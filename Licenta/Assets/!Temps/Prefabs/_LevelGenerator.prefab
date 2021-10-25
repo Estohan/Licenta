@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2961169146316220152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2444222529597242853}
+  - component: {fileID: 2136883339984803749}
+  m_Layer: 0
+  m_Name: _LevelGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2444222529597242853
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2961169146316220152}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2136883339984803749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2961169146316220152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99b44cadc1f065a49b97f945c28ca226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _FloorGrey: {fileID: 2138350550480822695, guid: b46af01614403d74e9f6746eac0c5e00, type: 3}
+  _FloorGreen: {fileID: 5604712175298679171, guid: 00effe600cb1bcd428d6f632e1202910, type: 3}
+  _FloorRed: {fileID: 2913102827824491736, guid: cb17b7bc79fc25a449fcab09700af060, type: 3}
+  _FloorWhite: {fileID: 8629296350452371809, guid: b446f7f9de7467f48a3b367bf0a68e97, type: 3}
+  _Wall: {fileID: 2963841803155172799, guid: bed2ec3d3dead6241bc8273ee549b3ff, type: 3}
+  _Corner2: {fileID: 6427568492116211923, guid: c11defd78f67fb0438250573581469c9, type: 3}
+  _Corner1: {fileID: 615831209944434021, guid: c24555aa70322a649a3bc0c05bd4e197, type: 3}
+  _Corner0: {fileID: 3346701834236899482, guid: f394939016fe87b408f00904bfceda22, type: 3}
+  _Start: {fileID: 2913102827824491736, guid: cb17b7bc79fc25a449fcab09700af060, type: 3}
+  _Finish: {fileID: 2040816228604073752, guid: 6caca472dc175154a9b08daae376dc8a, type: 3}
+  _OuterPadding: {fileID: 5604712175298679171, guid: 00effe600cb1bcd428d6f632e1202910, type: 3}
+  _InnerPadding: {fileID: 2138350550480822695, guid: b46af01614403d74e9f6746eac0c5e00, type: 3}
+  _MazeCellObject: {fileID: 6949120692278677125, guid: 78f392842b3ce0e40afd98b701913e38, type: 3}

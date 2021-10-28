@@ -14,8 +14,11 @@ public class MazeGenAlgorithms {
     // Types: 0 - outer padding, 1 - inner padding, 2 - start cell,
     //        3 - finish cell, 4 - common cell, 5 - special room cell.
 
-    public static int[,,] PrimsAlgorithm(int sizeZ, int sizeX, int outerPaddingDiv, int innerPaddingDiv, int nrOfSectors) {
+    public static (int[,,], MazeCoords startCellPos, MazeCoords finishCellPos)
+        PrimsAlgorithm(int sizeZ, int sizeX, int outerPaddingDiv, int innerPaddingDiv, int nrOfSectors) {
         int[,,] layout = new int[sizeZ, sizeX, 5];
+        MazeCoords startCell;
+        MazeCoords finishCell;
 
         // 6(OPl) + 3(IPl) + 12(M) + 3(IPr) + 6(OPr) = 12 + 6 + 12 = 30
         int outerPaddingValZ = (int)(sizeZ / outerPaddingDiv);
@@ -51,7 +54,8 @@ public class MazeGenAlgorithms {
         Debug.Log(message);*/
 
         // Choose start cell and end cell
-        ChooseStartAndFinish(layout, outerPaddingValZ, outerPaddingValX, sizeZ, sizeX);
+        (startCell, finishCell) = ChooseStartAndFinish(layout, outerPaddingValZ, outerPaddingValX, sizeZ, sizeX);
+        Debug.Log("Start cell: " + startCell + "\nFinish cell: " + finishCell);
 
         // TODO
         // Split remaining space into sectors
@@ -61,25 +65,109 @@ public class MazeGenAlgorithms {
 
         // TODO
         // Fill with corridors (maze)
-        // mazeFill_Prims(layout, visited, sizeZ, sizeX);
+        MazeFill_Prims(layout, startCell, finishCell, sizeZ, sizeX);
 
-        return layout;
+        return (layout, startCell, finishCell);
     }
 
-    private static void mazeFill_Prims(int[,,] layout, int[,] visited, int sizeZ, int sizeX) {
+    private static void MazeFill_Prims(int[,,] layout, MazeCoords startCell, MazeCoords finishCell, int sizeZ, int sizeX) {
         // Set all start, finish and all common cells to not visited
-        for (int z = 0; z < sizeZ; z++) {
+        /*for (int z = 0; z < sizeZ; z++) {
             for (int x = 0; x < sizeX; x++) {
                 if (layout[z, x, 4] > 10) {
                     visited[z, x] = 0;
                 }
             }
+        }*/
+        // Explored marks the unexplored directions for each cell.
+        // Visited keeps track of which cells were reached already. There is
+        // a guaranteed path from the start cell to any other visited cell.
+        List<MazeDirection>[,] unexplored = new List<MazeDirection>[sizeZ, sizeX];
+        bool[,] visited = new bool[sizeZ, sizeX];
+        for(int z = 0; z < sizeZ; z++) {
+            for(int x = 0; x < sizeX; x++) {
+                unexplored[z, x] = new List<MazeDirection>();
+                if (layout[z, x, 4] > 10) {
+                    visited[z, x] = false;
+                    unexplored[z, x].Add(MazeDirection.North);
+                    unexplored[z, x].Add(MazeDirection.East);
+                    unexplored[z, x].Add(MazeDirection.South);
+                    unexplored[z, x].Add(MazeDirection.West);
+                } else {
+                    visited[z, x] = true;
+                }
+            }
         }
 
-        //
+
+        MazeCoords currentCell;
+        MazeCoords neighbour;
+        MazeDirection unexploredDirection;
+        int unexploredDirectionIndex;
+        // Cell exploration will be done in a LIFO manner, using a stack
+        Stack<MazeCoords> stack = new Stack<MazeCoords>();
+        stack.Push(startCell);
+        visited[startCell.z, startCell.x] = true;
+
+        // Whiler there are cell with unexplored directions
+        while(stack.Count > 0) {
+            currentCell = stack.Peek();
+
+            // If the current cell is fully explored
+            if(unexplored[currentCell.z, currentCell.x].Count == 0) {
+                stack.Pop();
+                continue;
+            } else {
+                // Choose a random direction from the list of unexplored ones and ther remove
+                // that direction from the list
+                unexploredDirectionIndex = UnityEngine.Random.Range(0, unexplored[currentCell.z, currentCell.x].Count);
+                unexploredDirection = unexplored[currentCell.z, currentCell.x][unexploredDirectionIndex];
+                unexplored[currentCell.z, currentCell.x].RemoveAt(unexploredDirectionIndex);
+
+                neighbour = currentCell + unexploredDirection.ToMazeCoords();
+                /*Debug.Log("Current cell: " + currentCell.ToString());
+                //Debug.Log("Current cell + " + unexploredDirection + " = " + (currentCell + unexploredDirection.ToMazeCoords()).ToString());
+                Debug.Log("Neighbour cell: " + neighbour.ToString());*/
+                // If the neighbour was already visited
+                if (visited[neighbour.z, neighbour.x]) {
+                    // Then there is already out there a path between the starting cell
+                    // and this neighbour
+
+                    // Remove "this direction" from the neighbour's list of unexplored directions
+                    unexplored[neighbour.z, neighbour.x].Remove(unexploredDirection.GetOppositeDirection());
+                    // Place a wall between the current cell and this neighbour and between
+                    // the neighbour and the current cell.
+                    layout[currentCell.z, currentCell.x, (int)unexploredDirection] = 1;
+                    if (layout[neighbour.z, neighbour.x, 4] > 10) {
+                        layout[neighbour.z, neighbour.x, (int)unexploredDirection.GetOppositeDirection()] = 1;
+                    }
+                } else {
+                    // Mark the neighbour as visited, there is now a path to it.
+                    visited[neighbour.z, neighbour.x] = true;
+                    // Remove "this direction" from the neighbour's list of unexplored directions
+                    unexplored[neighbour.z, neighbour.x].Remove(unexploredDirection.GetOppositeDirection());
+                    // Add it to the stack
+                    stack.Push(new MazeCoords(neighbour.z, neighbour.x));
+                }
+            }
+        }
+
+        string message = "Maze Creation:\n";
+        for (int k = 0; k < 5; k++) {
+            message += "k = " + k + "\n";
+
+            for (int i = 0; i < sizeX; i++) {
+                for (int j = 0; j < sizeZ; j++) {
+                    message += (layout[i, j, k] + " ");
+                }
+                message += "\n";
+            }
+            message += "\n";
+        }
+        Debug.Log(message);
     }
 
-    private static void ChooseStartAndFinish(int[,,] layout, int outerPaddingValZ, int outerPaddingValX, int sizeZ, int sizeX) {
+    private static (MazeCoords, MazeCoords) ChooseStartAndFinish(int[,,] layout, int outerPaddingValZ, int outerPaddingValX, int sizeZ, int sizeX) {
         // Spiral search for a cell of common type starting with the
         // outer rim of the space contained by the outer padding.
         int currZ;
@@ -88,6 +176,8 @@ public class MazeGenAlgorithms {
         int lapComplete = 1;
         int searchIterations = 0;
         int maxSearchIterations = sizeZ * sizeX;
+        MazeCoords startCell = new MazeCoords((int) sizeZ / 2, (int) sizeX / 2);
+        MazeCoords finishCell = startCell;
         // Start the search from a random direction
         MazeDirection movingDirection = (MazeDirection) UnityEngine.Random.Range(0, 4);
         MazeDirection startCellDirection = movingDirection;
@@ -177,6 +267,7 @@ public class MazeGenAlgorithms {
 
         // Start point is chosen
         layout[currZ, currX, 4] = 20;
+        startCell = new MazeCoords(currZ, currX);
 
         // Depending on the start cell direction, a new row-by-row or column-by-column
         // search will be started in the opposite direction in order to find a free cell
@@ -192,6 +283,7 @@ public class MazeGenAlgorithms {
                     for(int x = InnPadLeftBorder; x < InnPadRightBorder; x++) {
                         if(layout[z, x, 4] == 40) {
                             layout[z, x, 4] = 30; // Finish point is chosen
+                            finishCell = new MazeCoords(z, x);
                             z = InnPadUpperBorder - 1;
                             break;
                         }
@@ -204,6 +296,7 @@ public class MazeGenAlgorithms {
                     for (int z = InnPadUpperBorder; z < InnPadLowerBorder; z++) {
                         if (layout[z, x, 4] == 40) {
                             layout[z, x, 4] = 30; // Finish point is chosen
+                            finishCell = new MazeCoords(z, x);
                             x = InnPadRightBorder + 1;
                             break;
                         }
@@ -216,18 +309,20 @@ public class MazeGenAlgorithms {
                     for (int x = InnPadLeftBorder; x < InnPadRightBorder; x++) {
                         if (layout[z, x, 4] == 40) {
                             layout[z, x, 4] = 30; // Finish point is chosen
+                            finishCell = new MazeCoords(z, x);
                             z = InnPadLowerBorder + 1;
                             break;
                         }
                     }
                 }
                 break;
-            case MazeDirection.West:
+            default: // MazeDirection.West:
                 // start a column-by-column search in East
                 for (int x = InnPadRightBorder; x > InnPadLeftBorder; x--) {
-                    for (int z = InnPadUpperBorder; z > InnPadLowerBorder; z++) {
+                    for (int z = InnPadUpperBorder; z < InnPadLowerBorder; z++) {
                         if (layout[z, x, 4] == 40) {
                             layout[z, x, 4] = 30; // Finish point is chosen
+                            finishCell = new MazeCoords(z, x);
                             x = InnPadLeftBorder - 1;
                             break;
                         }
@@ -235,6 +330,8 @@ public class MazeGenAlgorithms {
                 }
                 break;
         }
+
+        return (startCell, finishCell);
     }
 
     private static void CreateInnerPadding(int[,,] layout, int[,] visited, int outerPaddingValZ, int outerPaddingValX, int innerPaddingValZ, int innerPaddingValX, int sizeZ, int sizeX) {

@@ -6,6 +6,8 @@ public class Level {
     private int sizeZ, sizeX;
     private MazeCellData[,] cellsData;
     public MazeCellObject[,] cellsObjects;
+    public MazeCoords startCellPos;
+    public MazeCoords finishCellPos;
 
     // Takes in the layout of the maze and puts it into
     // a two dimensional array of MazeCellData

@@ -32,8 +32,11 @@ public class LevelGenerator : MonoBehaviour {
         this.sizeX = sizeZ;
 
         //int[,,] layout = MazeGenAlgorithms.testAlgoritm(sizeZ, sizeX, 1);
-        int[,,] layout = MazeGenAlgorithms.PrimsAlgorithm(sizeZ, sizeX, outerPaddingDiv, innerPaddingDiv, 3);
+        (int[,,] layout, MazeCoords startCellPos, MazeCoords finishCellPos) = 
+            MazeGenAlgorithms.PrimsAlgorithm(sizeZ, sizeX, outerPaddingDiv, innerPaddingDiv, 3);
         level = new Level(sizeZ, sizeX, layout);
+        level.startCellPos = startCellPos;
+        level.finishCellPos = finishCellPos;
 
         // printing layout
         string message = "\n";
@@ -56,7 +59,7 @@ public class LevelGenerator : MonoBehaviour {
     public void InstantiateLevel() {
         InstantiateCells();
         InstantiateWalls();
-        // InstantiateCorners();
+        InstantiateCorners();
     }
 
     private void InstantiateCorners() {
@@ -146,7 +149,7 @@ public class LevelGenerator : MonoBehaviour {
     private void InstantiateWalls() {
         for (int z = 0; z < sizeZ; z++) {
             for (int x = 0; x < sizeX; x++) {
-                if (level.getCellData(z, x).type == CellType.Common) {
+                if ((int) level.getCellData(z, x).type > 1) { // not outerPadding or innerPadding
                     foreach (MazeDirection direction in Enum.GetValues(typeof(MazeDirection))) {
                         if (level.getCellData(z, x).HasWallInDirection(direction)) {
                             // Set name and set cell subsection in which to be placed
@@ -344,6 +347,11 @@ public class LevelGenerator : MonoBehaviour {
                 throw new Exception("Unrecognized subsection received in GetCellSubsectionPos().");
         }
         return Quaternion.identity;
+
+    }
+
+    public Level GetLevel() {
+        return this.level;
     }
 
     /*

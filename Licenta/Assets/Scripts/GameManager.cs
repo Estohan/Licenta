@@ -7,8 +7,9 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance = null;
 
     public LevelGenerator _LevelGenerator;
-    private LevelGenerator levelGenerator;
+    public GameObject player;
 
+    private LevelGenerator levelGenerator;
     private Level currentLevel;
 
     // TEST
@@ -30,10 +31,25 @@ public class GameManager : MonoBehaviour {
     // Start is called before the first frame update
     void Start()
     {
+        // Instantiate the level generator
         levelGenerator = Instantiate(_LevelGenerator, new Vector3(0, 0, 0), Quaternion.identity);
         levelGenerator.transform.position.Set(0f, 0f, 0f);
+
+        // Generate level
         currentLevel = levelGenerator.GenerateLevel(sizeZ, sizeX, outerPaddingDiv, innerPaddingDiv);
+
+        // Instantiate level
         levelGenerator.InstantiateLevel();
+
+        // Move player to the start position
+        MazeCoords startCellPos = currentLevel.startCellPos;
+        Transform targetCellTransform = currentLevel.cellsObjects[startCellPos.z, startCellPos.x].transform;
+        float playerPosZ = targetCellTransform.position.z;
+        float playerPosX = targetCellTransform.position.x;
+
+        player.transform.position = new Vector3(playerPosX,
+                                                0f + player.transform.localScale.y / 2,
+                                                playerPosZ);
     }
 
     public Level getCurrentLevel() {

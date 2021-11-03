@@ -13,6 +13,8 @@ namespace Map {
             } else {
                 instance = this;
             }
+
+            Hide();
         }
 
         public static void Show() {

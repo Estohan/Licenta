@@ -30,6 +30,7 @@ public class InputHandler : MonoBehaviour
             }
         }
         
+        // Minimap visibility
         if(Input.GetKeyDown(KeyCode.O)) {
             if (miniMapVisible) {
                 Map.MinimapWindow.Hide();
@@ -38,6 +39,11 @@ public class InputHandler : MonoBehaviour
                 Map.MinimapWindow.Show();
                 miniMapVisible = true;
             }
+        }
+
+        // Restart game
+        if(Input.GetKeyDown(KeyCode.R)) {
+            GameManager.instance.RestartGame();
         }
     }
 }

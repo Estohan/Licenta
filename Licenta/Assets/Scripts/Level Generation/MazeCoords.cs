@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class MazeCoords {
 
     // Holds the coordinates of a maze cell
     // by z (Row) and x (Column)
-    public int z, x;
+    public int z;
+    public int x;
 
     public MazeCoords(int z, int x) {
         this.z = z;

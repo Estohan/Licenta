@@ -582,9 +582,7 @@ public class MazeGenAlgorithms {
     }
 }
 
-
-
-
+[System.Serializable]
 public enum CellType {
     OuterPadding,
     InnerPadding,

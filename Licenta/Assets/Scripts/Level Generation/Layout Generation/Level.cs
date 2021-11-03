@@ -15,8 +15,8 @@ public class Level {
         this.sizeZ = sizeZ;
         this.sizeX = sizeX;
 
-        cellsData = new MazeCellData[sizeX, sizeZ];
-        cellsObjects = new MazeCellObject[sizeX, sizeZ];
+        cellsData = new MazeCellData[sizeZ, sizeX];
+        cellsObjects = new MazeCellObject[sizeZ, sizeX];
 
         int[] wallsAndType = new int[5];
         for(int z = 0; z < sizeZ; z ++) {
@@ -29,7 +29,20 @@ public class Level {
                 cellsData[z, x] = new MazeCellData(new MazeCoords(z, x), wallsAndType);
             }
         }
+    }
 
+    public Level(int sizeZ, int sizeX, SavedData savedData) {
+        this.sizeZ = sizeZ;
+        this.sizeX = sizeX;
+
+        cellsData = new MazeCellData[sizeZ, sizeX];
+        cellsObjects = new MazeCellObject[sizeZ, sizeX];
+
+        for (int z = 0; z < sizeZ; z++) {
+            for (int x = 0; x < sizeX; x++) {
+                cellsData[z, x] = savedData.cells[z * sizeX + x];
+            }
+        }
     }
 
     public MazeCellData getCellData(int z, int x) {

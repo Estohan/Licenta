@@ -156,6 +156,26 @@ public class MazeCellObject : MonoBehaviour {
         }
     }
 
+    public void DebugColor() {
+        /*float r = 0.1f;
+        float g = 0.1f;
+        float b = 0.6f;
+        Color color = new Color(r, g, b, 1.0f);*/
+        List<Color> colors = new List<Color>();
+        colors.Add(new Color(0.1f, 0.1f, 0.5f, 1.0f));
+        colors.Add(new Color(0.1f, 0.5f, 0.1f, 1.0f));
+        colors.Add(new Color(0.5f, 0.1f, 0.1f, 1.0f));
+        colors.Add(new Color(0.1f, 0.5f, 0.5f, 1.0f));
+        colors.Add(new Color(0.5f, 0.1f, 0.5f, 1.0f));
+
+        Transform minimapFloor = this.transform.GetChild(0).transform.Find("MinimapFloor"); ;
+        // Color sector
+        if(minimapFloor != null && this.data.sector > 0) {
+            minimapFloor.GetComponent<Renderer>().material.color = colors[this.data.sector - 1];
+        }
+        // this.GetComponentInChildren<Renderer>().material.color = color;
+    }
+
     // REMOVE THIS LATER
     private GameObject DecideFloorType(CellType type) {
         switch (type) {

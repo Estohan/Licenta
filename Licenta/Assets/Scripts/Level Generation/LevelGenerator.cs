@@ -27,20 +27,20 @@ public class LevelGenerator : MonoBehaviour {
     // !! This function will need some parameters
     // Uses MazeGenAlgorithms to generate a maze layout and
     // saves that layout into a two dimensional array of MazeCellData
-    public Level GenerateLevel(int sizeZ, int sizeX, int outerPaddingDiv, int innerPaddingDiv) {
+    public Level GenerateLevel(int sizeZ, int sizeX, int outerPaddingDiv, int innerPaddingDiv, int nrOfSectors) {
         // minimum size of 30 ?
         this.sizeZ = sizeZ;
         this.sizeX = sizeX;
 
         //int[,,] layout = MazeGenAlgorithms.testAlgoritm(sizeZ, sizeX, 1);
         (int[,,] layout, MazeCoords startCellPos, MazeCoords finishCellPos) = 
-            MazeGenAlgorithms.PrimsAlgorithm(sizeZ, sizeX, outerPaddingDiv, innerPaddingDiv, 3);
+            MazeGenAlgorithms.PrimsAlgorithm(sizeZ, sizeX, outerPaddingDiv, innerPaddingDiv, nrOfSectors);
         level = new Level(sizeZ, sizeX, layout);
         level.startCellPos = startCellPos;
         level.finishCellPos = finishCellPos;
 
         // printing layout
-        string message = "\n";
+        string message = "Layout:\n";
         for (int k = 0; k < 5; k++) {
             message += "k = " + k + "\n";
 
@@ -93,9 +93,12 @@ public class LevelGenerator : MonoBehaviour {
 
                 // Instantiate corners
                 newCellObject.InstantiateCorners();
+
+                // DEBUG
+                newCellObject.DebugColor();
             }
         }
-        Debug.Log("OK");
+        /*Debug.Log("LevelGenerator: Level Instantiated.");*/
     }
 
     public Level GetLevel() {

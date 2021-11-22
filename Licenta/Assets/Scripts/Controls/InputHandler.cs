@@ -14,6 +14,7 @@ public class InputHandler : MonoBehaviour
     private void Awake() {
         fullMapVisible = false;
         miniMapVisible = true;
+        Map.FullmapWindow.Show();
     }
 
     // Update is called once per frame

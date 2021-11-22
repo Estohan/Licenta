@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
     public int sizeX;
     public int outerPaddingDiv;
     public int innerPaddingDiv;
+    public int sectorsNumber;
         
 
     private void Awake() {
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour {
 
     public void StartGame() {
         // Generate level
-        currentLevel = levelGenerator.GenerateLevel(sizeZ, sizeX, outerPaddingDiv, innerPaddingDiv);
+        currentLevel = levelGenerator.GenerateLevel(sizeZ, sizeX, outerPaddingDiv, innerPaddingDiv, sectorsNumber);
 
         // Instantiate level
         levelGenerator.InstantiateLevel();
@@ -58,6 +59,7 @@ public class GameManager : MonoBehaviour {
             Destroy(levelGenerator.transform.GetChild(0).gameObject);
             // Create a new one
             StartGame();
+            Debug.Log("Game Restarted.");
         }
     }
 

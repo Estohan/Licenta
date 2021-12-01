@@ -167,6 +167,7 @@ public class MazeCellObject : MonoBehaviour {
         colors.Add(new Color(0.5f, 0.1f, 0.1f, 1.0f));
         colors.Add(new Color(0.1f, 0.5f, 0.5f, 1.0f));
         colors.Add(new Color(0.5f, 0.1f, 0.5f, 1.0f));
+        colors.Add(new Color(0.5f, 0.5f, 0.1f, 1.0f));
 
         Transform minimapFloor = this.transform.GetChild(0).transform.Find("MinimapFloor"); ;
         // Color sector

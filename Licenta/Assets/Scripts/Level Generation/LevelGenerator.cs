@@ -40,7 +40,7 @@ public class LevelGenerator : MonoBehaviour {
         level.finishCellPos = finishCellPos;
 
         // printing layout
-        string message = "Layout:\n";
+        /*string message = "Layout:\n";
         for (int k = 0; k < 5; k++) {
             message += "k = " + k + "\n";
 
@@ -52,7 +52,7 @@ public class LevelGenerator : MonoBehaviour {
             }
             message += "\n";
         }
-        print(message);
+        print(message);*/
 
         return level;
     }

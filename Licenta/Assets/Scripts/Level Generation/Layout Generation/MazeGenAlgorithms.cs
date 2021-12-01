@@ -55,51 +55,184 @@ public static class MazeGenAlgorithms {
         CreateOuterPadding(layout, stats, visited);
 
         // Create inner padding
-        CreateInnerPadding(layout, visited, outerPaddingValZ, outerPaddingValX, innerPaddingValZ, innerPaddingValX, sizeZ, sizeX);
+        CreateInnerPadding(layout, stats, visited);
 
         // Choose start cell and end cell
-        (startCell, finishCell) = ChooseStartAndFinish(layout, stats, outerPaddingValZ, outerPaddingValX, sizeZ, sizeX);
+        (startCell, finishCell) = ChooseStartAndFinish(layout, stats);
         /*Debug.Log("New layout: Start cell - " + startCell + " Finish cell - " + finishCell);*/
 
         // TODO
         // Split remaining space into sectors
         // DivideIntoSectors_Attempt_1(layout, startCell, 4, sizeZ, sizeX);
         // DivideIntoSectors_Attempt_2(layout, startCell, 2, sizeZ, sizeX);
-        DivideIntoSectors_Attempt_3(layout, stats, startCell, nrOfSectors, outerPaddingValZ, outerPaddingValX, sizeZ, sizeX);
+        DivideIntoSectors_Attempt_3(layout, stats);
 
         // TODO
         // AddSpecialSections(layout, startCell, finishCell, nrOfSectors, sizeZ, sizeX);
 
         // Fill with corridors (maze)
-        MazeFill_Prims(layout, startCell, finishCell, sizeZ, sizeX);
+        // MazeFill_Prims(layout, stats);
+
+        // DEBUG
+
+        Debug.Log("Here are some stats:");
+        Debug.Log("Cells total: " + stats.sizeZ * stats.sizeX + " = " + stats.totalOuterPadding + " + " + stats.totalInnerPadding + " + " + stats.totalCore + " + " +
+          (stats.totalOuterPadding + stats.totalInnerPadding + stats.totalCore));
+        String message = "Sectors data: \n";
+        int DEBUGG_type;
+        for(int sector = 1; sector <= nrOfSectors; sector ++) {
+            message += "Sector " + sector + ": ";
+            message += stats.sectorCells[sector - 1].Count + " cells, of which ";
+            message += stats.sectorBorder[sector - 1].Count + " are on border. \n";
+            message += "\tExits on:";
+            foreach((MazeCoords cell, MazeDirection dir) in stats.nextSectorExit[sector - 1]) {
+                message += "[" + cell + " " + dir + "] ";
+            }
+            message += "\n";
+            message += "\tPassages on:";
+            foreach ((MazeCoords cell, MazeDirection dir) in stats.passages[sector - 1]) {
+                message += "[" + cell + " " + dir + "] ";
+                DEBUGG_type = (layout[cell.z, cell.x, 4] / 10) * 10;
+                layout[cell.z, cell.x, 4] = DEBUGG_type + 6;
+            }
+            message += "\n";
+            // COLOR STUFF
+            /*foreach(MazeCoords cell in stats.sectorBorder[sector - 1]) {
+                DEBUGG_type = (layout[cell.z, cell.x, 4] / 10) * 10;
+                if (sector == 2 || sector == 4) {
+                    layout[cell.z, cell.x, 4] = DEBUGG_type + 6;
+                }
+            }*/
+        }
+        Debug.Log(message);
 
         return (layout, startCell, finishCell);
     }
 
-    private static void AddSpecialSections(int[,,] layout, MazeCoords startCell, MazeCoords finishCell, int nrOfSectors, int sizeZ, int sizeX) {
+    private static void AddSpecialSections(int[,,] layout, LayoutStats stats) {
         // Step 1: Decide max number and complexity of sections/rooms per sector
         // [DEBUG][TRY] A section shouldn't represent more than 10% of its sector
         // [DEBUG][TRY] All sections in a sector shouldn't represent more than 20% of the sector
 
-        // Need SOME measurements
-        // int maxSectionSize = 
+        // Sector specific section size constraints
+        int[] initialMaxSectionSize = new int[stats.numberOfSectors];
+        int[] initialMaxSectionTotal = new int[stats.numberOfSectors];
+        int percentOfSectorSize;
+        for(int sector = 1; sector <= stats.numberOfSectors; sector++) {
+            percentOfSectorSize = stats.sectorCells[sector - 1].Count / 10; // 10% of sector size
+            // If there are no rooms this large, the limit will be the largest existing type of room
+            if(percentOfSectorSize >= RoomLayouts.rooms.Length) {
+                percentOfSectorSize = RoomLayouts.rooms.Length - 1;
+            }
+            initialMaxSectionSize[sector - 1] = percentOfSectorSize;
+            initialMaxSectionTotal[sector - 1] = percentOfSectorSize * 2;
+        }
 
         // Step 2: Place sections/rooms
+        bool largestOnePlaced;
+        bool roomPlaced;
+        int currentMaxSectionSize;
+        int currentMaxSectionTotal;
+        MazeCoords anchor;
+        MazeDirection rotation;
+        List<(int, int)>[] room;
+        List<(MazeCoords, MazeDirection)>[] placedRooms = new List<(MazeCoords, MazeDirection)>[stats.numberOfSectors];
+        // CREATE TEMPORARY LAYOUT?
+
+        for(int sector = 1; sector <= stats.numberOfSectors; sector++) {
+            // Initialize placed rooms list
+            placedRooms[sector - 1] = new List<(MazeCoords, MazeDirection)>();
+            largestOnePlaced = false;
+            currentMaxSectionSize = initialMaxSectionSize[sector - 1];
+            currentMaxSectionTotal = initialMaxSectionTotal[sector - 1];
+            // While there is space for more rooms
+            while(currentMaxSectionTotal > 0) {
+                // If the current maximum room size is bigger than the 
+                // current unallocated room space
+                // Ex.: can't get a size 5 room anymore if I only have 4 cells of space left
+                if(currentMaxSectionSize <= currentMaxSectionTotal) {
+                    currentMaxSectionSize = currentMaxSectionTotal;
+                }
+                // Choose a room
+                if(largestOnePlaced) {
+                    room = RoomLayouts.GetRandomRoomOfMaxSizeN(currentMaxSectionSize);
+                } else {
+                    room = RoomLayouts.GetRandomRoomOfSizeN(currentMaxSectionSize);
+                    largestOnePlaced = true;
+                }
+                // Find a place for it
+                roomPlaced = false;
+                while(!roomPlaced) {
+                    // DEBUG - Utils.GetRandomFrom(container)
+                    // Choose anchor
+                    anchor = stats.sectorCells[sector - 1][UnityEngine.Random.Range(0, stats.sectorCells[sector - 1].Count)];
+                    // Test rotations placement
+                    (roomPlaced, rotation) = CheckRoomPlacement(layout, anchor, sector, room);
+                    if(roomPlaced) {
+
+                    }
+
+                }
+                // 1. Randomly choose an anchor
+                // 2. Test chosen room on it. In case of failure return to [1].
+                // 3. Check room exit accessibility. In case of failure return to [1].
+                // 4. Check for blockages. In case of failure return to [1].
+                // 5. Mark layout and save room. Exit [1] loop.
+            }
+        }
+        
         throw new NotImplementedException();
     }
 
-    private static void DivideIntoSectors_Attempt_3(int[,,] layout, LayoutStats stats, MazeCoords startCell, int sectorsNumber, 
-                                                    int outerPaddingValZ, int outerPaddingValX, int sizeZ, int sizeX) {
+    private static (bool roomPlaced, MazeDirection rotation) 
+        CheckRoomPlacement(int[,,] layout, MazeCoords anchor, int sector, List<(int, int)>[] room) {
+        bool roomPlaced = false;
+        int rotation = -1;
+        int cellSector;
+        int cellType;
+        MazeCoords aux;
+
+        foreach(List<(int, int)> roomRotation in room) {
+            rotation++;
+            roomPlaced = true;
+            // Check overlapping
+            foreach((int z, int x) in roomRotation) {
+                cellSector = layout[z, x, 4] % 10;
+                cellType = layout[z, x, 4] / 10;
+                if(cellSector != sector || cellType != (int)CellType.Common) {
+                    roomPlaced = false;
+                    break;
+                }
+            }
+            // It the room does not overlap with anything,
+            // a) check if it can be accessed
+            // b) check if it blocks another room's entrance
+            // c) check if it blocks a sector exit or sector section
+            if(roomPlaced) {
+                // a)
+                aux = anchor + ((MazeDirection)rotation).ToMazeCoords();
+                if(layout[aux.z, aux.x, 4] / 10 != (int)CellType.Common) {
+                    roomPlaced = false;
+                    return (roomPlaced, (MazeDirection)rotation);
+                }
+                return (roomPlaced, (MazeDirection)rotation);
+            }
+        }
+        // Unable to place room
+        return (roomPlaced, MazeDirection.South);
+    }
+
+    private static void DivideIntoSectors_Attempt_3(int[,,] layout, LayoutStats stats) {
         // Step 1: Place seeds
         List<MazeCoords> sectorSeeds = new List<MazeCoords>();
-        MazeCoords center = new MazeCoords(sizeZ / 2, sizeX / 2);
+        MazeCoords center = new MazeCoords(stats.sizeZ / 2, stats.sizeX / 2);
 
         // Only allow 1, 2, 3, 4 or 5 sectors
-        if(sectorsNumber < 1 || sectorsNumber > 5) {
-            sectorsNumber = 1;
+        if(stats.numberOfSectors < 1 || stats.numberOfSectors > 5) {
+            stats.numberOfSectors = 1;
         }
 
-        switch(sectorsNumber) {
+        switch(stats.numberOfSectors) {
             case 2:
                 //  1..
                 //  .x.
@@ -151,19 +284,19 @@ public static class MazeGenAlgorithms {
         MazeCoords cellCandidate;
         List<Queue<MazeCoords>> bfsQueues = new List<Queue<MazeCoords>>();
         List<MazeCoords> neighbours;
-        bool[,] visited = new bool[sizeZ, sizeX];
+        bool[,] visited = new bool[stats.sizeZ, stats.sizeX];
         bool noSeedsLeft = false;
         bool noCellAssignedYet = true;
 
         // Initialize visited array
-        for (int z = 0; z < sizeZ; z++) {
-            for (int x = 0; x < sizeX; x++) {
+        for (int z = 0; z < stats.sizeZ; z++) {
+            for (int x = 0; x < stats.sizeX; x++) {
                 visited[z, x] = false;
             }
         }
 
         // Initialize queues
-        for(int sector = 1; sector <= sectorsNumber; sector ++) {
+        for(int sector = 1; sector <= stats.numberOfSectors; sector ++) {
             bfsQueues.Add(new Queue<MazeCoords>()); //  Create new queue
             bfsQueues[sector - 1].Enqueue(sectorSeeds[sector - 1]); // Put inside the corresponding seed
         }
@@ -171,7 +304,7 @@ public static class MazeGenAlgorithms {
         // Assign sectors to cells
         while(!noSeedsLeft) {
             // For each sector
-            for(int sector = 1; sector <= sectorsNumber; sector ++) {
+            for(int sector = 1; sector <= stats.numberOfSectors; sector ++) {
                 noCellAssignedYet = true;
                 // Assign a cell (if possible)
                 while(noCellAssignedYet && bfsQueues[sector - 1].Count > 0) {
@@ -184,7 +317,7 @@ public static class MazeGenAlgorithms {
                         visited[cellCandidate.z, cellCandidate.x] = true;
                         noCellAssignedYet = false;
                         // Record its assignation into stats
-                        stats.sectorCellCount[sector - 1]++;
+                        stats.sectorCells[sector - 1].Add(cellCandidate);
                         // Transform its neighbours into candidates for this sector
                         neighbours = GetNeighboursOfCell_Unsafe(cellCandidate, false, true);
                         foreach(MazeCoords neigh in neighbours) {
@@ -208,11 +341,18 @@ public static class MazeGenAlgorithms {
         MazeCoords neighbour, thisCell;
         int thisCellSector, neighbourSector;
         // Initialize unexplored edges list and borders list
-        List<MazeDirection>[,] unexplored = new List<MazeDirection>[sizeZ, sizeX];
-        List<(MazeCoords, MazeDirection)>[] borderWithNextSector = new List<(MazeCoords, MazeDirection)>[sectorsNumber];
+        List<MazeDirection>[,] unexplored = new List<MazeDirection>[stats.sizeZ, stats.sizeX];
+        List<(MazeCoords, MazeDirection)>[] borderWithNextSector = new List<(MazeCoords, MazeDirection)>[stats.numberOfSectors];
+        // Initialize visited array again, and use it to ensure a cell
+        // is added to a border in "stats" only once
+        for (int z = 0; z < stats.sizeZ; z++) {
+            for (int x = 0; x < stats.sizeX; x++) {
+                visited[z, x] = false;
+            }
+        }
 
-        for (int z = outerPaddingValZ; z < sizeZ - outerPaddingValZ; z++) {
-            for (int x = outerPaddingValX; x < sizeX - outerPaddingValX; x++) {
+        for (int z = stats.outerPaddingValZ; z < stats.sizeZ - stats.outerPaddingValZ; z++) {
+            for (int x = stats.outerPaddingValX; x < stats.sizeX - stats.outerPaddingValX; x++) {
                 // If cell is not padding
                 if(layout[z, x, 4] >= ((int)CellType.Start) * 10) {
                     unexplored[z, x] = new List<MazeDirection>();
@@ -223,13 +363,13 @@ public static class MazeGenAlgorithms {
                 }
             }
         }
-        for(int i = 0; i < sectorsNumber; i ++) {
+        for(int i = 0; i < stats.numberOfSectors; i ++) {
             borderWithNextSector[i] = new List<(MazeCoords, MazeDirection)>();
         }
 
         // Surround sectors with walls
-        for (int z = outerPaddingValZ; z < sizeZ - outerPaddingValZ; z++) {
-            for (int x = outerPaddingValX; x < sizeX - outerPaddingValX; x++) {
+        for (int z = stats.outerPaddingValZ; z < stats.sizeZ - stats.outerPaddingValZ; z++) {
+            for (int x = stats.outerPaddingValX; x < stats.sizeX - stats.outerPaddingValX; x++) {
                 // If cell is not padding
                 if (layout[z, x, 4] >= ((int)CellType.Start) * 10) {
                     thisCell = new MazeCoords(z, x);
@@ -246,8 +386,19 @@ public static class MazeGenAlgorithms {
                             if(layout[neighbour.z, neighbour.x, 4] >= ((int)CellType.Start) * 10) {
                                 layout[neighbour.z, neighbour.x, (int)direction.GetOppositeDirection()] = 1;
                                 unexplored[neighbour.z, neighbour.x].Remove(direction.GetOppositeDirection());
+                                // Record the border of the neighbour into stats
+                                if (!visited[neighbour.z, neighbour.x])  {
+                                    stats.sectorBorder[neighbourSector - 1].Add(neighbour);
+                                    visited[neighbour.z, neighbour.x] = true;
+                                }
                             }
-                            // If one cell is in sector n and the other in sector n+1, save the edge
+                            // Record this border into stats
+                            if(!visited[thisCell.z, thisCell.x]) {
+                                stats.sectorBorder[thisCellSector - 1].Add(thisCell);
+                                visited[thisCell.z, thisCell.x] = true;
+                            }
+                            // If one cell is in sector n and the other in sector n+1, save the edge for
+                            // later, when passages will be chosen
                             if(thisCellSector == neighbourSector - 1) {
                                 // Debug.Log("Added border between " + thisCellSector + " and " + neighbourSector);
                                 borderWithNextSector[thisCellSector - 1].Add((thisCell, direction));
@@ -266,11 +417,18 @@ public static class MazeGenAlgorithms {
         int randomIndex;
         MazeDirection passageDirection;
         MazeCoords passageCell;
-        for (int sector = 1; sector <= sectorsNumber; sector++) {
+        List<(MazeCoords, MazeDirection)> auxPassages = new List<(MazeCoords, MazeDirection)>();
+        for (int sector = 1; sector <= stats.numberOfSectors; sector++) {
             // Randomly choose a cell on this sector's border with the next sector
             randomIndex = UnityEngine.Random.Range(0, borderWithNextSector[sector - 1].Count);
             if (borderWithNextSector[sector - 1].Count > 0) {
                 (passageCell, passageDirection) = borderWithNextSector[sector - 1][randomIndex];
+                // Used when finding the player's route through the passages
+                auxPassages.Add((passageCell, passageDirection));
+                auxPassages.Add((passageCell + passageDirection.ToMazeCoords(), passageDirection.GetOppositeDirection()));
+                // Store passage location
+                stats.passages[sector - 1].Add((passageCell, passageDirection));
+                stats.passages[sector].Add((passageCell + passageDirection.ToMazeCoords(), passageDirection.GetOppositeDirection()));
                 // Remove the wall with the next sector
                 neighbour = passageCell + passageDirection.ToMazeCoords();
                 layout[passageCell.z, passageCell.x, (int)passageDirection] = 0;
@@ -278,7 +436,72 @@ public static class MazeGenAlgorithms {
             }
         }
 
-        for(int i = 1; i <= sectorsNumber; i ++) {
+        // DEBUG
+        /*String message = "";
+        foreach((MazeCoords celll, MazeDirection dirr) in passages) {
+            message += "[" + celll + " " + dirr + "]\n";
+        }
+        Debug.Log("---" + message);*/
+
+        // Save the passages in the order the player will visit them
+        MazeCoords cell;
+        MazeDirection dir;
+        int currentSector = layout[stats.startCell.z, stats.startCell.x, 4] % 10;
+        int toBeRemovedIndex;
+        bool sectorDone = false; // All its exits are discovered
+        bool passageDiscovered;
+        Queue<int> nextSector = new Queue<int>();
+
+        nextSector.Enqueue(currentSector);
+        while(auxPassages.Count > 0) {
+            // If all exits are discovered for this sector
+            //Debug.Log("Sector " + currentSector + " " + nextSector.Count + " " + passages.Count);
+            if (sectorDone) {
+                currentSector = nextSector.Dequeue();
+                sectorDone = false;
+            }
+            // Look for passages in this sector
+            passageDiscovered = false;
+            toBeRemovedIndex = -1;
+            for(int i = 0; i < auxPassages.Count; i++) {
+                cell = auxPassages[i].Item1;
+                dir = auxPassages[i].Item2;
+                if(layout[cell.z, cell.x, 4] % 10 == currentSector) {
+                    //Debug.Log("Found passage: ");
+                    //Debug.Log("[" + cell + " " + dir + " " + layout[(cell + dir.ToMazeCoords()).z, (cell + dir.ToMazeCoords()).x, 4] % 10 + "]");
+                    stats.nextSectorExit[currentSector - 1].Add(auxPassages[i]);
+                    nextSector.Enqueue(layout[(cell + dir.ToMazeCoords()).z, (cell + dir.ToMazeCoords()).x, 4] % 10);
+                    toBeRemovedIndex = i;
+                    passageDiscovered = true;
+                    break;
+                }
+            }
+            // DEBUG
+            //message = "";
+            // Remove the passage found from list passages
+            if(toBeRemovedIndex > -1) {
+                //message += "Removing: ";
+               // message += passages[toBeRemovedIndex];
+                auxPassages.RemoveAt(toBeRemovedIndex);
+                // Also remove the next/previous element, which is the same passage but in reverse
+                if (toBeRemovedIndex % 2 == 0) {
+                    //message += "and ";
+                    //message += passages[toBeRemovedIndex];
+                    auxPassages.RemoveAt(toBeRemovedIndex);
+                } else {
+                    //message += "and ";
+                    //message += passages[toBeRemovedIndex - 1];
+                    auxPassages.RemoveAt(toBeRemovedIndex - 1);
+                }
+            }
+            //Debug.Log(message);
+
+            if(!passageDiscovered) {
+                sectorDone = true;
+            }
+        }
+
+        for (int i = 1; i <= stats.numberOfSectors; i ++) {
             Debug.Log(borderWithNextSector[i - 1].Count + " on border between " + i + " and " + (i + 1));
         }
     }
@@ -397,14 +620,14 @@ public static class MazeGenAlgorithms {
         }
     }
 
-    private static void MazeFill_Prims(int[,,] layout, MazeCoords startCell, MazeCoords finishCell, int sizeZ, int sizeX) {
+    private static void MazeFill_Prims(int[,,] layout, LayoutStats stats) {
         // Explored marks the unexplored directions for each cell.
         // Visited keeps track of which cells were reached already. There is
         // a guaranteed path from the start cell to any other visited cell.
-        List<MazeDirection>[,] unexplored = new List<MazeDirection>[sizeZ, sizeX];
-        bool[,] visited = new bool[sizeZ, sizeX];
-        for(int z = 0; z < sizeZ; z++) {
-            for(int x = 0; x < sizeX; x++) {
+        List<MazeDirection>[,] unexplored = new List<MazeDirection>[stats.sizeZ, stats.sizeX];
+        bool[,] visited = new bool[stats.sizeZ, stats.sizeX];
+        for(int z = 0; z < stats.sizeZ; z++) {
+            for(int x = 0; x < stats.sizeX; x++) {
                 unexplored[z, x] = new List<MazeDirection>();
                 if (layout[z, x, 4] > 10) {
                     visited[z, x] = false;
@@ -425,8 +648,8 @@ public static class MazeGenAlgorithms {
         int unexploredDirectionIndex;
         // Cell exploration will be done in a LIFO manner, using a stack
         Stack<MazeCoords> stack = new Stack<MazeCoords>();
-        stack.Push(startCell);
-        visited[startCell.z, startCell.x] = true;
+        stack.Push(stats.startCell);
+        visited[stats.startCell.z, stats.startCell.x] = true;
 
         // Whiler there are cell with unexplored directions
         while(stack.Count > 0) {
@@ -486,7 +709,7 @@ public static class MazeGenAlgorithms {
         Debug.Log(message);*/
     }
 
-    private static (MazeCoords, MazeCoords) ChooseStartAndFinish(int[,,] layout, LayoutStats stats, int outerPaddingValZ, int outerPaddingValX, int sizeZ, int sizeX) {
+    private static (MazeCoords, MazeCoords) ChooseStartAndFinish(int[,,] layout, LayoutStats stats) {
         // Spiral search for a cell of common type starting with the
         // outer rim of the space contained by the outer padding.
         int currZ;
@@ -494,8 +717,8 @@ public static class MazeGenAlgorithms {
         int lapsDone = 0;
         int lapComplete = 1;
         int searchIterations = 0;
-        int maxSearchIterations = sizeZ * sizeX;
-        MazeCoords startCell = new MazeCoords((int) sizeZ / 2, (int) sizeX / 2);
+        int maxSearchIterations = stats.sizeZ * stats.sizeX;
+        MazeCoords startCell = new MazeCoords((int)stats.sizeZ / 2, (int)stats.sizeX / 2);
         MazeCoords finishCell = startCell;
         // Start the search from a random direction
         MazeDirection movingDirection = (MazeDirection) UnityEngine.Random.Range(0, 4);
@@ -504,26 +727,26 @@ public static class MazeGenAlgorithms {
         switch (movingDirection) {
             // start from the top-right corner
             case MazeDirection.North:
-                currZ = sizeZ - outerPaddingValZ - 1;
-                currX = sizeX - outerPaddingValX - 1;
+                currZ = stats.sizeZ - stats.outerPaddingValZ - 1;
+                currX = stats.sizeX - stats.outerPaddingValX - 1;
                 startCellDirection = MazeDirection.East;
                 break;
             // start from the top-left corner
             case MazeDirection.West:
-                currZ = outerPaddingValZ;
-                currX = sizeX - outerPaddingValX - 1;
+                currZ = stats.outerPaddingValZ;
+                currX = stats.sizeX - stats.outerPaddingValX - 1;
                 startCellDirection = MazeDirection.North;
                 break;
             // start from the bottom-left corner
             case MazeDirection.South:
-                currZ = outerPaddingValZ;
-                currX = outerPaddingValX;
+                currZ = stats.outerPaddingValZ;
+                currX = stats.outerPaddingValX;
                 startCellDirection = MazeDirection.West;
                 break;
             // start from the bottom-right corner
             default: // MazeDirecton.East
-                currZ = sizeZ - outerPaddingValZ - 1;
-                currX = outerPaddingValX;
+                currZ = stats.sizeZ - stats.outerPaddingValZ - 1;
+                currX = stats.outerPaddingValX;
                 startCellDirection = MazeDirection.South;
                 break;
         }
@@ -532,7 +755,7 @@ public static class MazeGenAlgorithms {
         while (layout[currZ, currX, 4] != 40) {
             switch (movingDirection) {
                 case MazeDirection.North:
-                    if (currZ > outerPaddingValZ + lapsDone) {
+                    if (currZ > stats.outerPaddingValZ + lapsDone) {
                         currZ--;
                     } else {
                         /*Debug.Log("Change from North to West at " + currZ + "-" + currX);*/
@@ -542,7 +765,7 @@ public static class MazeGenAlgorithms {
                     }
                     break;
                 case MazeDirection.West:
-                    if (currX > outerPaddingValX + lapsDone) {
+                    if (currX > stats.outerPaddingValX + lapsDone) {
                         currX--;
                     } else {
                         /*Debug.Log("Change from West to South at " + currZ + "-" + currX);*/
@@ -552,7 +775,7 @@ public static class MazeGenAlgorithms {
                     }
                     break;
                 case MazeDirection.South:
-                    if (currZ < sizeZ - outerPaddingValZ - lapsDone - 1) {
+                    if (currZ < stats.sizeZ - stats.outerPaddingValZ - lapsDone - 1) {
                         currZ++;
                     } else {
                         /*Debug.Log("Change from South to East at " + currZ + "-" + currX);*/
@@ -562,7 +785,7 @@ public static class MazeGenAlgorithms {
                     }
                     break;
                 default: // MazeDirection.East:
-                    if (currX < sizeX - outerPaddingValX - lapsDone - 1) {
+                    if (currX < stats.sizeX - stats.outerPaddingValX - lapsDone - 1) {
                         currX++;
                     } else {
                         /*Debug.Log("Change from East to North at " + currZ + "-" + currX);*/
@@ -591,10 +814,10 @@ public static class MazeGenAlgorithms {
         // Depending on the start cell direction, a new row-by-row or column-by-column
         // search will be started in the opposite direction in order to find a free cell
         // for the finish point
-        int InnPadUpperBorder = outerPaddingValZ;
-        int InnPadLowerBorder = sizeZ - outerPaddingValZ - 1;
-        int InnPadLeftBorder = outerPaddingValX;
-        int InnPadRightBorder = sizeX - outerPaddingValX - 1;
+        int InnPadUpperBorder = stats.outerPaddingValZ;
+        int InnPadLowerBorder = stats.sizeZ - stats.outerPaddingValZ - 1;
+        int InnPadLeftBorder = stats.outerPaddingValX;
+        int InnPadRightBorder = stats.sizeX - stats.outerPaddingValX - 1;
         switch (startCellDirection) {
             case MazeDirection.North:
                 // start a row-by-row search in South
@@ -654,10 +877,10 @@ public static class MazeGenAlgorithms {
         return (startCell, finishCell);
     }
 
-    private static void CreateInnerPadding(int[,,] layout, int[,] visited, int outerPaddingValZ, int outerPaddingValX, int innerPaddingValZ, int innerPaddingValX, int sizeZ, int sizeX) {
-        int remainingCellsZ = sizeZ - outerPaddingValZ * 2 - innerPaddingValZ * 2;
-        int remainingCellsX = sizeX - outerPaddingValX * 2 - innerPaddingValX * 2;
-        int totalInnerPadding = ((sizeZ - outerPaddingValZ * 2) * (sizeX - outerPaddingValX * 2)) -
+    private static void CreateInnerPadding(int[,,] layout, LayoutStats stats, int[,] visited) {
+        int remainingCellsZ = stats.sizeZ - stats.outerPaddingValZ * 2 - stats.innerPaddingValZ * 2;
+        int remainingCellsX = stats.sizeX - stats.outerPaddingValX * 2 - stats.innerPaddingValX * 2;
+        int desiredInnerPadding = ((stats.sizeZ - stats.outerPaddingValZ * 2) * (stats.sizeX - stats.outerPaddingValX * 2)) -
                                 (remainingCellsZ * remainingCellsX);
 
         /*int DBG_TOTAL_CORE = remainingCellsZ * remainingCellsX;
@@ -671,18 +894,18 @@ public static class MazeGenAlgorithms {
         // "frame" that will generate the inner padding
         List<MazeCoords> roots = new List<MazeCoords>();
         // array to mark already added roots so they are not added twice
-        bool[,] alreadyRoot = new bool[sizeZ, sizeX];
-        for(int z = 0; z < sizeZ; z ++) {
-            for(int x = 0; x < sizeX; x ++) {
+        bool[,] alreadyRoot = new bool[stats.sizeZ, stats.sizeX];
+        for(int z = 0; z < stats.sizeZ; z ++) {
+            for(int x = 0; x < stats.sizeX; x ++) {
                 alreadyRoot[z, x] = false;
             }
         }
 
         // initialization
-        int InnPadUpperBorder = outerPaddingValZ;
-        int InnPadLowerBorder = sizeZ - outerPaddingValZ - 1;
-        int InnPadLeftBorder = outerPaddingValX;
-        int InnPadRightBorder = sizeX - outerPaddingValX - 1;
+        int InnPadUpperBorder = stats.outerPaddingValZ;
+        int InnPadLowerBorder = stats.sizeZ - stats.outerPaddingValZ - 1;
+        int InnPadLeftBorder = stats.outerPaddingValX;
+        int InnPadRightBorder = stats.sizeX - stats.outerPaddingValX - 1;
         for(int x = InnPadLeftBorder; x <= InnPadRightBorder; x ++) {
             roots.Add(new MazeCoords(InnPadUpperBorder, x)); // upper edge of the frame
             roots.Add(new MazeCoords(InnPadLowerBorder, x)); // lower edge of the frame
@@ -700,18 +923,19 @@ public static class MazeGenAlgorithms {
         MazeCoords selectedCell;
         int selectedCellIndex;
         int totalPaddingNeighbours;
-        int selectedCells = 0;
+        int totalInnerPadding = 0;
         List<MazeCoords> toBeRemovedRoots = new List<MazeCoords>();
-        while (selectedCells < totalInnerPadding && roots.Count != 0) {
+        while (totalInnerPadding < desiredInnerPadding && roots.Count != 0) {
             // randomly select new inner padding cell and remove it from roots
             selectedCellIndex = UnityEngine.Random.Range(0, roots.Count);
             selectedCell = roots[selectedCellIndex];
             // Debug.Log("Chosen (" + selectedCell.z + "-" + selectedCell.x + "). Cell " + selectedCells + " from " + totalInnerPadding + ".");
             roots.RemoveAt(selectedCellIndex);
             layout[selectedCell.z, selectedCell.x, 4] = 10; // new inner padding cell
-            selectedCells++;
             // also mark the cell as visited for future removing of holes in the padding
             visited[selectedCell.z, selectedCell.x] = 1;
+            // also increase the count of inner padding cells
+            totalInnerPadding++;
 
             // add viable neighbours to the roots list
             if (layout[selectedCell.z - 1, selectedCell.x, 4] > 10 && alreadyRoot[selectedCell.z - 1, selectedCell.x] == false) {
@@ -744,8 +968,8 @@ public static class MazeGenAlgorithms {
                 if (totalPaddingNeighbours == 4) {
                     layout[root.z, root.x, 4] = 10; // new inner padding cell
                     visited[root.z, root.x] = 1;
+                    totalInnerPadding++;
                     toBeRemovedRoots.Add(root);
-                    selectedCells++;
                 }
             }
 
@@ -758,7 +982,7 @@ public static class MazeGenAlgorithms {
         // Cleaning up: fill up any padding holes that may have been formed
         // Start a BFS from the center of the grid and visit all accessible cells
         // Any cell left unvisited is a hole and becomes padding
-        MazeCoords startCell = new MazeCoords((int)(sizeZ / 2), (int)(sizeX / 2));
+        MazeCoords startCell = new MazeCoords((int)(stats.sizeZ / 2), (int)(stats.sizeX / 2));
         MazeCoords currentCell;
         List<MazeCoords> neighbours;
         Queue<MazeCoords> q = new Queue<MazeCoords>();
@@ -777,17 +1001,19 @@ public static class MazeGenAlgorithms {
             }
         }
 
-        for (int z = outerPaddingValZ; z < sizeZ - outerPaddingValZ; z ++) {
-            for (int x = outerPaddingValX; x < sizeX - outerPaddingValX; x ++) {
+        for (int z = stats.outerPaddingValZ; z < stats.sizeZ - stats.outerPaddingValZ; z ++) {
+            for (int x = stats.outerPaddingValX; x < stats.sizeX - stats.outerPaddingValX; x ++) {
                 if (visited[z, x] == 0) { // unvisited cell, hole
                     layout[z, x, 4] = 10;
-                    selectedCells++;
-                    /*DBG_HOLES_FILLED++;*/
                     visited[z, x] = 1;
+                    totalInnerPadding++;
+                    /*DBG_HOLES_FILLED++;*/
                 }
             }
         }
 
+        stats.totalInnerPadding = totalInnerPadding;
+        stats.totalCore = (stats.sizeZ * stats.sizeX) - stats.totalOuterPadding - stats.totalInnerPadding;
         /*Debug.Log("Filled " + DBG_HOLES_FILLED + " holes.");
         Debug.Log("Inner padding done with a total of  " + selectedCells + " cells.");*/
     }
@@ -809,15 +1035,15 @@ public static class MazeGenAlgorithms {
         if (currentCell.x + 1 >= 0) safe_r = true;
 
         if (safe_u) neighbours.Add(new MazeCoords(currentCell.z - 1, currentCell.x));
+        if (safe_r) neighbours.Add(new MazeCoords(currentCell.z, currentCell.x + 1));
         if (safe_d) neighbours.Add(new MazeCoords(currentCell.z + 1, currentCell.x));
         if (safe_l) neighbours.Add(new MazeCoords(currentCell.z, currentCell.x - 1));
-        if (safe_r) neighbours.Add(new MazeCoords(currentCell.z, currentCell.x + 1));
 
         if(extended) {
             if (safe_u && safe_l) neighbours.Add(new MazeCoords(currentCell.z - 1, currentCell.x - 1));
-            if (safe_d && safe_l) neighbours.Add(new MazeCoords(currentCell.z + 1, currentCell.x - 1));
             if (safe_u && safe_r) neighbours.Add(new MazeCoords(currentCell.z - 1, currentCell.x + 1));
             if (safe_d && safe_r) neighbours.Add(new MazeCoords(currentCell.z + 1, currentCell.x + 1));
+            if (safe_d && safe_l) neighbours.Add(new MazeCoords(currentCell.z + 1, currentCell.x - 1));
         }
 
         if(shuffled) {
@@ -842,15 +1068,15 @@ public static class MazeGenAlgorithms {
         List<MazeCoords> neighbours = new List<MazeCoords>();
 
         neighbours.Add(new MazeCoords(currentCell.z - 1, currentCell.x));
+        neighbours.Add(new MazeCoords(currentCell.z, currentCell.x + 1));
         neighbours.Add(new MazeCoords(currentCell.z + 1, currentCell.x));
         neighbours.Add(new MazeCoords(currentCell.z, currentCell.x - 1));
-        neighbours.Add(new MazeCoords(currentCell.z, currentCell.x + 1));
 
         if(extended) {
             neighbours.Add(new MazeCoords(currentCell.z - 1, currentCell.x - 1));
-            neighbours.Add(new MazeCoords(currentCell.z + 1, currentCell.x - 1));
             neighbours.Add(new MazeCoords(currentCell.z - 1, currentCell.x + 1));
             neighbours.Add(new MazeCoords(currentCell.z + 1, currentCell.x + 1));
+            neighbours.Add(new MazeCoords(currentCell.z + 1, currentCell.x - 1));
         }
 
         if (shuffled) {

@@ -18,15 +18,16 @@ public class Level {
         cellsData = new MazeCellData[sizeZ, sizeX];
         cellsObjects = new MazeCellObject[sizeZ, sizeX];
 
-        int[] wallsAndType = new int[5];
+        int[] data = new int[6];
         for(int z = 0; z < sizeZ; z ++) {
             for(int x = 0; x < sizeX; x ++) {
-                wallsAndType[0] = layout[z, x, 0];
-                wallsAndType[1] = layout[z, x, 1];
-                wallsAndType[2] = layout[z, x, 2];
-                wallsAndType[3] = layout[z, x, 3];
-                wallsAndType[4] = layout[z, x, 4];
-                cellsData[z, x] = new MazeCellData(new MazeCoords(z, x), wallsAndType);
+                data[0] = layout[z, x, 0];
+                data[1] = layout[z, x, 1];
+                data[2] = layout[z, x, 2];
+                data[3] = layout[z, x, 3];
+                data[4] = layout[z, x, 4];
+                data[5] = layout[z, x, 5];
+                cellsData[z, x] = new MazeCellData(new MazeCoords(z, x), data);
             }
         }
     }

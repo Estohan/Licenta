@@ -34,14 +34,14 @@ public class LevelGenerator : MonoBehaviour {
 
         //int[,,] layout = MazeGenAlgorithms.testAlgoritm(sizeZ, sizeX, 1);
         (int[,,] layout, MazeCoords startCellPos, MazeCoords finishCellPos) = 
-            MazeGenAlgorithms.PrimsAlgorithm(sizeZ, sizeX, outerPaddingDiv, innerPaddingDiv, nrOfSectors);
+            MazeGenAlgorithms.GenerateLayout(sizeZ, sizeX, outerPaddingDiv, innerPaddingDiv, nrOfSectors);
         level = new Level(sizeZ, sizeX, layout);
         level.startCellPos = startCellPos;
         level.finishCellPos = finishCellPos;
 
         // printing layout
         /*string message = "Layout:\n";
-        for (int k = 0; k < 5; k++) {
+        for (int k = 0; k < 6; k++) {
             message += "k = " + k + "\n";
 
             for (int i = 0; i < sizeX; i++) {

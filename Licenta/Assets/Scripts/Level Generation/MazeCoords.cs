@@ -21,6 +21,10 @@ public class MazeCoords {
         return new MazeCoords(a.z + b.z, a.x + b.x);
     }
 
+    public static MazeCoords operator + (MazeCoords a, (int, int) intPair) {
+        return new MazeCoords(a.z + intPair.Item1, a.x + intPair.Item2);
+    }
+
     public override string ToString() {
         return "(" + z + ", " + x + ")";
     }

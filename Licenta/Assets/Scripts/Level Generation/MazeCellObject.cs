@@ -37,7 +37,7 @@ public class MazeCellObject : MonoBehaviour {
     }
 
     public void InstantiateWalls() {
-        if ((int) data.type > 1) { // not outerPadding or innerPadding
+        if (data.type > CellType.InnerPadding) { // not outerPadding or innerPadding
             foreach (MazeDirection direction in Enum.GetValues(typeof(MazeDirection))) {
                 if (data.HasWallInDirection(direction)) {
                     // Set name and set cell subsection in which to be placed
@@ -78,7 +78,7 @@ public class MazeCellObject : MonoBehaviour {
 
     public void InstantiateCorners() {
         GameObject cornerType = ObjectReferences.instance._Corner0;
-        if (data.type == CellType.Common) {
+        if (data.type > CellType.InnerPadding) {
             for (int k = 0; k < 4; k++) {
                 // Choose corner type to be instantiated
                 switch (data.cornerFaces[k]) {
@@ -165,14 +165,25 @@ public class MazeCellObject : MonoBehaviour {
         colors.Add(new Color(0.1f, 0.1f, 0.5f, 1.0f));
         colors.Add(new Color(0.1f, 0.5f, 0.1f, 1.0f));
         colors.Add(new Color(0.5f, 0.1f, 0.1f, 1.0f));
+
         colors.Add(new Color(0.1f, 0.5f, 0.5f, 1.0f));
         colors.Add(new Color(0.5f, 0.1f, 0.5f, 1.0f));
-        colors.Add(new Color(0.5f, 0.5f, 0.1f, 1.0f));
+        colors.Add(new Color(1.0f, 0.1f, 0.1f, 1.0f));
+
+        colors.Add(new Color(1.0f, 0.5f, 0.1f, 1.0f)); // rooms
 
         Transform minimapFloor = this.transform.GetChild(0).transform.Find("MinimapFloor"); ;
         // Color sector
         if(minimapFloor != null && this.data.sector > 0) {
-            minimapFloor.GetComponent<Renderer>().material.color = colors[this.data.sector - 1];
+            if(this.data.type == CellType.Room) {
+                if(this.data.sector == 6) {
+                    minimapFloor.GetComponent<Renderer>().material.color = colors[this.data.sector - 1];
+                } else {
+                    minimapFloor.GetComponent<Renderer>().material.color = colors[colors.Count - 1];
+                }
+            } else {
+                minimapFloor.GetComponent<Renderer>().material.color = colors[this.data.sector - 1];
+            }
         }
         // this.GetComponentInChildren<Renderer>().material.color = color;
     }
@@ -191,7 +202,7 @@ public class MazeCellObject : MonoBehaviour {
             case CellType.Common:
                 return ObjectReferences.instance._FloorWhite;
             case CellType.Room:
-                return ObjectReferences.instance._FloorRed;
+                return ObjectReferences.instance._FloorWhite;
         }
         return ObjectReferences.instance._FloorWhite;
     }

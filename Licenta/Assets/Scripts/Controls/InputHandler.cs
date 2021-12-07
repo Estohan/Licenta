@@ -12,7 +12,7 @@ public class InputHandler : MonoBehaviour
     private bool miniMapVisible;
 
     private void Awake() {
-        fullMapVisible = false;
+        fullMapVisible = true;
         miniMapVisible = true;
         Map.FullmapWindow.Show();
     }
@@ -45,6 +45,11 @@ public class InputHandler : MonoBehaviour
         // Restart game
         if(Input.GetKeyDown(KeyCode.R)) {
             GameManager.instance.RestartGame();
+        }
+
+        // Fullmap camera zoom
+        if(fullMapVisible && Input.GetAxis("Mouse ScrollWheel") != 0f) {
+            Map.FullmapWindow.instance.Zoom(Input.GetAxis("Mouse ScrollWheel"));
         }
     }
 }

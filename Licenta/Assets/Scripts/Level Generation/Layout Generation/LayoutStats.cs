@@ -18,8 +18,11 @@ public class LayoutStats {
     public List<(MazeCoords, MazeDirection)>[] nextSectorExit;
     public List<(MazeCoords, MazeDirection)>[] passages;
     public List<MazeCoords>[] sectorCells;
-    //public int[] sectorCellCount;
+    public int[] _accessibleCellsCount;
     public int numberOfSectors;
+
+    // Rooms
+    public List<RoomData>[] rooms;
 
     public LayoutStats(int sizeZ, int sizeX, int numberOfSectors) {
         this.sizeZ = sizeZ;
@@ -30,13 +33,19 @@ public class LayoutStats {
         sectorBorder = new List<MazeCoords>[numberOfSectors];
         nextSectorExit = new List<(MazeCoords, MazeDirection)>[numberOfSectors];
         passages = new List<(MazeCoords, MazeDirection)>[numberOfSectors];
-        //sectorCellCount = new int[numberOfSectors]; // Default initialization with 0
+        _accessibleCellsCount = new int[numberOfSectors];
         sectorCells = new List<MazeCoords>[numberOfSectors];
-        for(int i = 0; i < numberOfSectors; i++) {
+        for (int i = 0; i < numberOfSectors; i++) {
             sectorBorder[i] = new List<MazeCoords>();
             nextSectorExit[i] = new List<(MazeCoords, MazeDirection)>();
             passages[i] = new List<(MazeCoords, MazeDirection)>();
             sectorCells[i] = new List<MazeCoords>();
+            _accessibleCellsCount[i] = 0;
+        }
+        // Initialize rooms
+        rooms = new List<RoomData>[numberOfSectors];
+        for (int i = 0; i < numberOfSectors; i++) {
+            rooms[i] = new List<RoomData>();
         }
     }
 

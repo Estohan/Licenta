@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Map {
     public class FullmapWindow : MonoBehaviour {
-        private static FullmapWindow instance;
+        public static FullmapWindow instance;
+        public Camera fullmapCamera;
 
         private void Awake() {
             if (instance != null && instance != this) {
@@ -23,6 +24,10 @@ namespace Map {
 
         public static void Hide() {
             instance.gameObject.SetActive(false);
+        }
+
+        public void Zoom(float offset) {
+            fullmapCamera.orthographicSize += offset * -100;
         }
     }
 }

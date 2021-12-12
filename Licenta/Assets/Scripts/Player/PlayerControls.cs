@@ -17,8 +17,8 @@ public class PlayerControls : MonoBehaviour
         targetPos = transform.position;
         isMoving = false;
         isRunning = false;
-        speedWalking = 3.0f;
-        speedRunning = 6.0f;
+        /*speedWalking = 3.0f;
+        speedRunning = 6.0f;*/
         speed = speedWalking;
     }
 

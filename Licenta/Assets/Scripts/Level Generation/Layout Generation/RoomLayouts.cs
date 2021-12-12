@@ -11,10 +11,10 @@ public static class RoomLayouts {
         new List<RoomLayout> {
             // Simplest room, the anchor itself is the whole room
             // A
-            new RoomLayout(new List<(int, int)> {(0, 0)}, // South orientation (default)
-                    new List<(int, int)> {(0, 0)}, // West orientation
-                    new List<(int, int)> {(0, 0)}, // North orientation
-                    new List<(int, int)> {(0, 0)}) // East orientation
+            new RoomLayout(new List<(int, int)> {(0, 0)}, // North orientation
+                    new List<(int, int)> {(0, 0)}, // East orientation
+                    new List<(int, int)> {(0, 0)}, // South orientation
+                    new List<(int, int)> {(0, 0)}) // West orientation
         },
 
         // ============================================================
@@ -22,19 +22,19 @@ public static class RoomLayouts {
         // ============================================================
         new List<RoomLayout> {
             // Access point on the side 2-cells room
-            // XA
+            // AX
             new RoomLayout(new List<(int, int)> {(0, 0), (0, 1)}, // North orientation
                     new List<(int, int)> {(0, 0), (1, 0)}, // East orientation
-                    new List<(int, int)> {(0, 0), (-1, 0)}, // West orientation
-                    new List<(int, int)> {(0, 0), (0, -1)}),
+                    new List<(int, int)> {(0, 0), (0, -1)}, // South orientation
+                    new List<(int, int)> {(0, 0), (-1, 0)}), // West orientation
 
             // Access point at the end 2-cells room
-            // X
             // A
+            // X
             new RoomLayout(new List<(int, int)> {(0, 0), (1, 0)}, // North orientation
                     new List<(int, int)> {(0, 0), (0, -1)}, // East orientation
-                    new List<(int, int)> {(0, 0), (0, 1)}, // West orientation
-                    new List<(int, int)> {(0, 0), (-1, 0)})
+                    new List<(int, int)> {(0, 0), (-1, 0)}, // South orientation
+                    new List<(int, int)> {(0, 0), (0, 1)}), // West orientation
         },
 
         // ============================================================
@@ -42,16 +42,16 @@ public static class RoomLayouts {
         // ============================================================
         new List<RoomLayout> {
             // 3-cell corner, access point at one end
+            // A
             // XX
-            //  A
             new RoomLayout(new List<(int, int)> {(0, 0), (1, 0), (1, 1)}, // North orientation
                     new List<(int, int)> {(0, 0), (0, -1), (1, -1)}, // East orientation
                     new List<(int, int)> {(0, 0), (-1, 0), (-1, -1)}, // South orientation (default)
                     new List<(int, int)> {(0, 0), (0, 1), (-1, 1)}), // West orientation
 
             // 3-cell corner, access point on the inside
-            // XA
-            // X
+            //  X
+            // AX
             new RoomLayout(
                     new List<(int, int)> {(0, 0), (0, 1), (-1, 1)}, // North orientation
                     new List<(int, int)> {(0, 0), (1, 0), (1, 1)}, // East orientation
@@ -63,8 +63,8 @@ public static class RoomLayouts {
         // ============================================================
         new List<RoomLayout> {
             // 4-cell sqare
+            // AX
             // XX
-            // XA
             new RoomLayout(new List<(int, int)> {(0, 0), (1, 0), (1, 1), (0, 1)}, // North orientation
                     new List<(int, int)> {(0, 0), (0, -1), (1, -1), (1, 0)}, // East orientation
                     new List<(int, int)> {(0, 0), (-1, 0), (-1, -1), (0, -1)}, // South orientation (default)
@@ -135,7 +135,8 @@ public class RoomLayout {
     }
 }
 
-public struct RoomData {
+[System.Serializable]
+public class RoomData {
     public MazeCoords anchor;
     public MazeDirection rotation;
     public int size;

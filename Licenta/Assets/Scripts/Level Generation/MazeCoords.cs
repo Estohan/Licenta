@@ -28,4 +28,8 @@ public class MazeCoords {
     public override string ToString() {
         return "(" + z + ", " + x + ")";
     }
+
+    /*public override bool Equals(object obj) {
+        return base.Equals(obj);
+    }*/
 }

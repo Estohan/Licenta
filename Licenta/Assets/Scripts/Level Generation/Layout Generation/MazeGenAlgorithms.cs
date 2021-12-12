@@ -14,7 +14,7 @@ public static class MazeGenAlgorithms {
     // Types: 0 - outer padding, 1 - inner padding, 2 - start cell,
     //        3 - finish cell, 4 - common cell, 5 - special room cell.
 
-    public static (int[,,], MazeCoords startCellPos, MazeCoords finishCellPos)
+    public static (int[,,], LayoutStats stats)
         GenerateLayout(int sizeZ, int sizeX, int outerPaddingDiv, int innerPaddingDiv, int nrOfSectors) {
 
         int[,,] layout = new int[sizeZ, sizeX, 6];
@@ -146,7 +146,7 @@ public static class MazeGenAlgorithms {
         Debug.Log(message);
 
 
-        return (layout, startCell, finishCell);
+        return (layout, stats);
     }
 
     private static void _RemoveRoomWalls(int[,,] layout, LayoutStats stats) {

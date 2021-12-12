@@ -7,11 +7,22 @@ public class MazeCellData {
 
     public MazeCoords coordinates;
     public bool[] walls;
-    public int[] cornerFaces;
+    public int[] cornerFaces; //  NW, NE, SE, SW
     public int sector;
     public CellType type;
-    //
 
+    // (stage, type, index)
+    // 0 - floor
+    // 1..4 - walls
+    // 5..8 - corners
+    // 9..17 - subsections
+    public (int, int, int)[] objectReferences;
+    public bool[] hasObjectReference;
+
+    // If part of a room
+    public int roomObjStage;
+    public RoomData room;
+    public MazeCoords offsetToRoomAnchor;
 
     public MazeCellData(MazeCoords coordinates, int[] data) {
         this.coordinates = coordinates;
@@ -46,6 +57,9 @@ public class MazeCellData {
         type = (CellType) data[4];
         // Sector
         sector = data[5];
+        // Initialize object references array
+        objectReferences = new (int, int, int)[18];
+        hasObjectReference = new bool[18];
     }
 
     public bool HasWallInDirection(MazeDirection direction) {

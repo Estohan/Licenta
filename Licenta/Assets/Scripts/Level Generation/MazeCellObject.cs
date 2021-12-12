@@ -25,7 +25,26 @@ public class MazeCellObject : MonoBehaviour {
     internal void InstantiateFloor() {
 
         // Create floor as child of the cell
-        GameObject _floorObj = DecideFloorType(data.type);
+        // GameObject _floorObj = DecideFloorType(data.type); [TODO] Remove this
+        if (!data.hasObjectReference[0] && data.type != CellType.Room) {
+            return;
+        }
+
+        GameObject _floorObj;
+
+        if (data.type != CellType.Room) { // Common type object
+            _floorObj = ObjectDatabase.instance.GetArchitecture(data.objectReferences[0].Item1,
+                                                                           (ObjectType)data.objectReferences[0].Item2,
+                                                                           data.objectReferences[0].Item3);
+        } else { // Room type object
+            RoomObjectCell roomObjCell = ObjectDatabase.instance.GetRoomCell(data.roomObjStage, data.room, data.offsetToRoomAnchor);
+            if(roomObjCell != null) {
+                _floorObj = roomObjCell._floor;
+            } else { // Default blank floor
+                _floorObj = ObjectDatabase.instance.GetArchitecture(0, ObjectType.Floor, 0);
+            }
+        }
+
         Instantiate(_floorObj, this.transform);
         // Move cell to correct position
         this.cellSize = this.transform.GetChild(0).GetComponent<MeshFilter>().mesh.bounds.size.x;
@@ -39,7 +58,7 @@ public class MazeCellObject : MonoBehaviour {
     public void InstantiateWalls() {
         if (data.type > CellType.InnerPadding) { // not outerPadding or innerPadding
             foreach (MazeDirection direction in Enum.GetValues(typeof(MazeDirection))) {
-                if (data.HasWallInDirection(direction)) {
+                if (data.HasWallInDirection(direction) && data.hasObjectReference[(int)direction + 1]) {
                     // Set name and set cell subsection in which to be placed
                     LevelGenerator.CellSubsections subsection = LevelGenerator.CellSubsections.Inner;
                     String name = "UNNAMED";
@@ -62,7 +81,24 @@ public class MazeCellObject : MonoBehaviour {
                             break;
                     }
                     // Create wall as child of its cell
-                    GameObject newWall = Instantiate(ObjectReferences.instance._Wall, this.transform);
+                    GameObject _wallObj;
+                    if (data.type != CellType.Room) { // Common type cell
+                        _wallObj = ObjectDatabase.instance.GetArchitecture(
+                                                data.objectReferences[(int)direction + 1].Item1,
+                                                (ObjectType)data.objectReferences[(int)direction + 1].Item2,
+                                                data.objectReferences[(int)direction + 1].Item3);
+                    } else { // Room type cell
+                        RoomObjectCell roomObjCell = ObjectDatabase.instance.GetRoomCell(
+                                                                    data.roomObjStage,
+                                                                    data.room,
+                                                                    data.offsetToRoomAnchor);
+                        if(roomObjCell != null) {
+                            _wallObj = roomObjCell.GetWall(direction);
+                        } else { // default blank object
+                            _wallObj = ObjectDatabase.instance.GetArchitecture(0, ObjectType.NEWall, 0);
+                        }
+                    }
+                    GameObject newWall = Instantiate(_wallObj, this.transform);
                     newWall.name = name + data.coordinates.z + "-" + data.coordinates.x;
                     // Set to correct position
                     newWall.transform.localPosition = GetCellSubsectionPos(newWall.transform,
@@ -77,81 +113,104 @@ public class MazeCellObject : MonoBehaviour {
     }
 
     public void InstantiateCorners() {
-        GameObject cornerType = ObjectReferences.instance._Corner0;
+        GameObject cornerType;
+        int objStage, objType, objIndex;
+
         if (data.type > CellType.InnerPadding) {
             for (int k = 0; k < 4; k++) {
-                // Choose corner type to be instantiated
-                switch (data.cornerFaces[k]) {
-                    case 0:
-                        cornerType = ObjectReferences.instance._Corner0;
-                        break;
-                    case 1:
-                        cornerType = ObjectReferences.instance._Corner1;
-                        break;
-                    case 2:
-                        cornerType = ObjectReferences.instance._Corner2;
-                        break;
+                if (data.hasObjectReference[5 + k]) {
+                    // Get the corner game object
+                    if (data.type != CellType.Room) { // Common cell
+                        (objStage, objType, objIndex) = data.objectReferences[5 + k];
+                        cornerType = ObjectDatabase.instance.GetArchitecture(objStage, (ObjectType)objType, objIndex);
+                    } else { // Room cell
+                        RoomObjectCell roomObjCell = ObjectDatabase.instance.GetRoomCell(
+                                                                        data.roomObjStage,
+                                                                        data.room,
+                                                                        data.offsetToRoomAnchor);
+                        if(roomObjCell != null) {
+                            cornerType = roomObjCell.GetCorner(k);
+                        } else { // default blank object
+                            cornerType = ObjectDatabase.instance.GetArchitecture(0, ObjectType.NoFaceCorner, 0);
+                        }
+                    }
+                    // Set name and set cell subsection in which to be placed
+                    // Also set rotation depending on corner position
+                    LevelGenerator.CellSubsections subsection = LevelGenerator.CellSubsections.Inner;
+                    String name = "UNNAMED";
+                    Quaternion rotation = Quaternion.identity;
+                    bool[] wallPlacement = data.walls;
+                    switch (k) {
+                        case 0: // North-West corner
+                            subsection = LevelGenerator.CellSubsections.NWCorner;
+                            name = "NWCorner";
+                            if (data.cornerFaces[k] == 1) {
+                                // 1F corner rotations
+                                if (wallPlacement[0]) { // Check existence of North wall
+                                    rotation = Quaternion.identity; // Face S
+                                } else {
+                                    rotation = Quaternion.Euler(0f, 270f, 0f); // Face E
+                                }
+                            } else {
+                                // 2F (and 0F) corner rotation
+                                rotation = Quaternion.Euler(0f, 270f, 0f); // Face SE
+                            }
+                            break;
+                        case 1: // North-East corner
+                            subsection = LevelGenerator.CellSubsections.NECorner;
+                            name = "NECorner";
+                            if (data.cornerFaces[k] == 1) {
+                                // 1F corner rotations
+                                if (wallPlacement[0]) { // Check existence of North wall
+                                    rotation = Quaternion.identity; // Face S
+                                } else {
+                                    rotation = Quaternion.Euler(0f, 90f, 0f); // Face W
+                                }
+                            } else {
+                                // 2F (and 0F) corner rotation
+                                rotation = Quaternion.identity; // Face SW
+                            }
+                            break;
+                        case 2: // South-East corner
+                            subsection = LevelGenerator.CellSubsections.SECorner;
+                            name = "SECorner";
+                            if (data.cornerFaces[k] == 1) {
+                                // 1F corner rotations
+                                if (wallPlacement[2]) { // Check existence of South wall
+                                    rotation = Quaternion.Euler(0f, 180f, 0f); // Face N
+                                } else {
+                                    rotation = Quaternion.Euler(0f, 90f, 0f); // Face W
+                                }
+                            } else {
+                                // 2F (and 0F) corner rotation
+                                rotation = Quaternion.Euler(0f, 90f, 0f); // Face NW
+                            }
+                            break;
+                        case 3: // South-West corner
+                            subsection = LevelGenerator.CellSubsections.SWCorner;
+                            name = "SWCorner";
+                            if (data.cornerFaces[k] == 1) {
+                                // 1F corner rotations
+                                if (wallPlacement[2]) { // Check existence of South wall
+                                    rotation = Quaternion.Euler(0f, 180f, 0f); // Face N
+                                } else {
+                                    rotation = Quaternion.Euler(0f, 270f, 0f); // Face E
+                                }
+                            } else {
+                                // 2F (and 0F) corner rotation
+                                rotation = Quaternion.Euler(0f, 180f, 0f); // Face NE
+                            }
+                            break;
+                    }
+                    // Create wall as child of its cell
+                    GameObject newCorner = Instantiate(cornerType, this.transform);
+                    newCorner.name = name + data.coordinates.z + "-" + data.coordinates.x;
+                    // Set to correct position
+                    newCorner.transform.localPosition = GetCellSubsectionPos(newCorner.transform,
+                                                                            cellSize,
+                                                                            subsection);
+                    newCorner.transform.rotation = rotation;
                 }
-                // Set name and set cell subsection in which to be placed
-                // Also set rotation depending on corner position
-                LevelGenerator.CellSubsections subsection = LevelGenerator.CellSubsections.Inner;
-                String name = "UNNAMED";
-                Quaternion rotation = Quaternion.identity;
-                bool[] wallPlacement = data.walls;
-                switch (k) {
-                    case 0:
-                        subsection = LevelGenerator.CellSubsections.NWCorner;
-                        name = "NWCorner";
-                        if (cornerType != ObjectReferences.instance._Corner2) {
-                            if (wallPlacement[0]) rotation = Quaternion.identity; // Face S
-                            if (wallPlacement[3]) rotation = Quaternion.Euler(0f, 270f, 0f); // Face E
-                        } else {
-                            rotation = Quaternion.Euler(0f, 270f, 0f); // Face SE
-                        }
-                        break;
-                    case 1:
-                        subsection = LevelGenerator.CellSubsections.NECorner;
-                        name = "NECorner";
-                        if (cornerType != ObjectReferences.instance._Corner2) {
-                            if (wallPlacement[0]) rotation = Quaternion.identity; // Face S
-                            if (wallPlacement[1]) rotation = Quaternion.Euler(0f, 90f, 0f); // Face W
-                        } else {
-                            rotation = Quaternion.identity; // Face SW
-                        }
-                        break;
-                    case 2:
-                        subsection = LevelGenerator.CellSubsections.SECorner;
-                        name = "SECorner";
-                        if (cornerType != ObjectReferences.instance._Corner2) {
-                            if (wallPlacement[1]) rotation = Quaternion.Euler(0f, 90f, 0f); // Face W
-                            if (wallPlacement[2]) rotation = Quaternion.Euler(0f, 180f, 0f); // Face N
-                        } else {
-                            rotation = Quaternion.Euler(0f, 90f, 0f); // Face NW
-                        }
-                        break;
-                    case 3:
-                        subsection = LevelGenerator.CellSubsections.SWCorner;
-                        name = "SWCorner";
-                        if (cornerType != ObjectReferences.instance._Corner2) {
-                            if (wallPlacement[2]) rotation = Quaternion.Euler(0f, 180f, 0f); // Face N
-                            if (wallPlacement[3]) rotation = Quaternion.Euler(0f, 270f, 0f); // Face E
-                        } else {
-                            rotation = Quaternion.Euler(0f, 180f, 0f); // Face NE
-                        }
-                        break;
-                }
-                // Create wall as child of its cell
-                GameObject newCorner = Instantiate(cornerType, this.transform);
-                newCorner.name = name + data.coordinates.z + "-" + data.coordinates.x;
-                // Set to correct position
-                newCorner.transform.localPosition = GetCellSubsectionPos(newCorner.transform,
-                                                                        cellSize,
-                                                                        subsection);
-                // Additional rotation of two-faced corners
-                if (cornerType == ObjectReferences.instance._Corner2) {
-
-                }
-                newCorner.transform.rotation = rotation;
             }
         }
     }
@@ -172,7 +231,11 @@ public class MazeCellObject : MonoBehaviour {
 
         colors.Add(new Color(1.0f, 0.5f, 0.1f, 1.0f)); // rooms
 
-        Transform minimapFloor = this.transform.GetChild(0).transform.Find("MinimapFloor"); ;
+        Transform minimapFloor = null;
+
+        if (data.hasObjectReference[0]) {
+            minimapFloor = this.transform.GetChild(0).transform.Find("MinimapFloor"); ;
+        }
         // Color sector
         if(minimapFloor != null && this.data.sector > 0) {
             if(this.data.type == CellType.Room) {
@@ -320,3 +383,84 @@ public class MazeCellObject : MonoBehaviour {
         return Quaternion.identity;
     }
 }
+
+
+/*public void InstantiateCorners() {
+    GameObject cornerType = ObjectReferences.instance._Corner0;
+    if (data.type > CellType.InnerPadding) {
+        for (int k = 0; k < 4; k++) {
+            // Choose corner type to be instantiated [TODO] Remove this
+            switch (data.cornerFaces[k]) {
+                case 0:
+                    cornerType = ObjectReferences.instance._Corner0;
+                    break;
+                case 1:
+                    cornerType = ObjectReferences.instance._Corner1;
+                    break;
+                case 2:
+                    cornerType = ObjectReferences.instance._Corner2;
+                    break;
+            }
+            // Set name and set cell subsection in which to be placed
+            // Also set rotation depending on corner position
+            LevelGenerator.CellSubsections subsection = LevelGenerator.CellSubsections.Inner;
+            String name = "UNNAMED";
+            Quaternion rotation = Quaternion.identity;
+            bool[] wallPlacement = data.walls;
+            switch (k) {
+                case 0:
+                    subsection = LevelGenerator.CellSubsections.NWCorner;
+                    name = "NWCorner";
+                    if (cornerType != ObjectReferences.instance._Corner2) {
+                        if (wallPlacement[0]) rotation = Quaternion.identity; // Face S
+                        if (wallPlacement[3]) rotation = Quaternion.Euler(0f, 270f, 0f); // Face E
+                    } else {
+                        rotation = Quaternion.Euler(0f, 270f, 0f); // Face SE
+                    }
+                    break;
+                case 1:
+                    subsection = LevelGenerator.CellSubsections.NECorner;
+                    name = "NECorner";
+                    if (cornerType != ObjectReferences.instance._Corner2) {
+                        if (wallPlacement[0]) rotation = Quaternion.identity; // Face S
+                        if (wallPlacement[1]) rotation = Quaternion.Euler(0f, 90f, 0f); // Face W
+                    } else {
+                        rotation = Quaternion.identity; // Face SW
+                    }
+                    break;
+                case 2:
+                    subsection = LevelGenerator.CellSubsections.SECorner;
+                    name = "SECorner";
+                    if (cornerType != ObjectReferences.instance._Corner2) {
+                        if (wallPlacement[1]) rotation = Quaternion.Euler(0f, 90f, 0f); // Face W
+                        if (wallPlacement[2]) rotation = Quaternion.Euler(0f, 180f, 0f); // Face N
+                    } else {
+                        rotation = Quaternion.Euler(0f, 90f, 0f); // Face NW
+                    }
+                    break;
+                case 3:
+                    subsection = LevelGenerator.CellSubsections.SWCorner;
+                    name = "SWCorner";
+                    if (cornerType != ObjectReferences.instance._Corner2) {
+                        if (wallPlacement[2]) rotation = Quaternion.Euler(0f, 180f, 0f); // Face N
+                        if (wallPlacement[3]) rotation = Quaternion.Euler(0f, 270f, 0f); // Face E
+                    } else {
+                        rotation = Quaternion.Euler(0f, 180f, 0f); // Face NE
+                    }
+                    break;
+            }
+            // Create wall as child of its cell
+            GameObject newCorner = Instantiate(cornerType, this.transform);
+            newCorner.name = name + data.coordinates.z + "-" + data.coordinates.x;
+            // Set to correct position
+            newCorner.transform.localPosition = GetCellSubsectionPos(newCorner.transform,
+                                                                    cellSize,
+                                                                    subsection);
+            // Additional rotation of two-faced corners
+            if (cornerType == ObjectReferences.instance._Corner2) {
+
+            }
+            newCorner.transform.rotation = rotation;
+        }
+    }
+}*/

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class LayoutStats {
     // General stats
     public int sizeZ, sizeX;
@@ -13,7 +14,7 @@ public class LayoutStats {
 
     public MazeCoords startCell, finishCell;
 
-    // Sectors
+    // Sectors ----------------------------------------------------------- Nested containers are not serialized
     public List<MazeCoords>[] sectorBorder;
     public List<(MazeCoords, MazeDirection)>[] nextSectorExit;
     public List<(MazeCoords, MazeDirection)>[] passages;
@@ -23,10 +24,12 @@ public class LayoutStats {
 
     // Rooms
     public List<RoomData>[] rooms;
+    public List<RoomData> test;
 
     public LayoutStats(int sizeZ, int sizeX, int numberOfSectors) {
         this.sizeZ = sizeZ;
         this.sizeX = sizeX;
+        test = new List<RoomData>();
 
         // Initialize sectors data
         this.numberOfSectors = numberOfSectors;

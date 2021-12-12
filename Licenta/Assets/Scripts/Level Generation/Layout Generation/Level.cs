@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Level {
-    private int sizeZ, sizeX;
-    private MazeCellData[,] cellsData;
+    public int stage;
+    public int sizeZ, sizeX;
+    public  MazeCellData[,] cellsData;
     public MazeCellObject[,] cellsObjects;
-    public MazeCoords startCellPos;
-    public MazeCoords finishCellPos;
+    public LayoutStats stats;
 
     // Takes in the layout of the maze and puts it into
     // a two dimensional array of MazeCellData
-    public Level(int sizeZ, int sizeX, int[,,] layout) {
+    public Level(int sizeZ, int sizeX, int[,,] layout, LayoutStats stats) {
+        stage = 1;
+
         this.sizeZ = sizeZ;
         this.sizeX = sizeX;
+        this.stats = stats;
 
         cellsData = new MazeCellData[sizeZ, sizeX];
         cellsObjects = new MazeCellObject[sizeZ, sizeX];
@@ -35,6 +38,7 @@ public class Level {
     public Level(int sizeZ, int sizeX, SavedData savedData) {
         this.sizeZ = sizeZ;
         this.sizeX = sizeX;
+        this.stats = savedData.stats;
 
         cellsData = new MazeCellData[sizeZ, sizeX];
         cellsObjects = new MazeCellObject[sizeZ, sizeX];

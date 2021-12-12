@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour {
     // Final preparations before the level is playable
     public void ReadyLevel() {
         // Move player to the start position
-        MazeCoords startCellPos = currentLevel.startCellPos;
+        MazeCoords startCellPos = currentLevel.stats.startCell;
         Transform targetCellTransform = currentLevel.cellsObjects[startCellPos.z, startCellPos.x].transform;
         float playerPosZ = targetCellTransform.position.z;
         float playerPosX = targetCellTransform.position.x;

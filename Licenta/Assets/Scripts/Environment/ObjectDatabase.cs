@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObjectDatabase : MonoBehaviour {
     public static ObjectDatabase instance;
 
-    public GameObject _mazeCellObject;
+    public MazeCellObject _mazeCellObject;
     public GameObject _levelRoot;
     public GameStageObjects commonObjects;
     public GameStageObjects firstStageObjects;
@@ -77,13 +77,11 @@ public class ObjectDatabase : MonoBehaviour {
         MazeDirection rotation = data.rotation;
         GameStageObjects currentStageObjects = firstStageObjects;
 
-        if (data.size == 1) { // only size 1 rooms for now
-            if (size < currentStageObjects.PredefinedRoomsBySize.Count) {
-                return currentStageObjects.PredefinedRoomsBySize[size - 1].GetRoomCell(index, rotation, offset);
-            } else {
-                throw new System.Exception("GetRoomCells: No rooms of size " + size + ".");
-            }
+        if (size <= currentStageObjects.PredefinedRoomsBySize.Count) {
+            return currentStageObjects.PredefinedRoomsBySize[size - 1].GetRoomCell(index, rotation, offset);
         } else {
+            //throw new System.Exception("GetRoomCells: No rooms of size " + size + ".");
+            // Debug.Log("(!) GetRoomCell: No room of index " + index + ".Returning null\n");
             return null;
         }
     }
@@ -146,9 +144,9 @@ public class RoomsOfSizeN {
         if(roomsByIndex.Count > index) {
             return roomsByIndex[index].GetRotation(rotation);
         } else {
-            throw new System.Exception("GetRoom: Bad room index!");
-            /*Debug.Log("GetRoom: BAD ROOM INDEX!\n");
-            return null;*/
+            // throw new System.Exception("GetRoom: Bad room index!");
+            // Debug.Log("(!) GetRoomCell: No room of index " + index + ".Returning null\n");
+            return null;
         }
     }
 
@@ -156,9 +154,9 @@ public class RoomsOfSizeN {
         if (roomsByIndex.Count > index) {
             return roomsByIndex[index].GetCellFromRotation(rotation, offset);
         } else {
-            throw new System.Exception("GetRoomCell: Bad room index!");
-            /*Debug.Log("GetRoom: BAD ROOM INDEX!\n");
-            return null;*/
+            // throw new System.Exception("GetRoomCell: Bad room index!");
+            // Debug.Log("(!) GetRoomCell: No room of index " + index + ". Returning null\n");
+            return null;
         }
     }
 }

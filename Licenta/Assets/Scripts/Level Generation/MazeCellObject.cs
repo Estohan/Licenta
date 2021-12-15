@@ -34,11 +34,11 @@ public class MazeCellObject : MonoBehaviour {
 
         if (data.type != CellType.Room) { // Common type object
             _floorObj = ObjectDatabase.instance.GetArchitecture(data.objectReferences[0].Item1,
-                                                                           (ObjectType)data.objectReferences[0].Item2,
-                                                                           data.objectReferences[0].Item3);
+                                                                (ObjectType)data.objectReferences[0].Item2,
+                                                                data.objectReferences[0].Item3);
         } else { // Room type object
             RoomObjectCell roomObjCell = ObjectDatabase.instance.GetRoomCell(data.roomObjStage, data.room, data.offsetToRoomAnchor);
-            if(roomObjCell != null) {
+            if(roomObjCell != null && roomObjCell.HasFloor()) {
                 _floorObj = roomObjCell._floor;
             } else { // Default blank floor
                 _floorObj = ObjectDatabase.instance.GetArchitecture(0, ObjectType.Floor, 0);
@@ -92,7 +92,7 @@ public class MazeCellObject : MonoBehaviour {
                                                                     data.roomObjStage,
                                                                     data.room,
                                                                     data.offsetToRoomAnchor);
-                        if(roomObjCell != null) {
+                        if(roomObjCell != null && roomObjCell.HasWall(direction)) {
                             _wallObj = roomObjCell.GetWall(direction);
                         } else { // default blank object
                             _wallObj = ObjectDatabase.instance.GetArchitecture(0, ObjectType.NEWall, 0);
@@ -128,7 +128,7 @@ public class MazeCellObject : MonoBehaviour {
                                                                         data.roomObjStage,
                                                                         data.room,
                                                                         data.offsetToRoomAnchor);
-                        if(roomObjCell != null) {
+                        if(roomObjCell != null && roomObjCell.HasCorner(k)) {
                             cornerType = roomObjCell.GetCorner(k);
                         } else { // default blank object
                             cornerType = ObjectDatabase.instance.GetArchitecture(0, ObjectType.NoFaceCorner, 0);
@@ -252,7 +252,7 @@ public class MazeCellObject : MonoBehaviour {
     }
 
     // REMOVE THIS LATER
-    private GameObject DecideFloorType(CellType type) {
+    /*private GameObject DecideFloorType(CellType type) {
         switch (type) {
             case CellType.OuterPadding:
                 return  ObjectReferences.instance._OuterPadding;
@@ -268,7 +268,7 @@ public class MazeCellObject : MonoBehaviour {
                 return ObjectReferences.instance._FloorWhite;
         }
         return ObjectReferences.instance._FloorWhite;
-    }
+    }*/
 
     // Returns the position of a cell subsection given the
     // position of the parent cell

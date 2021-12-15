@@ -314,13 +314,14 @@ public static class MazeGenAlgorithms {
     private static (bool roomPlaced, MazeDirection rotation, int err) 
         CheckRoomPlacement(int[,,] layout, MazeCoords anchor, int sector, List<(int, int)>[] room, LayoutStats stats) {
         bool roomPlaced = false;
-        int rotation;
+        int rotationIndex;
         int cellSector;
         int cellType;
         int nrOfRotations = room.Count();
         int currNrOfRotations = nrOfRotations;
         MazeCoords aux;
-        bool[] checkedRotations = new bool[nrOfRotations];
+        List<int> uncheckedRotations = new List<int>();
+        int uncheckedRotationIndex;
         List<(int, int)> roomRotation;
 
         // Check if the given anchor is on top of a room cell.
@@ -332,16 +333,20 @@ public static class MazeGenAlgorithms {
             return (roomPlaced, MazeDirection.North, 1);
         }
 
+        // uncheckedRotations contains the indexes of the rotations left
+        // unchecked in room
+        for(int i = 0; i < nrOfRotations; i ++) {
+            uncheckedRotations.Add(i);
+        }
+
         // Randomly select rotations from the list instead of simply interatig through
         // them to avoid the first rotations being "chosen" too frequently
         while(currNrOfRotations > 0) {
-            rotation = UnityEngine.Random.Range(0, nrOfRotations - 1);
-            // chckedRotations keeps track of already chosen rotations
-            while(checkedRotations[rotation]) {
-                rotation = UnityEngine.Random.Range(0, nrOfRotations - 1);
-            }
+            uncheckedRotationIndex = UnityEngine.Random.Range(0, uncheckedRotations.Count);
+            rotationIndex = uncheckedRotations[uncheckedRotationIndex];
+            uncheckedRotations.RemoveAt(uncheckedRotationIndex);
 
-            roomRotation = room[rotation];
+            roomRotation = room[rotationIndex];
             roomPlaced = true;
             // Check overlapping for each offset in rotation
             foreach((int z, int x) in roomRotation) {
@@ -356,16 +361,13 @@ public static class MazeGenAlgorithms {
             }
             currNrOfRotations--;
             // If the room does not overlap with anything:
-            // a) 
-            // b) 
-            // 
             if(roomPlaced) {
                 // a) Check if it can be accessed
-                aux = anchor + ((MazeDirection)rotation).ToMazeCoords();
+                aux = anchor + ((MazeDirection)rotationIndex).ToMazeCoords();
                 if(layout[aux.z, aux.x, 4] != (int)CellType.Common || layout[aux.z, aux.x, 5] != sector) {
                     roomPlaced = false;
                     // [DEBUG] Debug.Log("\t\tFAIL! Can't be accessed!");
-                    return (roomPlaced, (MazeDirection)rotation, 2);
+                    return (roomPlaced, (MazeDirection)rotationIndex, 2);
                 }
 
                 // b) Check if it blocks any sector exit
@@ -385,7 +387,7 @@ public static class MazeGenAlgorithms {
                     if(tempLayout[passage.z, passage.x] == (int)CellType.Room) {
                         roomPlaced = false;
                         // [DEBUG] Debug.Log("\t\tFAIL! Blocks sector exit!");
-                        return (roomPlaced, (MazeDirection)rotation, 3);
+                        return (roomPlaced, (MazeDirection)rotationIndex, 3);
                     }
                 }
 
@@ -402,7 +404,7 @@ public static class MazeGenAlgorithms {
                 // Start from the cell that is directly in front of the room's entrance a BFS for all explorable
                 // cells. If the final count is less than stats._accessibleCellsCount then it means there is one
                 // or more cells blocked by this placement
-                startCell = anchor + ((MazeDirection)rotation).ToMazeCoords();
+                startCell = anchor + ((MazeDirection)rotationIndex).ToMazeCoords();
 
                 bfsQueue.Enqueue(startCell);
                 visited[startCell.z, startCell.x] = true;
@@ -457,13 +459,13 @@ public static class MazeGenAlgorithms {
                     roomPlaced = false;
                     // [DEBUG] Debug.Log("\t\tFAIL! Blocks something! " + currAccessibleCellsCount + "==" + stats._accessibleCellsCount[sector - 1] +
                     // [DEBUG] " (Sec. total of " + stats.sectorCells[sector - 1].Count + ")");
-                    return (roomPlaced, (MazeDirection)rotation, 3);
+                    return (roomPlaced, (MazeDirection)rotationIndex, 3);
                 } else {
                     // [DEBUG] Debug.Log("\t\tSUCCESS! Not blocking. " + anchor + " " + currAccessibleCellsCount + "==" + stats._accessibleCellsCount[sector - 1] +
                     // [DEBUG] " (Sec. total of " + stats.sectorCells[sector - 1].Count + ")");
                 }
                 // Successful placement
-                return (roomPlaced, (MazeDirection)rotation, 0);
+                return (roomPlaced, (MazeDirection)rotationIndex, 0);
             }
         }
         // Unable to place room

@@ -44,9 +44,9 @@ public class RoomObject : ScriptableObject {
         }
 
         foreach(RoomObjectCell roomCell in rotationCells) {
-            Debug.Log("Comparing " + roomCell.offset + " with " + cellOffset);
+            // [TODO] What's up with "==" and ".Equals"
+            // Debug.Log("Comparing " + roomCell.offset + " with " + cellOffset);
             if(roomCell.offset.z == cellOffset.z && roomCell.offset.x == cellOffset.x) {
-                Debug.Log("True!");
                 return roomCell;
             }
         }

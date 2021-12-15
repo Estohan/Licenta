@@ -21,8 +21,8 @@ public class LevelGenerator : MonoBehaviour {
     public GameObject _Finish;
     public GameObject _OuterPadding;
     public GameObject _InnerPadding;*/
-    public MazeCellObject _MazeCellObject;
-    public GameObject _LevelRootObject;
+    /*public MazeCellObject _MazeCellObject;
+    public GameObject _LevelRootObject;*/
 
     // !! This function will need some parameters
     // Uses MazeGenAlgorithms to generate a maze layout and
@@ -170,14 +170,14 @@ public class LevelGenerator : MonoBehaviour {
 
     public void InstantiateLevel() {
         // Create a Level object that will hold all the level contents
-        Transform rootParent = Instantiate(_LevelRootObject, this.transform).transform;
+        Transform rootParent = Instantiate(ObjectDatabase.instance._levelRoot, this.transform).transform;
 
         // For each cell create its parent cell object and then
         // instantiate its contents as children
         for (int z = 0; z < sizeZ; z++) {
             for (int x = 0; x < sizeX; x++) {
                 // Create cell object
-                MazeCellObject newCellObject = Instantiate(_MazeCellObject, rootParent);
+                MazeCellObject newCellObject = Instantiate(ObjectDatabase.instance._mazeCellObject, rootParent);
                 newCellObject.data = level.getCellData(z, x);
                 newCellObject.name = "Cell " + z + "-" + x;
                 // newCellObject.transform.parent = this.transform;

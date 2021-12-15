@@ -26,6 +26,10 @@ public class RoomObjectCell : ScriptableObject {
     public GameObject _subsection_3;
     public MazeDirection _subsection_3_rot;
 
+    public bool HasFloor() {
+        return _floor != null;
+    }
+
     public GameObject GetWall(MazeDirection direction) {
         switch(direction) {
             case MazeDirection.North:
@@ -36,6 +40,19 @@ public class RoomObjectCell : ScriptableObject {
                 return _southWall;
             default:
                 return _westWall;
+        }
+    }
+
+    public bool HasWall(MazeDirection direction) {
+        switch (direction) {
+            case MazeDirection.North:
+                return _northWall != null;
+            case MazeDirection.East:
+                return _eastWall != null;
+            case MazeDirection.South:
+                return _southWall != null;
+            default:
+                return _westWall != null;
         }
     }
 
@@ -52,6 +69,20 @@ public class RoomObjectCell : ScriptableObject {
         }
     }
 
+    public bool HasCorner(int index) {
+        switch (index) {
+            case 0:
+                return _NWcorner != null;
+            case 1:
+                return _NEcorner != null;
+            case 2:
+                return _SEcorner != null;
+            default:
+                return _SWcorner != null;
+        }
+    }
+
+    // [TODO] Treat unassigned reference exceptions
     public List<(GameObject, MazeDirection)> GetSubsectionObj() {
         List < (GameObject, MazeDirection) > subsectionObjects = new List<(GameObject, MazeDirection)>();
 

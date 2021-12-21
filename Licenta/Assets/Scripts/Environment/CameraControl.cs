@@ -15,25 +15,34 @@ public class CameraControl : MonoBehaviour
     public float maximumDistance = 2;
 
     //The velocity of your player, used to determine the speed of the camera 
+    private PlayerStats playerStats;
     private float playerVelocity;
 
     private float movementX;
     private float movementZ;
     private float movementY;
 
+    private void Awake() {
+        playerStats = player.GetComponent<PlayerStats>();
+    }
+
     void Start() {
         followPlayer();
         // -------------- What if the player is running?
-        if(player.GetComponent<PlayerControls>() != null) {
-            playerVelocity = player.GetComponent<PlayerControls>().speed;
+        if(player.GetComponent<PlayerStats>() != null) {
+            playerVelocity = player.GetComponent<PlayerStats>().speed;
         } else {
             playerVelocity = 10;
         }
     }
 
-    // Update is called once per frame 
     void Update() {
+        playerVelocity = playerStats.speed;
         followPlayer();
+    }
+
+    void FixedUpdate() {
+        // followPlayer();
     }
 
     void followPlayer() {

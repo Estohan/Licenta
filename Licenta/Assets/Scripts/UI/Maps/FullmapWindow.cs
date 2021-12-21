@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Map {
     public class FullmapWindow : MonoBehaviour {
         public static FullmapWindow instance;
+        public float zoomIncrementValue;
         public Camera fullmapCamera;
 
         private void Awake() {
@@ -27,7 +28,7 @@ namespace Map {
         }
 
         public void Zoom(float offset) {
-            fullmapCamera.orthographicSize += offset * -100;
+            fullmapCamera.orthographicSize += offset * -zoomIncrementValue;
         }
     }
 }

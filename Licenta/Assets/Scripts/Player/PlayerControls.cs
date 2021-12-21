@@ -7,18 +7,24 @@ public class PlayerControls : MonoBehaviour
     public float speed;
     public float speedWalking;
     public float speedRunning;
+
     public Vector3 targetPos;
-    public bool isMoving;
+
+    public bool isIdle;
+    public bool isWalking;
     public bool isRunning;
+
     const int mouseLMB = 0;
+
+    Animator animator;
 
     // Use this for initialization1
     void Start() {
+        animator = GetComponent<Animator>();
+
         targetPos = transform.position;
-        isMoving = false;
+        isWalking = false;
         isRunning = false;
-        /*speedWalking = 3.0f;
-        speedRunning = 6.0f;*/
         speed = speedWalking;
     }
 
@@ -27,7 +33,7 @@ public class PlayerControls : MonoBehaviour
         if (Input.GetMouseButton(mouseLMB)) {
             SetTarggetPosition();
             // Running
-            if (Input.GetKey(KeyCode.LeftShift) && isMoving) {
+            if (Input.GetKey(KeyCode.LeftShift) && isWalking) {
                 isRunning = true;
                 speed = speedRunning;
             // Walking
@@ -36,8 +42,9 @@ public class PlayerControls : MonoBehaviour
                 speed = speedWalking;
             }
 
-            if (isMoving) {
-                MoveObject();
+            if (isWalking) {
+                Move();
+                animator.SetBool("isWalking", isWalking);
             }
         }
     }
@@ -55,17 +62,17 @@ public class PlayerControls : MonoBehaviour
             targetPos = ray.GetPoint(point);
         }
 
-        isMoving = true;
+        isWalking = true;
     }
 
-    void MoveObject() {
+    void Move() {
         // Rotate the transform so that the forward vector points to targetPos
         transform.LookAt(targetPos);
         // Move towards the targetPos by speed*Time.deltaTime
         transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
 
         if (transform.position == targetPos)
-            isMoving = false;
+            isWalking = false;
         Debug.DrawLine(transform.position, targetPos, Color.red);
     }
 }

@@ -118,13 +118,13 @@ public class PlayerNewControlsRB : MonoBehaviour {
     }
 
     private void OnSprintInputStarted(InputAction.CallbackContext context) {
-        if (playerStats.isIdleOnWalk) {
+        if (playerStats.isIdle) {
             playerSpeed = playerStats.speedRunning;
         }
     }
 
     private void OnSprintInputCanceled(InputAction.CallbackContext context) {
-        if (playerStats.isIdleOnWalk) {
+        if (playerStats.isIdle) {
             playerSpeed = playerStats.speedWalking;
         }
     }

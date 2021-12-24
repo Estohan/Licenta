@@ -144,6 +144,14 @@
                     "expectedControlType": "Button",
                     "processors": "NormalizeVector2",
                     "interactions": ""
+                },
+                {
+                    "name": "Alternate move",
+                    "type": "Button",
+                    "id": "5fa93342-371c-4f7b-ad4c-0a01222f4640",
+                    "expectedControlType": "Button",
+                    "processors": "NormalizeVector2",
+                    "interactions": "Hold"
                 }
             ],
             "bindings": [
@@ -320,6 +328,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "292d9a11-6224-44a7-a48b-dac9bafcec3e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Alternate move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

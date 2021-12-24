@@ -157,6 +157,14 @@ public class @InputManager : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": ""NormalizeVector2"",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Alternate move"",
+                    ""type"": ""Button"",
+                    ""id"": ""5fa93342-371c-4f7b-ad4c-0a01222f4640"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": ""NormalizeVector2"",
+                    ""interactions"": ""Hold""
                 }
             ],
             ""bindings"": [
@@ -335,6 +343,17 @@ public class @InputManager : IInputActionCollection, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""292d9a11-6224-44a7-a48b-dac9bafcec3e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Alternate move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -357,6 +376,7 @@ public class @InputManager : IInputActionCollection, IDisposable
         m_PlayerMovement_Crawl = m_PlayerMovement.FindAction("Crawl", throwIfNotFound: true);
         m_PlayerMovement_Sneak = m_PlayerMovement.FindAction("Sneak", throwIfNotFound: true);
         m_PlayerMovement_Jump = m_PlayerMovement.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerMovement_Alternatemove = m_PlayerMovement.FindAction("Alternate move", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -494,6 +514,7 @@ public class @InputManager : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerMovement_Crawl;
     private readonly InputAction m_PlayerMovement_Sneak;
     private readonly InputAction m_PlayerMovement_Jump;
+    private readonly InputAction m_PlayerMovement_Alternatemove;
     public struct PlayerMovementActions
     {
         private @InputManager m_Wrapper;
@@ -504,6 +525,7 @@ public class @InputManager : IInputActionCollection, IDisposable
         public InputAction @Crawl => m_Wrapper.m_PlayerMovement_Crawl;
         public InputAction @Sneak => m_Wrapper.m_PlayerMovement_Sneak;
         public InputAction @Jump => m_Wrapper.m_PlayerMovement_Jump;
+        public InputAction @Alternatemove => m_Wrapper.m_PlayerMovement_Alternatemove;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -531,6 +553,9 @@ public class @InputManager : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnJump;
+                @Alternatemove.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnAlternatemove;
+                @Alternatemove.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnAlternatemove;
+                @Alternatemove.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnAlternatemove;
             }
             m_Wrapper.m_PlayerMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -553,6 +578,9 @@ public class @InputManager : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Alternatemove.started += instance.OnAlternatemove;
+                @Alternatemove.performed += instance.OnAlternatemove;
+                @Alternatemove.canceled += instance.OnAlternatemove;
             }
         }
     }
@@ -575,5 +603,6 @@ public class @InputManager : IInputActionCollection, IDisposable
         void OnCrawl(InputAction.CallbackContext context);
         void OnSneak(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnAlternatemove(InputAction.CallbackContext context);
     }
 }

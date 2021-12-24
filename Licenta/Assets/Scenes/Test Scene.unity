@@ -876,7 +876,7 @@ Transform:
   - {fileID: 1766647129}
   - {fileID: 404712777}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &94871112
 PrefabInstance:
@@ -1318,20 +1318,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  speedWalking: 5
   speedRunning: 10
+  speedWalking: 5
   speedSneaking: 3
   speedCrawling: 2
+  rotationFactor: 0
+  runRotationFactor: 0
+  walkRotationFactor: 0
+  sneakRotationFactor: 0
+  crawlRotationFactor: 0
   jumpHeight: 2
   dodgeDistance: 3
   isIdle: 0
-  isIdleOnWalk: 0
-  isIdleOnSneak: 0
-  isIdleOnCrawl: 0
-  isWalking: 0
-  isSneaking: 0
-  isCrawling: 0
   isRunning: 0
+  jumped: 0
+  dodged: 0
+  currentPosture: 0
 --- !u!114 &152841438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1344,6 +1346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b20db4f44ae803d48983760f19cb2309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
   gravityValue: -84
   dragValue: {x: 10, y: 1, z: 10}
 --- !u!4 &174958121 stripped
@@ -1410,7 +1413,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -5716681864270162303, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
 --- !u!1001 &293378348
 PrefabInstance:
@@ -1842,7 +1846,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6949120692278677126, guid: 78f392842b3ce0e40afd98b701913e38, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6949120692278677126, guid: 78f392842b3ce0e40afd98b701913e38, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3563,20 +3567,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  speedWalking: 3
   speedRunning: 7
-  speedSneaking: 3
-  speedCrawling: 2
+  speedWalking: 3
+  speedSneaking: 2.5
+  speedCrawling: 1.5
+  rotationFactor: 0
+  runRotationFactor: 0.8
+  walkRotationFactor: 0.6
+  sneakRotationFactor: 0.4
+  crawlRotationFactor: 0.1
   jumpHeight: 2
-  dodgeDistance: 3
+  dodgeDistance: 1.5
   isIdle: 0
-  isIdleOnWalk: 0
-  isIdleOnSneak: 0
-  isIdleOnCrawl: 0
-  isWalking: 0
-  isSneaking: 0
-  isCrawling: 0
   isRunning: 0
+  jumped: 0
+  dodged: 0
+  currentPosture: 0
 --- !u!95 &1002808546
 Animator:
   serializedVersion: 3
@@ -3587,7 +3593,7 @@ Animator:
   m_GameObject: {fileID: 1002808542}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5a868f6203aea1c4e82a4ea099010fad, type: 2}
+  m_Controller: {fileID: 9100000, guid: ef993bcbcaa36554f99772b6e3309ab7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 1
   m_ApplyRootMotion: 0
@@ -3608,6 +3614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b20db4f44ae803d48983760f19cb2309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 2145889794}
   gravityValue: -84
   dragValue: {x: 10, y: 1, z: 10}
 --- !u!143 &1002808548
@@ -4817,6 +4824,154 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1493617302}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1569623038
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -6057140222963153312, guid: 36ea85c2a21d8204abaad7be3a17d7a5, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 52e8a3f2b5c32c44fb8ac246123a940d, type: 2}
+    - target: {fileID: -6057140222963153312, guid: 36ea85c2a21d8204abaad7be3a17d7a5, type: 3}
+      propertyPath: m_WarningMessage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 36ea85c2a21d8204abaad7be3a17d7a5, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 36ea85c2a21d8204abaad7be3a17d7a5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 36ea85c2a21d8204abaad7be3a17d7a5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 36ea85c2a21d8204abaad7be3a17d7a5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 36ea85c2a21d8204abaad7be3a17d7a5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 36ea85c2a21d8204abaad7be3a17d7a5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 36ea85c2a21d8204abaad7be3a17d7a5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 36ea85c2a21d8204abaad7be3a17d7a5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 36ea85c2a21d8204abaad7be3a17d7a5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 36ea85c2a21d8204abaad7be3a17d7a5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 36ea85c2a21d8204abaad7be3a17d7a5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 36ea85c2a21d8204abaad7be3a17d7a5, type: 3}
+      propertyPath: m_Name
+      value: Humanoid Robot Kyle
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 36ea85c2a21d8204abaad7be3a17d7a5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 36ea85c2a21d8204abaad7be3a17d7a5, type: 3}
+--- !u!1 &1569623039 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 36ea85c2a21d8204abaad7be3a17d7a5, type: 3}
+  m_PrefabInstance: {fileID: 1569623038}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1569623040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569623039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b20db4f44ae803d48983760f19cb2309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  gravityValue: -84
+  dragValue: {x: 10, y: 1, z: 10}
+--- !u!114 &1569623041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569623039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 823331f3a2f3eb14086fb420aa737f14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1569623042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569623039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c1973a437e555a44b0e416eb8597d48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  speedRunning: 7
+  speedWalking: 3
+  speedSneaking: 3
+  speedCrawling: 2
+  rotationFactor: 0
+  runRotationFactor: 0
+  walkRotationFactor: 0
+  sneakRotationFactor: 0
+  crawlRotationFactor: 0
+  jumpHeight: 2
+  dodgeDistance: 3
+  isIdle: 0
+  isRunning: 0
+  jumped: 0
+  dodged: 0
+  currentPosture: 0
+--- !u!143 &1569623043
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569623039}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1.81
+  m_Radius: 0.1940799
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.91, z: 0}
 --- !u!1001 &1593566891
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5141,7 +5296,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1749125226 stripped
 Transform:
@@ -5767,20 +5922,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  speedWalking: 5
   speedRunning: 10
+  speedWalking: 5
   speedSneaking: 3
   speedCrawling: 2
+  rotationFactor: 0
+  runRotationFactor: 0
+  walkRotationFactor: 0
+  sneakRotationFactor: 0
+  crawlRotationFactor: 0
   jumpHeight: 10
   dodgeDistance: 1
   isIdle: 0
-  isIdleOnWalk: 0
-  isIdleOnSneak: 0
-  isIdleOnCrawl: 0
-  isWalking: 0
-  isSneaking: 0
-  isCrawling: 0
   isRunning: 0
+  jumped: 0
+  dodged: 0
+  currentPosture: 0
 --- !u!65 &1911010520
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6369,7 +6526,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2131860084
 PrefabInstance:

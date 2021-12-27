@@ -24,6 +24,7 @@ public class PlayerStats : MonoBehaviour {
     public bool jumped;
     public bool dodged;
     public PlayerControls.PlayerPostureState currentPosture;
+    public ColliderDims[] CapsuleColliders;
 
     /*private void Awake() {
         animator = new Animator();
@@ -34,10 +35,27 @@ public class PlayerStats : MonoBehaviour {
         isRunning = false;
         jumped = false;
         dodged = false;
+        CapsuleColliders = new ColliderDims[3];
+        CapsuleColliders[0].SetDimensions(new Vector3(0f, 0.88f, 0f), 0.194f, 1.75f);
+        CapsuleColliders[1].SetDimensions(new Vector3(0f, 0.71f, 0f), 0.194f, 1.48f);
+        CapsuleColliders[2].SetDimensions(new Vector3(0f, 0.24f, 0f), 0.260f, 0.45f);
+
         currentPosture = PlayerControls.PlayerPostureState.Standing;
 
         speed = speedWalking;
         rotationFactor = walkRotationFactor;
+    }
+
+    public struct ColliderDims {
+        public Vector3 center;
+        public float radius;
+        public float height;
+
+        public void SetDimensions(Vector3 center, float radius, float height) {
+            this.center = center;
+            this.radius = radius;
+            this.height = height;
+        }
     }
 
 }

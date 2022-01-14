@@ -202,7 +202,7 @@ public class MazeCellObject : MonoBehaviour {
                             }
                             break;
                     }
-                    // Create wall as child of its cell
+                    // Create corner as child of its cell
                     GameObject newCorner = Instantiate(cornerType, this.transform);
                     newCorner.name = name + data.coordinates.z + "-" + data.coordinates.x;
                     // Set to correct position

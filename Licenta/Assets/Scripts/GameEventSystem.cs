@@ -1,0 +1,26 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameEventSystem : MonoBehaviour {
+    public static GameEventSystem instance = null;
+
+    public delegate void PlayerHitDelegate(object sender, float damage);
+    public event PlayerHitDelegate OnPlayerHit;
+    // public event EventHandler OnPlayerHit;
+
+    private void Awake() {
+        if (instance != null && instance != this) {
+            Debug.LogError("Duplicate instance of GameEventSystem.\n");
+            Destroy(gameObject);
+        } else {
+            instance = this;
+        }
+    }
+
+    public void PlayerHit(float damage) {
+        // OnPlayerHit?.Invoke(this, EventArgs.Empty);
+        OnPlayerHit?.Invoke(this, damage);
+    }
+}

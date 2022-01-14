@@ -9,8 +9,12 @@ public class Sceneviewbuildereditor : Editor {
         base.OnInspectorGUI();
         SceneViewBuilder builder = (SceneViewBuilder)target;
 
-        if (GUILayout.Button("Generate level")) {
-            builder.GenerateNewLevel();
+        if (GUILayout.Button("Generate board")) {
+            builder.GenerateBoard();
+        }
+
+        if (GUILayout.Button("Delete board")) {
+            builder.DeleteBoard();
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,6 +33,9 @@ public class PlayerAnimationHandler : MonoBehaviour
         playerStats.isIdle = animator.GetBool(isIdleHash);
         playerStats.isRunning = animator.GetBool(isRunningHash);
         playerStats.currentPosture = (PlayerControls.PlayerPostureState)animator.GetInteger(postureStateHash);
+
+        // events
+        GameEventSystem.instance.OnPlayerHit += HitPlayerReaction;
     }
 
     private void Update() {
@@ -70,5 +74,13 @@ public class PlayerAnimationHandler : MonoBehaviour
 
     public void Dodge() {
         animator.SetTrigger(dodgedHash);
+    }
+
+    /*private void HitPlayerReaction(object sender, EventArgs e) {
+        Debug.Log("Animation Handler: Player was hit!");
+    }*/
+
+    private void HitPlayerReaction(object sender, float damage) {
+        Debug.Log("Animation Handler: Player was hit! Showing " + damage + " points of damage.");
     }
 }

@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour {
-    
+    public float maxHealth;
+    public float currHealth; // persistent stats should be stored in a SO?
+    [Space]
     public float speed;
     public float speedRunning;
     public float speedWalking;
@@ -23,7 +26,7 @@ public class PlayerStats : MonoBehaviour {
     public bool isRunning;
     public bool jumped;
     public bool dodged;
-    public PlayerControls.PlayerPostureState currentPosture;
+    public PlayerControls.PlayerPostureState currentPosture; // persistent?
     public ColliderDims[] CapsuleColliders;
 
     /*private void Awake() {
@@ -31,6 +34,8 @@ public class PlayerStats : MonoBehaviour {
     }*/
 
     private void Start() {
+        currHealth = maxHealth;
+        // controls
         isIdle = true;
         isRunning = false;
         jumped = false;
@@ -44,8 +49,22 @@ public class PlayerStats : MonoBehaviour {
 
         speed = speedWalking;
         rotationFactor = walkRotationFactor;
+
+        // events
+        GameEventSystem.instance.OnPlayerHit += HitPLayerReaction;
     }
 
+    /*private void HitPLayerReaction(object sender, EventArgs e) {
+        Debug.Log("PlayerStats: Player was hit!");
+    }*/
+
+    private void HitPLayerReaction(object sender, float damage) {
+        Debug.Log("PlayerStats: Player was hit for " + damage + " points of damage!");
+        currHealth -= damage;
+    }
+
+
+    // Dimensions of the character controller's capsule collider
     public struct ColliderDims {
         public Vector3 center;
         public float radius;

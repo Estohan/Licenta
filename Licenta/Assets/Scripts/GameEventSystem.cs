@@ -7,7 +7,9 @@ public class GameEventSystem : MonoBehaviour {
     public static GameEventSystem instance = null;
 
     public delegate void PlayerHitDelegate(object sender, float damage);
+
     public event PlayerHitDelegate OnPlayerHit;
+    public event EventHandler OnPlayerStatsChange;
     // public event EventHandler OnPlayerHit;
 
     private void Awake() {
@@ -22,5 +24,9 @@ public class GameEventSystem : MonoBehaviour {
     public void PlayerHit(float damage) {
         // OnPlayerHit?.Invoke(this, EventArgs.Empty);
         OnPlayerHit?.Invoke(this, damage);
+    }
+
+    public void PlayerStatsChanged() {
+        OnPlayerStatsChange?.Invoke(this, EventArgs.Empty);
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour {
+public class PlayerStats : MyMonoBehaviour {
     public float maxHealth;
     public float currHealth; // persistent stats should be stored in a SO?
     [Space]
@@ -33,7 +33,8 @@ public class PlayerStats : MonoBehaviour {
         animator = new Animator();
     }*/
 
-    private void Start() {
+    protected override void Start() {
+        base.Start();
         currHealth = maxHealth;
         // controls
         isIdle = true;
@@ -49,7 +50,13 @@ public class PlayerStats : MonoBehaviour {
 
         speed = speedWalking;
         rotationFactor = walkRotationFactor;
+    }
 
+    protected override void OnEnable() {
+        base.OnEnable();
+    }
+
+    protected override void SafeOnEnable() {
         // events
         GameEventSystem.instance.OnPlayerHit += HitPLayerReaction;
     }
@@ -61,6 +68,7 @@ public class PlayerStats : MonoBehaviour {
     private void HitPLayerReaction(object sender, float damage) {
         Debug.Log("PlayerStats: Player was hit for " + damage + " points of damage!");
         currHealth -= damage;
+        GameEventSystem.instance.PlayerStatsChanged();
     }
 
 
@@ -77,4 +85,7 @@ public class PlayerStats : MonoBehaviour {
         }
     }
 
+    private void OnDisable() {
+        GameEventSystem.instance.OnPlayerHit -= HitPLayerReaction;
+    }
 }

@@ -276,8 +276,8 @@ public class MazeCellObject : MonoBehaviour {
         float z, x;
         // offset of z or x, so that it is places inside the cell
         float depthOffset = (transform.GetComponent<Renderer>().bounds.size.z) / 2;
-        // offset of y so that the object is placed "on the floor"
-        float y = (transform.GetComponent<Renderer>().bounds.size.y) / 2;
+        // offset of y so that the object is placed "on the floor" - only needed if the object's origin is set to geometry
+        float y = 0f; // (transform.GetComponent<Renderer>().bounds.size.y) / 2;
         switch (subsection) {
             case LevelGenerator.CellSubsections.NorthEdge:
                 z = transform.localPosition.z + cellSize / 2 - depthOffset;

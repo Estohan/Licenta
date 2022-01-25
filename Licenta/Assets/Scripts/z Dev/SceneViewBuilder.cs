@@ -8,6 +8,9 @@ public class SceneViewBuilder : MonoBehaviour {
     public GameObject _floorGrey;
     public GameObject _corner;
     [Space]
+    public bool originToGeometry;
+    public bool includeCorners;
+    [Space]
     public int mazeSizeX;
     public int mazeSizeZ;
 
@@ -44,34 +47,40 @@ public class SceneViewBuilder : MonoBehaviour {
                                        -z * cellSize + cellSize / 2);
 
                 // Corner instantiation
-                GameObject currentCorner;
-                Vector3 position = Vector3.zero;
-                float offset = _corner.transform.GetComponent<MeshFilter>().sharedMesh.bounds.size.z / 2;
-                position.y = _corner.transform.GetComponent<MeshFilter>().sharedMesh.bounds.size.y * 2;
-
-                for (int i = 0; i < 4; i ++) {
-                    switch(i) {
-                        case 0:
-                            position.z = (cellSize / 2) - offset;
-                            position.x = -(cellSize / 2) + offset;
-                            break;
-                        case 1:
-                            position.z = (cellSize / 2) - offset;
-                            position.x = (cellSize / 2) - offset;
-                            break;
-                        case 2:
-                            position.z = -(cellSize / 2) + offset;
-                            position.x = (cellSize / 2) - offset;
-                            break;
-                        default:
-                            position.z = -(cellSize / 2) + offset;
-                            position.x = -(cellSize / 2) + offset;
-                            break;
+                if (includeCorners) {
+                    GameObject currentCorner;
+                    Vector3 position = Vector3.zero;
+                    float offset = _corner.transform.GetComponent<MeshFilter>().sharedMesh.bounds.size.z / 2;
+                    if (originToGeometry) {
+                        position.y = _corner.transform.GetComponent<MeshFilter>().sharedMesh.bounds.size.y * 2;
+                    } else {
+                        position.y = 0f;
                     }
 
-                    currentCorner = Instantiate(_corner, newFloor.transform);
-                    currentCorner.name = "corner " + i;
-                    currentCorner.transform.localPosition = position;
+                    for (int i = 0; i < 4; i++) {
+                        switch (i) {
+                            case 0:
+                                position.z = (cellSize / 2) - offset;
+                                position.x = -(cellSize / 2) + offset;
+                                break;
+                            case 1:
+                                position.z = (cellSize / 2) - offset;
+                                position.x = (cellSize / 2) - offset;
+                                break;
+                            case 2:
+                                position.z = -(cellSize / 2) + offset;
+                                position.x = (cellSize / 2) - offset;
+                                break;
+                            default:
+                                position.z = -(cellSize / 2) + offset;
+                                position.x = -(cellSize / 2) + offset;
+                                break;
+                        }
+
+                        currentCorner = Instantiate(_corner, newFloor.transform);
+                        currentCorner.name = "corner " + i;
+                        currentCorner.transform.localPosition = position;
+                    }
                 }
             }
         }

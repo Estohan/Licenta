@@ -99,7 +99,7 @@ public static class MazeGenAlgorithms {
         DivideIntoSectors(layout, stats);
 
         // Add rooms 
-        AddSpecialSections(layout, stats);
+        // AddSpecialSections(layout, stats);
 
         // Fill with corridors (maze)
         MazeFill_GrowingTreeAlg(layout, stats);

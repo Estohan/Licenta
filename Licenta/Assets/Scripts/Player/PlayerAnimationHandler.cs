@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimationHandler : MonoBehaviour
+public class PlayerAnimationHandler : MyMonoBehaviour
 {
     private Animator animator;
     private PlayerStats playerStats;
@@ -28,12 +28,19 @@ public class PlayerAnimationHandler : MonoBehaviour
         postureStateHash = Animator.StringToHash("postureState");
     }
 
-    private void Start() {
+    protected override void Start() {
+        base.Start();
         //playerStats.isWalking = animator.GetBool(isWalkingHash);
         playerStats.isIdle = animator.GetBool(isIdleHash);
         playerStats.isRunning = animator.GetBool(isRunningHash);
         playerStats.currentPosture = (PlayerControls.PlayerPostureState)animator.GetInteger(postureStateHash);
+    }
 
+    protected override void OnEnable() {
+        base.OnEnable();
+    }
+
+    protected override void SafeOnEnable() {
         // events
         GameEventSystem.instance.OnPlayerHit += HitPlayerReaction;
     }
@@ -82,5 +89,9 @@ public class PlayerAnimationHandler : MonoBehaviour
 
     private void HitPlayerReaction(object sender, float damage) {
         Debug.Log("Animation Handler: Player was hit! Showing " + damage + " points of damage.");
+    }
+
+    private void OnDisable() {
+        GameEventSystem.instance.OnPlayerHit -= HitPlayerReaction;
     }
 }

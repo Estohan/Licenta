@@ -11,6 +11,9 @@ public class MazeCellData {
     public int sector;
     public CellType type;
 
+    public int TEST_INT;
+    public CellStats cellStats;
+
     // (stage, type, index)
     // 0 - floor
     // 1..4 - walls

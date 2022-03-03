@@ -181,6 +181,7 @@ public class LevelGenerator : MonoBehaviour {
                 newCellObject.data = level.getCellData(z, x);
                 newCellObject.name = "Cell " + z + "-" + x;
                 // newCellObject.transform.parent = this.transform;
+                newCellObject.data.TEST_INT = level.stats.cellsStats[z, x].distanceToStart;
 
                 // Save newly created cell
                 level.cellsObjects[z, x] = newCellObject;

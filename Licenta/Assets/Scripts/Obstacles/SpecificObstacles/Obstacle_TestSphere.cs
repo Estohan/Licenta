@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obstacle_TestSphere : Obstacle {
+public class Obstacle_TestSphere : ObstActivePart {
     private Color idleColor;
     private Color activeColor;
     private Color anounceColor;

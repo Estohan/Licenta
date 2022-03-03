@@ -215,61 +215,6 @@ public class MazeCellObject : MonoBehaviour {
         }
     }
 
-    public void DebugColor() {
-        /*float r = 0.1f;
-        float g = 0.1f;
-        float b = 0.6f;
-        Color color = new Color(r, g, b, 1.0f);*/
-        List<Color> colors = new List<Color>();
-        colors.Add(new Color(0.1f, 0.1f, 0.5f, 1.0f));
-        colors.Add(new Color(0.1f, 0.5f, 0.1f, 1.0f));
-        colors.Add(new Color(0.5f, 0.1f, 0.1f, 1.0f));
-
-        colors.Add(new Color(0.1f, 0.5f, 0.5f, 1.0f));
-        colors.Add(new Color(0.5f, 0.1f, 0.5f, 1.0f));
-        colors.Add(new Color(1.0f, 0.1f, 0.1f, 1.0f));
-
-        colors.Add(new Color(1.0f, 0.5f, 0.1f, 1.0f)); // rooms
-
-        Transform minimapFloor = null;
-
-        if (data.hasObjectReference[0]) {
-            minimapFloor = this.transform.GetChild(0).transform.Find("MinimapFloor"); ;
-        }
-        // Color sector
-        if(minimapFloor != null && this.data.sector > 0) {
-            if(this.data.type == CellType.Room) {
-                if(this.data.sector == 6) {
-                    minimapFloor.GetComponent<Renderer>().material.color = colors[this.data.sector - 1];
-                } else {
-                    minimapFloor.GetComponent<Renderer>().material.color = colors[colors.Count - 1];
-                }
-            } else {
-                minimapFloor.GetComponent<Renderer>().material.color = colors[this.data.sector - 1];
-            }
-        }
-        // this.GetComponentInChildren<Renderer>().material.color = color;
-    }
-
-    // REMOVE THIS LATER
-    /*private GameObject DecideFloorType(CellType type) {
-        switch (type) {
-            case CellType.OuterPadding:
-                return  ObjectReferences.instance._OuterPadding;
-            case CellType.InnerPadding:
-                return ObjectReferences.instance._InnerPadding;
-            case CellType.Start:
-                return ObjectReferences.instance._Start;
-            case CellType.Finish:
-                return ObjectReferences.instance._Finish;
-            case CellType.Common:
-                return ObjectReferences.instance._FloorWhite;
-            case CellType.Room:
-                return ObjectReferences.instance._FloorWhite;
-        }
-        return ObjectReferences.instance._FloorWhite;
-    }*/
-
     // Returns the position of a cell subsection given the
     // position of the parent cell
     private Vector3 GetCellSubsectionPos(Transform transform, float cellSize, LevelGenerator.CellSubsections subsection) {
@@ -381,6 +326,73 @@ public class MazeCellObject : MonoBehaviour {
                 throw new Exception("Unrecognized subsection received in GetCellSubsectionPos().");
         }
         return Quaternion.identity;
+    }
+
+    public void DebugColor() {
+        /*float r = 0.1f;
+        float g = 0.1f;
+        float b = 0.6f;
+        Color color = new Color(r, g, b, 1.0f);*/
+        List<Color> colors = new List<Color>();
+        colors.Add(new Color(0.1f, 0.1f, 0.5f, 1.0f));
+        colors.Add(new Color(0.1f, 0.5f, 0.1f, 1.0f));
+        colors.Add(new Color(0.5f, 0.1f, 0.1f, 1.0f));
+
+        colors.Add(new Color(0.1f, 0.5f, 0.5f, 1.0f));
+        colors.Add(new Color(0.5f, 0.1f, 0.5f, 1.0f));
+        colors.Add(new Color(1.0f, 0.1f, 0.1f, 1.0f));
+
+        colors.Add(new Color(1.0f, 1.0f, 1.0f, 1.0f)); // solution: count -2 
+        colors.Add(new Color(1.0f, 0.5f, 0.1f, 1.0f)); // rooms: count - 1
+
+        Transform minimapFloor = null;
+
+        // Check if there is a minimap icon associated
+        if (data.hasObjectReference[0]) {
+            minimapFloor = this.transform.GetChild(0).transform.Find("MinimapFloor"); ;
+        }
+        // Color sector
+        if (minimapFloor != null && this.data.sector > 0) {
+            if (this.data.type == CellType.Room) {
+                if (this.data.sector == 6) {
+                    minimapFloor.GetComponent<Renderer>().material.color = colors[this.data.sector - 1];
+                } else {
+                    minimapFloor.GetComponent<Renderer>().material.color = colors[colors.Count - 1];
+                }
+            } else {
+                if(data.cellStats.isInSolution) {
+                    minimapFloor.GetComponent<Renderer>().material.color = colors[colors.Count - 2];
+                } else {
+                    minimapFloor.GetComponent<Renderer>().material.color = colors[this.data.sector - 1];
+                }
+            }
+        }
+        // this.GetComponentInChildren<Renderer>().material.color = color;
+    }
+
+    public void DebugColor2() {
+        float r = 0.3f;
+        float g = 0.1f;
+        float b = 0.1f;
+        Color color = new Color(r, g, b, 1.0f);
+
+        Transform minimapFloor = null;
+
+        // Check if there is a minimap icon associated
+        if (data.hasObjectReference[0]) {
+            minimapFloor = this.transform.GetChild(0).transform.Find("MinimapFloor"); ;
+        }
+        // Color sector
+        if (minimapFloor != null && this.data.sector > 0) {
+            if (this.data.type == CellType.Room) {
+            } else {
+                minimapFloor.GetComponent<Renderer>().material.color = color + new Color(0.0f, 
+                                                                                           0.0f,
+                                                                                           this.data.cellStats.distanceToStart / 100f,
+                                                                                           0.0f);
+            }
+        }
+        // this.GetComponentInChildren<Renderer>().material.color = color;
     }
 }
 

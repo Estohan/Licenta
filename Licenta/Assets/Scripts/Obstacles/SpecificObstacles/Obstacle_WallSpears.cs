@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obstacle_WallSpears : Obstacle {
+public class Obstacle_WallSpears : ObstActivePart {
 
     private Animator animator;
     private int closeHash;

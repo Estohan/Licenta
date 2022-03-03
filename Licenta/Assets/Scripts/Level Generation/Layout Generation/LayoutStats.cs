@@ -26,6 +26,11 @@ public class LayoutStats {
     public List<RoomData>[] rooms;
     public List<RoomData> test;
 
+    // Solution and dead ends
+    public List<MazeCoords> solution;
+    public CellStats[,] cellsStats;
+    public List<List<MazeCoords>> deadEnds;
+
     public LayoutStats(int sizeZ, int sizeX, int numberOfSectors) {
         this.sizeZ = sizeZ;
         this.sizeX = sizeX;
@@ -50,6 +55,16 @@ public class LayoutStats {
         for (int i = 0; i < numberOfSectors; i++) {
             rooms[i] = new List<RoomData>();
         }
+
+        // Initialize solution and dead ends
+        solution = new List<MazeCoords>();
+        deadEnds = new List<List<MazeCoords>>();
+        cellsStats = new CellStats[sizeZ, sizeX];
+        for(int z = 0; z < sizeZ; z ++) {
+            for(int x = 0; x < sizeX; x ++) {
+                cellsStats[z, x] = new CellStats();
+            }
+        }
     }
 
     public void InitializePadding(int outerPaddingZ, int outerPaddingX, int innerPaddingZ, int innerPaddingX) {
@@ -64,5 +79,27 @@ public class LayoutStats {
     public void SetStartAndFinish(MazeCoords startCell, MazeCoords finishCell) {
         this.startCell = startCell;
         this.finishCell = finishCell;
+    }
+}
+
+[System.Serializable]
+public class CellStats {
+    //public bool isReachable; // ?
+    public bool isInSolution;
+    public bool isAdjacentToSectorGate;
+    public MazeDirection reachableFrom;
+
+    public int distanceToStart;
+    public int distanceToEnd;
+    public int sector;
+
+    public CellStats() {
+        isInSolution = false;
+        isAdjacentToSectorGate = false;
+        reachableFrom = MazeDirection.North;
+
+        distanceToStart = -1;
+        distanceToEnd = -1;
+        sector = -1;
     }
 }

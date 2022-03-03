@@ -5,7 +5,7 @@ using UnityEngine;
 public class Level {
     public int stage;
     public int sizeZ, sizeX;
-    public  MazeCellData[,] cellsData;
+    public MazeCellData[,] cellsData;
     public MazeCellObject[,] cellsObjects;
     public LayoutStats stats;
 
@@ -31,6 +31,7 @@ public class Level {
                 data[4] = layout[z, x, 4];
                 data[5] = layout[z, x, 5];
                 cellsData[z, x] = new MazeCellData(new MazeCoords(z, x), data);
+                cellsData[z, x].cellStats = stats.cellsStats[z, x];
             }
         }
     }

@@ -7,17 +7,20 @@ public class RoomObjectCell : ScriptableObject {
     public MazeCoords offset;
 
     public GameObject _floor;
-
+    [Space]
+    [Header("Walls")]
     public GameObject _northWall;
     public GameObject _eastWall;
     public GameObject _southWall;
     public GameObject _westWall;
-
+    [Space]
+    [Header("Corners")]
     public GameObject _NWcorner;
     public GameObject _NEcorner;
     public GameObject _SEcorner;
     public GameObject _SWcorner;
-
+    [Space]
+    [Header("Subsections")]
     // [TRY] List of GameObjects instead
     public GameObject _subsection_1;
     public MazeDirection _subsection_1_rot;

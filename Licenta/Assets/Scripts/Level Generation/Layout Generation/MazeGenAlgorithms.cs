@@ -99,13 +99,16 @@ public static class MazeGenAlgorithms {
         DivideIntoSectors(layout, stats);
 
         // Add rooms 
-        // AddSpecialSections(layout, stats);
+        AddSpecialSections(layout, stats);
 
         // Fill with corridors (maze)
         MazeFill_GrowingTreeAlg(layout, stats);
 
         // DEBUG
         _RemoveRoomWalls(layout, stats);
+
+        // Analyze layout
+        AnalyzeLayout(layout, stats);
 
         Debug.Log("Here are some stats:");
         Debug.Log("Cells total: " + stats.sizeZ * stats.sizeX + " = " + stats.totalOuterPadding + " + " + stats.totalInnerPadding + " + " + stats.totalCore + " + " +
@@ -147,6 +150,63 @@ public static class MazeGenAlgorithms {
 
 
         return (layout, stats);
+    }
+
+    private static void AnalyzeLayout(int[,,] layout, LayoutStats stats) {
+        // main solution
+        // partial solutions? (sector solutions)
+        // dead ends
+        MazeCoords startCell = stats.startCell;
+        MazeCoords finishCell = stats.finishCell;
+        MazeCoords currentCell;
+        Queue<MazeCoords> bfsQueue = new Queue<MazeCoords>();
+        List<MazeCoords> neighbours;
+        bool[,] visited = new bool[stats.sizeZ, stats.sizeX];
+
+        // Calculate distance to start cell
+        bfsQueue.Enqueue(startCell);
+        stats.cellsStats[startCell.z, startCell.x].distanceToStart = 0;
+        while (bfsQueue.Count > 0) {
+            currentCell = bfsQueue.Dequeue();
+            visited[currentCell.z, currentCell.x] = true;
+            neighbours = GetAccessibleNeighbours_Unsafe(currentCell, layout);
+            foreach(MazeCoords neighbour in neighbours) {
+                if(!visited[neighbour.z, neighbour.x]) {
+                    bfsQueue.Enqueue(neighbour);
+                    stats.cellsStats[neighbour.z, neighbour.x].distanceToStart = 
+                        stats.cellsStats[currentCell.z, currentCell.x].distanceToStart + 1;
+                }
+            }
+        }
+
+        // Reinitialize array "visited" for a new BFS
+        for(int z = 0; z < stats.sizeZ; z ++) {
+            for(int x = 0; x < stats.sizeX; x ++) {
+                visited[z, x] = false;
+            }
+        }
+
+        // Calculate distance to finish cell (and find solution)
+        int distanceToStartCounter = stats.cellsStats[finishCell.z, finishCell.x].distanceToStart + 1;
+        bfsQueue.Enqueue(finishCell);
+        stats.cellsStats[finishCell.z, finishCell.x].distanceToEnd = 0;
+        while (bfsQueue.Count > 0) {
+            currentCell = bfsQueue.Dequeue();
+            visited[currentCell.z, currentCell.x] = true;
+            neighbours = GetAccessibleNeighbours_Unsafe(currentCell, layout);
+            foreach (MazeCoords neighbour in neighbours) {
+                if (!visited[neighbour.z, neighbour.x]) {
+                    bfsQueue.Enqueue(neighbour);
+                    stats.cellsStats[neighbour.z, neighbour.x].distanceToEnd =
+                        stats.cellsStats[currentCell.z, currentCell.x].distanceToEnd + 1;
+                }
+            }
+            // also check if current cell is part of the solution path
+            if(stats.cellsStats[currentCell.z, currentCell.x].distanceToStart == distanceToStartCounter - 1) {
+                stats.cellsStats[currentCell.z, currentCell.x].isInSolution = true;
+                distanceToStartCounter--;
+            }
+        }
     }
 
     private static void _RemoveRoomWalls(int[,,] layout, LayoutStats stats) {
@@ -220,7 +280,7 @@ public static class MazeGenAlgorithms {
         for(int sector = 1; sector <= stats.numberOfSectors; sector++) {
             percentOfSectorSize = stats.sectorCells[sector - 1].Count / 10; // 10% of sector size
             // [TRY] Insert some randomness here
-            initialMaxSectionSize[sector - 1] = percentOfSectorSize;
+            initialMaxSectionSize[sector - 1] = percentOfSectorSize; // MAX SIZE OF THE ROOMS
             initialMaxSectionTotal[sector - 1] = percentOfSectorSize * 2;
             // If there are no rooms this large, the limit will be the largest existing type of room
             if(percentOfSectorSize >= RoomLayouts.rooms.Length) {
@@ -1236,6 +1296,39 @@ public static class MazeGenAlgorithms {
         }
 
         return neighbours;
+    }
+
+    private static List<MazeCoords> GetAccessibleNeighbours_Unsafe(MazeCoords currentCell, int[,,] layout) {
+        List<MazeCoords> accessibleNeighbours = new List<MazeCoords>();
+        // North
+        if(layout[currentCell.z - 1, currentCell.x, 2] == 0 &&
+            layout[currentCell.z, currentCell.x, 0] == 0 &&
+            layout[currentCell.z - 1, currentCell.x, 4] >= (int)CellType.Start &&
+            layout[currentCell.z - 1, currentCell.x, 4] <= (int)CellType.Common) { 
+                accessibleNeighbours.Add(new MazeCoords(currentCell.z - 1, currentCell.x));
+        }
+        // East
+        if (layout[currentCell.z, currentCell.x + 1, 3] == 0 &&
+            layout[currentCell.z, currentCell.x, 1] == 0 &&
+            layout[currentCell.z, currentCell.x + 1, 4] >= (int)CellType.Start &&
+            layout[currentCell.z, currentCell.x + 1, 4] <= (int)CellType.Common) {
+            accessibleNeighbours.Add(new MazeCoords(currentCell.z, currentCell.x + 1));
+        }
+        // South
+        if (layout[currentCell.z + 1, currentCell.x, 0] == 0 &&
+            layout[currentCell.z, currentCell.x, 2] == 0 &&
+            layout[currentCell.z + 1, currentCell.x, 4] >= (int)CellType.Start &&
+            layout[currentCell.z + 1, currentCell.x, 4] <= (int)CellType.Common) {
+            accessibleNeighbours.Add(new MazeCoords(currentCell.z + 1, currentCell.x));
+        }
+        // West
+        if (layout[currentCell.z, currentCell.x - 1, 1] == 0 &&
+            layout[currentCell.z, currentCell.x, 3] == 0 &&
+            layout[currentCell.z, currentCell.x - 1, 4] >= (int)CellType.Start &&
+            layout[currentCell.z, currentCell.x - 1, 4] <= (int)CellType.Common) {
+            accessibleNeighbours.Add(new MazeCoords(currentCell.z, currentCell.x - 1));
+        }
+        return accessibleNeighbours;
     }
 
     private static void CreateOuterPadding(int[,,] layout, LayoutStats stats, int[,] visited) {

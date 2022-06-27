@@ -27,14 +27,14 @@ public class LevelGenerator : MonoBehaviour {
     // !! This function will need some parameters
     // Uses MazeGenAlgorithms to generate a maze layout and
     // saves that layout into a two dimensional array of MazeCellData
-    public Level GenerateLevel(int sizeZ, int sizeX, int outerPaddingDiv, int innerPaddingDiv, int nrOfSectors) {
+    public Level GenerateLevel(int sizeZ, int sizeX, int outerPaddingPerc, int innerPaddingPerc, int nrOfSectors) {
         // minimum size of 30 ?
         this.sizeZ = sizeZ;
         this.sizeX = sizeX;
 
         //int[,,] layout = MazeGenAlgorithms.testAlgoritm(sizeZ, sizeX, 1);
         (int[,,] layout, LayoutStats stats) = 
-            MazeGenAlgorithms.GenerateLayout(sizeZ, sizeX, outerPaddingDiv, innerPaddingDiv, nrOfSectors);
+            MazeGenAlgorithms.GenerateLayout(sizeZ, sizeX, outerPaddingPerc, innerPaddingPerc, nrOfSectors);
         level = new Level(sizeZ, sizeX, layout, stats);
 
         AssignRoomsData(stats.rooms, nrOfSectors);
@@ -181,7 +181,6 @@ public class LevelGenerator : MonoBehaviour {
                 newCellObject.data = level.getCellData(z, x);
                 newCellObject.name = "Cell " + z + "-" + x;
                 // newCellObject.transform.parent = this.transform;
-                newCellObject.data.TEST_INT = level.stats.cellsStats[z, x].distanceToStart;
 
                 // Save newly created cell
                 level.cellsObjects[z, x] = newCellObject;

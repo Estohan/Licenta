@@ -29,6 +29,8 @@ public class PlayerStats : MyMonoBehaviour {
     public PlayerControls.PlayerPostureState currentPosture; // persistent?
     public ColliderDims[] CapsuleColliders;
 
+    public MazeCellData currentCellData;
+
     /*private void Awake() {
         animator = new Animator();
     }*/
@@ -59,11 +61,19 @@ public class PlayerStats : MyMonoBehaviour {
     protected override void SafeOnEnable() {
         // events
         GameEventSystem.instance.OnPlayerHit += HitPLayerReaction;
+        GameEventSystem.instance.OnPlayerMoveToAnotherCell += MoveToAnotherCellReaction;
     }
 
     /*private void HitPLayerReaction(object sender, EventArgs e) {
         Debug.Log("PlayerStats: Player was hit!");
     }*/
+
+    private void MoveToAnotherCellReaction(object sender, MazeCellData cellData) {
+        if(currentCellData != cellData) {
+            currentCellData = cellData;
+            GameEventSystem.instance.PlayerStatsChanged();
+        }
+    }
 
     private void HitPLayerReaction(object sender, float damage) {
         Debug.Log("PlayerStats: Player was hit for " + damage + " points of damage!");

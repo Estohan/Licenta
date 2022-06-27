@@ -21,6 +21,19 @@ public class MazeCellObject : MonoBehaviour {
         // objectPrefabs = GameManager.instance.GetComponent<ObjectReferences>();
     }
 
+    private void OnTriggerEnter(Collider other) {
+        if(other.transform.CompareTag("Player")) {
+            GameEventSystem.instance.PlayerMoveedToAnotherCell(data);
+        }
+    }
+
+
+    /*
+     ==========================================================================
+     CELL INSTANTIATION
+     ==========================================================================     
+     */
+
 
     internal void InstantiateFloor() {
 

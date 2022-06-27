@@ -39,4 +39,31 @@ public static class MazeDirections {
     public static MazeCoords ToMazeCoords(this MazeDirection direction) {
         return directionVectors[(int)direction];
     }
+
+    /* Returns the direction of the destination cell relative to the source cell*/
+    public static MazeDirection DirFromPairOfCoords(MazeCoords source, MazeCoords destination) {
+        int z_diff = destination.z - source.z;
+        int x_diff = destination.x - source.x;
+        /*          (-1,  0)
+         * ( 0, -1) ( 0,  0) ( 0,  1)
+         *          ( 1,  0)
+         * North: (0,  0) - (-1,  0) = ( 1,  0)
+         * East:  (0,  0) - ( 0,  1) = ( 0, -1)
+         * South: (0,  0) - ( 1,  0) = (-1,  0)
+         * West:  (0,  0) - ( 0, -1) = ( 0,  1)
+         */
+        if (z_diff == 0) {
+            if (x_diff == 1) {
+                return MazeDirection.West;
+            } else {
+                return MazeDirection.East;
+            }
+        } else {
+            if (z_diff == -1) {
+                return MazeDirection.South;
+            }
+        }
+
+        return MazeDirection.North;
+    }
 }

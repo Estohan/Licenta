@@ -15,18 +15,38 @@ public static class MazeGenAlgorithms {
     //        3 - finish cell, 4 - common cell, 5 - special room cell.
 
     public static (int[,,], LayoutStats stats)
-        GenerateLayout(int sizeZ, int sizeX, int outerPaddingDiv, int innerPaddingDiv, int nrOfSectors) {
+        GenerateLayout(int sizeZ, int sizeX, int outerPaddingPerc, int innerPaddingPerc, int nrOfSectors) {
+        Debug.Log("SizeZ: " + sizeZ);
+        Debug.Log("SizeX: " + sizeX);
+        Debug.Log("Op: " + outerPaddingPerc);
+        Debug.Log("Ip: " + innerPaddingPerc);
 
         int[,,] layout = new int[sizeZ, sizeX, 6];
         LayoutStats stats = new LayoutStats(sizeZ, sizeX, nrOfSectors);
         MazeCoords startCell;
         MazeCoords finishCell;
 
+        // Check padding percentages
+        if(outerPaddingPerc < 0 || outerPaddingPerc > 20) {
+            // Set outer padding value to a default value of 5%
+            outerPaddingPerc = 5;
+        }
+        if(innerPaddingPerc < 0 || innerPaddingPerc > 20) {
+            // Set inner padding value to a default value of 10%
+            innerPaddingPerc = 10;
+        }
+
         // 6(OPl) + 3(IPl) + 12(M) + 3(IPr) + 6(OPr) = 12 + 6 + 12 = 30
-        int outerPaddingValZ = (int)(sizeZ / outerPaddingDiv);
-        int outerPaddingValX = (int)(sizeX / outerPaddingDiv);
-        int innerPaddingValZ = (int)(sizeZ / innerPaddingDiv);
-        int innerPaddingValX = (int)(sizeX / innerPaddingDiv);
+        // Actual value = Percentage/2, since each type of padding is counted twice
+        // Percentage = Value/100
+        int outerPaddingValZ = (int)Mathf.Ceil(sizeZ * ((float)outerPaddingPerc/200));
+        int outerPaddingValX = (int)Mathf.Ceil(sizeX * ((float)outerPaddingPerc /200));
+        int innerPaddingValZ = (int)Mathf.Ceil(sizeZ * ((float)innerPaddingPerc /200));
+        int innerPaddingValX = (int)Mathf.Ceil(sizeX * ((float)innerPaddingPerc /200));
+        Debug.Log("Opz: " + outerPaddingValZ);
+        Debug.Log("Opx: " + outerPaddingValX);
+        Debug.Log("Ipz: " + innerPaddingValZ);
+        Debug.Log("Ipx: " + innerPaddingValX);
         int remainingCellsZ = sizeZ - outerPaddingValZ * 2 - innerPaddingValZ * 2; // DO I NEED THIS?
         int remainingCellsX = sizeX - outerPaddingValX * 2 - innerPaddingValX * 2; // DO I NEED THIS?
         int totalInnerPadding = ((sizeZ - outerPaddingValZ * 2) * (sizeX - outerPaddingValX * 2)) - 
@@ -104,8 +124,11 @@ public static class MazeGenAlgorithms {
         // Fill with corridors (maze)
         MazeFill_GrowingTreeAlg(layout, stats);
 
+        // Map obstacle shapes in the current maze
+        MapObstacleShapes(layout, stats);
+
         // DEBUG
-        _RemoveRoomWalls(layout, stats);
+        // _RemoveRoomWalls(layout, stats);
 
         // Analyze layout
         AnalyzeLayout(layout, stats);
@@ -152,13 +175,19 @@ public static class MazeGenAlgorithms {
         return (layout, stats);
     }
 
+    private static void MapObstacleShapes(int[,,] layout, LayoutStats stats) {
+        throw new NotImplementedException();
+
+        // TODO
+        // 1. fix room marking in maze analyzing
+        // 2. the rest
+    }
+
     private static void AnalyzeLayout(int[,,] layout, LayoutStats stats) {
-        // main solution
-        // partial solutions? (sector solutions)
-        // dead ends
         MazeCoords startCell = stats.startCell;
         MazeCoords finishCell = stats.finishCell;
         MazeCoords currentCell;
+        MazeCoords auxCell;
         Queue<MazeCoords> bfsQueue = new Queue<MazeCoords>();
         List<MazeCoords> neighbours;
         bool[,] visited = new bool[stats.sizeZ, stats.sizeX];
@@ -175,11 +204,14 @@ public static class MazeGenAlgorithms {
                     bfsQueue.Enqueue(neighbour);
                     stats.cellsStats[neighbour.z, neighbour.x].distanceToStart = 
                         stats.cellsStats[currentCell.z, currentCell.x].distanceToStart + 1;
+                    // The direction from which the new cell is reached
+                    stats.cellsStats[neighbour.z, neighbour.x].reachableFrom =
+                        MazeDirections.DirFromPairOfCoords(currentCell, neighbour);
                 }
             }
         }
 
-        // Reinitialize array "visited" for a new BFS
+        // Reinitialize array "visited" for a second BFS
         for(int z = 0; z < stats.sizeZ; z ++) {
             for(int x = 0; x < stats.sizeX; x ++) {
                 visited[z, x] = false;
@@ -204,9 +236,87 @@ public static class MazeGenAlgorithms {
             // also check if current cell is part of the solution path
             if(stats.cellsStats[currentCell.z, currentCell.x].distanceToStart == distanceToStartCounter - 1) {
                 stats.cellsStats[currentCell.z, currentCell.x].isInSolution = true;
+                stats.cellsStats[currentCell.z, currentCell.x].distanceToSolution = 0;
+                stats.solution.Add(currentCell);
                 distanceToStartCounter--;
             }
         }
+
+        // Reinitialize array "visited" for a third BFS
+        for (int z = 0; z < stats.sizeZ; z++) {
+            for (int x = 0; x < stats.sizeX; x++) {
+                visited[z, x] = false;
+            }
+        }
+
+        int accessPointCount; /* non-wall cell sides */
+        bfsQueue.Enqueue(startCell);
+        stats.cellsStats[startCell.z, startCell.x].distanceToEnd = 0;
+        while (bfsQueue.Count > 0) {
+            currentCell = bfsQueue.Dequeue();
+            visited[currentCell.z, currentCell.x] = true;
+            neighbours = GetAccessibleNeighbours_Unsafe(currentCell, layout);
+            foreach (MazeCoords neighbour in neighbours) {
+                if (!visited[neighbour.z, neighbour.x]) {
+                    bfsQueue.Enqueue(neighbour);
+                    /* Set distance from solution */
+                    if(!stats.cellsStats[neighbour.z, neighbour.x].isInSolution) {
+                        stats.cellsStats[neighbour.z, neighbour.x].distanceToSolution =
+                            stats.cellsStats[currentCell.z, currentCell.x].distanceToSolution + 1;
+                    }
+                }
+            }
+
+            /* Set type of intersection */
+            accessPointCount = 0;
+            if (layout[currentCell.z, currentCell.x, 0] == 0) {
+                accessPointCount++;                
+            }
+            if (layout[currentCell.z, currentCell.x, 1] == 0) {
+                accessPointCount++;
+            }
+            if (layout[currentCell.z, currentCell.x, 2] == 0) {
+                accessPointCount++;
+            }
+            if (layout[currentCell.z, currentCell.x, 3] == 0) {
+                accessPointCount++;
+            }
+            stats.cellsStats[currentCell.z, currentCell.x].accessPoints = accessPointCount;
+            if(accessPointCount >= 3) {
+                stats.intersections.Add(currentCell);
+            }
+            if(accessPointCount == 1) {
+                stats.deadEnds.Add(currentCell);
+            }
+            /* Check if it is a dead-end */
+            if((accessPointCount == 1 || layout[currentCell.z, currentCell.x, 4] == (int) CellType.Room) && 
+                layout[currentCell.z, currentCell.x, 4] > (int) CellType.Finish) {
+                stats.cellsStats[currentCell.z, currentCell.x].isDeadEnd = true;
+            }
+        }
+
+        // Mark sensitive cells (cells that should not be trapped)
+        // Passages
+        for(int sector = 0; sector < stats.numberOfSectors; sector ++) {
+            foreach((MazeCoords cell, MazeDirection direction) in stats.passages[sector]) {
+                stats.cellsStats[cell.z, cell.x].isAdjacentToSectorGate = true;
+                // the other side of the passage
+                auxCell = cell + direction.ToMazeCoords();
+                stats.cellsStats[auxCell.z, auxCell.x].isAdjacentToSectorGate = true;
+            }
+        }
+
+        /* Set distance to solution for room cells - !count one room once!*/
+        /* Mark adjacency to sector gates */
+
+        // Display calculated stats
+        /*string message = "";
+        Debug.Log("Maze solution:");
+        foreach (MazeCoords cell in stats.solution) {
+            message += cell + " ";
+        }
+        Debug.Log(message);
+        Debug.Log("Solution length is " + stats.solution.Count);*/
     }
 
     private static void _RemoveRoomWalls(int[,,] layout, LayoutStats stats) {

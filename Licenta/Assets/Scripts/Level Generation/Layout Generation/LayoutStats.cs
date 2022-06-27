@@ -29,7 +29,8 @@ public class LayoutStats {
     // Solution and dead ends
     public List<MazeCoords> solution;
     public CellStats[,] cellsStats;
-    public List<List<MazeCoords>> deadEnds;
+    public List<MazeCoords> deadEnds;
+    public List<MazeCoords> intersections;
 
     public LayoutStats(int sizeZ, int sizeX, int numberOfSectors) {
         this.sizeZ = sizeZ;
@@ -58,7 +59,8 @@ public class LayoutStats {
 
         // Initialize solution and dead ends
         solution = new List<MazeCoords>();
-        deadEnds = new List<List<MazeCoords>>();
+        deadEnds = new List<MazeCoords>();
+        intersections = new List<MazeCoords>();
         cellsStats = new CellStats[sizeZ, sizeX];
         for(int z = 0; z < sizeZ; z ++) {
             for(int x = 0; x < sizeX; x ++) {
@@ -87,10 +89,13 @@ public class CellStats {
     //public bool isReachable; // ?
     public bool isInSolution;
     public bool isAdjacentToSectorGate;
+    public bool isDeadEnd;
     public MazeDirection reachableFrom;
 
     public int distanceToStart;
     public int distanceToEnd;
+    public int distanceToSolution;
+    public int accessPoints; /* min. 1, max. 4 */
     public int sector;
 
     public CellStats() {
@@ -100,6 +105,8 @@ public class CellStats {
 
         distanceToStart = -1;
         distanceToEnd = -1;
+        distanceToSolution = -1;
+        accessPoints = 0;
         sector = -1;
     }
 }

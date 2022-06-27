@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6949120692278677126}
   - component: {fileID: 6949120692278677125}
+  - component: {fileID: 2363681988670045902}
   m_Layer: 0
   m_Name: _MazeCell
   m_TagString: Untagged
@@ -43,4 +44,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90b89049b2a489a4788c0a1bb0428833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 0
+  data:
+    coordinates:
+      z: 0
+      x: 0
+    walls: 
+    cornerFaces: 
+    sector: 0
+    type: 0
+    TEST_INT: 0
+    cellStats:
+      isInSolution: 0
+      isAdjacentToSectorGate: 0
+      reachableFrom: 0
+      distanceToStart: -1
+      distanceToEnd: -1
+      sector: -1
+    hasObjectReference: 
+    roomObjStage: 0
+    room:
+      anchor:
+        z: 0
+        x: 0
+      rotation: 0
+      size: 0
+      index: 0
+    offsetToRoomAnchor:
+      z: 0
+      x: 0
+  cellSize: 0
+--- !u!65 &2363681988670045902
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6949120692278677124}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.8, y: 3, z: 4.8}
+  m_Center: {x: 0, y: 1.5, z: 0}

@@ -15,8 +15,10 @@ public class GameManager : MonoBehaviour {
     // TEST
     public int sizeZ;
     public int sizeX;
-    public int outerPaddingDiv;
-    public int innerPaddingDiv;
+    // ignored if greater than 20%
+    public int outerPaddingPercentage;
+    // ignored if greater than 20%
+    public int innerPaddingPercentage;
     public int sectorsNumber;
         
 
@@ -44,7 +46,7 @@ public class GameManager : MonoBehaviour {
 
     public void StartGame() {
         // Generate level
-        currentLevel = levelGenerator.GenerateLevel(sizeZ, sizeX, outerPaddingDiv, innerPaddingDiv, sectorsNumber);
+        currentLevel = levelGenerator.GenerateLevel(sizeZ, sizeX, outerPaddingPercentage, innerPaddingPercentage, sectorsNumber);
 
         // Instantiate level
         levelGenerator.InstantiateLevel();

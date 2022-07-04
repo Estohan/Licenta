@@ -58,6 +58,30 @@ public class ObjectDatabase : MonoBehaviour {
         }
     }
 
+    public List<ObstacleObject> GetObstaclesOfShapeID(int stage, int shapeID) {
+        GameStageObjects currentStageObjects = firstStageObjects;
+
+        if(shapeID < currentStageObjects.obstacleObjectsByShape.Count) {
+            return currentStageObjects.obstacleObjectsByShape[shapeID].obstacleObjectsOfShapeID;
+        } else {
+            throw new System.Exception("GetObstaclesOfShapeID: No existing obstacles for shapeID " + shapeID);
+        }
+    }
+
+    public ObstacleObject GetObstacle(int stage, int shapeID, int obstacleID) {
+        GameStageObjects currentStageObjects = firstStageObjects;
+        
+        if(shapeID < currentStageObjects.obstacleObjectsByShape.Count) {
+            if (obstacleID < currentStageObjects.obstacleObjectsByShape[shapeID].obstacleObjectsOfShapeID.Count) {
+                return currentStageObjects.obstacleObjectsByShape[shapeID].obstacleObjectsOfShapeID[obstacleID];
+            } else {
+                throw new System.Exception("GetObstacle: No existing obstacles for obstacleID " + obstacleID);
+            }
+        } else {
+            throw new System.Exception("GetObstacle: No existing obstacles for shapeID " + shapeID);
+        }
+    }
+
     public List<RoomObjectCell> GetRoomCells(int stage, RoomData data) {
         int size = data.size;
         int index = data.index;
@@ -109,6 +133,8 @@ public class GameStageObjects {
     public List<GameObject> innerPadding;
     // Rooms
     public List<RoomsOfSizeN> PredefinedRoomsBySize;
+    // Obstacles
+    public List<ObstacleObjectsByShape> obstacleObjectsByShape;
 
     public int GetWallsPoolSize(MazeDirection direction) {
         if(direction == MazeDirection.North ||
@@ -161,9 +187,15 @@ public class RoomsOfSizeN {
     }
 }
 
+[System.Serializable]
+public class ObstacleObjectsByShape {
+    public List<ObstacleObject> obstacleObjectsOfShapeID;
+}
+
 public enum ObjectType {
     Floor,
     NEWall, SWWall,
     TwoFaceCorner, OneFaceCorner, NoFaceCorner,
-    OuterPadding, InnerPadding
+    OuterPadding, InnerPadding,
+    Obstacle
 }

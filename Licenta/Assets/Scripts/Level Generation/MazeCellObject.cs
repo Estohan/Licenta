@@ -40,6 +40,7 @@ public class MazeCellObject : MonoBehaviour {
         // Create floor as child of the cell
         // GameObject _floorObj = DecideFloorType(data.type); [TODO] Remove this
         if (!data.hasObjectReference[0] && data.type != CellType.Room) {
+            Debug.LogError("Cell " + data.coordinates + " cannot instantiate floor (no object reference).");
             return;
         }
 
@@ -225,6 +226,29 @@ public class MazeCellObject : MonoBehaviour {
                     newCorner.transform.rotation = rotation;
                 }
             }
+        }
+    }
+
+    public void InstantiateContent() {
+        Quaternion rotation = Quaternion.identity;
+        // Test
+        if(data.type == CellType.Obstacle && data.anchor == true) {
+            GameObject obstacle = Instantiate(ObjectDatabase.instance.GetObstacle(1, data.shapeID, data.obstacleID).obstacle,
+                                                this.transform);
+            switch (data.rotation) {
+                case MazeDirection.East:
+                    rotation = Quaternion.Euler(0f, 90f, 0f);
+                    break;
+                case MazeDirection.South:
+                    rotation = Quaternion.Euler(0f, 180f, 0f);
+                    break;
+                case MazeDirection.West:
+                    rotation = Quaternion.Euler(0f, 270f, 0f);
+                    break;
+                default: // North
+                    break;
+             }
+            obstacle.transform.rotation = rotation;
         }
     }
 

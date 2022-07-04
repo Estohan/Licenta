@@ -49,6 +49,11 @@ public class UIPlayerStats : MyMonoBehaviour {
         positionText.text += "\nAcc.pt. \t:" + newCurrentCellStats.accessPoints.ToString();
 
         positionText.text += "\nRch.from\t:" + newCurrentCellStats.reachableFrom.ToString();
+
+        positionText.text += "\nObst.\t: ";
+        foreach((int shapeID, MazeDirection direction) in newCurrentCellStats.mappedObstacleShapes) {
+            positionText.text += "(" + shapeID + ", " + direction + ") ";
+        }
     }
 
     protected override void OnEnable() {

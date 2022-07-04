@@ -32,6 +32,9 @@ public class LayoutStats {
     public List<MazeCoords> deadEnds;
     public List<MazeCoords> intersections;
 
+    // Obstacles
+    public List<(MazeCoords, int, MazeDirection, int)> obstacles; // anchor, shapeID, rotation and rec. diff.
+
     public LayoutStats(int sizeZ, int sizeX, int numberOfSectors) {
         this.sizeZ = sizeZ;
         this.sizeX = sizeX;
@@ -67,6 +70,9 @@ public class LayoutStats {
                 cellsStats[z, x] = new CellStats();
             }
         }
+
+        // Initialize obstacles list
+        obstacles = new List<(MazeCoords, int, MazeDirection, int)>();
     }
 
     public void InitializePadding(int outerPaddingZ, int outerPaddingX, int innerPaddingZ, int innerPaddingX) {
@@ -97,6 +103,7 @@ public class CellStats {
     public int distanceToSolution;
     public int accessPoints; /* min. 1, max. 4 */
     public int sector;
+    public List<(int, MazeDirection)> mappedObstacleShapes;
 
     public CellStats() {
         isInSolution = false;
@@ -108,5 +115,7 @@ public class CellStats {
         distanceToSolution = -1;
         accessPoints = 0;
         sector = -1;
+
+        mappedObstacleShapes = new List<(int, MazeDirection)>();
     }
 }

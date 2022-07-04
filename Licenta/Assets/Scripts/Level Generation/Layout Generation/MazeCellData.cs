@@ -20,11 +20,18 @@ public class MazeCellData {
     // 9..17 - subsections
     public (int, int, int)[] objectReferences;
     public bool[] hasObjectReference;
+    public MazeDirection[] objectsRotations; // store all rotations here when implementing save/load functionalities !!
 
     // If part of a room
     public int roomObjStage;
     public RoomData room;
     public MazeCoords offsetToRoomAnchor;
+
+    // If trapped
+    public bool anchor;
+    public int shapeID;
+    public int obstacleID;
+    public MazeDirection rotation;
 
     public MazeCellData(MazeCoords coordinates, int[] data) {
         this.coordinates = coordinates;
@@ -62,6 +69,7 @@ public class MazeCellData {
         // Initialize object references array
         objectReferences = new (int, int, int)[18];
         hasObjectReference = new bool[18];
+        objectsRotations = new MazeDirection[18];
     }
 
     public bool HasWallInDirection(MazeDirection direction) {

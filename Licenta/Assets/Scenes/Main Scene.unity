@@ -315,6 +315,7 @@ MonoBehaviour:
     outerPadding: []
     innerPadding: []
     PredefinedRoomsBySize: []
+    obstacleObjectsByShape: []
   firstStageObjects:
     floors:
     - {fileID: 3333479967393559652, guid: 8be42705c45819d4b9c814ded711724e, type: 3}
@@ -348,6 +349,25 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 091d17d7a51b7db4db4909a6387f6bb8, type: 2}
     - roomsByIndex:
       - {fileID: 11400000, guid: a10d03995f16ae6438bc2952d47607c4, type: 2}
+    obstacleObjectsByShape:
+    - obstacleObjectsOfShapeID:
+      - {fileID: 11400000, guid: b3267007ae6cb7f4aa37c555bc671aa1, type: 2}
+    - obstacleObjectsOfShapeID:
+      - {fileID: 11400000, guid: 2617b06196255334180b985826629574, type: 2}
+    - obstacleObjectsOfShapeID:
+      - {fileID: 11400000, guid: eb518ccfba726364a8181a135cfc3c04, type: 2}
+    - obstacleObjectsOfShapeID:
+      - {fileID: 11400000, guid: bf0aedd1340512e45b5db7ca2d364d53, type: 2}
+    - obstacleObjectsOfShapeID:
+      - {fileID: 11400000, guid: 8ce0aa8c1b990464e93023f44c9921af, type: 2}
+    - obstacleObjectsOfShapeID:
+      - {fileID: 11400000, guid: ec3f262dbd5fd22428ce5b34b0681c3a, type: 2}
+    - obstacleObjectsOfShapeID:
+      - {fileID: 11400000, guid: 58038a45413a412489df7a83c1330b36, type: 2}
+    - obstacleObjectsOfShapeID:
+      - {fileID: 11400000, guid: 1a877969a37f45b45be5538c6ba537d6, type: 2}
+    - obstacleObjectsOfShapeID:
+      - {fileID: 11400000, guid: d56520d9c52320a4cb9df7fe98dbbfad, type: 2}
 --- !u!4 &30605362
 Transform:
   m_ObjectHideFlags: 0
@@ -947,6 +967,7 @@ MonoBehaviour:
       accessPoints: 0
       sector: -1
     hasObjectReference: 
+    objectsRotations: 
     roomObjStage: 0
     room:
       anchor:
@@ -958,6 +979,10 @@ MonoBehaviour:
     offsetToRoomAnchor:
       z: 0
       x: 0
+    anchor: 0
+    shapeID: 0
+    obstacleID: 0
+    rotation: 0
 --- !u!65 &521719601
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4186,6 +4211,7 @@ MonoBehaviour:
       accessPoints: 0
       sector: -1
     hasObjectReference: 
+    objectsRotations: 
     roomObjStage: 0
     room:
       anchor:
@@ -4197,6 +4223,10 @@ MonoBehaviour:
     offsetToRoomAnchor:
       z: 0
       x: 0
+    anchor: 0
+    shapeID: 0
+    obstacleID: 0
+    rotation: 0
 --- !u!95 &1736421226
 Animator:
   serializedVersion: 3

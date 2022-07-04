@@ -8,35 +8,18 @@ public class LevelGenerator : MonoBehaviour {
     private Level level;
     private int sizeZ, sizeX;
 
-    // GAMEOBJECTS - TEMPORARY LOCATION
-    /*public GameObject _FloorGrey;
-    public GameObject _FloorGreen;
-    public GameObject _FloorRed;
-    public GameObject _FloorWhite;
-    public GameObject _Wall;
-    public GameObject _Corner2;
-    public GameObject _Corner1;
-    public GameObject _Corner0;
-    public GameObject _Start;
-    public GameObject _Finish;
-    public GameObject _OuterPadding;
-    public GameObject _InnerPadding;*/
-    /*public MazeCellObject _MazeCellObject;
-    public GameObject _LevelRootObject;*/
-
     // !! This function will need some parameters
     // Uses MazeGenAlgorithms to generate a maze layout and
     // saves that layout into a two dimensional array of MazeCellData
     public Level GenerateLevel(int sizeZ, int sizeX, int outerPaddingPerc, int innerPaddingPerc, int nrOfSectors) {
-        // minimum size of 30 ?
         this.sizeZ = sizeZ;
         this.sizeX = sizeX;
 
-        //int[,,] layout = MazeGenAlgorithms.testAlgoritm(sizeZ, sizeX, 1);
         (int[,,] layout, LayoutStats stats) = 
             MazeGenAlgorithms.GenerateLayout(sizeZ, sizeX, outerPaddingPerc, innerPaddingPerc, nrOfSectors);
         level = new Level(sizeZ, sizeX, layout, stats);
 
+        SelectObstacles();
         AssignRoomsData(stats.rooms, nrOfSectors);
         AssignWallsAndFloors();
 
@@ -56,6 +39,19 @@ public class LevelGenerator : MonoBehaviour {
         print(message);*/
 
         return level;
+    }
+
+    private void SelectObstacles() {
+        foreach((MazeCoords coords, int shapeID, MazeDirection rotation, int rec_diff) in level.stats.obstacles) {
+            if(ObjectDatabase.instance.GetObstaclesOfShapeID(1, shapeID) != null) {
+                // [TODO] See if trap has floor/walls attached (bridge case)
+                // level.cellsData[coords.z, coords.x].objectReferences[(int)CellSubsections.Inner] = (1, (int)ObjectType.Obstacle, )
+                level.cellsData[coords.z, coords.x].anchor = true;
+                level.cellsData[coords.z, coords.x].shapeID = shapeID;
+                level.cellsData[coords.z, coords.x].obstacleID = 0;
+                level.cellsData[coords.z, coords.x].rotation = rotation;
+            }
+        }
     }
 
     private void AssignRoomsData(List<RoomData>[] rooms, int nrOfSectors) {
@@ -84,7 +80,7 @@ public class LevelGenerator : MonoBehaviour {
 
     private void AssignWallsAndFloors() {
         int objStage = level.stage;
-        int objIndex;
+        int objIndex; // [TODO] Insert some logic to decide between multiple objects
         for(int z = 0; z < sizeZ; z ++) {
             for(int x = 0; x < sizeX; x ++) {
                 // [TODO] Insert some logic to decide between multiple objects
@@ -107,6 +103,8 @@ public class LevelGenerator : MonoBehaviour {
                         break;
                     case CellType.Start:
                     case CellType.Finish:
+                    case CellType.Obstacle:
+                    case CellType.Loot:
                     case CellType.Common:
                         // Walls
                         // [TODO] Choose 4 walls?
@@ -194,6 +192,9 @@ public class LevelGenerator : MonoBehaviour {
                 // Instantiate corners
                 newCellObject.InstantiateCorners();
 
+                // Instantiate cell contents
+                newCellObject.InstantiateContent();
+
                 // DEBUG
                 newCellObject.DebugColor();
             }
@@ -214,6 +215,7 @@ public class LevelGenerator : MonoBehaviour {
      */
     [System.Serializable]
     public enum CellSubsections {
+        Floor, // 0
         NorthEdge, EastEdge, SouthEdge, WestEdge,
         NWCorner, NECorner, SECorner, SWCorner,
         NWInner, NInner, NEInner,

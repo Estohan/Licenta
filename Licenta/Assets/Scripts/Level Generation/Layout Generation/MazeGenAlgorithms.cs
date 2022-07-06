@@ -189,6 +189,9 @@ public static class MazeGenAlgorithms {
         const float chanceForSimpleOnSol = 3; // 3 out of 10, translates to 30%
 
         int shapesCount = ObstacleShapes.shapes.Count();
+        int randListIndex;
+        List<MazeCoords> shuffledCells;
+        MazeCoords auxCoords;
         // simple shapes - solution only, complex shapes - all
         Queue<(MazeCoords, MazeDirection)>[] mappedShapesByID_Q = new Queue<(MazeCoords, MazeDirection)>[shapesCount];
         // simple shapes - out of solution
@@ -196,44 +199,67 @@ public static class MazeGenAlgorithms {
 
         // [TODO]
         // Boundaries and quantities
-        int maxToPlace = (int) UnityEngine.Mathf.Sqrt(stats.sizeZ * stats.sizeX);
-        int complexToPlace = (int) (maxToPlace * percOfComplexShapes);
+        int maxToPlace = (int)UnityEngine.Mathf.Sqrt(stats.sizeZ * stats.sizeX);
+        int complexToPlace = (int)(maxToPlace * percOfComplexShapes);
         int totalPlacedShapes = 0;
         int totalMappedShapes;
 
         // Some initializations
         totalMappedShapes = 0;
         // initialize queues
-        for (int i = 0; i < shapesCount; i ++) {
+        for (int i = 0; i < shapesCount; i++) {
             mappedShapesByID_Q[i] = new Queue<(MazeCoords, MazeDirection)>();
         }
         // initialize lists
-        for (int i = 0; i <= complexThreshold; i ++) {
+        for (int i = 0; i <= complexThreshold; i++) {
             mappedShapesByID_L[i] = new List<(MazeCoords, MazeDirection)>();
+        }
+
+        // shuffle step (Fisher–Yates shuffle): solution cells
+        shuffledCells = stats.solution;
+        for (int i = 0; i < shuffledCells.Count() - 1; i++) {
+            auxCoords = shuffledCells[i];
+            randListIndex = UnityEngine.Random.Range(i, shuffledCells.Count());
+            shuffledCells[i] = shuffledCells[randListIndex];
+            shuffledCells[randListIndex] = auxCoords;
         }
         // add shapes present on solution to queues
         foreach (MazeCoords coords in stats.solution) {
             foreach ((int shapeID, MazeDirection rotation) in stats.cellsStats[coords.z, coords.x].mappedObstacleShapes) {
-                    mappedShapesByID_Q[shapeID].Enqueue((coords, rotation));
-                    totalMappedShapes++;
+                mappedShapesByID_Q[shapeID].Enqueue((coords, rotation));
+                totalMappedShapes++;
             }
         }
-        // add all the rest of the shapes
-        for(int z = 0; z < stats.sizeZ; z ++) {
-            for(int x = 0; x < stats.sizeX; x ++) {
-                foreach((int shapeID, MazeDirection rotation) in stats.cellsStats[z, x].mappedObstacleShapes) {
-                    // if current cell si part of solution, then add only the simple shapes
-                    // (complex shapes are already added)
-                    if(stats.cellsStats[z, x].isInSolution) {
-                            continue;
-                    }
-                    if(shapeID > complexThreshold) {
-                        mappedShapesByID_Q[shapeID].Enqueue((new MazeCoords(z, x), rotation));
-                    } else {
-                        mappedShapesByID_L[shapeID].Add((new MazeCoords(z, x), rotation));
-                    }
-                    totalMappedShapes++;
+        // shuffle step(Fisher-Yates): all maze cells
+        shuffledCells.Clear();
+        for (int z = 0; z < stats.sizeZ; z++) {
+            for (int x = 0; x < stats.sizeX; x++) {
+                // add only cells where obstacles were mapped
+                if (stats.cellsStats[z, x].mappedObstacleShapes.Count() > 0) {
+                    shuffledCells.Add(new MazeCoords(z, x));
                 }
+            }
+        }
+        for (int i = 0; i < shuffledCells.Count() - 1; i++) {
+            auxCoords = shuffledCells[i];
+            randListIndex = UnityEngine.Random.Range(i, shuffledCells.Count());
+            shuffledCells[i] = shuffledCells[randListIndex];
+            shuffledCells[randListIndex] = auxCoords;
+        }
+        // add all the rest of the shapes
+        foreach (MazeCoords cell in shuffledCells) {
+            foreach ((int shapeID, MazeDirection rotation) in stats.cellsStats[cell.z, cell.x].mappedObstacleShapes) {
+                // if current cell si part of solution, then add only the simple shapes
+                // (complex shapes are already added)
+                if (stats.cellsStats[cell.z, cell.x].isInSolution) {
+                    continue;
+                }
+                if (shapeID > complexThreshold) {
+                    mappedShapesByID_Q[shapeID].Enqueue((new MazeCoords(cell.z, cell.x), rotation));
+                } else {
+                    mappedShapesByID_L[shapeID].Add((new MazeCoords(cell.z, cell.x), rotation));
+                }
+                totalMappedShapes++;
             }
         }
 
@@ -286,7 +312,6 @@ public static class MazeGenAlgorithms {
         int shapeIDCounter = shapesCount - 1;
         int randOnSolutionOrNot;
         int randSimpleShapeID;
-        int randListIndex;
         while(totalPlacedShapes < maxToPlace) {
             emptyIterationCounter = 0;
             // (1) first phase: place the first percOfComplexShapes shapes

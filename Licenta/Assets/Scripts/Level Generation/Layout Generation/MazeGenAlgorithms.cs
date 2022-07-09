@@ -181,9 +181,245 @@ public static class MazeGenAlgorithms {
 
     private static void PlaceShapes(int[,,] layout, LayoutStats stats) {
         /*
+         * Complex shapes are considered all shapes that occupy more than one cell (complexThreshold marks
+         * this size threshold).
+         */
+        const int complexThreshold = 1;
+        const float percOfComplexShapes = 0.7f;
+        const float chanceForSimpleOnSol = 3; // 3 out of 10, translates to 30%
+
+        int diffSizesCount = ObstacleShapes.GetNrDifferentSizes();
+        int randListIndex;
+        List<MazeCoords> shuffledCells;
+        MazeCoords auxCoords;
+        int size;
+        // simple shapes - solution only, complex shapes - all
+        Queue<(MazeCoords, int, MazeDirection)>[] mappedShapesBySize_Q = new Queue<(MazeCoords, int, MazeDirection)>[diffSizesCount]; // Careful here: size = index + 1
+        // simple shapes - out of solution
+        List<(MazeCoords, int, MazeDirection)>[] mappedShapesBySize_L = new List<(MazeCoords, int, MazeDirection)>[complexThreshold]; // Careful here: size = index + 1
+
+        // [TODO]
+        // Boundaries and quantities
+        int maxToPlace = (int)UnityEngine.Mathf.Sqrt(stats.sizeZ * stats.sizeX);
+        int complexToPlace = (int)(maxToPlace * percOfComplexShapes);
+        int totalPlacedShapes = 0;
+        int totalMappedShapes;
+
+        // Some initializations
+        totalMappedShapes = 0;
+        // initialize queues
+        for (int i = 0; i < diffSizesCount; i++) {
+            mappedShapesBySize_Q[i] = new Queue<(MazeCoords, int, MazeDirection)>();
+        }
+        // initialize lists
+        for (int i = 0; i < complexThreshold; i++) {
+            mappedShapesBySize_L[i] = new List<(MazeCoords, int, MazeDirection)>();
+        }
+
+        // shuffle step (Fisher–Yates shuffle): solution cells
+        shuffledCells = stats.solution;
+        for (int i = 0; i < shuffledCells.Count() - 1; i++) {
+            auxCoords = shuffledCells[i];
+            randListIndex = UnityEngine.Random.Range(i, shuffledCells.Count());
+            shuffledCells[i] = shuffledCells[randListIndex];
+            shuffledCells[randListIndex] = auxCoords;
+        }
+        // add shapes present on solution to queues
+        foreach (MazeCoords coords in stats.solution) {
+            foreach ((int shapeID, MazeDirection rotation) in stats.cellsStats[coords.z, coords.x].mappedObstacleShapes) {
+                size = ObstacleShapes.shapes[shapeID].size;
+                mappedShapesBySize_Q[size - 1].Enqueue((coords, shapeID, rotation));
+                totalMappedShapes++;
+            }
+        }
+        // shuffle step (Fisher-Yates): all maze cells
+        shuffledCells.Clear();
+        for (int z = 0; z < stats.sizeZ; z++) {
+            for (int x = 0; x < stats.sizeX; x++) {
+                // add only cells where obstacles were mapped
+                if (stats.cellsStats[z, x].mappedObstacleShapes.Count() > 0) {
+                    shuffledCells.Add(new MazeCoords(z, x));
+                }
+            }
+        }
+        for (int i = 0; i < shuffledCells.Count() - 1; i++) {
+            auxCoords = shuffledCells[i];
+            randListIndex = UnityEngine.Random.Range(i, shuffledCells.Count());
+            shuffledCells[i] = shuffledCells[randListIndex];
+            shuffledCells[randListIndex] = auxCoords;
+        }
+        // add all the rest of the shapes
+        foreach (MazeCoords cell in shuffledCells) {
+            foreach ((int shapeID, MazeDirection rotation) in stats.cellsStats[cell.z, cell.x].mappedObstacleShapes) {
+                // if current cell si part of solution, then add only the simple shapes
+                // (complex shapes are already added)
+                if (stats.cellsStats[cell.z, cell.x].isInSolution) {
+                    continue;
+                }
+                size = ObstacleShapes.shapes[shapeID].size;
+                if (size > complexThreshold) {
+                    mappedShapesBySize_Q[size - 1].Enqueue((new MazeCoords(cell.z, cell.x), shapeID, rotation));
+                } else {
+                    mappedShapesBySize_L[size - 1].Add((new MazeCoords(cell.z, cell.x), shapeID, rotation));
+                }
+                totalMappedShapes++;
+            }
+        }
+
+
+        // Some data about the mapped shapes
+        String msg = "Shape mapping metrics:\n";
+        int[] shapeCount = new int[ObstacleShapes.shapes.Count()];
+        for (int i = 0; i < shapeCount.Count(); i++) shapeCount[i] = 0;
+
+        msg += " - " + stats.sizeZ + stats.sizeX + " total cells\n";
+        msg += " - " + ObstacleShapes.shapes.Count() + " shapes\n";
+        msg += " - " + ObstacleShapes.GetNrDifferentSizes() + " different shape sizes\n";
+        msg += " - " + maxToPlace + " shapes to place\n";
+        msg += " - " + complexToPlace + " simple shapes to place\n";
+
+        for (int z = 0; z < stats.sizeZ; z++) {
+            for (int x = 0; x < stats.sizeX; x++) {
+                foreach ((int shapeID, MazeDirection _) in stats.cellsStats[z, x].mappedObstacleShapes) {
+                    shapeCount[shapeID]++;
+                }
+            }
+        }
+
+        for (int i = 0; i < shapeCount.Count(); i++)
+            msg += "\t - " + shapeCount[i] + " of shapeID " + i + "\n";
+
+        msg += "Count of sorted shapes:\n";
+        msg += "Queues:\n";
+        for (int i = 0; i < diffSizesCount; i++) {
+            msg += "\t" + mappedShapesBySize_Q[i].Count() + " of size " + (i + 1) + "\n";
+        }
+        msg += "Lists:\n";
+        for (int i = 0; i < complexThreshold; i++) {
+            msg += "\t" + mappedShapesBySize_L[i].Count() + " of size " + (i + 1) + "\n";
+        }
+
+        Debug.Log(msg);
+
+
+        // [TODO]
+        // queues only for complex shapes, the rest are stored in lists
+        // Choose shapes to place as follows:
+        // - one from every shape class, starting with the most complex
+        //      (until 70% of max nr of shapes is reached, solution cells are prioritized when
+        //       placing complex shapes)
+        // - randomly select simple shapes ID's 0 to 4 (until max nr of shapes are reached)
+        int emptyIterationCounter; // emptyIteration if nothing was placed in this iteration
+        int maxEmptyIterations = 10;
+        bool secondPhase = false;
+        int sizeCounter = diffSizesCount;
+        int randOnSolutionOrNot;
+        int randSimpleShape;
+        while(totalPlacedShapes < maxToPlace) {
+            emptyIterationCounter = 0;
+            // (1) first phase: place the first percOfComplexShapes shapes
+            if(!secondPhase) {
+                // if queue is not empty
+                if(mappedShapesBySize_Q[sizeCounter - 1].Count() > 0) {
+                    (MazeCoords coords, int shapeID, MazeDirection rotation) = mappedShapesBySize_Q[sizeCounter - 1].Dequeue();
+                    // try to place the dequeued shape
+                    if(PlaceShapeOnCell(layout, stats, coords, shapeID, rotation)) {
+                        totalPlacedShapes++;
+                        sizeCounter--;
+                        emptyIterationCounter = 0;
+                        // check condition for passing to second phase
+                        if(totalPlacedShapes >= complexToPlace) {
+                            secondPhase = true;
+                        }
+                    } else {
+                        emptyIterationCounter++;
+                    }
+                } else {
+                    // this queue is empty, move on to the next one
+                    sizeCounter--;
+                }
+                // reset counter
+                if(sizeCounter < 1) {
+                    sizeCounter = diffSizesCount;
+                }
+            } else {
+                // (2) second phase: place simple shapes only
+                randOnSolutionOrNot = UnityEngine.Random.Range(0, 10);
+                randSimpleShape = UnityEngine.Random.Range(0, complexThreshold - 1);
+                if (randOnSolutionOrNot < chanceForSimpleOnSol) { // (chanceForSimpleOnSol)% chance to choose a solution cell
+                    // check if the queue is not empty
+                    if (mappedShapesBySize_Q[randSimpleShape].Count() > 0) {
+                        (MazeCoords coords, int shapeID, MazeDirection rotation) = mappedShapesBySize_Q[randSimpleShape].Dequeue();
+                        // try to place the dequeued shape
+                        if (PlaceShapeOnCell(layout, stats, coords, shapeID, rotation)) {
+                            totalPlacedShapes++;
+                            emptyIterationCounter = 0;
+                        } else {
+                            emptyIterationCounter++;
+                        }
+                    }
+                } else { // (10 - chanceForSimpleOnSol)% chance to choose a random cell that is not part of the solution
+                    // check if the list is not empty
+                    if (mappedShapesBySize_L[randSimpleShape].Count() > 0) {
+                        randListIndex = UnityEngine.Random.Range(0, mappedShapesBySize_L[randSimpleShape].Count());
+                        (MazeCoords coords, int shapeID, MazeDirection rotation) = mappedShapesBySize_L[randSimpleShape][randListIndex];
+                        // try to place the dequeued shape
+                        if (PlaceShapeOnCell(layout, stats, coords, shapeID, rotation)) {
+                            totalPlacedShapes++;
+                            emptyIterationCounter = 0;
+                        } else {
+                            emptyIterationCounter++;
+                        }
+                    }
+                }
+            }
+            // if the nothing was placed this iteration, then exit the loop
+            if(emptyIterationCounter > maxEmptyIterations) {
+                break;
+            }
+        }
+
+
+        /*for (int z = 0; z < stats.sizeZ; z++) {
+            for (int x = 0; x < stats.sizeX; x++) {
+                if (stats.cellsStats[z, x].mappedObstacleShapes.Count() <= 1) {
+                    continue;
+                } else {
+                    foreach ((int shape_ID, MazeDirection rotation) in stats.cellsStats[z, x].mappedObstacleShapes) {
+                        if (shape_ID == 8) {
+                            // Check obstacle overlapping
+                            canBePlaced = true;
+                            foreach ((int offset_z, int offset_x, int[] walls) in
+                                ObstacleShapes.shapes[shape_ID].cellsRelativeToAnchor[(int)rotation]) {
+                                if (layout[z + offset_z, x + offset_x, 4] != (int)CellType.Common) {
+                                    // Obstacle space is not free anymore, it probably overlaps with
+                                    // another obstacle that was already placed
+                                    canBePlaced = false;
+                                    continue;
+                                }
+                            }
+                            if (canBePlaced) {
+                                // Mark cells as trapped
+                                foreach ((int offset_z, int offset_x, int[] walls) in
+                                    ObstacleShapes.shapes[shape_ID].cellsRelativeToAnchor[(int)rotation]) {
+                                    layout[z + offset_z, x + offset_x, 4] = (int)CellType.Obstacle;
+                                }
+                                // Store obstacle in stats
+                                stats.obstacles.Add((new MazeCoords(z, x), shape_ID, rotation, 0));
+                            }
+                        }
+                    }
+                }
+            }
+        }*/
+    }
+
+    // Just in case
+    /*private static void PlaceShapes(int[,,] layout, LayoutStats stats) {
+        *//*
          * Complex shapes are considered all shapes that occupy more than one cell (that are above the
          * complex threshold of 4, same thing as saying that shapeID must be greater than 4)
-         */
+         *//*
         const int complexThreshold = 4;
         const float percOfComplexShapes = 0.7f;
         const float chanceForSimpleOnSol = 3; // 3 out of 10, translates to 30%
@@ -312,20 +548,20 @@ public static class MazeGenAlgorithms {
         int shapeIDCounter = shapesCount - 1;
         int randOnSolutionOrNot;
         int randSimpleShapeID;
-        while(totalPlacedShapes < maxToPlace) {
+        while (totalPlacedShapes < maxToPlace) {
             emptyIterationCounter = 0;
             // (1) first phase: place the first percOfComplexShapes shapes
-            if(!secondPhase) {
+            if (!secondPhase) {
                 // if queue is not empty
-                if(mappedShapesByID_Q[shapeIDCounter].Count() > 0) {
+                if (mappedShapesByID_Q[shapeIDCounter].Count() > 0) {
                     (MazeCoords coords, MazeDirection rotation) = mappedShapesByID_Q[shapeIDCounter].Dequeue();
                     // try to place the dequeued shape
-                    if(PlaceShapeOnCell(layout, stats, coords, shapeIDCounter, rotation)) {
+                    if (PlaceShapeOnCell(layout, stats, coords, shapeIDCounter, rotation)) {
                         totalPlacedShapes++;
                         shapeIDCounter--;
                         emptyIterationCounter = 0;
                         // check condition for passing to second phase
-                        if(totalPlacedShapes >= complexToPlace) {
+                        if (totalPlacedShapes >= complexToPlace) {
                             secondPhase = true;
                         }
                     } else {
@@ -336,7 +572,7 @@ public static class MazeGenAlgorithms {
                     shapeIDCounter--;
                 }
                 // reset counter
-                if(shapeIDCounter < 0) {
+                if (shapeIDCounter < 0) {
                     shapeIDCounter = shapesCount - 1;
                 }
             } else {
@@ -371,45 +607,11 @@ public static class MazeGenAlgorithms {
                 }
             }
             // if the nothing was placed this iteration, then exit the loop
-            if(emptyIterationCounter > maxEmptyIterations) {
+            if (emptyIterationCounter > maxEmptyIterations) {
                 break;
             }
         }
-
-
-        /*for (int z = 0; z < stats.sizeZ; z++) {
-            for (int x = 0; x < stats.sizeX; x++) {
-                if (stats.cellsStats[z, x].mappedObstacleShapes.Count() <= 1) {
-                    continue;
-                } else {
-                    foreach ((int shape_ID, MazeDirection rotation) in stats.cellsStats[z, x].mappedObstacleShapes) {
-                        if (shape_ID == 8) {
-                            // Check obstacle overlapping
-                            canBePlaced = true;
-                            foreach ((int offset_z, int offset_x, int[] walls) in
-                                ObstacleShapes.shapes[shape_ID].cellsRelativeToAnchor[(int)rotation]) {
-                                if (layout[z + offset_z, x + offset_x, 4] != (int)CellType.Common) {
-                                    // Obstacle space is not free anymore, it probably overlaps with
-                                    // another obstacle that was already placed
-                                    canBePlaced = false;
-                                    continue;
-                                }
-                            }
-                            if (canBePlaced) {
-                                // Mark cells as trapped
-                                foreach ((int offset_z, int offset_x, int[] walls) in
-                                    ObstacleShapes.shapes[shape_ID].cellsRelativeToAnchor[(int)rotation]) {
-                                    layout[z + offset_z, x + offset_x, 4] = (int)CellType.Obstacle;
-                                }
-                                // Store obstacle in stats
-                                stats.obstacles.Add((new MazeCoords(z, x), shape_ID, rotation, 0));
-                            }
-                        }
-                    }
-                }
-            }
-        }*/
-    }
+    }*/
 
     private static bool PlaceShapeOnCell(int[,,] layout, LayoutStats stats, MazeCoords anchor, int shapeID, MazeDirection rotation) {
         // Check obstacle overlapping

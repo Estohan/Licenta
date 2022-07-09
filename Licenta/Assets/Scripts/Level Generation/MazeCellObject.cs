@@ -6,9 +6,6 @@ using UnityEngine;
 public class MazeCellObject : MonoBehaviour {
 
     public MazeCellData data;
-    // public ObjectReferences objectPrefabs;
-
-    public float cellSize;
 
     // GAME OBJECTS ?
     /*public GameObject Prf_FloorGrey;
@@ -39,8 +36,8 @@ public class MazeCellObject : MonoBehaviour {
 
         // Create floor as child of the cell
         // GameObject _floorObj = DecideFloorType(data.type); [TODO] Remove this
-        if (!data.hasObjectReference[0] && data.type != CellType.Room) {
-            Debug.LogError("Cell " + data.coordinates + " cannot instantiate floor (no object reference).");
+        if (!data.hasObjectReference[0]) { // && data.type != CellType.Room) {
+            //Debug.LogError("Cell " + data.coordinates + " cannot instantiate floor (no object reference).");
             return;
         }
 
@@ -60,13 +57,6 @@ public class MazeCellObject : MonoBehaviour {
         }
 
         Instantiate(_floorObj, this.transform);
-        // Move cell to correct position
-        this.cellSize = this.transform.GetChild(0).GetComponent<MeshFilter>().mesh.bounds.size.x;
-        this.transform.parent = transform;
-        this.transform.localPosition =
-            new Vector3(data.coordinates.x * cellSize - cellSize / 2,
-                        0f,
-                        -data.coordinates.z * cellSize + cellSize / 2);
     }
 
     public void InstantiateWalls() {
@@ -116,7 +106,7 @@ public class MazeCellObject : MonoBehaviour {
                     newWall.name = name + data.coordinates.z + "-" + data.coordinates.x;
                     // Set to correct position
                     newWall.transform.localPosition = GetCellSubsectionPos(newWall.transform,
-                                                                            cellSize,
+                                                                            Constants.cellSize,
                                                                             subsection);
                     // Rotate to correct position
                     newWall.transform.rotation = GetRotationFromSubsection(newWall.transform,
@@ -221,7 +211,7 @@ public class MazeCellObject : MonoBehaviour {
                     newCorner.name = name + data.coordinates.z + "-" + data.coordinates.x;
                     // Set to correct position
                     newCorner.transform.localPosition = GetCellSubsectionPos(newCorner.transform,
-                                                                            cellSize,
+                                                                            Constants.cellSize,
                                                                             subsection);
                     newCorner.transform.rotation = rotation;
                 }

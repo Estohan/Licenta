@@ -166,32 +166,32 @@ public static class ObstacleShapes {
             //                       `
             {7, new ObstacleShape(
                    new List<(int, int, int[])> {
-                       (0, 0, new int[] {1, 1, -1, 1}),
-                       (1, 0, new int[] {-1, 1, -1, 1}),
-                       (2, 0, new int[] {-1, 1, -1, 1}),
-                       (3, 0, new int[] {-1, 1, -1, 1}),
-                       (4, 0, new int[] {-1, 1, 0, 1})
+                       (0, 0, new int[] {1, 0, -1, 0}),
+                       (1, 0, new int[] {-1, 0, -1, 0}),
+                       (2, 0, new int[] {-1, 0, -1, 0}),
+                       (3, 0, new int[] {-1, 0, -1, 0}),
+                       (4, 0, new int[] {-1, 0, 0, 0})
                    }, // North rotation
                    new List<(int, int, int[])> {
-                       (0, 0, new int[] {1, 1, 1, -1}),
-                       (0, -1, new int[] {1, -1, 1, -1}),
-                       (0, -2, new int[] {1, -1, 1, -1}),
-                       (0, -3, new int[] {1, -1, 1, -1}),
-                       (0, -4, new int[] {1, -1, 1, 0})
+                       (0, 0, new int[] {0, 1, 0, -1}),
+                       (0, -1, new int[] {0, -1, 0, -1}),
+                       (0, -2, new int[] {0, -1, 0, -1}),
+                       (0, -3, new int[] {0, -1, 0, -1}),
+                       (0, -4, new int[] {0, -1, 0, 0})
                    }, // East rotation (None)
                    new List<(int, int, int[])> {
-                       (0, 0, new int[] {-1, 1, 1, 1}),
-                       (-1, 0, new int[] {-1, 1, -1, 1}),
-                       (-2, 0, new int[] {-1, 1, -1, 1}),
-                       (-3, 0, new int[] {-1, 1, -1, 1}),
-                       (-4, 0, new int[] {0, 1, -1, 1})
+                       (0, 0, new int[] {-1, 0, 1, 0}),
+                       (-1, 0, new int[] {-1, 0, -1, 0}),
+                       (-2, 0, new int[] {-1, 0, -1, 0}),
+                       (-3, 0, new int[] {-1, 0, -1, 0}),
+                       (-4, 0, new int[] {0, 0, -1, 0})
                    }, // South rotation (None)
                    new List<(int, int, int[])> {
-                       (0, 0, new int[] {1, -1, 1, 1}),
-                       (0, 1, new int[] {1, -1, 1, -1}),
-                       (0, 2, new int[] {1, -1, 1, -1}),
-                       (0, 3, new int[] {1, -1, 1, -1}),
-                       (0, 4, new int[] {1, 0, 1, -1})
+                       (0, 0, new int[] {0, -1, 0, 1}),
+                       (0, 1, new int[] {0, -1, 0, -1}),
+                       (0, 2, new int[] {0, -1, 0, -1}),
+                       (0, 3, new int[] {0, -1, 0, -1}),
+                       (0, 4, new int[] {0, 0, 0, -1})
                    }, // West rotation (None)
                    null, // North pruning (None)
                    null, // East pruning (None)
@@ -238,7 +238,19 @@ public static class ObstacleShapes {
             )}
         };
 
-
+    public static int GetNrDifferentSizes() {
+        bool[] sizes = new bool[shapes.Count];
+        int sizesCount = 0;
+        foreach(KeyValuePair<int, ObstacleShape> entry in shapes) {
+            sizes[entry.Value.size] = true; // array index will represent sizex`
+        }
+        for(int i = 0; i < sizes.Length; i++) {
+            if(sizes[i]) {
+                sizesCount++;
+            }
+        }
+        return sizesCount;
+    }
 
 
 
@@ -296,6 +308,7 @@ public static class ObstacleShapes {
 }
 
 public class ObstacleShape {
+    public int size;
     public List<(int, int, int[])>[] cellsRelativeToAnchor;
     // pairs (index, rotation) of shapes that are to be automatically
     // excluded from being checked if current direction cannot be mapped
@@ -319,6 +332,13 @@ public class ObstacleShape {
         prunedShapes[1] = prunedByEast;
         prunedShapes[2] = prunedBySouth;
         prunedShapes[3] = prunedByWest;
+        // search for an existing rotation and get its size
+        for(int i = 0; i < 4; i ++) {
+            if(cellsRelativeToAnchor[i].Count != 0) {
+                size = cellsRelativeToAnchor[i].Count;
+                break;
+            }
+        }
     }
 }
 

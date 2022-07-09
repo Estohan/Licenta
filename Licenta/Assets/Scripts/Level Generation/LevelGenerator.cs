@@ -22,6 +22,7 @@ public class LevelGenerator : MonoBehaviour {
         SelectObstacles();
         AssignRoomsData(stats.rooms, nrOfSectors);
         AssignWallsAndFloors();
+        ObstacleArchitectureDeletions();
 
         // printing layout
         /*string message = "Layout:\n";
@@ -41,6 +42,17 @@ public class LevelGenerator : MonoBehaviour {
         return level;
     }
 
+    private void ObstacleArchitectureDeletions() {
+        foreach((MazeCoords anchor, int shapeID, MazeDirection rotation, int obstacleID) in level.obstaclesList) {
+            List<ObstacleObject.ObstObjDeletionEntry> deletionEntries = 
+                   ObjectDatabase.instance.GetObstacle(level.stage, shapeID, obstacleID).getDeletionEntries(rotation);
+            foreach(ObstacleObject.ObstObjDeletionEntry entry in deletionEntries) {
+                // Debug.Log("Deletion:  " + anchor + ", " + shapeID + ", " + rotation + ", " + obstacleID + ", " + entry.offset + ", " + entry.subsection);
+                level.cellsData[anchor.z + entry.offset.z, anchor.x + entry.offset.x].hasObjectReference[entry.subsection] = false;
+            }
+        }
+    }
+
     private void SelectObstacles() {
         foreach((MazeCoords coords, int shapeID, MazeDirection rotation, int rec_diff) in level.stats.obstacles) {
             if(ObjectDatabase.instance.GetObstaclesOfShapeID(1, shapeID) != null) {
@@ -48,8 +60,9 @@ public class LevelGenerator : MonoBehaviour {
                 // level.cellsData[coords.z, coords.x].objectReferences[(int)CellSubsections.Inner] = (1, (int)ObjectType.Obstacle, )
                 level.cellsData[coords.z, coords.x].anchor = true;
                 level.cellsData[coords.z, coords.x].shapeID = shapeID;
-                level.cellsData[coords.z, coords.x].obstacleID = 0;
+                level.cellsData[coords.z, coords.x].obstacleID = 0; // The actual selection
                 level.cellsData[coords.z, coords.x].rotation = rotation;
+                level.obstaclesList.Add((coords, shapeID, rotation, 0));
             }
         }
     }
@@ -179,6 +192,13 @@ public class LevelGenerator : MonoBehaviour {
                 newCellObject.data = level.getCellData(z, x);
                 newCellObject.name = "Cell " + z + "-" + x;
                 // newCellObject.transform.parent = this.transform;
+                // Move cell to correct position
+                // this.cellSize = this.transform.GetChild(0).GetComponent<MeshFilter>().mesh.bounds.size.x;
+                //newCellObject.transform.parent = transform;
+                newCellObject.transform.localPosition =
+                    new Vector3(newCellObject.data.coordinates.x * Constants.cellSize - Constants.cellSize / 2,
+                                0f,
+                                -newCellObject.data.coordinates.z * Constants.cellSize + Constants.cellSize / 2);
 
                 // Save newly created cell
                 level.cellsObjects[z, x] = newCellObject;

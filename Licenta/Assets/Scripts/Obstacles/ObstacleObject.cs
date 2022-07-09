@@ -20,6 +20,26 @@ public class ObstacleObject : ScriptableObject {
     [Space]
     public float damage;
     public ObstacleState state;
+    [Space]
+    // list of tuples (offset, object) where object is a subsection to delete
+    // these deleted objects will be replaced by the obstacle
+    public List<ObstObjDeletionEntry> deletionListNorth;
+    public List<ObstObjDeletionEntry> deletionListEast;
+    public List<ObstObjDeletionEntry> deletionListSouth;
+    public List<ObstObjDeletionEntry> deletionListWest;
+
+    public List<ObstObjDeletionEntry> getDeletionEntries(MazeDirection rotation) {
+        switch(rotation) {
+            case MazeDirection.North:
+                return deletionListNorth;
+            case MazeDirection.East:
+                return deletionListEast;
+            case MazeDirection.South:
+                return deletionListSouth;
+            default:
+                return deletionListWest;
+        }
+    }
 
     /*public Obstacle GetObstacle(MazeDirection rotation) {
         switch(rotation) {
@@ -38,9 +58,16 @@ public class ObstacleObject : ScriptableObject {
         artificial,
         natural
     }
+
+    [System.Serializable]
+    public struct ObstObjDeletionEntry {
+        public MazeCoords offset;
+        public int subsection;
+    }
 }
 
 [System.Serializable]
 public class ObstacleData {
     // data about the obstacle to be saved when saving the game
 }
+

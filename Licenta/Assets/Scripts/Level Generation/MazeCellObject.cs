@@ -247,37 +247,38 @@ public class MazeCellObject : MonoBehaviour {
     private Vector3 GetCellSubsectionPos(Transform transform, float cellSize, LevelGenerator.CellSubsections subsection) {
         float z, x;
         // offset of z or x, so that it is places inside the cell
-        float depthOffset = (transform.GetComponent<Renderer>().bounds.size.z) / 2;
+        // float depthOffset = (transform.GetComponent<Renderer>().bounds.size.z) / 2;
+        // float depthOffset = Constants.cellSize / Constants.cellSegments / 2; //  half the size of a subsesction
         // offset of y so that the object is placed "on the floor" - only needed if the object's origin is set to geometry
         float y = 0f; // (transform.GetComponent<Renderer>().bounds.size.y) / 2;
         switch (subsection) {
             case LevelGenerator.CellSubsections.NorthEdge:
-                z = transform.localPosition.z + cellSize / 2 - depthOffset;
+                z = transform.localPosition.z + cellSize / 2 - (Constants.wallWidth / 2);
                 return new Vector3(0f, y, z);
             case LevelGenerator.CellSubsections.EastEdge:
-                x = transform.localPosition.x + cellSize / 2 - depthOffset;
+                x = transform.localPosition.x + cellSize / 2 - (Constants.wallWidth / 2);
                 return new Vector3(x, y, 0f);
             case LevelGenerator.CellSubsections.SouthEdge:
-                z = transform.localPosition.z - cellSize / 2 + depthOffset;
+                z = transform.localPosition.z - cellSize / 2 + (Constants.wallWidth / 2);
                 return new Vector3(0f, y, z);
             case LevelGenerator.CellSubsections.WestEdge:
-                x = transform.localPosition.x - cellSize / 2 + depthOffset;
+                x = transform.localPosition.x - cellSize / 2 + (Constants.wallWidth / 2);
                 return new Vector3(x, y, 0f);
             case LevelGenerator.CellSubsections.NWCorner:
-                z = transform.localPosition.z + cellSize / 2 - depthOffset;
-                x = transform.localPosition.x - cellSize / 2 + depthOffset;
+                z = transform.localPosition.z + cellSize / 2 - (Constants.wallWidth / 2);
+                x = transform.localPosition.x - cellSize / 2 + (Constants.wallWidth / 2);
                 return new Vector3(x, y, z);
             case LevelGenerator.CellSubsections.NECorner:
-                z = transform.localPosition.z + cellSize / 2 - depthOffset;
-                x = transform.localPosition.x + cellSize / 2 - depthOffset;
+                z = transform.localPosition.z + cellSize / 2 - (Constants.wallWidth / 2);
+                x = transform.localPosition.x + cellSize / 2 - (Constants.wallWidth / 2);
                 return new Vector3(x, y, z);
             case LevelGenerator.CellSubsections.SECorner:
-                z = transform.localPosition.z - cellSize / 2 + depthOffset;
-                x = transform.localPosition.x + cellSize / 2 - depthOffset;
+                z = transform.localPosition.z - cellSize / 2 + (Constants.wallWidth / 2);
+                x = transform.localPosition.x + cellSize / 2 - (Constants.wallWidth / 2);
                 return new Vector3(x, y, z);
             case LevelGenerator.CellSubsections.SWCorner:
-                z = transform.localPosition.z - cellSize / 2 + depthOffset;
-                x = transform.localPosition.x - cellSize / 2 + depthOffset;
+                z = transform.localPosition.z - cellSize / 2 + (Constants.wallWidth / 2);
+                x = transform.localPosition.x - cellSize / 2 + (Constants.wallWidth / 2);
                 return new Vector3(x, y, z);
             case LevelGenerator.CellSubsections.NWInner:
                 break;

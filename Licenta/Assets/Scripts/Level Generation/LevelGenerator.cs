@@ -194,6 +194,7 @@ public class LevelGenerator : MonoBehaviour {
                 // newCellObject.transform.parent = this.transform;
                 // Move cell to correct position
                 // this.cellSize = this.transform.GetChild(0).GetComponent<MeshFilter>().mesh.bounds.size.x;
+
                 //newCellObject.transform.parent = transform;
                 newCellObject.transform.localPosition =
                     new Vector3(newCellObject.data.coordinates.x * Constants.cellSize - Constants.cellSize / 2,

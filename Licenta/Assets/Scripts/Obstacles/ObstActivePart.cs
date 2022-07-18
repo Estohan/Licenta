@@ -8,9 +8,6 @@ public class ObstActivePart : MonoBehaviour {
     public bool canAnounce;
     public float timeToReturn;
     [Space]
-    public bool breakable;
-    public float breakChance;
-    [Space]
     [SerializeField]
     private ObstacleState state;
 
@@ -18,14 +15,20 @@ public class ObstActivePart : MonoBehaviour {
         state = ObstacleState.idle;
     }
 
+    public ObstacleState GetState() {
+        return state;
+    }
+
     // Trigger trap
     public void Trigger() {
-        if (state == ObstacleState.idle || state == ObstacleState.waiting) {
+        if (state == ObstacleState.idle || state == ObstacleState.sprung_waiting) {
             // trigger trap/obstacle
             Activate();
             // return to initial state if possible, after timeToDeactivate seconds
             if (canReturn) {
                 StartCoroutine(WaitAndReturn(timeToReturn));
+            } else {
+                state = ObstacleState.broken;
             }
         }
     }
@@ -38,18 +41,14 @@ public class ObstActivePart : MonoBehaviour {
     }
 
     public virtual void Anounce() {
-        state = ObstacleState.waiting;
+        state = ObstacleState.sprung_waiting;
     }
 
     public virtual void Activate() {
-        // Debug.Log(this.transform.name + " is activated");
-        // meshRenderer.material.color = activeColor;
-        state = ObstacleState.active;
+        state = ObstacleState.sprung_active;
     }
 
     public virtual void Return() {
-        // Debug.Log(this.transform.name + " is returning to idle state");
-        // meshRenderer.material.color = idleColor;
         state = ObstacleState.idle;
     }
 
@@ -57,11 +56,12 @@ public class ObstActivePart : MonoBehaviour {
         yield return new WaitForSeconds(waitTime);
         Return();
     }
+
 }
 
 public enum ObstacleState {
     idle,
-    waiting,
-    active,
+    sprung_waiting,
+    sprung_active,
     broken
 }

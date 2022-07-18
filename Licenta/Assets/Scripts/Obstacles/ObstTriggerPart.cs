@@ -9,9 +9,8 @@ public class ObstTriggerPart : MonoBehaviour {
         the trigger
     */
     public bool isTwoPartTrigger;
-    bool isActive;
     MeshRenderer meshRenderer;
-
+    [Space]
     public List<ObstActivePart> obstaclesToBeTriggered;
 
     public void Start() {
@@ -28,7 +27,7 @@ public class ObstTriggerPart : MonoBehaviour {
     }
 
     // Two part trigger - first part: the trap is about to be triggered,
-    // obstacles or sources of danger can make themselves known at this point
+    // obstacles or sources of danger will make themselves known at this point
     private void TPT_1_TriggerObstacles() {
         if(obstaclesToBeTriggered.Count != 0) {
             for(int i = 0; i < obstaclesToBeTriggered.Count; i ++) {
@@ -64,7 +63,9 @@ public class ObstTriggerPart : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         // Debug.Log("TriggerEnter triggered by " + other.gameObject.transform.name);
         if (other.gameObject.transform.CompareTag("Player")) {
-            meshRenderer.material.color = Color.red;
+            if (meshRenderer != null) {
+                meshRenderer.material.color = Color.red;
+            }
             if (!isTwoPartTrigger) {
                 OPT_TriggerObstacles();
             } else {
@@ -76,7 +77,9 @@ public class ObstTriggerPart : MonoBehaviour {
     private void OnTriggerExit(Collider other) {
         // Debug.Log("TriggerExit triggered by " + other.gameObject.transform.name);
         if (other.gameObject.transform.CompareTag("Player")) {
-            meshRenderer.material.color = Color.white;
+            if (meshRenderer != null) {
+                meshRenderer.material.color = Color.white;
+            }
             if (isTwoPartTrigger) {
                 TPT_2_TriggerObstacles();
             }

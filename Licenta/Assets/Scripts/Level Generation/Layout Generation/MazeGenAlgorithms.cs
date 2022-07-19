@@ -15,48 +15,52 @@ public static class MazeGenAlgorithms {
     //        3 - finish cell, 4 - common cell, 5 - special room cell.
 
     public static (int[,,], LayoutStats stats)
-        GenerateLayout(int sizeZ, int sizeX, int outerPaddingPerc, int innerPaddingPerc, int nrOfSectors) {
-        Debug.Log("SizeZ: " + sizeZ);
-        Debug.Log("SizeX: " + sizeX);
-        Debug.Log("Op: " + outerPaddingPerc);
-        Debug.Log("Ip: " + innerPaddingPerc);
+        GenerateLayout(LevelGenerator.LayoutRequirements layoutRec) {
+        Debug.Log("SizeZ: " + layoutRec.sizeZ);
+        Debug.Log("SizeX: " + layoutRec.sizeX);
+        Debug.Log("Op: " + layoutRec.outerPaddingPerc);
+        Debug.Log("Ip: " + layoutRec.innerPaddingPerc);
 
-        int[,,] layout = new int[sizeZ, sizeX, 6];
-        LayoutStats stats = new LayoutStats(sizeZ, sizeX, nrOfSectors);
+        int[,,] layout = new int[layoutRec.sizeZ, layoutRec.sizeX, 6];
+        LayoutStats stats = new LayoutStats(layoutRec.sizeZ, layoutRec.sizeX, layoutRec.nrOfSectors);
+        stats.difficulty = layoutRec.difficulty;
+        stats.chanceOfObstDowngrade = layoutRec.chanceOfObstDowngrade;
+        stats.chanceOfObstUpgrade = layoutRec.chanceOfObstUpgrade;
+
         MazeCoords startCell;
         MazeCoords finishCell;
 
         // Check padding percentages
-        if(outerPaddingPerc < 0 || outerPaddingPerc > 20) {
+        if(layoutRec.outerPaddingPerc < 0 || layoutRec.outerPaddingPerc > 20) {
             // Set outer padding value to a default value of 5%
-            outerPaddingPerc = 5;
+            layoutRec.outerPaddingPerc = 5;
         }
-        if(innerPaddingPerc < 0 || innerPaddingPerc > 20) {
+        if(layoutRec.innerPaddingPerc < 0 || layoutRec.innerPaddingPerc > 20) {
             // Set inner padding value to a default value of 10%
-            innerPaddingPerc = 10;
+            layoutRec.innerPaddingPerc = 10;
         }
 
         // 6(OPl) + 3(IPl) + 12(M) + 3(IPr) + 6(OPr) = 12 + 6 + 12 = 30
         // Actual value = Percentage/2, since each type of padding is counted twice
         // Percentage = Value/100
-        int outerPaddingValZ = (int)Mathf.Ceil(sizeZ * ((float)outerPaddingPerc/200));
-        int outerPaddingValX = (int)Mathf.Ceil(sizeX * ((float)outerPaddingPerc /200));
-        int innerPaddingValZ = (int)Mathf.Ceil(sizeZ * ((float)innerPaddingPerc /200));
-        int innerPaddingValX = (int)Mathf.Ceil(sizeX * ((float)innerPaddingPerc /200));
+        int outerPaddingValZ = (int)Mathf.Ceil(layoutRec.sizeZ * ((float)layoutRec.outerPaddingPerc /200));
+        int outerPaddingValX = (int)Mathf.Ceil(layoutRec.sizeX * ((float)layoutRec.outerPaddingPerc /200));
+        int innerPaddingValZ = (int)Mathf.Ceil(layoutRec.sizeZ * ((float)layoutRec.innerPaddingPerc /200));
+        int innerPaddingValX = (int)Mathf.Ceil(layoutRec.sizeX * ((float)layoutRec.innerPaddingPerc /200));
         Debug.Log("Opz: " + outerPaddingValZ);
         Debug.Log("Opx: " + outerPaddingValX);
         Debug.Log("Ipz: " + innerPaddingValZ);
         Debug.Log("Ipx: " + innerPaddingValX);
-        int remainingCellsZ = sizeZ - outerPaddingValZ * 2 - innerPaddingValZ * 2; // DO I NEED THIS?
-        int remainingCellsX = sizeX - outerPaddingValX * 2 - innerPaddingValX * 2; // DO I NEED THIS?
-        int totalInnerPadding = ((sizeZ - outerPaddingValZ * 2) * (sizeX - outerPaddingValX * 2)) - 
+        int remainingCellsZ = layoutRec.sizeZ - outerPaddingValZ * 2 - innerPaddingValZ * 2; // DO I NEED THIS?
+        int remainingCellsX = layoutRec.sizeX - outerPaddingValX * 2 - innerPaddingValX * 2; // DO I NEED THIS?
+        int totalInnerPadding = ((layoutRec.sizeZ - outerPaddingValZ * 2) * (layoutRec.sizeX - outerPaddingValX * 2)) - 
                                 (remainingCellsZ * remainingCellsX); // DO I NEED THIS?
         stats.InitializePadding(outerPaddingValZ, outerPaddingValX, innerPaddingValZ, innerPaddingValX);
 
         // visisted array initialization
-        int[,] visited = new int[sizeZ, sizeX];
-        for(int z = 0; z < sizeZ; z ++) {
-            for(int x = 0; x < sizeX; x ++) {
+        int[,] visited = new int[layoutRec.sizeZ, layoutRec.sizeX];
+        for(int z = 0; z < layoutRec.sizeZ; z ++) {
+            for(int x = 0; x < layoutRec.sizeX; x ++) {
                 visited[z, x] = 0;
             }
         }
@@ -141,7 +145,7 @@ public static class MazeGenAlgorithms {
         Debug.Log("Cells total: " + stats.sizeZ * stats.sizeX + " = " + stats.totalOuterPadding + " + " + stats.totalInnerPadding + " + " + stats.totalCore + " + " +
           (stats.totalOuterPadding + stats.totalInnerPadding + stats.totalCore));
         String message = "Sectors data: \n";
-        for(int sector = 1; sector <= nrOfSectors; sector ++) {
+        for(int sector = 1; sector <= layoutRec.nrOfSectors; sector ++) {
             message += "Sector " + sector + ": ";
             message += stats.sectorCells[sector - 1].Count + " cells, of which ";
             message += stats.sectorBorder[sector - 1].Count + " are on border. \n";
@@ -167,7 +171,7 @@ public static class MazeGenAlgorithms {
         Debug.Log(message);
 
         message = "Room data:\n";
-        for(int sector = 1; sector < nrOfSectors; sector ++) {
+        for(int sector = 1; sector < layoutRec.nrOfSectors; sector ++) {
             message += "Sector " + sector + ":\n";
             foreach(RoomData room in stats.rooms[sector - 1]) {
                 message += "\t Room " + room.index + " of size " + room.size + " and rot. " + room.rotation + ", at " + room.anchor + "\n";
@@ -631,8 +635,25 @@ public static class MazeGenAlgorithms {
                 ObstacleShapes.shapes[shapeID].cellsRelativeToAnchor[(int)rotation]) {
                 layout[anchor.z + offset_z, anchor.x + offset_x, 4] = (int)CellType.Obstacle;
             }
+            // Also pick a difficulty level for this obstacle, based on the level of difficulty received in layoutRec and 
+            // the chances of deviation from that level.
+            // difficultyChance:
+            // 0%                                                                           100%
+            // | chanceOfObstDowngrade | chance of expected difficulty | chanceOfObstUpgrade |
+            //
+            // A downgrade means lesser difficulty and an upgrade means higher difficulty.
+            int difficultyChance = UnityEngine.Random.Range(0, 99);
+            int difficulty = stats.difficulty;
+            if(difficultyChance < stats.chanceOfObstDowngrade && 
+                difficulty > 0) { // also ensure that the final difficulty won't be 0
+                difficulty--; ;
+            }
+            if(difficultyChance > 100 - stats.chanceOfObstUpgrade && 
+                difficulty < Constants.maxDifficulty) {  // also ensure that the final difficulty won't be maxDifficulty + 1
+                difficulty++;
+            }
             // Store obstacle in stats
-            stats.obstacles.Add((new MazeCoords(anchor.z, anchor.x), shapeID, rotation, 0));
+            stats.obstacles.Add((new MazeCoords(anchor.z, anchor.x), shapeID, rotation, difficulty));
             return true;
         }
         return false;

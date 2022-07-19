@@ -10,7 +10,7 @@ public class ObstacleObject : ScriptableObject {
     public Obstacle obstacle_East;
     public Obstacle obstacle_South;
     public Obstacle obstacle_West;*/
-    public GameObject obstacle;
+    //public GameObject obstacle;
 
     // TODO
     // difficulty objects
@@ -19,28 +19,48 @@ public class ObstacleObject : ScriptableObject {
     // East
     // West
     // South
+    [Header("Lvl. 0 Difficulty - Tutorial")]
+    public GameObject northRotation_0;
+    public GameObject eastRotation_0;
+    public GameObject southRotation_0;
+    public GameObject westRotation_0;
 
     // 1
     // North
     // East
     // West
     // South
+    [Header("Lvl. 1 Difficulty - Easy")]
+    public GameObject northRotation_1;
+    public GameObject eastRotation_1;
+    public GameObject southRotation_1;
+    public GameObject westRotation_1;
 
     // 2
     // North
     // East
     // West
     // South
+    [Header("Lvl. 2 Difficulty - Medium")]
+    public GameObject northRotation_2;
+    public GameObject eastRotation_2;
+    public GameObject southRotation_2;
+    public GameObject westRotation_2;
 
     // 3
     // North
     // East
     // West
     // South
+    [Header("Lvl. 3 Difficulty - Difficult")]
+    public GameObject northRotation_3;
+    public GameObject eastRotation_3;
+    public GameObject southRotation_3;
+    public GameObject westRotation_3;
 
 
-    [Space]
-    public int difficulty; // 0 - tutorial, 1 - mild, 2 - serious or 3 - difficult
+    /*[Space]
+    public int difficulty; // 0 - tutorial, 1 - mild, 2 - serious or 3 - difficult*/
     [Space]
     public float damage;
     public ObstacleState state;
@@ -65,19 +85,30 @@ public class ObstacleObject : ScriptableObject {
         }
     }
 
-    // TODO
-    /*public Obstacle GetObstacle(MazeDirection rotation) {
-        switch(rotation) {
-            case MazeDirection.North:
-                return obstacle_North;
-            case MazeDirection.East:
-                return obstacle_East;
-            case MazeDirection.South:
-                return obstacle_South;
-            default:
-                return obstacle_West;
+    public GameObject GetObstacle(MazeDirection rotation, int difficulty) {
+        switch (difficulty) {
+            case 1:
+                if (rotation == MazeDirection.North) return northRotation_1;
+                if (rotation == MazeDirection.East) return eastRotation_1;
+                if (rotation == MazeDirection.South) return southRotation_1;
+                return westRotation_1;
+            case 2:
+                if (rotation == MazeDirection.North) return northRotation_2;
+                if (rotation == MazeDirection.East) return eastRotation_2;
+                if (rotation == MazeDirection.South) return southRotation_2;
+                return westRotation_2;
+            case 3:
+                if (rotation == MazeDirection.North) return northRotation_3;
+                if (rotation == MazeDirection.East) return eastRotation_3;
+                if (rotation == MazeDirection.South) return southRotation_3;
+                return westRotation_3;
+            default: // 0
+                if (rotation == MazeDirection.North) return northRotation_0;
+                if (rotation == MazeDirection.East) return eastRotation_0;
+                if (rotation == MazeDirection.South) return southRotation_0;
+                return westRotation_0;
         }
-    }*/
+    }
 
     [System.Serializable]
     public struct ObstObjDeletionEntry {

@@ -34,6 +34,9 @@ public class LayoutStats {
 
     // Obstacles
     public List<(MazeCoords, int, MazeDirection, int)> obstacles; // anchor, shapeID, rotation and rec. diff.
+    public int difficulty;
+    public int chanceOfObstDowngrade;
+    public int chanceOfObstUpgrade;
 
     public LayoutStats(int sizeZ, int sizeX, int numberOfSectors) {
         this.sizeZ = sizeZ;

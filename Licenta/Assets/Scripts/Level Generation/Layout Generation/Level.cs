@@ -8,7 +8,7 @@ public class Level {
     public MazeCellData[,] cellsData;
     public MazeCellObject[,] cellsObjects;
     public LayoutStats stats;
-    public List<(MazeCoords, int, MazeDirection, int)> obstaclesList;
+    public List<(MazeCoords, int, MazeDirection, int, int)> obstaclesList;
 
     // Takes in the layout of the maze and puts it into
     // a two dimensional array of MazeCellData
@@ -21,7 +21,7 @@ public class Level {
 
         cellsData = new MazeCellData[sizeZ, sizeX];
         cellsObjects = new MazeCellObject[sizeZ, sizeX];
-        obstaclesList = new List<(MazeCoords, int, MazeDirection, int)>();
+        obstaclesList = new List<(MazeCoords, int, MazeDirection, int, int)>();
 
         int[] data = new int[6];
         for(int z = 0; z < sizeZ; z ++) {

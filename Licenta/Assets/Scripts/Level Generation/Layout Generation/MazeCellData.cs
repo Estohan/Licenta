@@ -28,10 +28,11 @@ public class MazeCellData {
     public MazeCoords offsetToRoomAnchor;
 
     // If trapped
-    public bool anchor;
-    public int shapeID;
-    public int obstacleID;
-    public MazeDirection rotation;
+    public bool obst_anchor;
+    public int obst_shapeID;
+    public int obst_obstacleID;
+    public int obst_difficulty;
+    public MazeDirection obst_rotation;
 
     public MazeCellData(MazeCoords coordinates, int[] data) {
         this.coordinates = coordinates;

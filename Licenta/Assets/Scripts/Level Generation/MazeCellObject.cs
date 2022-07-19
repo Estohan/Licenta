@@ -220,12 +220,14 @@ public class MazeCellObject : MonoBehaviour {
     }
 
     public void InstantiateContent() {
+        int stage = 1;
         Quaternion rotation = Quaternion.identity;
         // Test
-        if(data.type == CellType.Obstacle && data.anchor == true) {
-            GameObject obstacle = Instantiate(ObjectDatabase.instance.GetObstacle(1, data.shapeID, data.obstacleID).obstacle,
+        if(data.type == CellType.Obstacle && data.obst_anchor == true) {
+            GameObject obstacle = Instantiate(ObjectDatabase.instance.GetObstacle(stage, data.obst_shapeID, data.obst_obstacleID).
+                                                                       GetObstacle(data.obst_rotation, data.obst_difficulty),
                                                 this.transform);
-            switch (data.rotation) {
+            /*switch (data.rotation) {
                 case MazeDirection.East:
                     rotation = Quaternion.Euler(0f, 90f, 0f);
                     break;
@@ -238,7 +240,7 @@ public class MazeCellObject : MonoBehaviour {
                 default: // North
                     break;
              }
-            obstacle.transform.rotation = rotation;
+            obstacle.transform.rotation = rotation;*/
         }
     }
 

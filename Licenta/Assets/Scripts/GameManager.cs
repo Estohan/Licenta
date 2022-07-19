@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour {
     // ignored if greater than 20%
     public int innerPaddingPercentage;
     public int sectorsNumber;
+    [Space]
+    public int difficulty;
+    public int chanceOfObstDowngrade;
+    public int chanceOfObstUpgrade;
         
 
     private void Awake() {
@@ -46,7 +50,13 @@ public class GameManager : MonoBehaviour {
 
     public void StartGame() {
         // Generate level
-        currentLevel = levelGenerator.GenerateLevel(sizeZ, sizeX, outerPaddingPercentage, innerPaddingPercentage, sectorsNumber);
+        LevelGenerator.LayoutRequirements layoutRec = 
+            new LevelGenerator.LayoutRequirements(sizeZ, sizeX, outerPaddingPercentage, innerPaddingPercentage, sectorsNumber);
+        layoutRec.stage = 1;
+        layoutRec.difficulty = difficulty;
+        layoutRec.chanceOfObstDowngrade = chanceOfObstDowngrade;
+        layoutRec.chanceOfObstUpgrade = chanceOfObstUpgrade;
+        currentLevel = levelGenerator.GenerateLevel(layoutRec);
 
         // Instantiate level
         levelGenerator.InstantiateLevel();

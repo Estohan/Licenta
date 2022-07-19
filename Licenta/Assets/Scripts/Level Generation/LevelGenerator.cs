@@ -11,16 +11,16 @@ public class LevelGenerator : MonoBehaviour {
     // !! This function will need some parameters
     // Uses MazeGenAlgorithms to generate a maze layout and
     // saves that layout into a two dimensional array of MazeCellData
-    public Level GenerateLevel(int sizeZ, int sizeX, int outerPaddingPerc, int innerPaddingPerc, int nrOfSectors) {
-        this.sizeZ = sizeZ;
-        this.sizeX = sizeX;
+    public Level GenerateLevel(LayoutRequirements layoutRec) {
+        this.sizeZ = layoutRec.sizeZ;
+        this.sizeX = layoutRec.sizeX;
 
         (int[,,] layout, LayoutStats stats) = 
-            MazeGenAlgorithms.GenerateLayout(sizeZ, sizeX, outerPaddingPerc, innerPaddingPerc, nrOfSectors);
+            MazeGenAlgorithms.GenerateLayout(layoutRec);
         level = new Level(sizeZ, sizeX, layout, stats);
 
         SelectObstacles();
-        AssignRoomsData(stats.rooms, nrOfSectors);
+        AssignRoomsData(stats.rooms, layoutRec.nrOfSectors);
         AssignWallsAndFloors();
         ObstacleArchitectureDeletions();
 
@@ -43,7 +43,7 @@ public class LevelGenerator : MonoBehaviour {
     }
 
     private void ObstacleArchitectureDeletions() {
-        foreach((MazeCoords anchor, int shapeID, MazeDirection rotation, int obstacleID) in level.obstaclesList) {
+        foreach((MazeCoords anchor, int shapeID, MazeDirection rotation, int obstacleID, int difficulty) in level.obstaclesList) {
             List<ObstacleObject.ObstObjDeletionEntry> deletionEntries = 
                    ObjectDatabase.instance.GetObstacle(level.stage, shapeID, obstacleID).getDeletionEntries(rotation);
             foreach(ObstacleObject.ObstObjDeletionEntry entry in deletionEntries) {
@@ -54,15 +54,45 @@ public class LevelGenerator : MonoBehaviour {
     }
 
     private void SelectObstacles() {
+        int stage = 1;
+        int randIndex;
+        int selectedDifficulty;
+        int selectedObjectID;
+        MazeDirection selectedRotation;
+        List<ObstacleObject> obstaclesList;
+        List<(int obstacleID, MazeDirection rotation, int difficulty)> viableObstacles = 
+            new List<(int obstacleID, MazeDirection rotation, int difficulty)>();
+
         foreach((MazeCoords coords, int shapeID, MazeDirection rotation, int rec_diff) in level.stats.obstacles) {
-            if(ObjectDatabase.instance.GetObstaclesOfShapeID(1, shapeID) != null) {
+            // Fetch from ObstacleDatabase a list of all obstacles of shape 'shapeID' in stage 'stage'
+            obstaclesList = ObjectDatabase.instance.GetObstaclesOfShapeID(stage, shapeID);
+            viableObstacles.Clear();
+            if (obstaclesList != null) {
+                // Select from the list above all obstacles that support the necessary rotation
+                for(int i = 0; i < obstaclesList.Count; i ++) {
+                    if (obstaclesList[i].GetObstacle(rotation, rec_diff) != null) {
+                        viableObstacles.Add((i, rotation, rec_diff));
+                    }
+                }
+                if(viableObstacles.Count == 0) {
+                        Debug.LogError("No available obstacles for (" + stage + ", " +
+                                                                        shapeID + ", " +
+                                                                        rotation + ", " +
+                                                                        rec_diff + ").");
+                        return;
+                }
+
+                // Randomly pick one of them
+                randIndex = UnityEngine.Random.Range(0, viableObstacles.Count - 1);
+                   (selectedObjectID, selectedRotation, selectedDifficulty) = viableObstacles[randIndex];
                 // [TODO] See if trap has floor/walls attached (bridge case)
                 // level.cellsData[coords.z, coords.x].objectReferences[(int)CellSubsections.Inner] = (1, (int)ObjectType.Obstacle, )
-                level.cellsData[coords.z, coords.x].anchor = true;
-                level.cellsData[coords.z, coords.x].shapeID = shapeID;
-                level.cellsData[coords.z, coords.x].obstacleID = 0; // The actual selection
-                level.cellsData[coords.z, coords.x].rotation = rotation;
-                level.obstaclesList.Add((coords, shapeID, rotation, 0));
+                level.cellsData[coords.z, coords.x].obst_anchor = true;
+                level.cellsData[coords.z, coords.x].obst_shapeID = shapeID;
+                level.cellsData[coords.z, coords.x].obst_obstacleID = selectedObjectID; // The actual selection
+                level.cellsData[coords.z, coords.x].obst_rotation = selectedRotation;
+                level.cellsData[coords.z, coords.x].obst_difficulty = selectedDifficulty;
+                level.obstaclesList.Add((coords, shapeID, selectedRotation, selectedObjectID, selectedDifficulty));
             }
         }
     }
@@ -225,6 +255,34 @@ public class LevelGenerator : MonoBehaviour {
 
     public Level GetLevel() {
         return this.level;
+    }
+
+    public struct LayoutRequirements {
+        public int sizeZ;
+        public int sizeX;
+        public int outerPaddingPerc;
+        public int innerPaddingPerc;
+        public int nrOfSectors;
+        public int stage;
+        public int difficulty;
+        public int chanceOfObstDowngrade;
+        public int chanceOfObstUpgrade;
+
+        public LayoutRequirements(int sizeZ,
+                                    int sizeX,
+                                    int outerPaddingPerc,
+                                    int innerPaddingPerc,
+                                    int nrOfSectors) {
+            this.sizeZ = sizeZ;
+            this.sizeX = sizeX;
+            this.outerPaddingPerc = outerPaddingPerc;
+            this.innerPaddingPerc = innerPaddingPerc;
+            this.nrOfSectors = nrOfSectors;
+            this.stage = 0;
+            this.difficulty = 0;
+            this.chanceOfObstDowngrade = 20;
+            this.chanceOfObstUpgrade = 20;
+        }
     }
 
     /*

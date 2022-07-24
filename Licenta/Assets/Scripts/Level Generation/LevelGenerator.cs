@@ -123,7 +123,9 @@ public class LevelGenerator : MonoBehaviour {
 
     private void AssignWallsAndFloors() {
         int objStage = level.stage;
-        int objIndex; // [TODO] Insert some logic to decide between multiple objects
+        int outerPaddingPoolSize = ObjectDatabase.instance.GetObjectsPoolSize(objStage, ObjectType.OuterPadding);
+        int innerPaddingPoolSize = ObjectDatabase.instance.GetObjectsPoolSize(objStage, ObjectType.InnerPadding);
+        int objIndex;
         for(int z = 0; z < sizeZ; z ++) {
             for(int x = 0; x < sizeX; x ++) {
                 // [TODO] Insert some logic to decide between multiple objects
@@ -131,12 +133,16 @@ public class LevelGenerator : MonoBehaviour {
                 switch(level.cellsData[z, x].type) {
                     case CellType.OuterPadding:
                         // Floor
-                        level.cellsData[z, x].objectReferences[0] = (objStage, (int)ObjectType.OuterPadding, 0);
+                        // Randomly choose an outer padding object
+                        objIndex = UnityEngine.Random.Range(0, outerPaddingPoolSize);
+                        level.cellsData[z, x].objectReferences[0] = (objStage, (int)ObjectType.OuterPadding, objIndex);
                         level.cellsData[z, x].hasObjectReference[0] = true;
                         break;
                     case CellType.InnerPadding:
                         // Floor
-                        level.cellsData[z, x].objectReferences[0] = (objStage, (int)ObjectType.InnerPadding, 0);
+                        // Randomly choose an inner padding object
+                        objIndex = UnityEngine.Random.Range(0, innerPaddingPoolSize);
+                        level.cellsData[z, x].objectReferences[0] = (objStage, (int)ObjectType.InnerPadding, objIndex);
                         level.cellsData[z, x].hasObjectReference[0] = true;
                         break;
                     case CellType.Room:

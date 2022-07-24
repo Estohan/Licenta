@@ -58,6 +58,38 @@ public class ObjectDatabase : MonoBehaviour {
         }
     }
 
+    public int GetObjectsPoolSize(int stage, ObjectType objType) {
+        GameStageObjects currentStageObjects;
+
+        switch (stage) {
+            case 0:
+                currentStageObjects = commonObjects;
+                break;
+            default:
+                currentStageObjects = firstStageObjects;
+                break;
+        }
+
+        switch (objType) {
+            case ObjectType.NEWall:
+                return currentStageObjects.neWalls.Count;
+            case ObjectType.SWWall:
+                return currentStageObjects.swWalls.Count;
+            case ObjectType.TwoFaceCorner:
+                return currentStageObjects.twoFacecorners.Count;
+            case ObjectType.OneFaceCorner:
+                return currentStageObjects.oneFacecorners.Count;
+            case ObjectType.NoFaceCorner:
+                return currentStageObjects.noFacecorners.Count;
+            case ObjectType.InnerPadding:
+                return currentStageObjects.innerPadding.Count;
+            case ObjectType.OuterPadding:
+                return currentStageObjects.outerPadding.Count;
+            default: // floor
+                return currentStageObjects.floors.Count;
+        }
+    }
+
     public List<ObstacleObject> GetObstaclesOfShapeID(int stage, int shapeID) {
         GameStageObjects currentStageObjects = firstStageObjects;
 

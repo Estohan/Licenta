@@ -15,11 +15,11 @@ D:/Projects/Unity/Licenta/Licenta
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-59339
+61104
 Successfully changed project path to: D:/Projects/Unity/Licenta/Licenta
 D:/Projects/Unity/Licenta/Licenta
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 40.57 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 41.61 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.20f1 (41c4e627c95f)
 [Subsystems] Discovering subsystems at path D:/Program Files/Unity/2020.3.20f1/Editor/Data/Resources/UnitySubsystems
@@ -35,72 +35,72 @@ Initialize mono
 Mono path[0] = 'D:/Program Files/Unity/2020.3.20f1/Editor/Data/Managed'
 Mono path[1] = 'D:/Program Files/Unity/2020.3.20f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'D:/Program Files/Unity/2020.3.20f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56244
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56932
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: D:/Program Files/Unity/2020.3.20f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.140473 seconds.
+Registered in 0.002246 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 38.81 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 41.19 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  4.193 seconds
+- Completed reload, in  1.066 seconds
 Domain Reload Profiling:
-	ReloadAssembly (4194ms)
-		BeginReloadAssembly (2449ms)
+	ReloadAssembly (1066ms)
+		BeginReloadAssembly (42ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (773ms)
-			LoadAssemblies (2448ms)
+		EndReloadAssembly (365ms)
+			LoadAssemblies (42ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (407ms)
+			SetupTypeCache (130ms)
 			ReleaseScriptCaches (0ms)
 			RebuildScriptCaches (26ms)
-			SetupLoadedEditorAssemblies (275ms)
+			SetupLoadedEditorAssemblies (152ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (3ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (39ms)
-				BeforeProcessingInitializeOnLoad (137ms)
-				ProcessInitializeOnLoadAttributes (65ms)
-				ProcessInitializeOnLoadMethodAttributes (30ms)
+				RefreshPlugins (41ms)
+				BeforeProcessingInitializeOnLoad (15ms)
+				ProcessInitializeOnLoadAttributes (67ms)
+				ProcessInitializeOnLoadMethodAttributes (25ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.464356 seconds.
+Registered in 0.008332 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 40.41 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 53.95 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  3.273 seconds
+- Completed reload, in  1.087 seconds
 Domain Reload Profiling:
-	ReloadAssembly (3277ms)
-		BeginReloadAssembly (116ms)
+	ReloadAssembly (1087ms)
+		BeginReloadAssembly (149ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
+			DisableScriptedObjects (5ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (16ms)
-		EndReloadAssembly (3115ms)
-			LoadAssemblies (1657ms)
+			CreateAndSetChildDomain (26ms)
+		EndReloadAssembly (889ms)
+			LoadAssemblies (96ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (839ms)
+			SetupTypeCache (267ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (39ms)
-			SetupLoadedEditorAssemblies (470ms)
+			RebuildScriptCaches (48ms)
+			SetupLoadedEditorAssemblies (356ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (3ms)
+				InitializePlatformSupportModulesInManaged (4ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (40ms)
-				BeforeProcessingInitializeOnLoad (58ms)
-				ProcessInitializeOnLoadAttributes (362ms)
+				RefreshPlugins (54ms)
+				BeforeProcessingInitializeOnLoad (76ms)
+				ProcessInitializeOnLoadAttributes (215ms)
 				ProcessInitializeOnLoadMethodAttributes (4ms)
 				AfterProcessingInitializeOnLoad (2ms)
 				EditorAssembliesLoaded (0ms)
@@ -109,15 +109,15 @@ Domain Reload Profiling:
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.08 seconds
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
 Refreshing native plugins compatible for Editor in 0.44 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 1914 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 92.4 MB.
-System memory in use after: 92.5 MB.
+System memory in use before: 92.9 MB.
+System memory in use after: 93.0 MB.
 
-Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 2364.
-Total: 2.646400 ms (FindLiveObjects: 0.186900 ms CreateObjectMapping: 0.072600 ms MarkObjects: 2.328700 ms  DeleteObjects: 0.057100 ms)
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 2366.
+Total: 2.592800 ms (FindLiveObjects: 0.210200 ms CreateObjectMapping: 0.092500 ms MarkObjects: 2.235300 ms  DeleteObjects: 0.054100 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -131,872 +131,544 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_1_long.fbx
-  artifactKey: Guid(bd6bd46f187f97b47ba5102ea293de3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_1_long.fbx using Guid(bd6bd46f187f97b47ba5102ea293de3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '569db8745b345a879c4e2e898ce7db42') in 0.138586 seconds 
-  Import took 0.141921 seconds .
+  path: Assets/!Temps/Models/Nature/Materials/particle_yellow_leaf_mat.mat
+  artifactKey: Guid(4e4d3673e5116a44098e7680014fd935) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Models/Nature/Materials/particle_yellow_leaf_mat.mat using Guid(4e4d3673e5116a44098e7680014fd935) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5dc7de53df61afe69cd28f672e8a7dfb') in 0.112886 seconds 
+  Import took 0.117045 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000208 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_2_long.fbx
-  artifactKey: Guid(f5f84fdc9f104434c93ac480f5878e31) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_2_long.fbx using Guid(f5f84fdc9f104434c93ac480f5878e31) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1698679f166739dd594ef0e19ce04cf9') in 0.046063 seconds 
-  Import took 0.050762 seconds .
+  Time since last request: 115.656850 seconds.
+  path: Assets/!Temps/Models/Nature/Materials/particle_orange_leaf_mat.mat
+  artifactKey: Guid(68e87eba681009c42984e45c06c87cb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Models/Nature/Materials/particle_orange_leaf_mat.mat using Guid(68e87eba681009c42984e45c06c87cb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '43c7126038068736dd0d9f0bf5102c31') in 0.016349 seconds 
+  Import took 0.020195 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000163 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long
-  artifactKey: Guid(bcafc89b3ade24f49acb9d4bc36c6cfd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long using Guid(bcafc89b3ade24f49acb9d4bc36c6cfd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1f0cfb47f74d40f13fc1ba829a793e45') in 0.006578 seconds 
-  Import took 0.010404 seconds .
+  Time since last request: 0.000252 seconds.
+  path: Assets/!Temps/Models/Nature/Materials/Materials/yellow_leaf.mat
+  artifactKey: Guid(32098028ac9893648924f16424be60bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Models/Nature/Materials/Materials/yellow_leaf.mat using Guid(32098028ac9893648924f16424be60bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cde1ef5a0b779846a856d3a819882b80') in 0.030004 seconds 
+  Import took 0.034947 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.752545 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_3_long.fbx
-  artifactKey: Guid(6ca91cddf0223fd4e9aa38057b3b4cad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_3_long.fbx using Guid(6ca91cddf0223fd4e9aa38057b3b4cad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '83a5322ff0016c7c2448b7f0584ad994') in 0.052895 seconds 
-  Import took 0.056797 seconds .
+  Time since last request: 58.016933 seconds.
+  path: Assets/!Temps/Models/Nature/Materials/particle_yellow_leaf_mat.mat
+  artifactKey: Guid(4e4d3673e5116a44098e7680014fd935) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Models/Nature/Materials/particle_yellow_leaf_mat.mat using Guid(4e4d3673e5116a44098e7680014fd935) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a90b71897a9a886d2983487c2748f405') in 0.016264 seconds 
+  Import took 0.020342 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.887171 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_4_long.fbx
-  artifactKey: Guid(b7332465107dac141b26b9a588458edb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_4_long.fbx using Guid(b7332465107dac141b26b9a588458edb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7e8b2483775369aa788569e71067dda9') in 0.035733 seconds 
-  Import took 0.040233 seconds .
+  Time since last request: 59.489170 seconds.
+  path: Assets/!Temps/Models/Nature/Particles_leaves.prefab
+  artifactKey: Guid(e8273fcbb49956546b37f1b51cc7871d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Models/Nature/Particles_leaves.prefab using Guid(e8273fcbb49956546b37f1b51cc7871d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e75962dee7b852f59d5e56f8efc574d2') in 0.034996 seconds 
+  Import took 0.040277 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 8.892032 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_1_long.fbx
-  artifactKey: Guid(bd6bd46f187f97b47ba5102ea293de3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_1_long.fbx using Guid(bd6bd46f187f97b47ba5102ea293de3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1e896d5ac41e68d61e56d2d137ba3c70') in 0.040273 seconds 
-  Import took 0.044477 seconds .
+  Time since last request: 17.224143 seconds.
+  path: Assets/!Temps/Models/Nature/Particles_leaves.prefab
+  artifactKey: Guid(e8273fcbb49956546b37f1b51cc7871d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Models/Nature/Particles_leaves.prefab using Guid(e8273fcbb49956546b37f1b51cc7871d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0cbb1c8e518b6c6c7775c27251d6413e') in 0.011213 seconds 
+  Import took 0.016002 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 3.441090 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_1_long.fbx
-  artifactKey: Guid(bd6bd46f187f97b47ba5102ea293de3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_1_long.fbx using Guid(bd6bd46f187f97b47ba5102ea293de3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '15675d97ccba20f4a5951af829633cd9') in 0.037305 seconds 
-  Import took 0.041440 seconds .
+  Time since last request: 7.456976 seconds.
+  path: Assets/!Temps/Models/Nature/Particles_leaves.prefab
+  artifactKey: Guid(e8273fcbb49956546b37f1b51cc7871d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Models/Nature/Particles_leaves.prefab using Guid(e8273fcbb49956546b37f1b51cc7871d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '336999e8837207e9e22cee68d0639a85') in 0.009579 seconds 
+  Import took 0.014047 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 1.964668 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_1_long.fbx
-  artifactKey: Guid(bd6bd46f187f97b47ba5102ea293de3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_1_long.fbx using Guid(bd6bd46f187f97b47ba5102ea293de3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '63509f78f79fc1d334ee6c02c83be301') in 0.037040 seconds 
-  Import took 0.042496 seconds .
+  Time since last request: 314.362212 seconds.
+  path: Assets/!Temps/Models/Nature/Materials/particle_orange_leaf_mat.mat
+  artifactKey: Guid(68e87eba681009c42984e45c06c87cb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Models/Nature/Materials/particle_orange_leaf_mat.mat using Guid(68e87eba681009c42984e45c06c87cb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e93b1ed9434f8da7ab735c8583636864') in 0.021215 seconds 
+  Import took 0.026616 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 5.709396 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_1_long.fbx
-  artifactKey: Guid(bd6bd46f187f97b47ba5102ea293de3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_1_long.fbx using Guid(bd6bd46f187f97b47ba5102ea293de3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cf6dc9e1a69220c7b9813027bbf72b71') in 0.017230 seconds 
-  Import took 0.022391 seconds .
+  Time since last request: 589.230698 seconds.
+  path: Assets/!Temps/Prefabs/Padding
+  artifactKey: Guid(840aa997b823c4c4b849a62c8f772d9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding using Guid(840aa997b823c4c4b849a62c8f772d9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '500971bf0b242b1da743a44994d8bca9') in 0.009366 seconds 
+  Import took 0.013414 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 1.407871 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_2_long.fbx
-  artifactKey: Guid(f5f84fdc9f104434c93ac480f5878e31) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_2_long.fbx using Guid(f5f84fdc9f104434c93ac480f5878e31) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '48d99ba48540c9690881b07dc3828bee') in 0.024821 seconds 
-  Import took 0.028895 seconds .
+  Time since last request: 13.868164 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Outer padding
+  artifactKey: Guid(da502c16fe10c3c46807eb5f408d63d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Outer padding using Guid(da502c16fe10c3c46807eb5f408d63d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '88f2e4b178f4e09a80196c9a9acbb49b') in 0.005308 seconds 
+  Import took 0.010472 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 2.476222 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_2_long.fbx
-  artifactKey: Guid(f5f84fdc9f104434c93ac480f5878e31) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_2_long.fbx using Guid(f5f84fdc9f104434c93ac480f5878e31) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c0f634c404866dfb10a58a0480116e2b') in 0.027626 seconds 
-  Import took 0.031000 seconds .
+  Time since last request: 8.089645 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Inner padding
+  artifactKey: Guid(fd0b840a2dbd13f458171541b58ae777) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Inner padding using Guid(fd0b840a2dbd13f458171541b58ae777) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7f44a9f9c77bf635e549dadbb53101dd') in 0.006404 seconds 
+  Import took 0.011907 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 1.698280 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_3_long.fbx
-  artifactKey: Guid(6ca91cddf0223fd4e9aa38057b3b4cad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_3_long.fbx using Guid(6ca91cddf0223fd4e9aa38057b3b4cad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '943950a8dd7c45b0a0836903ba8a4dfa') in 0.046579 seconds 
-  Import took 0.050561 seconds .
+  Time since last request: 13.886333 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_5.prefab
+  artifactKey: Guid(4b88dcea05f2afb449b824e83bb301f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_5.prefab using Guid(4b88dcea05f2afb449b824e83bb301f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7b020f198bb417d76c480ad673cd7bb5') in 0.037682 seconds 
+  Import took 0.043775 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 2.325556 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_3_long.fbx
-  artifactKey: Guid(6ca91cddf0223fd4e9aa38057b3b4cad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_3_long.fbx using Guid(6ca91cddf0223fd4e9aa38057b3b4cad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '972bae1d95a44c24434f5dbb591ea279') in 0.020748 seconds 
-  Import took 0.025918 seconds .
+  Time since last request: 9.749206 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_4.prefab
+  artifactKey: Guid(ecbf28c7955cd1c4488095703c7fa253) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_4.prefab using Guid(ecbf28c7955cd1c4488095703c7fa253) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f2dbea7211b968fea2312fa78c1d9836') in 0.036612 seconds 
+  Import took 0.040686 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.895536 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_4_long.fbx
-  artifactKey: Guid(b7332465107dac141b26b9a588458edb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_4_long.fbx using Guid(b7332465107dac141b26b9a588458edb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '450ce4a9145e89303cc4e6e69a96b5ee') in 0.024798 seconds 
-  Import took 0.028168 seconds .
+  Time since last request: 4.465747 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_3.prefab
+  artifactKey: Guid(bc388c6e82c9c854b8a3b158b907d135) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_3.prefab using Guid(bc388c6e82c9c854b8a3b158b907d135) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cffc2ea38d5120a1d67d781577a6afd0') in 0.032570 seconds 
+  Import took 0.037734 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 2.559626 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_4_long.fbx
-  artifactKey: Guid(b7332465107dac141b26b9a588458edb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_4_long.fbx using Guid(b7332465107dac141b26b9a588458edb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5142682a0bf845521fc347588a3bac89') in 0.034019 seconds 
-  Import took 0.037495 seconds .
+  Time since last request: 4.396354 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_2.prefab
+  artifactKey: Guid(ebdd515072370cb458fe255af0601b17) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_2.prefab using Guid(ebdd515072370cb458fe255af0601b17) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '95429b576277fd5fb2ff24666162c8e0') in 0.027985 seconds 
+  Import took 0.032867 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 52.055766 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/ground_dirt_tex_2.png
-  artifactKey: Guid(a48808acdc48f9b40839c6cac92d315a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/ground_dirt_tex_2.png using Guid(a48808acdc48f9b40839c6cac92d315a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '601903712da4f5c53d12b2e81cce5566') in 0.032861 seconds 
-  Import took 0.037219 seconds .
+  Time since last request: 3.818084 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_1.prefab
+  artifactKey: Guid(a0049d722e641674ca67765a5765e08c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_1.prefab using Guid(a0049d722e641674ca67765a5765e08c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ff8ade5c81be613ef4f2a04e433afcd2') in 0.029290 seconds 
+  Import took 0.034231 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 824.741901 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/dirt_floor_spikes_long.prefab
-  artifactKey: Guid(ad7fe0754a4e35145a6475485d36e1d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/dirt_floor_spikes_long.prefab using Guid(ad7fe0754a4e35145a6475485d36e1d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0d19fb31efa205f82dcf76b076ab4a47') in 0.058557 seconds 
-  Import took 0.064304 seconds .
+  Time since last request: 6.725012 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_1.prefab
+  artifactKey: Guid(a0049d722e641674ca67765a5765e08c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_1.prefab using Guid(a0049d722e641674ca67765a5765e08c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f22c65a5ab882356762ecc4bd8f3de7f') in 0.028973 seconds 
+  Import took 0.034204 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 421.679687 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_1_long (2).prefab
-  artifactKey: Guid(0917fff66f5933140892a68bc4df9c81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_1_long (2).prefab using Guid(0917fff66f5933140892a68bc4df9c81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd29b2bd80a2e6e3b0b1844da3c379c2d') in 0.015738 seconds 
-  Import took 0.019867 seconds .
+  Time since last request: 0.168324 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_1.prefab
+  artifactKey: Guid(a0049d722e641674ca67765a5765e08c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_1.prefab using Guid(a0049d722e641674ca67765a5765e08c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '60d84640d4ef6d1513d14a8a0de0013e') in 0.018846 seconds 
+  Import took 0.027134 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 6.427871 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_1_long.prefab
-  artifactKey: Guid(0917fff66f5933140892a68bc4df9c81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_1_long.prefab using Guid(0917fff66f5933140892a68bc4df9c81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4bf7199c113b82d5f2704d60f9072e17') in 0.010871 seconds 
-  Import took 0.014918 seconds .
+  Time since last request: 4.402831 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_2.prefab
+  artifactKey: Guid(ebdd515072370cb458fe255af0601b17) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_2.prefab using Guid(ebdd515072370cb458fe255af0601b17) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c9a3d3b3c99a76011f552d0c2ccb1a71') in 0.018590 seconds 
+  Import took 0.024006 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 5.609487 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_2_long (3).prefab
-  artifactKey: Guid(b5f25366a85b8f04eb7f04d2790bf807) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_2_long (3).prefab using Guid(b5f25366a85b8f04eb7f04d2790bf807) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '62fd802382b738ccbf898e783a20618e') in 0.013309 seconds 
-  Import took 0.017772 seconds .
+  Time since last request: 0.239009 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_2.prefab
+  artifactKey: Guid(ebdd515072370cb458fe255af0601b17) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_2.prefab using Guid(ebdd515072370cb458fe255af0601b17) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a1cc1ddd5b09817d64e78bcc4969a49c') in 0.016971 seconds 
+  Import took 0.021269 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 6.620265 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_2_long.prefab
-  artifactKey: Guid(b5f25366a85b8f04eb7f04d2790bf807) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_2_long.prefab using Guid(b5f25366a85b8f04eb7f04d2790bf807) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd952b1bf84d3343da08d9c190d3edfbd') in 0.010112 seconds 
-  Import took 0.014017 seconds .
+  Time since last request: 4.420315 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_3.prefab
+  artifactKey: Guid(bc388c6e82c9c854b8a3b158b907d135) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_3.prefab using Guid(bc388c6e82c9c854b8a3b158b907d135) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5fb869227b6645038b294d3643101949') in 0.027124 seconds 
+  Import took 0.034264 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 6.350917 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_3_long (5).prefab
-  artifactKey: Guid(98a5b8ddf54993e4095948835c4a0fbc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_3_long (5).prefab using Guid(98a5b8ddf54993e4095948835c4a0fbc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd03eb941d9ad68a8df9cdc1944252c68') in 0.012141 seconds 
-  Import took 0.016621 seconds .
+  Time since last request: 4.775628 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_4.prefab
+  artifactKey: Guid(ecbf28c7955cd1c4488095703c7fa253) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_4.prefab using Guid(ecbf28c7955cd1c4488095703c7fa253) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eae4fe9bedb969445fcffc2d4b801b7d') in 0.021170 seconds 
+  Import took 0.025812 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 6.060555 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_3_long.prefab
-  artifactKey: Guid(98a5b8ddf54993e4095948835c4a0fbc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_3_long.prefab using Guid(98a5b8ddf54993e4095948835c4a0fbc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a60b95b704e5ce9289e63575eb0bb73f') in 0.009071 seconds 
-  Import took 0.013224 seconds .
+  Time since last request: 0.232765 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_4.prefab
+  artifactKey: Guid(ecbf28c7955cd1c4488095703c7fa253) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_4.prefab using Guid(ecbf28c7955cd1c4488095703c7fa253) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7c458c68a7b495892e9053285efba659') in 0.021867 seconds 
+  Import took 0.026222 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 5.761327 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_4_long (2).prefab
-  artifactKey: Guid(0c60d4a8bc1cecc49940d6f63773d24b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_4_long (2).prefab using Guid(0c60d4a8bc1cecc49940d6f63773d24b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2b9f791e91e6be3c754d9dcb4cedaeda') in 0.012854 seconds 
-  Import took 0.017902 seconds .
+  Time since last request: 3.937724 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_5.prefab
+  artifactKey: Guid(4b88dcea05f2afb449b824e83bb301f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_5.prefab using Guid(4b88dcea05f2afb449b824e83bb301f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bd633074a42164339d1e4e4b5871f7bf') in 0.019869 seconds 
+  Import took 0.025645 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 5.979510 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_4_long.prefab
-  artifactKey: Guid(0c60d4a8bc1cecc49940d6f63773d24b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_4_long.prefab using Guid(0c60d4a8bc1cecc49940d6f63773d24b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2543fbfbfffc4b1a5d45ed57dec8ea71') in 0.006679 seconds 
-  Import took 0.010641 seconds .
+  Time since last request: 0.241505 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_5.prefab
+  artifactKey: Guid(4b88dcea05f2afb449b824e83bb301f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_5.prefab using Guid(4b88dcea05f2afb449b824e83bb301f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ec3ad2b44e2ee5fef92e83138be817ff') in 0.020109 seconds 
+  Import took 0.027468 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 20.039679 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_1_long.prefab
-  artifactKey: Guid(0917fff66f5933140892a68bc4df9c81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_1_long.prefab using Guid(0917fff66f5933140892a68bc4df9c81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9ac0be768f03cc5f06845a1e8fef6184') in 0.009455 seconds 
-  Import took 0.012902 seconds .
+  Time since last request: 1.183686 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_5.prefab
+  artifactKey: Guid(4b88dcea05f2afb449b824e83bb301f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Outer padding/Outer_padding_5.prefab using Guid(4b88dcea05f2afb449b824e83bb301f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aebcc38bd0213bbf7711cd56dfda1ca6') in 0.016838 seconds 
+  Import took 0.020625 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 9.204453 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_1_long.prefab
-  artifactKey: Guid(0917fff66f5933140892a68bc4df9c81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_1_long.prefab using Guid(0917fff66f5933140892a68bc4df9c81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e781e69aa9c3fdf819fe04559939b5f7') in 0.009069 seconds 
-  Import took 0.012763 seconds .
+  Time since last request: 27.742827 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_5.prefab
+  artifactKey: Guid(078720dfde49a694c8e774027a757ac0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_5.prefab using Guid(078720dfde49a694c8e774027a757ac0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5e9b5f678dfe81689f7a5f2d7b71d934') in 0.023916 seconds 
+  Import took 0.029315 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.475230 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_1_long.prefab
-  artifactKey: Guid(0917fff66f5933140892a68bc4df9c81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_1_long.prefab using Guid(0917fff66f5933140892a68bc4df9c81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '03bf9f85b1bbb79e151f153182b3e1f9') in 0.010473 seconds 
-  Import took 0.014633 seconds .
+  Time since last request: 9.644337 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_5.prefab
+  artifactKey: Guid(078720dfde49a694c8e774027a757ac0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_5.prefab using Guid(078720dfde49a694c8e774027a757ac0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e240353e46cb63af6c4116b208874b5c') in 0.018114 seconds 
+  Import took 0.024315 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 11.897490 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_2_long.prefab
-  artifactKey: Guid(b5f25366a85b8f04eb7f04d2790bf807) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_2_long.prefab using Guid(b5f25366a85b8f04eb7f04d2790bf807) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '51cbedbc60f76c1e38046ec616040367') in 0.009249 seconds 
-  Import took 0.013843 seconds .
+  Time since last request: 0.192227 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_5.prefab
+  artifactKey: Guid(078720dfde49a694c8e774027a757ac0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_5.prefab using Guid(078720dfde49a694c8e774027a757ac0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cb373ad85914f1f66430f90bd92eee5c') in 0.030917 seconds 
+  Import took 0.034663 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 4.546967 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_3_long.prefab
-  artifactKey: Guid(98a5b8ddf54993e4095948835c4a0fbc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_3_long.prefab using Guid(98a5b8ddf54993e4095948835c4a0fbc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '71a39d7dac4a21ccd6610187cdecb609') in 0.008560 seconds 
-  Import took 0.013077 seconds .
+  Time since last request: 7.431847 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_4.prefab
+  artifactKey: Guid(e4ac8f8ad380c2048a95f06d96107259) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_4.prefab using Guid(e4ac8f8ad380c2048a95f06d96107259) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd7c58def1e41d83a2f6ef456bd1cfb34') in 0.023053 seconds 
+  Import took 0.029356 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 1.245491 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_3_long.prefab
-  artifactKey: Guid(98a5b8ddf54993e4095948835c4a0fbc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_3_long.prefab using Guid(98a5b8ddf54993e4095948835c4a0fbc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'db054311e202485de384af1d069b61e1') in 0.008220 seconds 
-  Import took 0.013156 seconds .
+  Time since last request: 8.430795 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_4.prefab
+  artifactKey: Guid(e4ac8f8ad380c2048a95f06d96107259) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_4.prefab using Guid(e4ac8f8ad380c2048a95f06d96107259) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '49fc16869295079c7ff6bcb12cdab3cc') in 0.028087 seconds 
+  Import took 0.034675 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 6.044898 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_4_long.prefab
-  artifactKey: Guid(0c60d4a8bc1cecc49940d6f63773d24b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_4_long.prefab using Guid(0c60d4a8bc1cecc49940d6f63773d24b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eafb3512a2412b6c12a0ab572d7e68a2') in 0.008757 seconds 
-  Import took 0.013049 seconds .
+  Time since last request: 0.171608 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_4.prefab
+  artifactKey: Guid(e4ac8f8ad380c2048a95f06d96107259) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_4.prefab using Guid(e4ac8f8ad380c2048a95f06d96107259) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8a9b1abce94694a544bfb164827912c2') in 0.017055 seconds 
+  Import took 0.021254 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 1.030631 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_4_long.prefab
-  artifactKey: Guid(0c60d4a8bc1cecc49940d6f63773d24b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Spikes long/Spikes_4_long.prefab using Guid(0c60d4a8bc1cecc49940d6f63773d24b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3e83b3545496d6c6c3d9a611bff8657a') in 0.007303 seconds 
-  Import took 0.011234 seconds .
+  Time since last request: 4.974736 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_3.prefab
+  artifactKey: Guid(e91e9f69345a1ea428149e543bad1f06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_3.prefab using Guid(e91e9f69345a1ea428149e543bad1f06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e558cefe8dbf590276424f490121e5e8') in 0.041738 seconds 
+  Import took 0.047493 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 20.666987 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls
-  artifactKey: Guid(3d4e44899e025ff418cf558a682be03e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls using Guid(3d4e44899e025ff418cf558a682be03e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2e08601b1e1fb416396618c37bf49497') in 0.008956 seconds 
-  Import took 0.013106 seconds .
+  Time since last request: 11.346730 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_2.prefab
+  artifactKey: Guid(376541857eb7de742aff84b390cbff9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_2.prefab using Guid(376541857eb7de742aff84b390cbff9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '89349e923a61113267999117539f7ad7') in 0.022670 seconds 
+  Import took 0.027743 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 27.582742 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx
-  artifactKey: Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx using Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '70ce3c4ba6717fa66ef9a99231cb2f8f') in 0.016156 seconds 
-  Import took 0.020640 seconds .
+  Time since last request: 5.916728 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_4.prefab
+  artifactKey: Guid(e4ac8f8ad380c2048a95f06d96107259) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_4.prefab using Guid(e4ac8f8ad380c2048a95f06d96107259) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b41dd296ba11abf5ece5b64c6cca0df4') in 0.026609 seconds 
+  Import took 0.032779 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 5.801176 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx
-  artifactKey: Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx using Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd8296f27dc62eb0a98d88f9da35c2fec') in 0.012703 seconds 
-  Import took 0.017732 seconds .
+  Time since last request: 1.673131 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_5.prefab
+  artifactKey: Guid(078720dfde49a694c8e774027a757ac0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_5.prefab using Guid(078720dfde49a694c8e774027a757ac0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2c52608147ed81801a93911356ab059a') in 0.018611 seconds 
+  Import took 0.023395 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 3.391167 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx
-  artifactKey: Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx using Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f8ce4ad2f4739aea419bbfbe4869299d') in 0.012614 seconds 
-  Import took 0.016190 seconds .
+  Time since last request: 56.101769 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_1.prefab
+  artifactKey: Guid(cacb8880a9748cd4686b632d5213e4ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_1.prefab using Guid(cacb8880a9748cd4686b632d5213e4ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fdccff1ecd9e2e351b0ddf7c9f921add') in 0.019422 seconds 
+  Import took 0.023420 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 1.602047 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx
-  artifactKey: Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx using Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb68b9136d6c9ce1c5c6fefb512af8d9') in 0.020861 seconds 
-  Import took 0.024553 seconds .
+  Time since last request: 7.281940 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_2 1.prefab
+  artifactKey: Guid(38c0747fc2e604e48b181150dc1a8bd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_2 1.prefab using Guid(38c0747fc2e604e48b181150dc1a8bd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'da6078b4f5775635f00f782de1fa4371') in 0.020749 seconds 
+  Import took 0.027419 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 2.554773 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx
-  artifactKey: Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx using Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'faa4c06c2d27369deabc91f54a009f25') in 0.014516 seconds 
-  Import took 0.019474 seconds .
+  Time since last request: 20.260881 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_2.prefab
+  artifactKey: Guid(376541857eb7de742aff84b390cbff9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_2.prefab using Guid(376541857eb7de742aff84b390cbff9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '293bb63e480ffbc9bc27b7b1323e7d1e') in 0.020373 seconds 
+  Import took 0.024943 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 1975.455212 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx
-  artifactKey: Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx using Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a7e3283d3fa71835bd3ef16215c1f7d6') in 0.044994 seconds 
-  Import took 0.049082 seconds .
+  Time since last request: 21.218330 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_3.prefab
+  artifactKey: Guid(e91e9f69345a1ea428149e543bad1f06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_3.prefab using Guid(e91e9f69345a1ea428149e543bad1f06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6a7156e4f45700bddb6f999380eb914b') in 0.018684 seconds 
+  Import took 0.022997 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 5.037541 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx
-  artifactKey: Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx using Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eda6b0a9c7d8d7648dc64dafbcddf0fb') in 0.013339 seconds 
-  Import took 0.017900 seconds .
+  Time since last request: 0.383717 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_3.prefab
+  artifactKey: Guid(e91e9f69345a1ea428149e543bad1f06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_3.prefab using Guid(e91e9f69345a1ea428149e543bad1f06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a616d838a37bf8629ff576c0c2f7123e') in 0.033534 seconds 
+  Import took 0.040646 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 3.405687 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx
-  artifactKey: Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx using Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '752fcec8b12f9bb9239aaf17373e66b3') in 0.013787 seconds 
-  Import took 0.019268 seconds .
+  Time since last request: 4.511655 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_2.prefab
+  artifactKey: Guid(376541857eb7de742aff84b390cbff9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_2.prefab using Guid(376541857eb7de742aff84b390cbff9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1ccc317f6495318c7c69a8010594abcd') in 0.011841 seconds 
+  Import took 0.016709 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 2.020742 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx
-  artifactKey: Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx using Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7c4c9a107066368254ba8ea6ae965c52') in 0.013814 seconds 
-  Import took 0.019033 seconds .
+  Time since last request: 0.389470 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_2.prefab
+  artifactKey: Guid(376541857eb7de742aff84b390cbff9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_2.prefab using Guid(376541857eb7de742aff84b390cbff9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b2fd1e8816df00eb88c8621d1318ca2d') in 0.014792 seconds 
+  Import took 0.018478 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 2.214912 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx
-  artifactKey: Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx using Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '41142d9fb93dbd682fc82c4f98bcb6b5') in 0.018654 seconds 
-  Import took 0.024197 seconds .
+  Time since last request: 4.187731 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_1.prefab
+  artifactKey: Guid(cacb8880a9748cd4686b632d5213e4ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_1.prefab using Guid(cacb8880a9748cd4686b632d5213e4ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0356339aa295aa130dcc34115770afca') in 0.018759 seconds 
+  Import took 0.023085 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 514.345987 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_bottom.fbx
-  artifactKey: Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_bottom.fbx using Guid(4d7ea3aa74048d54e93989c0bd55c939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd0d2e706d4e9685f398fb78725f644d2') in 0.033416 seconds 
-  Import took 0.037609 seconds .
+  Time since last request: 0.379250 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_1.prefab
+  artifactKey: Guid(cacb8880a9748cd4686b632d5213e4ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_1.prefab using Guid(cacb8880a9748cd4686b632d5213e4ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5b219df21888ec84b419ebcb57d8bb35') in 0.015122 seconds 
+  Import took 0.020929 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 813.831855 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor.fbx
-  artifactKey: Guid(fb5b3e58b0008fc4c9af0910aeb66cb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor.fbx using Guid(fb5b3e58b0008fc4c9af0910aeb66cb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '507eae1abdfa9b8a800da9b68d1cdb68') in 0.036499 seconds 
-  Import took 0.041144 seconds .
+  Time since last request: 1.272377 seconds.
+  path: Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_1.prefab
+  artifactKey: Guid(cacb8880a9748cd4686b632d5213e4ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/!Temps/Prefabs/Padding/Inner padding/Inner_padding_1.prefab using Guid(cacb8880a9748cd4686b632d5213e4ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c1a5f1c2da349638ec51f1786ba0d428') in 0.013709 seconds 
+  Import took 0.017343 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 2.517887 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor.fbx
-  artifactKey: Guid(fb5b3e58b0008fc4c9af0910aeb66cb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor.fbx using Guid(fb5b3e58b0008fc4c9af0910aeb66cb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c66a8fce2705111de2ebaa98452e1c2f') in 0.012919 seconds 
-  Import took 0.016995 seconds .
+  Time since last request: 91.647053 seconds.
+  path: Assets/Scripts/Level Generation/MazeCellObject.cs
+  artifactKey: Guid(90b89049b2a489a4788c0a1bb0428833) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Level Generation/MazeCellObject.cs using Guid(90b89049b2a489a4788c0a1bb0428833) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3190fac5942b610dacfbd5ec6a054bd3') in 0.017644 seconds 
+  Import took 0.022458 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 1.847377 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor.fbx
-  artifactKey: Guid(fb5b3e58b0008fc4c9af0910aeb66cb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor.fbx using Guid(fb5b3e58b0008fc4c9af0910aeb66cb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bdef9324047b14e10ab6b234c647526c') in 0.020974 seconds 
-  Import took 0.027537 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.851200 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor.fbx
-  artifactKey: Guid(fb5b3e58b0008fc4c9af0910aeb66cb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor.fbx using Guid(fb5b3e58b0008fc4c9af0910aeb66cb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5633690a4f6f5f6741ecc17612aba291') in 0.014209 seconds 
-  Import took 0.018990 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.196868 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor.fbx
-  artifactKey: Guid(fb5b3e58b0008fc4c9af0910aeb66cb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor.fbx using Guid(fb5b3e58b0008fc4c9af0910aeb66cb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bab2441096988deecceea0726848735d') in 0.027225 seconds 
-  Import took 0.030719 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.512553 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx
-  artifactKey: Guid(3715eefd26ff22b46a28c449692deb14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx using Guid(3715eefd26ff22b46a28c449692deb14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eb2906d0e00419346e260ad42d6e71b2') in 0.022755 seconds 
-  Import took 0.026889 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 6.073439 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx
-  artifactKey: Guid(3715eefd26ff22b46a28c449692deb14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx using Guid(3715eefd26ff22b46a28c449692deb14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cd7ba20a394b0ace05916a3ba977c7af') in 0.013274 seconds 
-  Import took 0.017365 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.190708 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx
-  artifactKey: Guid(3715eefd26ff22b46a28c449692deb14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx using Guid(3715eefd26ff22b46a28c449692deb14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c1e9133ebe71c91b66b02f50a27c8d21') in 0.014115 seconds 
-  Import took 0.017934 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.201423 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx
-  artifactKey: Guid(3715eefd26ff22b46a28c449692deb14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx using Guid(3715eefd26ff22b46a28c449692deb14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '97c6b3d3a6d8c8373dda42470a88443d') in 0.013245 seconds 
-  Import took 0.017431 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.486808 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx
-  artifactKey: Guid(3715eefd26ff22b46a28c449692deb14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_middle.fbx using Guid(3715eefd26ff22b46a28c449692deb14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f7be556ad3052d6190fba9f9a9b66ce0') in 0.018733 seconds 
-  Import took 0.022189 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 1389.354185 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_1.fbx
-  artifactKey: Guid(5ddee02cba2c2704da89d744e7fd868b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_1.fbx using Guid(5ddee02cba2c2704da89d744e7fd868b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5a53bfc5111de76ba0140ee4a39b95b0') in 0.027118 seconds 
-  Import took 0.032057 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 12.419937 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_1.fbx
-  artifactKey: Guid(5ddee02cba2c2704da89d744e7fd868b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_1.fbx using Guid(5ddee02cba2c2704da89d744e7fd868b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '32a4717d4eac4dc5f35055d91a9f2632') in 0.026506 seconds 
-  Import took 0.030788 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.081689 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_1.fbx
-  artifactKey: Guid(5ddee02cba2c2704da89d744e7fd868b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_1.fbx using Guid(5ddee02cba2c2704da89d744e7fd868b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb8f411c6447f493237e33e65a269ce4') in 0.013837 seconds 
-  Import took 0.017639 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.851869 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_1.fbx
-  artifactKey: Guid(5ddee02cba2c2704da89d744e7fd868b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_1.fbx using Guid(5ddee02cba2c2704da89d744e7fd868b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd7335737bf3458ad5ee5cef322faccf8') in 0.013510 seconds 
-  Import took 0.017283 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.161707 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_1.fbx
-  artifactKey: Guid(5ddee02cba2c2704da89d744e7fd868b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_1.fbx using Guid(5ddee02cba2c2704da89d744e7fd868b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f096edcac056d612062ce4a981a3bbe0') in 0.025830 seconds 
-  Import took 0.031545 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 5.594631 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx
-  artifactKey: Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx using Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8549a3add422a321e25bef55799c96be') in 0.047820 seconds 
-  Import took 0.051914 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 5.599741 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx
-  artifactKey: Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx using Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '755174ce9671334ef148f8415e4be77b') in 0.025830 seconds 
-  Import took 0.030073 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.687358 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx
-  artifactKey: Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx using Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '02bbe694f373b650891bdc102334299e') in 0.011569 seconds 
-  Import took 0.016133 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.833601 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx
-  artifactKey: Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx using Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3a9e8d245ddda78e3946f259709a8979') in 0.025149 seconds 
-  Import took 0.029062 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.837208 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx
-  artifactKey: Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx using Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e85d7e8af570b0cb57fe62d082bba5d5') in 0.014510 seconds 
-  Import took 0.019096 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 512.386257 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx
-  artifactKey: Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx using Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f1ec5f5f170d9009accbbf657f353798') in 0.015334 seconds 
-  Import took 0.020743 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 5.640717 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx
-  artifactKey: Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx using Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0c87cb4451e7dce897b19bfdd936a37b') in 0.014788 seconds 
-  Import took 0.020105 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.673929 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx
-  artifactKey: Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx using Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2307c43bc45d7dfca17f6767abe8540a') in 0.014086 seconds 
-  Import took 0.018982 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.941027 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx
-  artifactKey: Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx using Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '74fa0956073cf40dd12ed5848e8f417b') in 0.013973 seconds 
-  Import took 0.017588 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.581366 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx
-  artifactKey: Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx using Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5f2d8171aea1c95b40826c4fd5cd53f4') in 0.018624 seconds 
-  Import took 0.022091 seconds .
+  Time since last request: 252.254089 seconds.
+  path: Assets/Scripts/Level Generation/MazeCellObject.cs
+  artifactKey: Guid(90b89049b2a489a4788c0a1bb0428833) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Level Generation/MazeCellObject.cs using Guid(90b89049b2a489a4788c0a1bb0428833) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8d05b95ab86c2c8cd144272f6ba694b2') in 0.002985 seconds 
+  Import took 0.007439 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.002603 seconds.
+Registered in 0.001507 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.07 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 0.50 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.660 seconds
+- Completed reload, in  1.088 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1663ms)
-		BeginReloadAssembly (256ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (16ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (113ms)
-		EndReloadAssembly (1321ms)
-			LoadAssemblies (145ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (497ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (62ms)
-			SetupLoadedEditorAssemblies (448ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (8ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (98ms)
-				ProcessInitializeOnLoadAttributes (333ms)
-				ProcessInitializeOnLoadMethodAttributes (4ms)
-				AfterProcessingInitializeOnLoad (2ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (12ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.60 ms, found 2 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1867 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 92.2 MB.
-System memory in use after: 92.3 MB.
-
-Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 2411.
-Total: 4.165600 ms (FindLiveObjects: 0.377000 ms CreateObjectMapping: 0.129700 ms MarkObjects: 3.632800 ms  DeleteObjects: 0.024300 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.001511 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.65 ms, found 2 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  0.860 seconds
-Domain Reload Profiling:
-	ReloadAssembly (861ms)
-		BeginReloadAssembly (102ms)
+	ReloadAssembly (1089ms)
+		BeginReloadAssembly (111ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (4ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (29ms)
-		EndReloadAssembly (713ms)
-			LoadAssemblies (70ms)
+			CreateAndSetChildDomain (35ms)
+		EndReloadAssembly (903ms)
+			LoadAssemblies (99ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (254ms)
+			SetupTypeCache (260ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (34ms)
-			SetupLoadedEditorAssemblies (256ms)
+			RebuildScriptCaches (32ms)
+			SetupLoadedEditorAssemblies (402ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (3ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (56ms)
-				ProcessInitializeOnLoadAttributes (190ms)
+				BeforeProcessingInitializeOnLoad (63ms)
+				ProcessInitializeOnLoadAttributes (325ms)
+				ProcessInitializeOnLoadMethodAttributes (7ms)
+				AfterProcessingInitializeOnLoad (3ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (8ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.52 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1867 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 92.7 MB.
+System memory in use after: 92.8 MB.
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 2408.
+Total: 2.617200 ms (FindLiveObjects: 0.198700 ms CreateObjectMapping: 0.072100 ms MarkObjects: 2.326800 ms  DeleteObjects: 0.018700 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.001584 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.91 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.010 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1010ms)
+		BeginReloadAssembly (159ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (71ms)
+		EndReloadAssembly (800ms)
+			LoadAssemblies (86ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (279ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (35ms)
+			SetupLoadedEditorAssemblies (299ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (62ms)
+				ProcessInitializeOnLoadAttributes (224ms)
+				ProcessInitializeOnLoadMethodAttributes (4ms)
+				AfterProcessingInitializeOnLoad (2ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (6ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.75 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1867 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 92.7 MB.
+System memory in use after: 92.8 MB.
+
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2410.
+Total: 3.721400 ms (FindLiveObjects: 0.310900 ms CreateObjectMapping: 0.115000 ms MarkObjects: 3.267100 ms  DeleteObjects: 0.027000 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.001543 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.44 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.903 seconds
+Domain Reload Profiling:
+	ReloadAssembly (903ms)
+		BeginReloadAssembly (107ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (31ms)
+		EndReloadAssembly (738ms)
+			LoadAssemblies (85ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (283ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (34ms)
+			SetupLoadedEditorAssemblies (249ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (3ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (0ms)
+				BeforeProcessingInitializeOnLoad (55ms)
+				ProcessInitializeOnLoadAttributes (184ms)
 				ProcessInitializeOnLoadMethodAttributes (3ms)
 				AfterProcessingInitializeOnLoad (2ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (6ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.47 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 0.46 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 1867 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 92.2 MB.
-System memory in use after: 92.3 MB.
+System memory in use before: 92.7 MB.
+System memory in use after: 92.8 MB.
 
-Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2413.
-Total: 2.596200 ms (FindLiveObjects: 0.199500 ms CreateObjectMapping: 0.074000 ms MarkObjects: 2.309100 ms  DeleteObjects: 0.012800 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 401.641296 seconds.
-  path: Assets/Scenes/Trap builder.unity
-  artifactKey: Guid(7b4d30622c15d39409488ae20781d820) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Trap builder.unity using Guid(7b4d30622c15d39409488ae20781d820) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '487a95486cedab25c74784b2299c0df4') in 0.036786 seconds 
-  Import took 0.040045 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 173.469266 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx
-  artifactKey: Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx using Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '83ef08924b4273ba772236e7eef3d014') in 0.075360 seconds 
-  Import took 0.078257 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 5.484797 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx
-  artifactKey: Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx using Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cc12500cb624e2b204e465e7fbbb6f6a') in 0.029595 seconds 
-  Import took 0.033489 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.225669 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx
-  artifactKey: Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx using Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '46632ffd1daae0bebf7f34beb7123df4') in 0.014347 seconds 
-  Import took 0.019979 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.483411 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx
-  artifactKey: Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx using Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5e390ae9029595e72f89d409e68909cc') in 0.016421 seconds 
-  Import took 0.020082 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.452546 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx
-  artifactKey: Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit walls/Pit_wall_floor_2.fbx using Guid(9d75988f91fb0ba4a9e5ceb57e85e855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c32cedbaa603a89cd2bd44996be4c04a') in 0.015409 seconds 
-  Import took 0.018814 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 935.519044 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit_cell_starter.prefab
-  artifactKey: Guid(93c3598beac5bac45b5de07ede42e318) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit_cell_starter.prefab using Guid(93c3598beac5bac45b5de07ede42e318) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '55ad0deb8a0767d7d0b3e98216e9fd1f') in 0.067008 seconds 
-  Import took 0.072211 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 20.767757 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit_cell_starter.prefab
-  artifactKey: Guid(93c3598beac5bac45b5de07ede42e318) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit_cell_starter.prefab using Guid(93c3598beac5bac45b5de07ede42e318) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd4d63abc7969e81b2f1ae9fab89222d1') in 0.020802 seconds 
-  Import took 0.025347 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2850.636479 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit_cell_starter.prefab
-  artifactKey: Guid(93c3598beac5bac45b5de07ede42e318) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit_cell_starter.prefab using Guid(93c3598beac5bac45b5de07ede42e318) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eb117f154555eac1f650479d08ea6b28') in 0.054682 seconds 
-  Import took 0.073662 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.536258 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit_cell_starter.prefab
-  artifactKey: Guid(93c3598beac5bac45b5de07ede42e318) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit_cell_starter.prefab using Guid(93c3598beac5bac45b5de07ede42e318) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8006f0dd6d5585f2abfe025cd1fa81b5') in 0.021427 seconds 
-  Import took 0.027529 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 279.047755 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Ground_long/Ground_long_corner_outer.fbx
-  artifactKey: Guid(853e57a1718e131428d8630f26ca55fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Ground_long/Ground_long_corner_outer.fbx using Guid(853e57a1718e131428d8630f26ca55fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1461082989ba83f6cfd0102414c4406f') in 0.030000 seconds 
-  Import took 0.034758 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 9.861280 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Ground_long/Ground_long_corner_outer.fbx
-  artifactKey: Guid(853e57a1718e131428d8630f26ca55fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Ground_long/Ground_long_corner_outer.fbx using Guid(853e57a1718e131428d8630f26ca55fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f0fbe5e65cb11bfc0781b0e773309240') in 0.016074 seconds 
-  Import took 0.022681 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 26.491098 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Ground_long/Ground_long_middle_outer.fbx
-  artifactKey: Guid(f15769f34c1b83841ae62c70199d38f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Ground_long/Ground_long_middle_outer.fbx using Guid(f15769f34c1b83841ae62c70199d38f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'db07f49913556c1231af4a6866a93e0d') in 0.018983 seconds 
-  Import took 0.023739 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 21.521445 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Ground_long/Ground_long_middle_outer.fbx
-  artifactKey: Guid(f15769f34c1b83841ae62c70199d38f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Ground_long/Ground_long_middle_outer.fbx using Guid(f15769f34c1b83841ae62c70199d38f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a36966326144621037bb1e5d7b171000') in 0.010891 seconds 
-  Import took 0.016888 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 14.797091 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Ground_long/Ground_long_middle_outer.fbx
-  artifactKey: Guid(f15769f34c1b83841ae62c70199d38f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Ground_long/Ground_long_middle_outer.fbx using Guid(f15769f34c1b83841ae62c70199d38f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1a40f54bde7fa113b963a27566360a29') in 0.013134 seconds 
-  Import took 0.018337 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 14.093026 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Ground_long/Ground_long_middle_outer.fbx
-  artifactKey: Guid(f15769f34c1b83841ae62c70199d38f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Ground_long/Ground_long_middle_outer.fbx using Guid(f15769f34c1b83841ae62c70199d38f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b6c205a18e90eb1d7cebb508ee651e2e') in 0.012678 seconds 
-  Import took 0.018310 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.674290 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Ground_long/Ground_long_middle_outer.fbx
-  artifactKey: Guid(f15769f34c1b83841ae62c70199d38f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Ground_long/Ground_long_middle_outer.fbx using Guid(f15769f34c1b83841ae62c70199d38f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4994dfd320f1e2438a56d8e5e30c2d27') in 0.012025 seconds 
-  Import took 0.016505 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 354.553666 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit_cell_starter.prefab
-  artifactKey: Guid(93c3598beac5bac45b5de07ede42e318) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit_cell_starter.prefab using Guid(93c3598beac5bac45b5de07ede42e318) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'de54f7b280e4b8e3352cd98623ec8a33') in 0.022760 seconds 
-  Import took 0.028677 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 464.978755 seconds.
-  path: Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit_cell_starter.prefab
-  artifactKey: Guid(93c3598beac5bac45b5de07ede42e318) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/!Temps/Objects/Obstacles/Pits and spikes/Pit_cell_starter.prefab using Guid(93c3598beac5bac45b5de07ede42e318) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c476729a0aca07fb95d0ad43bfdb87b1') in 0.024315 seconds 
-  Import took 0.030299 seconds .
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.002604 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.47 ms, found 2 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  0.980 seconds
-Domain Reload Profiling:
-	ReloadAssembly (982ms)
-		BeginReloadAssembly (162ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (12ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (84ms)
-		EndReloadAssembly (765ms)
-			LoadAssemblies (82ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (258ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (33ms)
-			SetupLoadedEditorAssemblies (288ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (4ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (59ms)
-				ProcessInitializeOnLoadAttributes (218ms)
-				ProcessInitializeOnLoadMethodAttributes (5ms)
-				AfterProcessingInitializeOnLoad (2ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (8ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.89 ms, found 2 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1867 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 92.5 MB.
-System memory in use after: 92.6 MB.
-
-Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 2416.
-Total: 3.216500 ms (FindLiveObjects: 0.232300 ms CreateObjectMapping: 0.086700 ms MarkObjects: 2.779000 ms  DeleteObjects: 0.116800 ms)
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2412.
+Total: 2.618900 ms (FindLiveObjects: 0.190800 ms CreateObjectMapping: 0.068900 ms MarkObjects: 2.344500 ms  DeleteObjects: 0.014000 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -1011,48 +683,48 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.001634 seconds.
+Registered in 0.002692 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.44 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 0.45 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.885 seconds
+- Completed reload, in  0.907 seconds
 Domain Reload Profiling:
-	ReloadAssembly (885ms)
-		BeginReloadAssembly (97ms)
+	ReloadAssembly (907ms)
+		BeginReloadAssembly (104ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
+			DisableScriptedObjects (5ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (28ms)
-		EndReloadAssembly (723ms)
-			LoadAssemblies (74ms)
+			CreateAndSetChildDomain (36ms)
+		EndReloadAssembly (751ms)
+			LoadAssemblies (71ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (262ms)
+			SetupTypeCache (267ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (33ms)
-			SetupLoadedEditorAssemblies (260ms)
+			RebuildScriptCaches (32ms)
+			SetupLoadedEditorAssemblies (271ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (3ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (0ms)
-				BeforeProcessingInitializeOnLoad (56ms)
-				ProcessInitializeOnLoadAttributes (195ms)
+				BeforeProcessingInitializeOnLoad (58ms)
+				ProcessInitializeOnLoadAttributes (203ms)
 				ProcessInitializeOnLoadMethodAttributes (4ms)
 				AfterProcessingInitializeOnLoad (2ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (8ms)
+			AwakeInstancesAfterBackupRestoration (6ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.47 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 0.52 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 1867 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 92.5 MB.
-System memory in use after: 92.6 MB.
+System memory in use before: 92.7 MB.
+System memory in use after: 92.9 MB.
 
-Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2418.
-Total: 2.852300 ms (FindLiveObjects: 0.215700 ms CreateObjectMapping: 0.077800 ms MarkObjects: 2.540700 ms  DeleteObjects: 0.017400 ms)
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2414.
+Total: 2.659700 ms (FindLiveObjects: 0.190000 ms CreateObjectMapping: 0.071500 ms MarkObjects: 2.383400 ms  DeleteObjects: 0.013500 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -1067,104 +739,48 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.001891 seconds.
+Registered in 0.002214 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.51 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 0.55 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.977 seconds
+- Completed reload, in  1.518 seconds
 Domain Reload Profiling:
-	ReloadAssembly (981ms)
-		BeginReloadAssembly (174ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (14ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (74ms)
-		EndReloadAssembly (750ms)
-			LoadAssemblies (85ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (260ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (34ms)
-			SetupLoadedEditorAssemblies (274ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (4ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (62ms)
-				ProcessInitializeOnLoadAttributes (201ms)
-				ProcessInitializeOnLoadMethodAttributes (3ms)
-				AfterProcessingInitializeOnLoad (2ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.49 ms, found 2 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1867 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 92.5 MB.
-System memory in use after: 92.6 MB.
-
-Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2420.
-Total: 3.553100 ms (FindLiveObjects: 0.346600 ms CreateObjectMapping: 0.084400 ms MarkObjects: 3.080400 ms  DeleteObjects: 0.039900 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.001520 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.44 ms, found 2 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  0.970 seconds
-Domain Reload Profiling:
-	ReloadAssembly (971ms)
-		BeginReloadAssembly (105ms)
+	ReloadAssembly (1519ms)
+		BeginReloadAssembly (250ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (4ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (31ms)
-		EndReloadAssembly (813ms)
-			LoadAssemblies (78ms)
+			CreateAndSetChildDomain (65ms)
+		EndReloadAssembly (1198ms)
+			LoadAssemblies (98ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (233ms)
+			SetupTypeCache (364ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (32ms)
-			SetupLoadedEditorAssemblies (316ms)
+			RebuildScriptCaches (53ms)
+			SetupLoadedEditorAssemblies (529ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (3ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (0ms)
-				BeforeProcessingInitializeOnLoad (56ms)
-				ProcessInitializeOnLoadAttributes (224ms)
-				ProcessInitializeOnLoadMethodAttributes (30ms)
+				InitializePlatformSupportModulesInManaged (7ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (92ms)
+				ProcessInitializeOnLoadAttributes (414ms)
+				ProcessInitializeOnLoadMethodAttributes (12ms)
 				AfterProcessingInitializeOnLoad (2ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (13ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 1.55 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 0.54 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 1867 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 92.5 MB.
-System memory in use after: 92.6 MB.
+System memory in use before: 92.8 MB.
+System memory in use after: 92.9 MB.
 
-Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2422.
-Total: 5.499800 ms (FindLiveObjects: 0.339200 ms CreateObjectMapping: 0.109900 ms MarkObjects: 5.019400 ms  DeleteObjects: 0.029500 ms)
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2416.
+Total: 2.941200 ms (FindLiveObjects: 0.260100 ms CreateObjectMapping: 0.089900 ms MarkObjects: 2.571200 ms  DeleteObjects: 0.018700 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 

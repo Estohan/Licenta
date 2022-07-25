@@ -64,6 +64,7 @@ public class PlayerControls : MonoBehaviour {
     }
 
     private void Update() {
+        //Debug.Log("Start " + this.transform.position);
         groundedPlayer = characterController.isGrounded;
         // groundedPlayer = Physics.CheckSphere(this.transform.position, 0.5f, groundLayer, QueryTriggerInteraction.Ignore);
         // Debug.Log(groundedPlayer + " " + playerVelocity);
@@ -120,6 +121,7 @@ public class PlayerControls : MonoBehaviour {
         playerVelocity.x /= 1 + dragValue.x * Time.deltaTime;
         playerVelocity.y /= 1 + dragValue.y * Time.deltaTime;
         playerVelocity.z /= 1 + dragValue.z * Time.deltaTime;
+        //Debug.Log(this.transform.position + "end");
     }
 
     /*private void Update() {

@@ -16,10 +16,10 @@ public static class MazeGenAlgorithms {
 
     public static (int[,,], LayoutStats stats)
         GenerateLayout(LevelGenerator.LayoutRequirements layoutRec) {
-        Debug.Log("SizeZ: " + layoutRec.sizeZ);
+        /*Debug.Log("SizeZ: " + layoutRec.sizeZ);
         Debug.Log("SizeX: " + layoutRec.sizeX);
         Debug.Log("Op: " + layoutRec.outerPaddingPerc);
-        Debug.Log("Ip: " + layoutRec.innerPaddingPerc);
+        Debug.Log("Ip: " + layoutRec.innerPaddingPerc);*/
 
         int[,,] layout = new int[layoutRec.sizeZ, layoutRec.sizeX, 6];
         LayoutStats stats = new LayoutStats(layoutRec.sizeZ, layoutRec.sizeX, layoutRec.nrOfSectors);
@@ -47,10 +47,10 @@ public static class MazeGenAlgorithms {
         int outerPaddingValX = (int)Mathf.Ceil(layoutRec.sizeX * ((float)layoutRec.outerPaddingPerc /200));
         int innerPaddingValZ = (int)Mathf.Ceil(layoutRec.sizeZ * ((float)layoutRec.innerPaddingPerc /200));
         int innerPaddingValX = (int)Mathf.Ceil(layoutRec.sizeX * ((float)layoutRec.innerPaddingPerc /200));
-        Debug.Log("Opz: " + outerPaddingValZ);
+        /*Debug.Log("Opz: " + outerPaddingValZ);
         Debug.Log("Opx: " + outerPaddingValX);
         Debug.Log("Ipz: " + innerPaddingValZ);
-        Debug.Log("Ipx: " + innerPaddingValX);
+        Debug.Log("Ipx: " + innerPaddingValX);*/
         int remainingCellsZ = layoutRec.sizeZ - outerPaddingValZ * 2 - innerPaddingValZ * 2; // DO I NEED THIS?
         int remainingCellsX = layoutRec.sizeX - outerPaddingValX * 2 - innerPaddingValX * 2; // DO I NEED THIS?
         int totalInnerPadding = ((layoutRec.sizeZ - outerPaddingValZ * 2) * (layoutRec.sizeX - outerPaddingValX * 2)) - 
@@ -273,8 +273,9 @@ public static class MazeGenAlgorithms {
 
         // Some data about the mapped shapes
         String msg = "Shape mapping metrics:\n";
-        int[] shapeCount = new int[ObstacleShapes.shapes.Count()];
-        for (int i = 0; i < shapeCount.Count(); i++) shapeCount[i] = 0;
+        Dictionary<int, int> shapesCount = new Dictionary<int, int>();
+        // int[] shapeCount = new int[ObstacleShapes.shapes.Count()];
+        // for (int i = 0; i < shapesCount.Count(); i++) shapeCount[i] = 0;
 
         msg += " - " + stats.sizeZ + stats.sizeX + " total cells\n";
         msg += " - " + ObstacleShapes.shapes.Count() + " shapes\n";
@@ -285,13 +286,20 @@ public static class MazeGenAlgorithms {
         for (int z = 0; z < stats.sizeZ; z++) {
             for (int x = 0; x < stats.sizeX; x++) {
                 foreach ((int shapeID, MazeDirection _) in stats.cellsStats[z, x].mappedObstacleShapes) {
-                    shapeCount[shapeID]++;
+                    if(!shapesCount.ContainsKey(shapeID)) {
+                        shapesCount.Add(shapeID, 1);
+                    } else {
+                        shapesCount[shapeID]++;
+                    }
+                    // shapeCount[shapeID]++;
                 }
             }
         }
 
-        for (int i = 0; i < shapeCount.Count(); i++)
-            msg += "\t - " + shapeCount[i] + " of shapeID " + i + "\n";
+        //for (int i = 0; i < shapeCount.Count(); i++)
+        foreach (KeyValuePair<int, int> entry in shapesCount) {
+            msg += "\t - " + entry.Value + " of shapeID " + entry.Key + "\n";
+        }
 
         msg += "Count of sorted shapes:\n";
         msg += "Queues:\n";

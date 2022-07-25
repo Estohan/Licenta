@@ -22,7 +22,7 @@ public static class ObstacleShapes {
             // 1: _    
             //    x  x|  x  |x
             //           `
-            {1, new ObstacleShape(
+            /*{1, new ObstacleShape(
                    new List<(int, int, int[])> {
                        (0, 0, new int[] {1, 0, 0, 0})
                    }, // North rotation
@@ -39,11 +39,11 @@ public static class ObstacleShapes {
                    null, // East pruning (None)
                    null, // South pruning (None)
                    null // West pruning (None)
-            )},
+            )},*/
             // 2: _       _
             //    x  |x|  x  |x|
             //    `       `
-            {2, new ObstacleShape(
+            /*{2, new ObstacleShape(
                    new List<(int, int, int[])> {
                        (0, 0, new int[] {1, 0, 1, 0})
                    }, // North rotation
@@ -60,11 +60,11 @@ public static class ObstacleShapes {
                    null, // East pruning (None)
                    null, // South pruning (None)
                    null // West pruning (None)
-            )},
+            )},*/
             // 3: _            _
             //    x|  x|  |x  |x
             //        `    ` 
-            {3, new ObstacleShape(
+            /*{3, new ObstacleShape(
                    new List<(int, int, int[])> {
                        (0, 0, new int[] {1, 1, 0, 0})
                    }, // North rotation
@@ -81,11 +81,11 @@ public static class ObstacleShapes {
                    null, // East pruning (None)
                    null, // South pruning (None)
                    null // West pruning (None)
-            )},
+            )},*/
             // 4:  _   _         _
             //    |x|  x|  |x|  |x
             //         `    `    `
-            {4, new ObstacleShape(
+            /*{4, new ObstacleShape(
                    new List<(int, int, int[])> {
                        (0, 0, new int[] {1, 1, 0, 1})
                    }, // North rotation
@@ -102,7 +102,7 @@ public static class ObstacleShapes {
                    null, // East pruning (None)
                    null, // South pruning (None)
                    null // West pruning (None)
-            )},
+            )},*/
             // 5: |x|  _ _  | |  _ _
             //    | |    x  |x|  x  
             //         ` `       ` `
@@ -239,17 +239,14 @@ public static class ObstacleShapes {
         };
 
     public static int GetNrDifferentSizes() {
-        bool[] sizes = new bool[shapes.Count];
-        int sizesCount = 0;
+        List<int> differentSizes = new List<int>();
         foreach(KeyValuePair<int, ObstacleShape> entry in shapes) {
-            sizes[entry.Value.size] = true; // array index will represent sizex`
-        }
-        for(int i = 0; i < sizes.Length; i++) {
-            if(sizes[i]) {
-                sizesCount++;
+            // If a new size is found, add it to the list of different sizes
+            if(!differentSizes.Contains(entry.Value.size)) {
+                differentSizes.Add(entry.Value.size);
             }
         }
-        return sizesCount;
+        return differentSizes.Count;
     }
 
 

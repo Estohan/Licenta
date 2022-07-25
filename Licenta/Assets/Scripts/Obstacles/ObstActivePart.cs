@@ -12,7 +12,7 @@ public class ObstActivePart : MonoBehaviour {
     private ObstacleState state;
 
     public virtual void Start() {
-        state = ObstacleState.idle;
+        // state = ObstacleState.idle;
     }
 
     public ObstacleState GetState() {

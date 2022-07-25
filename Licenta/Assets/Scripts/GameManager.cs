@@ -101,13 +101,16 @@ public class GameManager : MonoBehaviour {
     public void ReadyLevel() {
         // Move player to the start position
         MazeCoords startCellPos = currentLevel.stats.startCell;
+        Debug.Log("Start cell is " + startCellPos);
         Transform targetCellTransform = currentLevel.cellsObjects[startCellPos.z, startCellPos.x].transform;
         float playerPosZ = targetCellTransform.position.z;
         float playerPosX = targetCellTransform.position.x;
+        Debug.Log("Cell transform: " + currentLevel.cellsObjects[startCellPos.z, startCellPos.x].transform.position);
 
         player.transform.position = new Vector3(playerPosX,
                                                 0f + player.transform.localScale.y / 2,
                                                 playerPosZ);
+        Debug.Log("Player transform: " + player.transform.position);
     }
 
     public Level getCurrentLevel() {

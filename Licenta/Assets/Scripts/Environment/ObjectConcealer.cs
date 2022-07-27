@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObjectConcealer : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
-        Debug.Log("!!");
+        // Debug.Log("!!");
         //if(((this.transform.position - other.transform.position).normalized.x > 0) &&
         //    (this.transform.position - other.transform.position).normalized.z < 0) {
 
@@ -26,7 +26,7 @@ public class ObjectConcealer : MonoBehaviour {
     }*/
 
     private void OnTriggerExit(Collider other) {
-        Debug.Log("!");
+        // Debug.Log("!");
         other.gameObject.GetComponent<MeshRenderer>().enabled = true;
     }
 }

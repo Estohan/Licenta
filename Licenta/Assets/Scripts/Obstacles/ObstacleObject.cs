@@ -62,9 +62,6 @@ public class ObstacleObject : ScriptableObject {
     /*[Space]
     public int difficulty; // 0 - tutorial, 1 - mild, 2 - serious or 3 - difficult*/
     [Space]
-    public float damage;
-    public ObstacleState state;
-    [Space]
     // list of tuples (offset, object), where object is a subsection to delete.
     // these deleted objects will be replaced by the obstacle
     public List<ObstObjDeletionEntry> deletionListNorth;

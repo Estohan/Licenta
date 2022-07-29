@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class ObstActivePart : MonoBehaviour {
 
-    public bool canReturn;
-    public bool canAnounce;
-    public float timeToReturn;
+    [SerializeField]
+    protected bool canReturn;
+    [SerializeField]
+    protected bool canAnounce;
+    [SerializeField]
+    private float timeToReturn;
+    [SerializeField]
+    private float timeActive;
     [Space]
     [SerializeField]
-    private ObstacleState state;
+    protected ObstacleState state;
 
     public virtual void Start() {
         // state = ObstacleState.idle;
@@ -22,13 +27,14 @@ public class ObstActivePart : MonoBehaviour {
     // Trigger trap
     public void Trigger() {
         if (state == ObstacleState.idle || state == ObstacleState.sprung_waiting) {
-            // trigger trap/obstacle
+            // Trigger trap/obstacle
             Activate();
-            // return to initial state if possible, after timeToDeactivate seconds
+            // Return to initial state if possible, after timeToDeactivate seconds
             if (canReturn) {
                 StartCoroutine(WaitAndReturn(timeToReturn));
+            // Or stay active for timeActive seconds and then become broken
             } else {
-                state = ObstacleState.broken;
+                StartCoroutine(WaitAndBreak(timeActive));
             }
         }
     }
@@ -52,11 +58,19 @@ public class ObstActivePart : MonoBehaviour {
         state = ObstacleState.idle;
     }
 
+    public virtual void Break() {
+        state = ObstacleState.broken;
+    }
+
     private IEnumerator WaitAndReturn(float waitTime) {
         yield return new WaitForSeconds(waitTime);
         Return();
     }
 
+    private IEnumerator WaitAndBreak(float waitTime) {
+        yield return new WaitForSeconds(waitTime);
+        Break();
+    }
 }
 
 public enum ObstacleState {

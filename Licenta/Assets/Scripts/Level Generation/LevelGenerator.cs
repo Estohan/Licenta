@@ -47,7 +47,10 @@ public class LevelGenerator : MonoBehaviour {
             List<ObstacleObject.ObstObjDeletionEntry> deletionEntries = 
                    ObjectDatabase.instance.GetObstacle(level.stage, shapeID, obstacleID).getDeletionEntries(rotation);
             foreach(ObstacleObject.ObstObjDeletionEntry entry in deletionEntries) {
-                // Debug.Log("Deletion:  " + anchor + ", " + shapeID + ", " + rotation + ", " + obstacleID + ", " + entry.offset + ", " + entry.subsection);
+                Debug.Log("Deletion:  " + anchor + ", " + shapeID + ", " + rotation + ", " + obstacleID + ", " + entry.offset + ", " + entry.subsection);
+                Debug.Log("-> " + level.cellsData[anchor.z + entry.offset.z, anchor.x + entry.offset.x]);
+                Debug.Log("-> " + level.cellsData[anchor.z + entry.offset.z, anchor.x + entry.offset.x].hasObjectReference);
+                Debug.Log(".");
                 level.cellsData[anchor.z + entry.offset.z, anchor.x + entry.offset.x].hasObjectReference[entry.subsection] = false;
             }
         }

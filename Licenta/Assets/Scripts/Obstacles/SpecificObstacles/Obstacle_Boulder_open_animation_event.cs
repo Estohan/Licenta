@@ -19,4 +19,8 @@ public class Obstacle_Boulder_open_animation_event : MonoBehaviour {
         // Second part: roll the boulder down the hallway
         animatorBoulder.SetTrigger(rollHash);
     }
+
+    public void OnEndOfCloseAnimation() {
+
+    }
 }

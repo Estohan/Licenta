@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class Obstacle_Boulder_break_animation_event : MonoBehaviour {
     [SerializeField]
-    private SkinnedMeshRenderer brokenBoulderRenderer;
+    private GameObject boulderSlot;
+    private Animator boulderSlotAnimator;
+
+    private int closeHash;
+
+    private void Start() {
+        boulderSlotAnimator = boulderSlot.GetComponent<Animator>();
+        closeHash = Animator.StringToHash("close");
+    }
 
     public void OnEndOfBreakAnimation() {
-        // Broken boulder is hidden so that it won't be seen when
-        // Announce() is called and it is brought back up
-        brokenBoulderRenderer.enabled = false;
+        // Fourth part: close the boulder slot back up
+        boulderSlotAnimator.SetTrigger(closeHash);
     }
 }

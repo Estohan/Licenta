@@ -9,9 +9,7 @@ public class ObstActivePart : MonoBehaviour {
     [SerializeField]
     protected bool canAnounce;
     [SerializeField]
-    private float timeToReturn;
-    [SerializeField]
-    private float timeActive;
+    private float timeToReturnOrBreak;
     [Space]
     [SerializeField]
     protected ObstacleState state;
@@ -31,10 +29,10 @@ public class ObstActivePart : MonoBehaviour {
             Activate();
             // Return to initial state if possible, after timeToDeactivate seconds
             if (canReturn) {
-                StartCoroutine(WaitAndReturn(timeToReturn));
+                StartCoroutine(WaitAndReturn(timeToReturnOrBreak));
             // Or stay active for timeActive seconds and then become broken
             } else {
-                StartCoroutine(WaitAndBreak(timeActive));
+                StartCoroutine(WaitAndBreak(timeToReturnOrBreak));
             }
         }
     }

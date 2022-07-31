@@ -23,7 +23,7 @@ public class ObstActivePart : MonoBehaviour {
     }
 
     // Trigger trap
-    public void Trigger() {
+    public virtual void Trigger() {
         if (state == ObstacleState.idle || state == ObstacleState.sprung_waiting) {
             // Trigger trap/obstacle
             Activate();

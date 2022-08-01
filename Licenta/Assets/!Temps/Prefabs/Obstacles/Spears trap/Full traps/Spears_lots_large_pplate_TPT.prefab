@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 12
+  isIndependent: 0
   obstActivePart: {fileID: 7001664686831919708}
 --- !u!114 &7001664687389636295
 MonoBehaviour:
@@ -27,6 +28,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 12
+  isIndependent: 0
   obstActivePart: {fileID: 7001664686452023040}
 --- !u!114 &7001664686537068005
 MonoBehaviour:
@@ -41,6 +43,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 12
+  isIndependent: 0
   obstActivePart: {fileID: 7001664687577263246}
 --- !u!114 &7001664687982109373
 MonoBehaviour:
@@ -55,6 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 12
+  isIndependent: 0
   obstActivePart: {fileID: 7001664687335152009}
 --- !u!114 &7001664686542474449
 MonoBehaviour:
@@ -69,6 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 12
+  isIndependent: 0
   obstActivePart: {fileID: 7001664686201108758}
 --- !u!114 &7001664687954099991
 MonoBehaviour:
@@ -83,6 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 12
+  isIndependent: 0
   obstActivePart: {fileID: 7001664687461837097}
 --- !u!114 &7001664687996257300
 MonoBehaviour:
@@ -97,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 12
+  isIndependent: 0
   obstActivePart: {fileID: 7001664688130457157}
 --- !u!114 &7001664686144221259
 MonoBehaviour:
@@ -111,6 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 12
+  isIndependent: 0
   obstActivePart: {fileID: 7001664686199393127}
 --- !u!114 &7001664686191448617
 MonoBehaviour:
@@ -125,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 12
+  isIndependent: 0
   obstActivePart: {fileID: 7001664687582079935}
 --- !u!114 &7001664686301430615
 MonoBehaviour:
@@ -139,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 12
+  isIndependent: 0
   obstActivePart: {fileID: 7001664687116442433}
 --- !u!114 &7001664687976012885
 MonoBehaviour:
@@ -153,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 12
+  isIndependent: 0
   obstActivePart: {fileID: 7001664687183497917}
 --- !u!114 &7001664686170271053
 MonoBehaviour:
@@ -167,6 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 12
+  isIndependent: 0
   obstActivePart: {fileID: 7001664687487799719}
 --- !u!114 &7001664687010869239
 MonoBehaviour:
@@ -181,6 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 12
+  isIndependent: 0
   obstActivePart: {fileID: 7001664687590587179}
 --- !u!114 &7001664686135823770
 MonoBehaviour:
@@ -195,6 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 12
+  isIndependent: 0
   obstActivePart: {fileID: 7001664688032746575}
 --- !u!114 &7001664686981652370
 MonoBehaviour:
@@ -209,6 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 12
+  isIndependent: 0
   obstActivePart: {fileID: 7001664686896803095}
 --- !u!114 &7001664687590587179
 MonoBehaviour:
@@ -224,7 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturn: 0.5
+  timeToReturnOrBreak: 0.3
   state: 0
 --- !u!114 &7001664686896803095
 MonoBehaviour:
@@ -240,7 +255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturn: 0.5
+  timeToReturnOrBreak: 0.3
   state: 0
 --- !u!114 &7001664688032746575
 MonoBehaviour:
@@ -256,7 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturn: 0.5
+  timeToReturnOrBreak: 0.3
   state: 0
 --- !u!114 &7001664687487799719
 MonoBehaviour:
@@ -272,7 +287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturn: 0.5
+  timeToReturnOrBreak: 0.3
   state: 0
 --- !u!114 &7001664687183497917
 MonoBehaviour:
@@ -288,7 +303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturn: 0.5
+  timeToReturnOrBreak: 0.3
   state: 0
 --- !u!114 &7001664686201108758
 MonoBehaviour:
@@ -304,7 +319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturn: 0.5
+  timeToReturnOrBreak: 0.3
   state: 0
 --- !u!114 &7001664687335152009
 MonoBehaviour:
@@ -320,7 +335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturn: 0.5
+  timeToReturnOrBreak: 0.3
   state: 0
 --- !u!114 &7001664688130457157
 MonoBehaviour:
@@ -336,7 +351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturn: 0.5
+  timeToReturnOrBreak: 0.3
   state: 0
 --- !u!114 &7001664687461837097
 MonoBehaviour:
@@ -352,7 +367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturn: 0.5
+  timeToReturnOrBreak: 0.3
   state: 0
 --- !u!114 &7001664686199393127
 MonoBehaviour:
@@ -368,7 +383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturn: 0.5
+  timeToReturnOrBreak: 0.3
   state: 0
 --- !u!114 &7001664687116442433
 MonoBehaviour:
@@ -384,7 +399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturn: 0.5
+  timeToReturnOrBreak: 0.3
   state: 0
 --- !u!114 &7001664687582079935
 MonoBehaviour:
@@ -400,7 +415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturn: 0.5
+  timeToReturnOrBreak: 0.3
   state: 0
 --- !u!114 &7001664686452023040
 MonoBehaviour:
@@ -416,7 +431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturn: 0.5
+  timeToReturnOrBreak: 0.3
   state: 0
 --- !u!114 &7001664687577263246
 MonoBehaviour:
@@ -432,7 +447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturn: 0.5
+  timeToReturnOrBreak: 0.3
   state: 0
 --- !u!1 &7001664686557032197
 GameObject:
@@ -494,7 +509,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturn: 0.5
+  timeToReturnOrBreak: 0.3
   state: 0
 --- !u!1001 &6789223284647396075
 PrefabInstance:

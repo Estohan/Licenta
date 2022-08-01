@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 0
-  timeToReturn: 1
+  timeToReturnOrBreak: 0.3
   state: 0
 --- !u!114 &7867711959820613162
 MonoBehaviour:
@@ -29,6 +29,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 11
+  isIndependent: 0
   obstActivePart: {fileID: 7867711959384329901}
 --- !u!114 &2308180554395047690
 MonoBehaviour:
@@ -44,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 0
-  timeToReturn: 1
+  timeToReturnOrBreak: 0.3
   state: 0
 --- !u!114 &7867711959479422555
 MonoBehaviour:
@@ -59,6 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 9
+  isIndependent: 0
   obstActivePart: {fileID: 2308180554395047690}
 --- !u!1 &7867711959226350754
 GameObject:

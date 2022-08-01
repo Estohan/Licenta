@@ -7,7 +7,7 @@ public static class ObstacleShapes {
     public static readonly Dictionary<int, ObstacleShape> shapes =
         new Dictionary<int, ObstacleShape> {
             // 0: x
-            {0, new ObstacleShape(
+            /*{0, new ObstacleShape(
                    new List<(int, int, int[])> {
                        (0, 0, new int[] {0, 0, 0, 0})
                    }, // North rotation
@@ -18,7 +18,7 @@ public static class ObstacleShapes {
                    null, // East pruning (None)
                    null, // South pruning (None)
                    null // West pruning (None)
-            )},
+            )},*/
             // 1: _    
             //    x  x|  x  |x
             //           `
@@ -42,25 +42,25 @@ public static class ObstacleShapes {
             )},*/
             // 2: _       _
             //    x  |x|  x  |x|
-            //    `       `
-            /*{2, new ObstacleShape(
+            //    `       `=
+            {2, new ObstacleShape(
                    new List<(int, int, int[])> {
-                       (0, 0, new int[] {1, 0, 1, 0})
+                       (0, 0, new int[] {0, 1, 0, 1})
                    }, // North rotation
                    new List<(int, int, int[])> {
+                       (0, 0, new int[] {1, 0, 1, 0})
+                   }, // East rotation
+                   new List<(int, int, int[])> {
                        (0, 0, new int[] {0, 1, 0, 1})
-                   }, // East rotation (None)
+                   }, // South rotation
                    new List<(int, int, int[])> {
                        (0, 0, new int[] {1, 0, 1, 0})
-                   }, // South rotation (None)
-                   new List<(int, int, int[])> {
-                       (0, 0, new int[] {0, 1, 0, 1})
-                   }, // West rotation (None)
+                   }, // West rotation
                    null, // North pruning (None)
                    null, // East pruning (None)
                    null, // South pruning (None)
                    null // West pruning (None)
-            )},*/
+            )},
             // 3: _            _
             //    x|  x|  |x  |x
             //        `    ` 
@@ -179,20 +179,22 @@ public static class ObstacleShapes {
                        (0, -3, new int[] {0, -1, 0, -1}),
                        (0, -4, new int[] {0, -1, 0, 0})
                    }, // East rotation (None)
-                   new List<(int, int, int[])> {
+                   null
+                   /*new List<(int, int, int[])> {
                        (0, 0, new int[] {-1, 0, 1, 0}),
                        (-1, 0, new int[] {-1, 0, -1, 0}),
                        (-2, 0, new int[] {-1, 0, -1, 0}),
                        (-3, 0, new int[] {-1, 0, -1, 0}),
                        (-4, 0, new int[] {0, 0, -1, 0})
-                   }, // South rotation (None)
-                   new List<(int, int, int[])> {
+                   }*/, // South rotation (None)
+                   null
+                   /*new List<(int, int, int[])> {
                        (0, 0, new int[] {0, -1, 0, 1}),
                        (0, 1, new int[] {0, -1, 0, -1}),
                        (0, 2, new int[] {0, -1, 0, -1}),
                        (0, 3, new int[] {0, -1, 0, -1}),
                        (0, 4, new int[] {0, 0, 0, -1})
-                   }, // West rotation (None)
+                   }*/, // West rotation (None)
                    null, // North pruning (None)
                    null, // East pruning (None)
                    null, // South pruning (None)

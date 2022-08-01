@@ -11,4 +11,6 @@ public static class Constants {
     public const float subsectionSize = 0.9f;
 
     public const int maxDifficulty = 3;
+
+    public const float rotationEpsilon = 0.001f;
 }

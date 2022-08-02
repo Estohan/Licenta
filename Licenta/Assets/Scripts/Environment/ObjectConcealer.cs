@@ -4,62 +4,118 @@ using UnityEngine;
 
 public class ObjectConcealer : MonoBehaviour {
 
-    private int layerMask;
-
-    private RaycastHit hit;
-    private Vector3 offset;
+    [SerializeField]
+    // private float checkFrequency;
+    // private bool canCheck;
+    // private int layerMask;
+    private ObjectConcealed objectConcealed;
+    // private RaycastHit hitInfo;
+    // private bool hit;
+    // private WaitForSeconds waitSecondsBeforeCheck;
 
     private void Start() {
-        layerMask = (1 << LayerMask.NameToLayer("ConcealableObjects"));
-        offset = new Vector3(0.05f, 0.00f, 0.05f);
+        /*layerMask = (1 << LayerMask.NameToLayer("ConcealableObjects"));
+
+        if (checkFrequency == 0f) {
+            checkFrequency = 1f;
+        }
+
+        canCheck = true;
+        waitSecondsBeforeCheck = new WaitForSeconds(checkFrequency);*/
     }
 
     private void OnTriggerEnter(Collider other) {
-        // Debug.Log("!!");
-        //if(((this.transform.position - other.transform.position).normalized.x > 0) &&
-        //    (this.transform.position - other.transform.position).normalized.z < 0) {
-        if (Physics.Raycast(this.transform.position, other.transform.position, out hit, layerMask)) {
-            Debug.DrawLine(this.transform.position, other.transform.position + offset, Color.white, 6.5f, false);
-            Debug.DrawLine(this.transform.position, hit.transform.position, Color.red, 6.5f, false);
-            Debug.Log("Aimed for " + other.transform.name + " but hit " + hit.transform.name);
-        } else {
-            Debug.DrawLine(this.transform.position, other.transform.position, Color.green, 6.5f, false);
+
+        objectConcealed = other.GetComponent<ObjectConcealed>();
+        if (objectConcealed.GetDoesConceal()) {
+            Conceal(other.gameObject, objectConcealed);
         }
-        
-        if (other.GetComponent<ObjectConcealed>().DoesConceal() &&
-            !Physics.Linecast(this.transform.position, other.transform.position, layerMask)) {
-            other.gameObject.GetComponent<MeshRenderer>().enabled = false;
-        }
-        //}
     }
 
-    /*private void OnTriggerStay(Collider other) {
-        if (Physics.Linecast(this.transform.position, other.transform.position, out hit, layerMask)) {
-            Debug.DrawLine(this.transform.position, other.transform.position, Color.white, 0.5f, false);
-            Debug.DrawLine(this.transform.position, hit.transform.position, Color.red, 0.5f, false);
-        } else {
-            Debug.DrawLine(this.transform.position, other.transform.position, Color.green, 0.5f, false);
-        }
-        if (other.GetComponent<ObjectConcealed>().IsConcealing() && 
-            !Physics.Linecast(this.transform.position, other.transform.position, layerMask)) {
-            other.gameObject.GetComponent<MeshRenderer>().enabled = false;
+    // (1) Raycasts
+    /*private void OnTriggerEnter(Collider other) {
+
+        objectConcealed = other.GetComponent<ObjectConcealed>();
+        if (objectConcealed.GetDoesConceal()) {
+            if (objectConcealed.GetIsUnreachable()) {
+                Conceal(other.gameObject, objectConcealed);
+            }
+
+            hit = Physics.Linecast(this.transform.position, other.transform.position, out hitInfo, layerMask);
+
+            *//*Debug.DrawLine(this.transform.position, other.transform.position, Color.white, 7f);
+            if (hit) {
+                Debug.DrawLine(this.transform.position, hitInfo.transform.position + new Vector3(0.1f, 0.0f, 0.1f), Color.red, 7f);
+                Debug.Log("Hit :" + hitInfo.transform.name + ", " + hitInfo.transform.position + " instead of " + other.transform.name + ", " + other.transform.position);
+            }*//*
+            if (hit && Vector3.Distance(hitInfo.transform.position, other.transform.position) < Vector3.kEpsilon) {
+                // Debug.DrawLine(this.transform.position, other.transform.position + new Vector3(-0.1f, -0.0f, -0.1f), Color.green, 7f);
+                Conceal(other.gameObject, objectConcealed);
+            }
         }
     }*/
 
+    // (1) RaycastsOnTriggerStay max
     /*private void OnTriggerStay(Collider other) {
-        //Debug.Log("!!!");
-        if (!alreadyConcealed &&
-            other.gameObject.transform.parent.gameObject.CompareTag("Player") &&
-            ((this.transform.position - other.transform.position).normalized.x > 0 ||
-            (this.transform.position - other.transform.position).normalized.z < 0)) {
 
-            concealablePart.SetActive(false);
-            alreadyConcealed = true;
+        objectConcealed = other.GetComponent<ObjectConcealed>();
+        if (objectConcealed.GetDoesConceal() && !objectConcealed.GetIsConcealed()) {
+            Debug.Log("Call!");
+            hit = Physics.Linecast(this.transform.position, other.transform.position, out hitInfo, layerMask);
+            if (Vector3.Distance(hitInfo.transform.position, other.transform.position) < Vector3.kEpsilon) {
+                Conceal(other.gameObject, objectConcealed);
+            }
         }
+    }*/
+
+    // (1.2) Raycasts OnTriggerStay rare
+    /*private void OnTriggerStay(Collider other) {
+        if(canCheck) {
+            StartCoroutine(OnTriggerStayCheck(other));
+        }
+    }
+
+    private IEnumerator OnTriggerStayCheck(Collider other) {
+
+        canCheck = false;
+
+        objectConcealed = other.GetComponent<ObjectConcealed>();
+        if (objectConcealed.GetDoesConceal() && !objectConcealed.GetIsConcealed()) {
+            Debug.Log("Call!");
+            hit = Physics.Linecast(this.transform.position, other.transform.position, out hitInfo, layerMask);
+            //Debug.DrawLine(this.transform.position, other.transform.position + new Vector3(-0.1f, -0.0f, -0.1f), Color.green, 7f);
+            if (Vector3.Distance(hitInfo.transform.position, other.transform.position) < Vector3.kEpsilon) {
+                Conceal(other.gameObject, objectConcealed);
+            }
+        }
+
+        yield return waitSecondsBeforeCheck;
+        canCheck = true;
     }*/
 
     private void OnTriggerExit(Collider other) {
-        // Debug.Log("!");
-        other.gameObject.GetComponent<MeshRenderer>().enabled = true;
+        objectConcealed = other.GetComponent<ObjectConcealed>();
+        if (objectConcealed.GetIsConcealed()) {
+            Reveal(other.gameObject, objectConcealed);
+        }
     }
+
+    private void Conceal(GameObject obj, ObjectConcealed objConcealed) {
+        obj.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        objConcealed.SetIsConcealed(true);
+    }
+
+    private void Reveal(GameObject obj, ObjectConcealed objConcealed) {
+        obj.gameObject.GetComponent<MeshRenderer>().enabled = true;
+        objConcealed.SetIsConcealed(false);
+    }
+
+    // (1) Raycasts
+    /*private void OnTriggerExit(Collider other) {
+        objectConcealed = other.GetComponent<ObjectConcealed>();
+        if (objectConcealed.GetIsConcealed()) {
+            Reveal(other.gameObject, objectConcealed);
+        }
+    }*/
+
 }

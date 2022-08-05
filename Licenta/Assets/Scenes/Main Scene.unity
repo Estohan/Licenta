@@ -708,7 +708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f79ec129b45ddb74f933fed403baa40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkFrequency: 0
+  objectConcealed: {fileID: 0}
 --- !u!1 &353039394
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,6 +1055,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currHealth: 0
+  isAlive: 0
+  isInactive: 0
+  isDamageImmune: 0
   speed: 0
   speedRunning: 20
   speedWalking: 10
@@ -1752,6 +1755,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6949120692278677126, guid: 78f392842b3ce0e40afd98b701913e38, type: 3}
   m_PrefabInstance: {fileID: 1308063996}
   m_PrefabAsset: {fileID: 0}
+--- !u!137 &907777151 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1649218382573798814, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
+  m_PrefabInstance: {fileID: 1736421221}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &920060329
 GameObject:
   m_ObjectHideFlags: 0
@@ -2019,7 +2027,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 567
+    m_Bits: 1591
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -4714,6 +4722,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 823331f3a2f3eb14086fb420aa737f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitFlashCount: 3
+  hitFlashDuration: 0.1
+  hitFlashMaterial_1: {fileID: 2100000, guid: b5bb8c38a933b7f4fb0302de025d0bd8, type: 2}
+  hitFlashMaterial_2: {fileID: 2100000, guid: a3f724e827045694294662c6c5d168d2, type: 2}
+  playerSkMeshRenderer: {fileID: 907777151}
 --- !u!114 &1736421224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4741,8 +4754,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c1973a437e555a44b0e416eb8597d48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currHealth: 100
+  maxHealth: 1
+  currHealth: 1
+  isAlive: 0
+  isInactive: 0
+  isDamageImmune: 0
   speed: 0
   speedRunning: 7
   speedWalking: 3

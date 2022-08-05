@@ -7,9 +7,11 @@ public class GameEventSystem : MonoBehaviour {
     public static GameEventSystem instance = null;
 
     public delegate void PlayerHitDelegate(object sender, float damage);
+    public delegate void PlayerDeathDelegate(object sender);
     public delegate void PlayerMoveToCellDelegate(object sender, MazeCellData cellData);
 
     public event PlayerHitDelegate OnPlayerHit;
+    public event PlayerDeathDelegate OnPlayerDeath;
     public event PlayerMoveToCellDelegate OnPlayerMoveToAnotherCell;
     public event EventHandler OnPlayerStatsChange;
     // public event EventHandler OnPlayerHit;
@@ -26,6 +28,10 @@ public class GameEventSystem : MonoBehaviour {
     public void PlayerHit(float damage) {
         // OnPlayerHit?.Invoke(this, EventArgs.Empty);
         OnPlayerHit?.Invoke(this, damage);
+    }
+
+    public void PlayerDeath() {
+        OnPlayerDeath?.Invoke(this);
     }
 
     public void PlayerStatsChanged() {

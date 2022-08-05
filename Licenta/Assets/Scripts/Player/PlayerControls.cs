@@ -201,74 +201,6 @@ public class PlayerControls : MonoBehaviour {
         playerAnimationHandler.Move(playerStats.isIdle);
     }
 
-    /*private void OnAltMovementInput(InputAction.CallbackContext context) {
-        Vector3 targetPos = Vector3.zero;
-        Plane plane = new Plane(Vector3.up, transform.position);
-        // Create a ray from the mouse click position
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        // Initialization of the enter value
-        float point = 0f;
-
-
-        if (plane.Raycast(ray, out point)) {
-            // Get the point that is clicked
-            targetPos = ray.GetPoint(point);
-        }
-
-        // Move towards the targetPos by speed*Time.deltaTime
-        // transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
-        //Debug.Log("TargetPos: " + targetPos);
-        //Debug.Log("Result?: " + (targetPos - this.transform.position).normalized);
-        //Debug.DrawLine(transform.position, targetPos, Color.red);
-
-        currentMovementFromInput = (targetPos - this.transform.position).normalized;
-        playerMovement.x = currentMovementFromInput.x;
-        playerMovement.z = currentMovementFromInput.y;
-        playerMovement = Quaternion.Euler(0f, 45f, 0f) * playerMovement;
-        movementInputDetected = playerMovement.x != 0 || playerMovement.z != 0;
-
-        if (context.canceled) { // stopped moving
-            playerStats.isIdle = true;
-        } else { // is moving
-            playerStats.isIdle = false;
-        }
-        playerAnimationHandler.Move(playerStats.isIdle);
-
-        *//*Plane plane = new Plane(Vector3.up, transform.position);
-        // Create a ray from the mouse click position
-        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        // Initialization of the enter value
-        float point = 0f;
-
-
-        if (plane.Raycast(ray, out point)) {
-            // Get the point that is clicked
-            currentMovementFromInput = ray.GetPoint(point);
-        }
-
-        Vector3 movement = new Vector3();
-        //currentMovementFromInput = mainCamera.ScreenToViewportPoint(Mouse.current.position.ReadValue());
-        *//*currentMovementFromInput = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        movement.x = currentMovementFromInput.x;
-        movement.z = currentMovementFromInput.y;
-        playerMovement = (this.transform.position - movement).normalized;
-        movementInputDetected = playerMovement.x != 0 || playerMovement.z != 0;
-
-        if (context.canceled) { // stopped moving
-            movement = Vector3.zero;
-            playerStats.isIdle = true;
-        } else { // is moving
-            playerStats.isIdle = false;
-        }
-        playerAnimationHandler.Move(playerStats.isIdle);*//*
-
-        // Destination too close to player
-        *//*if (transform.position == targetPos)
-            isWalking = false;*//*
-
-        Debug.Log("Mouse: " + currentMovementFromInput);
-        Debug.DrawLine(this.transform.position, currentMovementFromInput, Color.red);*//*
-    }*/
 
     private void OnJump(InputAction.CallbackContext context) {
         if(groundedPlayer &&
@@ -369,4 +301,72 @@ public class PlayerControls : MonoBehaviour {
         Sneaking,
         Crawling
     }
+    /*private void OnAltMovementInput(InputAction.CallbackContext context) {
+        Vector3 targetPos = Vector3.zero;
+        Plane plane = new Plane(Vector3.up, transform.position);
+        // Create a ray from the mouse click position
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        // Initialization of the enter value
+        float point = 0f;
+
+
+        if (plane.Raycast(ray, out point)) {
+            // Get the point that is clicked
+            targetPos = ray.GetPoint(point);
+        }
+
+        // Move towards the targetPos by speed*Time.deltaTime
+        // transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+        //Debug.Log("TargetPos: " + targetPos);
+        //Debug.Log("Result?: " + (targetPos - this.transform.position).normalized);
+        //Debug.DrawLine(transform.position, targetPos, Color.red);
+
+        currentMovementFromInput = (targetPos - this.transform.position).normalized;
+        playerMovement.x = currentMovementFromInput.x;
+        playerMovement.z = currentMovementFromInput.y;
+        playerMovement = Quaternion.Euler(0f, 45f, 0f) * playerMovement;
+        movementInputDetected = playerMovement.x != 0 || playerMovement.z != 0;
+
+        if (context.canceled) { // stopped moving
+            playerStats.isIdle = true;
+        } else { // is moving
+            playerStats.isIdle = false;
+        }
+        playerAnimationHandler.Move(playerStats.isIdle);
+
+        *//*Plane plane = new Plane(Vector3.up, transform.position);
+        // Create a ray from the mouse click position
+        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        // Initialization of the enter value
+        float point = 0f;
+
+
+        if (plane.Raycast(ray, out point)) {
+            // Get the point that is clicked
+            currentMovementFromInput = ray.GetPoint(point);
+        }
+
+        Vector3 movement = new Vector3();
+        //currentMovementFromInput = mainCamera.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+        *//*currentMovementFromInput = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        movement.x = currentMovementFromInput.x;
+        movement.z = currentMovementFromInput.y;
+        playerMovement = (this.transform.position - movement).normalized;
+        movementInputDetected = playerMovement.x != 0 || playerMovement.z != 0;
+
+        if (context.canceled) { // stopped moving
+            movement = Vector3.zero;
+            playerStats.isIdle = true;
+        } else { // is moving
+            playerStats.isIdle = false;
+        }
+        playerAnimationHandler.Move(playerStats.isIdle);*//*
+
+        // Destination too close to player
+        *//*if (transform.position == targetPos)
+            isWalking = false;*//*
+
+        Debug.Log("Mouse: " + currentMovementFromInput);
+        Debug.DrawLine(this.transform.position, currentMovementFromInput, Color.red);*//*
+    }*/
 }

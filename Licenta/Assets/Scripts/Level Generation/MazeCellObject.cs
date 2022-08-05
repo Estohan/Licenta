@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class MazeCellObject : MonoBehaviour {
 
+    [SerializeField]
+    private CellOccluder cellOccluder;
+    private bool visited;
+
     public MazeCellData data;
 
     // GAME OBJECTS ?
@@ -12,6 +16,10 @@ public class MazeCellObject : MonoBehaviour {
     public GameObject Prf_FloorGreen;
     public GameObject Prf_FloorRed;
     public GameObject Prf_FloorWhite;*/
+
+    private void Start() {
+        visited = false;
+    }
 
     public MazeCellObject(MazeCoords coordinates) {
         this.data.coordinates = coordinates;
@@ -21,6 +29,10 @@ public class MazeCellObject : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if(other.transform.CompareTag("Player")) {
             GameEventSystem.instance.PlayerMoveedToAnotherCell(data);
+            /*if (!visited) {
+                cellOccluder.RevealNeighbours();
+                visited = true;
+            }*/
         }
     }
 
@@ -423,6 +435,10 @@ public class MazeCellObject : MonoBehaviour {
             }
         }
         // this.GetComponentInChildren<Renderer>().material.color = color;
+    }
+
+    public CellOccluder GetOccluder() {
+        return cellOccluder;
     }
 }
 

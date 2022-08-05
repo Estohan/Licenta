@@ -40,6 +40,20 @@ public static class MazeDirections {
         return directionVectors[(int)direction];
     }
 
+    // Works only with Vector3.forward, Vector3.back, Vector3.right and Vector3.left
+    public static Vector3 ToVector3(this MazeDirection direction) {
+        switch (direction) {
+            case MazeDirection.North:
+                return Vector3.forward;
+            case MazeDirection.East:
+                return Vector3.right;
+            case MazeDirection.South:
+                return Vector3.back;
+            default: // West
+                return Vector3.left;
+        }
+    }
+
     /* Returns the direction of the destination cell relative to the source cell*/
     public static MazeDirection DirFromPairOfCoords(MazeCoords source, MazeCoords destination) {
         int z_diff = destination.z - source.z;

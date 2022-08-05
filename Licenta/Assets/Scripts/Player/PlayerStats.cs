@@ -7,6 +7,10 @@ public class PlayerStats : MyMonoBehaviour {
     public float maxHealth;
     public float currHealth; // persistent stats should be stored in a SO?
     [Space]
+    public bool isAlive;
+    public bool isInactive;
+    public bool isDamageImmune;
+    [Space]
     public float speed;
     public float speedRunning;
     public float speedWalking;
@@ -35,9 +39,31 @@ public class PlayerStats : MyMonoBehaviour {
         animator = new Animator();
     }*/
 
+    public bool test1;
+    public bool test2;
+
+    private void Update() {
+        int val = 0;
+        if (test1) {
+            test1 = false;
+            val = UnityEngine.Random.Range(5, 15);
+            GameEventSystem.instance.PlayerHit(val);
+            GameEventSystem.instance.PlayerStatsChanged();
+        }
+        if (test2) {
+            test2 = false;
+            val = -UnityEngine.Random.Range(5, 15);
+            GameEventSystem.instance.PlayerHit(val);
+            GameEventSystem.instance.PlayerStatsChanged();
+        }
+    }
+
     protected override void Start() {
         base.Start();
         currHealth = maxHealth;
+        isAlive = true;
+        isInactive = false;
+        isDamageImmune = false;
         // controls
         isIdle = true;
         isRunning = false;
@@ -52,6 +78,8 @@ public class PlayerStats : MyMonoBehaviour {
 
         speed = speedWalking;
         rotationFactor = walkRotationFactor;
+
+        GameEventSystem.instance.PlayerStatsChanged();
     }
 
     protected override void OnEnable() {
@@ -61,6 +89,7 @@ public class PlayerStats : MyMonoBehaviour {
     protected override void SafeOnEnable() {
         // events
         GameEventSystem.instance.OnPlayerHit += HitPLayerReaction;
+        GameEventSystem.instance.OnPlayerDeath += PlayerDeathReaction;
         GameEventSystem.instance.OnPlayerMoveToAnotherCell += MoveToAnotherCellReaction;
     }
 
@@ -75,10 +104,23 @@ public class PlayerStats : MyMonoBehaviour {
         }
     }
 
+    private void PlayerDeathReaction(object sender) {
+        currHealth = 0;
+        isAlive = false;
+        isInactive = true;
+    }
+
     private void HitPLayerReaction(object sender, float damage) {
-        Debug.Log("PlayerStats: Player was hit for " + damage + " points of damage!");
-        currHealth -= damage;
-        GameEventSystem.instance.PlayerStatsChanged();
+        // Debug.Log("PlayerStats: Player was hit for " + damage + " points of damage!");
+        if (!isDamageImmune) {
+            isDamageImmune = true;
+            if (currHealth - damage <= 0) {
+                GameEventSystem.instance.PlayerDeath();
+            } else {
+                currHealth -= damage;
+            }
+            GameEventSystem.instance.PlayerStatsChanged();
+        }
     }
 
 
@@ -97,5 +139,6 @@ public class PlayerStats : MyMonoBehaviour {
 
     private void OnDisable() {
         GameEventSystem.instance.OnPlayerHit -= HitPLayerReaction;
+        GameEventSystem.instance.OnPlayerDeath -= PlayerDeathReaction;
     }
 }

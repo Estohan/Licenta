@@ -9,6 +9,10 @@ public class ObjectConcealed : MonoBehaviour {
     private List<float> concealingRotations;
     /*[SerializeField]
     private bool unreachable; // cannot be reached using raycast/linecast*/
+    /*[SerializeField]
+    private Material opaqueMaterial;*/
+    [SerializeField]
+    private Material concealingMaterial;
 
     // A concealable object is an object that does not conceal when it is
     // instantiated is such a way (rotated) so that it does not obstruct
@@ -32,10 +36,11 @@ public class ObjectConcealed : MonoBehaviour {
         if (concealingRotations == null) {
             return; // not assigned in the inspector
         }
-        foreach(float concealingRotation in concealingRotations) {
+        foreach (float concealingRotation in concealingRotations) {
             if (Quaternion.Angle(rotation, Quaternion.Euler(0f, concealingRotation, 0f)) < Constants.rotationEpsilon) {
                 // concealedObject.layer = LayerMask.NameToLayer("ConcealableObjects");
                 doesConceal = true;
+                this.GetComponent<MeshRenderer>().sharedMaterial = concealingMaterial;
             }
         }
     }

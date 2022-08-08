@@ -6,7 +6,7 @@ using UnityEngine;
 public class MazeCellObject : MonoBehaviour {
 
     [SerializeField]
-    private CellOccluder cellOccluder;
+    private CellConcealer cellConcealer;
     private bool visited;
 
     public MazeCellData data;
@@ -29,10 +29,10 @@ public class MazeCellObject : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if(other.transform.CompareTag("Player")) {
             GameEventSystem.instance.PlayerMoveedToAnotherCell(data);
-            /*if (!visited) {
-                cellOccluder.RevealNeighbours();
+            if (!visited) {
+                cellConcealer.RevealNeighbours();
                 visited = true;
-            }*/
+            }
         }
     }
 
@@ -437,8 +437,8 @@ public class MazeCellObject : MonoBehaviour {
         // this.GetComponentInChildren<Renderer>().material.color = color;
     }
 
-    public CellOccluder GetOccluder() {
-        return cellOccluder;
+    public CellConcealer GetOccluder() {
+        return cellConcealer;
     }
 }
 

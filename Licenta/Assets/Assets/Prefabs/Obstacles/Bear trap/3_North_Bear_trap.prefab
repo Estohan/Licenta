@@ -104,6 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  isIndependent: 0
   obstActivePart: {fileID: 8501390895079852514}
 --- !u!1 &239219869593069096
 GameObject:
@@ -293,7 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 0
   canAnounce: 0
-  timeToReturn: 0
+  timeToReturnOrBreak: 0
   state: 0
   obstHarmfulPart: {fileID: 3737180219281743830}
 --- !u!1 &684370227989517568
@@ -721,6 +722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  isIndependent: 0
   obstActivePart: {fileID: 3751924553975345027}
 --- !u!1 &2404677023759015207
 GameObject:
@@ -885,7 +887,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 0
   canAnounce: 0
-  timeToReturn: 0
+  timeToReturnOrBreak: 0
   state: 0
   obstHarmfulPart: {fileID: 7314661174859673559}
 --- !u!1 &2664921799031318091
@@ -1261,7 +1263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 0
   canAnounce: 0
-  timeToReturn: 0
+  timeToReturnOrBreak: 0
   state: 0
   obstHarmfulPart: {fileID: 6806094331620724331}
 --- !u!1 &3264281321444316081
@@ -1362,7 +1364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 0
   canAnounce: 0
-  timeToReturn: 0
+  timeToReturnOrBreak: 0
   state: 0
   obstHarmfulPart: {fileID: 5606908438581127218}
 --- !u!1 &3359431232522124145
@@ -1484,9 +1486,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee37d016ea341ba489b4bc1c5bb9369b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTwoPartTrigger: 0
   obstaclesToBeTriggered:
   - {fileID: 7347591281913038639}
+  isTwoPartTrigger: 0
+  isOneTimeTrigger: 1
+  triggerCollider: {fileID: 126702416834172687}
+  canToleratePosture: 0
+  toleratedPosture: 0
+  changeStateOnTrigger: 0
+  changeColorOnTrigger: 0
+  colorChangingPart: {fileID: 0}
+  newColor: {r: 0, g: 0, b: 0, a: 0}
+  preTriggerState: {fileID: 0}
+  postTriggerState: {fileID: 0}
 --- !u!1 &3685421418938053657
 GameObject:
   m_ObjectHideFlags: 0
@@ -1762,9 +1774,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee37d016ea341ba489b4bc1c5bb9369b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTwoPartTrigger: 0
   obstaclesToBeTriggered:
   - {fileID: 260227031951497057}
+  isTwoPartTrigger: 0
+  isOneTimeTrigger: 1
+  triggerCollider: {fileID: 5859376738236079472}
+  canToleratePosture: 0
+  toleratedPosture: 0
+  changeStateOnTrigger: 0
+  changeColorOnTrigger: 0
+  colorChangingPart: {fileID: 0}
+  newColor: {r: 0, g: 0, b: 0, a: 0}
+  preTriggerState: {fileID: 0}
+  postTriggerState: {fileID: 0}
 --- !u!1 &4241365502191084335
 GameObject:
   m_ObjectHideFlags: 0
@@ -1822,9 +1844,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee37d016ea341ba489b4bc1c5bb9369b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTwoPartTrigger: 0
   obstaclesToBeTriggered:
   - {fileID: 8501390895079852514}
+  isTwoPartTrigger: 0
+  isOneTimeTrigger: 1
+  triggerCollider: {fileID: 5518910130797011552}
+  canToleratePosture: 0
+  toleratedPosture: 0
+  changeStateOnTrigger: 0
+  changeColorOnTrigger: 0
+  colorChangingPart: {fileID: 0}
+  newColor: {r: 0, g: 0, b: 0, a: 0}
+  preTriggerState: {fileID: 0}
+  postTriggerState: {fileID: 0}
 --- !u!1 &4533752353701974890
 GameObject:
   m_ObjectHideFlags: 0
@@ -2128,6 +2160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  isIndependent: 0
   obstActivePart: {fileID: 260227031951497057}
 --- !u!1 &5333617350569289318
 GameObject:
@@ -2702,9 +2735,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee37d016ea341ba489b4bc1c5bb9369b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTwoPartTrigger: 0
   obstaclesToBeTriggered:
   - {fileID: 6485795297528071909}
+  isTwoPartTrigger: 0
+  isOneTimeTrigger: 1
+  triggerCollider: {fileID: 1555062971444767132}
+  canToleratePosture: 0
+  toleratedPosture: 0
+  changeStateOnTrigger: 0
+  changeColorOnTrigger: 0
+  colorChangingPart: {fileID: 0}
+  newColor: {r: 0, g: 0, b: 0, a: 0}
+  preTriggerState: {fileID: 0}
+  postTriggerState: {fileID: 0}
 --- !u!1 &6686245451369874247
 GameObject:
   m_ObjectHideFlags: 0
@@ -2958,9 +3001,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee37d016ea341ba489b4bc1c5bb9369b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTwoPartTrigger: 0
   obstaclesToBeTriggered:
   - {fileID: 3751924553975345027}
+  isTwoPartTrigger: 0
+  isOneTimeTrigger: 1
+  triggerCollider: {fileID: 6034705536069757908}
+  canToleratePosture: 0
+  toleratedPosture: 0
+  changeStateOnTrigger: 0
+  changeColorOnTrigger: 0
+  colorChangingPart: {fileID: 0}
+  newColor: {r: 0, g: 0, b: 0, a: 0}
+  preTriggerState: {fileID: 0}
+  postTriggerState: {fileID: 0}
 --- !u!1 &7085684306420046308
 GameObject:
   m_ObjectHideFlags: 0
@@ -3182,7 +3235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 0
   canAnounce: 0
-  timeToReturn: 0
+  timeToReturnOrBreak: 0
   state: 0
   obstHarmfulPart: {fileID: 1576664947676775805}
 --- !u!1 &7596269815118413446
@@ -3367,9 +3420,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee37d016ea341ba489b4bc1c5bb9369b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTwoPartTrigger: 0
   obstaclesToBeTriggered:
   - {fileID: 5653458742122591017}
+  isTwoPartTrigger: 0
+  isOneTimeTrigger: 1
+  triggerCollider: {fileID: 2549204506033806460}
+  canToleratePosture: 0
+  toleratedPosture: 0
+  changeStateOnTrigger: 0
+  changeColorOnTrigger: 0
+  colorChangingPart: {fileID: 0}
+  newColor: {r: 0, g: 0, b: 0, a: 0}
+  preTriggerState: {fileID: 0}
+  postTriggerState: {fileID: 0}
 --- !u!1 &8144994390369121949
 GameObject:
   m_ObjectHideFlags: 0
@@ -3448,6 +3511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  isIndependent: 0
   obstActivePart: {fileID: 7347591281913038639}
 --- !u!1 &8231441939996924220
 GameObject:
@@ -3543,9 +3607,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee37d016ea341ba489b4bc1c5bb9369b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTwoPartTrigger: 0
   obstaclesToBeTriggered:
   - {fileID: 5615859190051795907}
+  isTwoPartTrigger: 0
+  isOneTimeTrigger: 1
+  triggerCollider: {fileID: 4668901491491764260}
+  canToleratePosture: 0
+  toleratedPosture: 0
+  changeStateOnTrigger: 0
+  changeColorOnTrigger: 0
+  colorChangingPart: {fileID: 0}
+  newColor: {r: 0, g: 0, b: 0, a: 0}
+  preTriggerState: {fileID: 0}
+  postTriggerState: {fileID: 0}
 --- !u!1 &8415089221563926762
 GameObject:
   m_ObjectHideFlags: 0
@@ -3590,6 +3664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  isIndependent: 0
   obstActivePart: {fileID: 5615859190051795907}
 --- !u!1 &8479527239664750018
 GameObject:
@@ -3658,7 +3733,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 0
   canAnounce: 0
-  timeToReturn: 0
+  timeToReturnOrBreak: 0
   state: 0
   obstHarmfulPart: {fileID: 1939830945132503524}
 --- !u!1 &8482739711091273037
@@ -3736,6 +3811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  isIndependent: 0
   obstActivePart: {fileID: 5653458742122591017}
 --- !u!1 &8649254256263685317
 GameObject:
@@ -3841,6 +3917,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  isIndependent: 0
   obstActivePart: {fileID: 6485795297528071909}
 --- !u!1 &8808738197791931610
 GameObject:
@@ -3940,6 +4017,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 0
   canAnounce: 0
-  timeToReturn: 0
+  timeToReturnOrBreak: 0
   state: 0
   obstHarmfulPart: {fileID: 5088272263456460784}

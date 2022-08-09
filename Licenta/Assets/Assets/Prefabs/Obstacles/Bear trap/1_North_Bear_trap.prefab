@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  isIndependent: 0
   obstActivePart: {fileID: 8861997306563978763}
 --- !u!1 &890487201027573401
 GameObject:
@@ -326,14 +327,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6722877645007484536}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee37d016ea341ba489b4bc1c5bb9369b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTwoPartTrigger: 0
   obstaclesToBeTriggered:
   - {fileID: 8861997306563978763}
+  isTwoPartTrigger: 0
+  isOneTimeTrigger: 1
+  triggerCollider: {fileID: 2853339196848573532}
+  canToleratePosture: 0
+  toleratedPosture: 0
+  changeStateOnTrigger: 0
+  changeColorOnTrigger: 0
+  colorChangingPart: {fileID: 0}
+  newColor: {r: 0, g: 0, b: 0, a: 0}
+  preTriggerState: {fileID: 0}
+  postTriggerState: {fileID: 0}
 --- !u!1 &6816018617861840006
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,7 +502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 0
   canAnounce: 0
-  timeToReturn: 0
+  timeToReturnOrBreak: 0
   state: 0
   obstHarmfulPart: {fileID: 4667957103866711164}
 --- !u!1 &8158411059095410164

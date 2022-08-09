@@ -41,7 +41,8 @@ public class UIPlayerStats : MyMonoBehaviour {
     }
     private void UpdatePlayerPosition(MazeCellData newCurrentCellData) {
         //displayedPlayerPosition = newCurrentCellData.coordinates;
-        CellStats newCurrentCellStats = newCurrentCellData.cellStats;
+
+        /*CellStats newCurrentCellStats = newCurrentCellData.cellStats;
         positionText.text = "Coords.   \t:" + newCurrentCellData.coordinates.ToString();
         positionText.text += "\nInSol.  \t:" + newCurrentCellStats.isInSolution.ToString();
         positionText.text += "\nDead-end\t:" + newCurrentCellStats.isDeadEnd.ToString();
@@ -55,7 +56,7 @@ public class UIPlayerStats : MyMonoBehaviour {
         positionText.text += "\nObst.\t: ";
         foreach ((int shapeID, MazeDirection direction) in newCurrentCellStats.mappedObstacleShapes) {
             positionText.text += "(" + shapeID + ", " + direction + ") ";
-        }
+        }*/
     }
 
 

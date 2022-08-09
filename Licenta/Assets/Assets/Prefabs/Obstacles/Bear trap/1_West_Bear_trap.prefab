@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  isIndependent: 0
   obstActivePart: {fileID: 1112072533532226349}
 --- !u!1 &3216879278659097923
 GameObject:
@@ -294,7 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 0
   canAnounce: 0
-  timeToReturn: 0
+  timeToReturnOrBreak: 0
   state: 0
   obstHarmfulPart: {fileID: 5150795660023773606}
 --- !u!1 &4510580617902271135
@@ -354,9 +355,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee37d016ea341ba489b4bc1c5bb9369b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTwoPartTrigger: 0
   obstaclesToBeTriggered:
   - {fileID: 1112072533532226349}
+  isTwoPartTrigger: 0
+  isOneTimeTrigger: 1
+  triggerCollider: {fileID: 5470110065131741359}
+  canToleratePosture: 0
+  toleratedPosture: 0
+  changeStateOnTrigger: 0
+  changeColorOnTrigger: 0
+  colorChangingPart: {fileID: 0}
+  newColor: {r: 0, g: 0, b: 0, a: 0}
+  preTriggerState: {fileID: 0}
+  postTriggerState: {fileID: 0}
 --- !u!1 &5999599954309382690
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,6 +16,8 @@ public class ObstTriggerPart : MonoBehaviour {
     [SerializeField]
     private bool isOneTimeTrigger; // can be triggered only once
     [SerializeField]
+    private Collider triggerCollider;
+    [SerializeField]
     private bool canToleratePosture; // does not trigger if player is in toleratedPosture
     [SerializeField]
     private PlayerControls.PlayerPostureState toleratedPosture;
@@ -71,9 +73,11 @@ public class ObstTriggerPart : MonoBehaviour {
             // show broken trigger
             postTriggerState.SetActive(true);
         }
+
         // Disable collider if this can trigger only once
         if (isOneTimeTrigger) {
-            this.transform.GetComponent<BoxCollider>().enabled = false;
+            // this.transform.GetComponent<BoxCollider>().enabled = false;
+            triggerCollider.enabled = false;
         }
     }
 

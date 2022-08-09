@@ -41,6 +41,14 @@ public class @InputManager : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Grab map"",
+                    ""type"": ""Button"",
+                    ""id"": ""0023138f-a218-4a57-8d85-c48b2735e95f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -74,6 +82,17 @@ public class @InputManager : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Map zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e578e094-8967-4948-a1a0-fb11cc7a042b"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grab map"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -365,6 +384,7 @@ public class @InputManager : IInputActionCollection, IDisposable
         m_UI_Openmap = m_UI.FindAction("Open map", throwIfNotFound: true);
         m_UI_Mapzoom = m_UI.FindAction("Map zoom", throwIfNotFound: true);
         m_UI_ShowHideminimap = m_UI.FindAction("Show/Hide minimap", throwIfNotFound: true);
+        m_UI_Grabmap = m_UI.FindAction("Grab map", throwIfNotFound: true);
         // Others
         m_Others = asset.FindActionMap("Others", throwIfNotFound: true);
         m_Others_RestartGame = m_Others.FindAction("Restart Game", throwIfNotFound: true);
@@ -429,6 +449,7 @@ public class @InputManager : IInputActionCollection, IDisposable
     private readonly InputAction m_UI_Openmap;
     private readonly InputAction m_UI_Mapzoom;
     private readonly InputAction m_UI_ShowHideminimap;
+    private readonly InputAction m_UI_Grabmap;
     public struct UIActions
     {
         private @InputManager m_Wrapper;
@@ -436,6 +457,7 @@ public class @InputManager : IInputActionCollection, IDisposable
         public InputAction @Openmap => m_Wrapper.m_UI_Openmap;
         public InputAction @Mapzoom => m_Wrapper.m_UI_Mapzoom;
         public InputAction @ShowHideminimap => m_Wrapper.m_UI_ShowHideminimap;
+        public InputAction @Grabmap => m_Wrapper.m_UI_Grabmap;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -454,6 +476,9 @@ public class @InputManager : IInputActionCollection, IDisposable
                 @ShowHideminimap.started -= m_Wrapper.m_UIActionsCallbackInterface.OnShowHideminimap;
                 @ShowHideminimap.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnShowHideminimap;
                 @ShowHideminimap.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnShowHideminimap;
+                @Grabmap.started -= m_Wrapper.m_UIActionsCallbackInterface.OnGrabmap;
+                @Grabmap.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnGrabmap;
+                @Grabmap.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnGrabmap;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -467,6 +492,9 @@ public class @InputManager : IInputActionCollection, IDisposable
                 @ShowHideminimap.started += instance.OnShowHideminimap;
                 @ShowHideminimap.performed += instance.OnShowHideminimap;
                 @ShowHideminimap.canceled += instance.OnShowHideminimap;
+                @Grabmap.started += instance.OnGrabmap;
+                @Grabmap.performed += instance.OnGrabmap;
+                @Grabmap.canceled += instance.OnGrabmap;
             }
         }
     }
@@ -590,6 +618,7 @@ public class @InputManager : IInputActionCollection, IDisposable
         void OnOpenmap(InputAction.CallbackContext context);
         void OnMapzoom(InputAction.CallbackContext context);
         void OnShowHideminimap(InputAction.CallbackContext context);
+        void OnGrabmap(InputAction.CallbackContext context);
     }
     public interface IOthersActions
     {

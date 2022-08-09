@@ -21,6 +21,8 @@ public class Input_UI : MonoBehaviour {
         inputManager.UI.Openmap.started += _ => FullMapToggle();
         inputManager.UI.ShowHideminimap.started += _ => MiniMapToggle();
         inputManager.UI.Mapzoom.started += context => FullMapZoom(context.ReadValue<float>());
+        inputManager.UI.Grabmap.started += _ => PanMapCameraStarted();
+        inputManager.UI.Grabmap.canceled += _ => PanMapCameraStopped();
     }
 
 
@@ -44,9 +46,11 @@ public class Input_UI : MonoBehaviour {
     private void FullMapToggle() {
         if (fullMapVisible) {
             Map.FullmapWindow.Hide();
+            Map.MinimapWindow.Show();
             fullMapVisible = false;
         } else {
             Map.FullmapWindow.Show();
+            Map.MinimapWindow.Hide();
             fullMapVisible = true;
         }
     }
@@ -64,6 +68,18 @@ public class Input_UI : MonoBehaviour {
     private void FullMapZoom(float scrollOffset) {
         if (fullMapVisible) {
             Map.FullmapWindow.instance.Zoom(scrollOffset);
+        }
+    }
+
+    private void PanMapCameraStarted() {
+        if (fullMapVisible) {
+            Map.FullmapWindow.instance.PanMapCamera(true);
+        }
+    }
+
+    private void PanMapCameraStopped() {
+        if (fullMapVisible) {
+            Map.FullmapWindow.instance.PanMapCamera(false);
         }
     }
 }

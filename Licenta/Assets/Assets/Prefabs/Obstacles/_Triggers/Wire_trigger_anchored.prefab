@@ -236,9 +236,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee37d016ea341ba489b4bc1c5bb9369b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstaclesToBeTriggered: []
+  obstaclesToBeTriggered:
+  - {fileID: 0}
   isTwoPartTrigger: 0
   isOneTimeTrigger: 1
+  triggerCollider: {fileID: 2089301590443662796}
   canToleratePosture: 1
   toleratedPosture: 1
   changeStateOnTrigger: 1

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.5
   state: 0
 --- !u!114 &3126678580561577273
 MonoBehaviour:
@@ -30,7 +31,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.5
   state: 0
 --- !u!114 &3126678579557557670
 MonoBehaviour:
@@ -46,7 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.5
   state: 0
 --- !u!114 &3126678579269763690
 MonoBehaviour:
@@ -62,7 +65,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.5
   state: 0
 --- !u!114 &3126678579683054854
 MonoBehaviour:
@@ -78,7 +82,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.5
   state: 0
 --- !u!114 &3126678580401219438
 MonoBehaviour:
@@ -94,7 +99,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.5
   state: 0
 --- !u!114 &3126678579801364368
 MonoBehaviour:
@@ -110,7 +116,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.5
   state: 0
 --- !u!114 &3126678579394639506
 MonoBehaviour:
@@ -126,7 +133,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.5
   state: 0
 --- !u!114 &3126678579809634052
 MonoBehaviour:
@@ -142,7 +150,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.5
   state: 0
 --- !u!114 &3126678579179253856
 MonoBehaviour:
@@ -158,7 +167,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.5
   state: 0
 --- !u!1 &3126678580927075114
 GameObject:
@@ -235,7 +245,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.5
   state: 0
 --- !u!114 &3126678580305990616
 MonoBehaviour:
@@ -1114,7 +1125,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4544908781355229360, guid: 1e25819e84d10e14d86b4c98a37e20fa, type: 3}
       propertyPath: m_Name
-      value: Spears_9_ground_2
+      value: Spears_9_ground_1
       objectReference: {fileID: 0}
     - target: {fileID: 4544908781355229366, guid: 1e25819e84d10e14d86b4c98a37e20fa, type: 3}
       propertyPath: m_RootOrder
@@ -1122,7 +1133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4544908781355229366, guid: 1e25819e84d10e14d86b4c98a37e20fa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4544908781355229366, guid: 1e25819e84d10e14d86b4c98a37e20fa, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1138,7 +1149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4544908781355229366, guid: 1e25819e84d10e14d86b4c98a37e20fa, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4544908781355229366, guid: 1e25819e84d10e14d86b4c98a37e20fa, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1526,7 +1537,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d946c34429f3ee14eb7c87262c03b54f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d946c34429f3ee14eb7c87262c03b54f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1592,7 +1603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d946c34429f3ee14eb7c87262c03b54f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d946c34429f3ee14eb7c87262c03b54f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1716,7 +1727,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4544908781355229360, guid: 1e25819e84d10e14d86b4c98a37e20fa, type: 3}
       propertyPath: m_Name
-      value: Spears_9_ground_5
+      value: Spears_9_ground_4
       objectReference: {fileID: 0}
     - target: {fileID: 4544908781355229366, guid: 1e25819e84d10e14d86b4c98a37e20fa, type: 3}
       propertyPath: m_RootOrder
@@ -1724,7 +1735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4544908781355229366, guid: 1e25819e84d10e14d86b4c98a37e20fa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4544908781355229366, guid: 1e25819e84d10e14d86b4c98a37e20fa, type: 3}
       propertyPath: m_LocalPosition.y

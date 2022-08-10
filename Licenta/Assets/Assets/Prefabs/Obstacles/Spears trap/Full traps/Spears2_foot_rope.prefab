@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 0
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 1
   state: 0
 --- !u!114 &7867711959820613162
 MonoBehaviour:
@@ -45,7 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 0
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 1
   state: 0
 --- !u!114 &7867711959479422555
 MonoBehaviour:
@@ -115,6 +117,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7867711959226350757}
     m_Modifications:
+    - target: {fileID: 4746843562054240337, guid: 736d2630235961e43868315b2d89ecf1, type: 3}
+      propertyPath: m_Size.x
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746843562054240337, guid: 736d2630235961e43868315b2d89ecf1, type: 3}
+      propertyPath: m_Size.z
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 5559684581476565645, guid: 736d2630235961e43868315b2d89ecf1, type: 3}
       propertyPath: m_Name
       value: Single_spear_socket_1
@@ -227,6 +237,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7867711959226350757}
     m_Modifications:
+    - target: {fileID: 4746843562054240337, guid: 736d2630235961e43868315b2d89ecf1, type: 3}
+      propertyPath: m_Size.x
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746843562054240337, guid: 736d2630235961e43868315b2d89ecf1, type: 3}
+      propertyPath: m_Size.z
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 5559684581476565645, guid: 736d2630235961e43868315b2d89ecf1, type: 3}
       propertyPath: m_Name
       value: Single_spear_socket_2
@@ -352,6 +370,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2284297352947868390, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
+      propertyPath: triggerCollider
+      value: 
+      objectReference: {fileID: 7867711959505518336}
+    - target: {fileID: 2284297352947868390, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
       propertyPath: toleratedPosture
       value: 1
       objectReference: {fileID: 0}
@@ -432,5 +454,10 @@ PrefabInstance:
 --- !u!4 &7867711959505518366 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2284297352947868409, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
+  m_PrefabInstance: {fileID: 8258702322104376807}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &7867711959505518336 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 2284297352947868391, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
   m_PrefabInstance: {fileID: 8258702322104376807}
   m_PrefabAsset: {fileID: 0}

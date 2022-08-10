@@ -60,7 +60,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 0
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.4
   state: 0
 --- !u!1 &457348799293367003
 GameObject:
@@ -335,6 +336,7 @@ MonoBehaviour:
   - {fileID: 9152799385419079283}
   isTwoPartTrigger: 0
   isOneTimeTrigger: 0
+  triggerCollider: {fileID: 0}
   canToleratePosture: 0
   toleratedPosture: 0
   changeStateOnTrigger: 0
@@ -670,7 +672,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.4
   state: 0
 --- !u!1 &6007925305953785155
 GameObject:
@@ -2027,7 +2030,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.4
   state: 0
 --- !u!1 &6007925306230526211
 GameObject:
@@ -2731,7 +2735,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.4
   state: 0
 --- !u!1 &6007925306379820557
 GameObject:
@@ -3213,7 +3218,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.4
   state: 0
 --- !u!1 &6007925306433215402
 GameObject:
@@ -4222,7 +4228,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.4
   state: 0
 --- !u!1 &6007925306699751828
 GameObject:
@@ -5331,7 +5338,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.4
   state: 0
 --- !u!1 &6007925306911332489
 GameObject:
@@ -5408,7 +5416,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.4
   state: 0
 --- !u!1 &6007925306926074235
 GameObject:
@@ -7793,7 +7802,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.4
   state: 0
 --- !u!1 &6007925307446882308
 GameObject:
@@ -9552,7 +9562,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.4
   state: 0
 --- !u!1 &6007925307923801635
 GameObject:
@@ -9707,6 +9718,7 @@ MonoBehaviour:
   - {fileID: 5303225146232996056}
   isTwoPartTrigger: 1
   isOneTimeTrigger: 0
+  triggerCollider: {fileID: 0}
   canToleratePosture: 0
   toleratedPosture: 0
   changeStateOnTrigger: 0
@@ -10153,7 +10165,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.4
   state: 0
 --- !u!1 &6835976950711645117
 GameObject:
@@ -10294,6 +10307,7 @@ MonoBehaviour:
   - {fileID: 287508315863840233}
   isTwoPartTrigger: 0
   isOneTimeTrigger: 0
+  triggerCollider: {fileID: 0}
   canToleratePosture: 0
   toleratedPosture: 0
   changeStateOnTrigger: 0
@@ -10393,7 +10407,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 0
-  timeToReturnOrBreak: 0.3
+  activeTime: 0.3
+  returnTime: 0.4
   state: 0
 --- !u!1001 &287508316126859621
 PrefabInstance:

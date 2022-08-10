@@ -119,6 +119,7 @@ MonoBehaviour:
   - {fileID: 1542790252377621694}
   isTwoPartTrigger: 1
   isOneTimeTrigger: 0
+  triggerCollider: {fileID: 0}
   canToleratePosture: 0
   toleratedPosture: 0
   changeStateOnTrigger: 0
@@ -143,6 +144,7 @@ MonoBehaviour:
   - {fileID: 8563898822498192757}
   isTwoPartTrigger: 1
   isOneTimeTrigger: 0
+  triggerCollider: {fileID: 0}
   canToleratePosture: 0
   toleratedPosture: 0
   changeStateOnTrigger: 0
@@ -167,6 +169,7 @@ MonoBehaviour:
   - {fileID: 8563898822498192757}
   isTwoPartTrigger: 1
   isOneTimeTrigger: 0
+  triggerCollider: {fileID: 0}
   canToleratePosture: 0
   toleratedPosture: 0
   changeStateOnTrigger: 0
@@ -294,6 +297,7 @@ MonoBehaviour:
   - {fileID: 1542790252377621694}
   isTwoPartTrigger: 1
   isOneTimeTrigger: 0
+  triggerCollider: {fileID: 0}
   canToleratePosture: 0
   toleratedPosture: 0
   changeStateOnTrigger: 0
@@ -349,6 +353,7 @@ MonoBehaviour:
   - {fileID: 1542790252377621694}
   isTwoPartTrigger: 1
   isOneTimeTrigger: 0
+  triggerCollider: {fileID: 0}
   canToleratePosture: 0
   toleratedPosture: 0
   changeStateOnTrigger: 0
@@ -375,6 +380,7 @@ MonoBehaviour:
   - {fileID: 1542790252377621694}
   isTwoPartTrigger: 1
   isOneTimeTrigger: 0
+  triggerCollider: {fileID: 0}
   canToleratePosture: 0
   toleratedPosture: 0
   changeStateOnTrigger: 0
@@ -410,7 +416,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 0
-  timeToReturnOrBreak: 14
+  activeTime: 0
+  returnTime: 0
   state: 0
 --- !u!114 &1542790252377621694
 MonoBehaviour:
@@ -426,7 +433,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 0
-  timeToReturnOrBreak: 14
+  activeTime: 0
+  returnTime: 0
   state: 0
 --- !u!114 &1542790251453836708
 MonoBehaviour:
@@ -442,7 +450,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 0
-  timeToReturnOrBreak: 14
+  activeTime: 0
+  returnTime: 0
   state: 0
 --- !u!114 &1542790251873390284
 MonoBehaviour:
@@ -458,7 +467,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 0
-  timeToReturnOrBreak: 14
+  activeTime: 0
+  returnTime: 0
   state: 0
 --- !u!114 &1542790252085405772
 MonoBehaviour:
@@ -619,7 +629,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 1
   canAnounce: 1
-  timeToReturnOrBreak: 13
+  activeTime: 13
+  returnTime: 14
   state: 0
   boulder: {fileID: 9067472528989125828}
   brokenBoulder: {fileID: 1921045133933964771}
@@ -877,6 +888,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4749418153974781453, guid: c3167bd7372c6ca48b5e106377940970, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3167bd7372c6ca48b5e106377940970, type: 3}
 --- !u!4 &4232655137517266527 stripped
@@ -1072,6 +1087,10 @@ PrefabInstance:
     - target: {fileID: 3446519128434951168, guid: c3167bd7372c6ca48b5e106377940970, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749418153974781453, guid: c3167bd7372c6ca48b5e106377940970, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3167bd7372c6ca48b5e106377940970, type: 3}
@@ -1475,6 +1494,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4749418153974781453, guid: c3167bd7372c6ca48b5e106377940970, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3167bd7372c6ca48b5e106377940970, type: 3}
 --- !u!4 &4232655138643487304 stripped
@@ -1598,6 +1621,10 @@ PrefabInstance:
     - target: {fileID: 3446519128434951168, guid: c3167bd7372c6ca48b5e106377940970, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749418153974781453, guid: c3167bd7372c6ca48b5e106377940970, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3167bd7372c6ca48b5e106377940970, type: 3}
@@ -1846,6 +1873,10 @@ PrefabInstance:
     - target: {fileID: 3446519128434951168, guid: c3167bd7372c6ca48b5e106377940970, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749418153974781453, guid: c3167bd7372c6ca48b5e106377940970, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3167bd7372c6ca48b5e106377940970, type: 3}

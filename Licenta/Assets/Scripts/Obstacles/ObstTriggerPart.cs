@@ -66,18 +66,17 @@ public class ObstTriggerPart : MonoBehaviour {
                 obstaclesToBeTriggered[i].Trigger();
             }
         }
+        // Disable collider if this can trigger only once
+        if (isOneTimeTrigger) {
+            // this.transform.GetComponent<BoxCollider>().enabled = false;
+            triggerCollider.enabled = false;
+        }
         // Change trigger state if possible
         if (changeStateOnTrigger) {
             // hide set trigger
             preTriggerState.SetActive(false);
             // show broken trigger
             postTriggerState.SetActive(true);
-        }
-
-        // Disable collider if this can trigger only once
-        if (isOneTimeTrigger) {
-            // this.transform.GetComponent<BoxCollider>().enabled = false;
-            triggerCollider.enabled = false;
         }
     }
 

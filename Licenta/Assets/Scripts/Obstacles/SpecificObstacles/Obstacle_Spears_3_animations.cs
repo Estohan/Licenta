@@ -20,8 +20,10 @@ public class Obstacle_Spears_3_animations : ObstActivePart {
     }
 
     public override void Activate() {
-        base.Activate();
-        animator.SetTrigger(openHash);
+        if (state == ObstacleState.sprung_waiting) {
+            base.Activate();
+            animator.SetTrigger(openHash);
+        }
     }
 
     public override void Return() {
@@ -30,7 +32,9 @@ public class Obstacle_Spears_3_animations : ObstActivePart {
     }
 
     public override void Anounce() {
-        base.Anounce();
-        animator.SetTrigger(announceHash);
+        if (state == ObstacleState.idle) {
+            base.Anounce();
+            animator.SetTrigger(announceHash);
+        }
     }
 }

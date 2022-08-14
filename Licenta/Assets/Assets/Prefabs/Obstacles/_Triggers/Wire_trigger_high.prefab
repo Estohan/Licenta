@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 842509568189932883}
   - component: {fileID: 842509568189932877}
-  - component: {fileID: 842509568189932876}
   m_Layer: 0
   m_Name: Wire_trigger_high
   m_TagString: Untagged
@@ -47,29 +46,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.6, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0.24, z: 0}
---- !u!114 &842509568189932876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 842509568189932882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee37d016ea341ba489b4bc1c5bb9369b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstaclesToBeTriggered: []
-  isTwoPartTrigger: 0
-  isOneTimeTrigger: 1
-  canToleratePosture: 0
-  toleratedPosture: 0
-  changeStateOnTrigger: 1
-  changeColorOnTrigger: 0
-  colorChangingPart: {fileID: 0}
-  newColor: {r: 0, g: 0, b: 0, a: 0}
-  preTriggerState: {fileID: 842509569242652310}
-  postTriggerState: {fileID: 842509569424045369}
 --- !u!1 &842509569242652310
 GameObject:
   m_ObjectHideFlags: 0

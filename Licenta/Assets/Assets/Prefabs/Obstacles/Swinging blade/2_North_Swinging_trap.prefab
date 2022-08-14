@@ -1,30 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &1331435302862450680
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1773674177373196928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee37d016ea341ba489b4bc1c5bb9369b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstaclesToBeTriggered:
-  - {fileID: 7401246244881378077}
-  - {fileID: 7401246246151487940}
-  isTwoPartTrigger: 0
-  isOneTimeTrigger: 0
-  canToleratePosture: 0
-  toleratedPosture: 0
-  changeStateOnTrigger: 0
-  changeColorOnTrigger: 1
-  colorChangingPart: {fileID: 1773674177373196928}
-  newColor: {r: 1, g: 0, b: 0, a: 0}
-  preTriggerState: {fileID: 0}
-  postTriggerState: {fileID: 0}
 --- !u!114 &1331435303993660836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38,15 +13,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstaclesToBeTriggered:
-  - {fileID: 7401246244881378077}
   - {fileID: 7401246246151487940}
   isTwoPartTrigger: 0
   isOneTimeTrigger: 0
+  triggerCollider: {fileID: 0}
   canToleratePosture: 0
   toleratedPosture: 0
   changeStateOnTrigger: 0
   changeColorOnTrigger: 1
   colorChangingPart: {fileID: 828888249231039332}
+  newColor: {r: 1, g: 0, b: 0, a: 0}
+  preTriggerState: {fileID: 0}
+  postTriggerState: {fileID: 0}
+--- !u!114 &1331435304756208400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828888249525464520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee37d016ea341ba489b4bc1c5bb9369b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstaclesToBeTriggered:
+  - {fileID: 7401246244881378077}
+  isTwoPartTrigger: 0
+  isOneTimeTrigger: 0
+  triggerCollider: {fileID: 0}
+  canToleratePosture: 0
+  toleratedPosture: 0
+  changeStateOnTrigger: 0
+  changeColorOnTrigger: 1
+  colorChangingPart: {fileID: 828888249525464520}
   newColor: {r: 1, g: 0, b: 0, a: 0}
   preTriggerState: {fileID: 0}
   postTriggerState: {fileID: 0}
@@ -87,13 +87,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1331435304756208400
+--- !u!114 &1331435302862450680
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 828888249525464520}
+  m_GameObject: {fileID: 1773674177373196928}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee37d016ea341ba489b4bc1c5bb9369b, type: 3}
@@ -104,11 +104,12 @@ MonoBehaviour:
   - {fileID: 7401246246151487940}
   isTwoPartTrigger: 0
   isOneTimeTrigger: 0
+  triggerCollider: {fileID: 0}
   canToleratePosture: 0
   toleratedPosture: 0
   changeStateOnTrigger: 0
   changeColorOnTrigger: 1
-  colorChangingPart: {fileID: 828888249525464520}
+  colorChangingPart: {fileID: 1773674177373196928}
   newColor: {r: 1, g: 0, b: 0, a: 0}
   preTriggerState: {fileID: 0}
   postTriggerState: {fileID: 0}

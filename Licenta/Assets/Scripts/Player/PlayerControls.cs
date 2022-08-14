@@ -4,29 +4,37 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerControls : MonoBehaviour {
-    public Camera mainCamera;
-    InputManager inputManager;
-    CharacterController characterController;
-    PlayerStats playerStats;
-    PlayerAnimationHandler playerAnimationHandler;
+    [SerializeField]
+    private Camera mainCamera;
+    private InputManager inputManager;
+    private CharacterController characterController;
+    private PlayerStats playerStats;
+    private PlayerAnimationHandler playerAnimationHandler;
 
-    Vector3 currentMovementFromInput; // used to be Vec2 while using wasd
-    Vector3 playerVelocity;
-    Vector3 playerMovement;
+    private Vector3 currentMovementFromInput; // used to be Vec2 while using wasd
+    private Vector3 playerVelocity;
+    private Vector3 playerMovement;
 
-    public float gravityValue;
-    public Vector3 dragValue;
+    [SerializeField]
+    private float gravityValue;
+    [SerializeField]
+    private Vector3 dragValue;
+    [SerializeField]
+    private float dodgeCooldown;
 
-    Quaternion currentRotation;
-    Quaternion targetRotation;
+    private Quaternion currentRotation;
+    private Quaternion targetRotation;
 
-    bool movementInputDetected;
-    bool groundedPlayer;
-    bool playerJumped;
-    bool playerDodged;
-    float mov_planePoint;
-    Plane mov_plane;
-    Ray mov_ray;
+    private bool movementInputDetected;
+    private bool groundedPlayer;
+    private bool playerJumped;
+    private bool playerDodged;
+    private bool dodgeOnCooldown;
+    private float mov_planePoint;
+    private Plane mov_plane;
+    private Ray mov_ray;
+
+    private WaitForSeconds waitDodgeCooldown;
 
     private void Awake() {
         inputManager = new InputManager();
@@ -55,12 +63,15 @@ public class PlayerControls : MonoBehaviour {
         inputManager.PlayerMovement.Alternatemove.started += OnAltMovementInput;
         inputManager.PlayerMovement.Alternatemove.canceled += OnAltMovementInput;
         inputManager.PlayerMovement.Alternatemove.performed += OnAltMovementInput;
+
+        waitDodgeCooldown = new WaitForSeconds(dodgeCooldown);
     }
 
     private void Start() {
         // playerSpeed = playerStats.speedWalking;
         playerJumped = false;
         playerDodged = false;
+        dodgeOnCooldown = false;
     }
 
     private void Update() {
@@ -113,6 +124,7 @@ public class PlayerControls : MonoBehaviour {
                                                                                     0,
                                                                                     (Mathf.Log(1f / (Time.deltaTime * dragValue.z + 1)) / -Time.deltaTime)));
             playerDodged = false;
+            StartCoroutine(DodgeCooldownCoroutine());
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
@@ -211,10 +223,12 @@ public class PlayerControls : MonoBehaviour {
     }
 
     private void OnDodge(InputAction.CallbackContext context) {
-        if(groundedPlayer && 
+        if(groundedPlayer &&
+            !dodgeOnCooldown &&
             playerStats.currentPosture != PlayerPostureState.Crawling) {
             playerAnimationHandler.Dodge();
             playerDodged = true;
+            dodgeOnCooldown = true;
         }
     }
 
@@ -294,6 +308,13 @@ public class PlayerControls : MonoBehaviour {
 
     private void OnDisable() {
         inputManager.PlayerMovement.Disable();
+    }
+
+    private IEnumerator DodgeCooldownCoroutine() {
+        Debug.Log("Dodge cooldown up.");
+        yield return waitDodgeCooldown;
+        dodgeOnCooldown = false;
+        Debug.Log("Dodge cooldown down.");
     }
 
     public enum PlayerPostureState {

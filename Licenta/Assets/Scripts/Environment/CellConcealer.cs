@@ -10,6 +10,8 @@ public class CellConcealer : MonoBehaviour {
     [SerializeField]
     private MazeCellObject mazeCellObject;
     private MeshRenderer occluderObjectRenderer;
+    [SerializeField]
+    private ParticleSystem fogParticles;
 
     private bool isRevealed;
 
@@ -21,7 +23,7 @@ public class CellConcealer : MonoBehaviour {
 
     private void Start() {
         isRevealed = false;
-        occluderObjectRenderer = occluderObject.GetComponent<MeshRenderer>();
+        // occluderObjectRenderer = occluderObject.GetComponent<MeshRenderer>();
 
         layerMask = (1 << LayerMask.NameToLayer("CellConcealers"));
     }
@@ -57,7 +59,8 @@ public class CellConcealer : MonoBehaviour {
     }
 
     public void RevealCell() {
-        occluderObjectRenderer.enabled = false;
+        // occluderObjectRenderer.enabled = false;
+        fogParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         isRevealed = true;
     }
 

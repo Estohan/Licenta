@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstaclesToBeTriggered:
-  - {fileID: 578183159679725230}
   - {fileID: 578183160425386655}
   isTwoPartTrigger: 0
   isOneTimeTrigger: 1
+  triggerCollider: {fileID: 6932193603647580996}
   canToleratePosture: 1
   toleratedPosture: 1
   changeStateOnTrigger: 1
@@ -39,9 +39,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstaclesToBeTriggered:
   - {fileID: 578183159679725230}
-  - {fileID: 578183160425386655}
   isTwoPartTrigger: 0
   isOneTimeTrigger: 1
+  triggerCollider: {fileID: 6932193604415569800}
   canToleratePosture: 1
   toleratedPosture: 1
   changeStateOnTrigger: 1
@@ -102,8 +102,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2284297352947868390, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
+      propertyPath: triggerCollider
+      value: 
+      objectReference: {fileID: 7168004057735771599}
+    - target: {fileID: 2284297352947868390, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2284297352947868390, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.data[0]
@@ -112,7 +116,7 @@ PrefabInstance:
     - target: {fileID: 2284297352947868390, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.data[1]
       value: 
-      objectReference: {fileID: 578183160425386655}
+      objectReference: {fileID: 0}
     - target: {fileID: 2284297352947868408, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
       propertyPath: m_Name
       value: Wire_trigger
@@ -161,11 +165,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4739073629715273494, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ea23efe29e488c4a95ce9be415dba34, type: 2}
+    - target: {fileID: 4739073630845149797, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ea23efe29e488c4a95ce9be415dba34, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
 --- !u!4 &7168004057735771601 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2284297352947868409, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
+  m_PrefabInstance: {fileID: 8992186387720869672}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &7168004057735771599 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 2284297352947868391, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
   m_PrefabInstance: {fileID: 8992186387720869672}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8992186388123170133
@@ -300,7 +317,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wire_trigger_anchored (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7847964546263721249, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4591621240666728130, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
 --- !u!1 &5339638954677338734 stripped
 GameObject:
@@ -310,6 +332,11 @@ GameObject:
 --- !u!4 &7612419397438069045 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1544196996728713149, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
+  m_PrefabInstance: {fileID: 8992186388701755016}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &6932193603647580996 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 2089301590443662796, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
   m_PrefabInstance: {fileID: 8992186388701755016}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7165449525042331421 stripped
@@ -458,7 +485,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7847964546263721249, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4591621240666728130, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
 --- !u!1 &5339638954917041826 stripped
 GameObject:
@@ -468,6 +500,11 @@ GameObject:
 --- !u!4 &7612419398809964025 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1544196996728713149, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
+  m_PrefabInstance: {fileID: 8992186388998857284}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &6932193604415569800 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 2089301590443662796, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
   m_PrefabInstance: {fileID: 8992186388998857284}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7165449523209776081 stripped
@@ -496,13 +533,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2284297352947868390, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
+      propertyPath: triggerCollider
+      value: 
+      objectReference: {fileID: 7168004056349593630}
+    - target: {fileID: 2284297352947868390, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2284297352947868390, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.data[0]
       value: 
-      objectReference: {fileID: 578183159679725230}
+      objectReference: {fileID: 578183160425386655}
     - target: {fileID: 2284297352947868390, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.data[1]
       value: 
@@ -555,10 +596,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4739073629715273494, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ea23efe29e488c4a95ce9be415dba34, type: 2}
+    - target: {fileID: 4739073630845149797, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ea23efe29e488c4a95ce9be415dba34, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
 --- !u!4 &7168004056349593600 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2284297352947868409, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
+  m_PrefabInstance: {fileID: 8992186389237101305}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &7168004056349593630 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 2284297352947868391, guid: 5d2740abf2a7bc14683bfc833fc45d6d, type: 3}
   m_PrefabInstance: {fileID: 8992186389237101305}
   m_PrefabAsset: {fileID: 0}

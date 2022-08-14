@@ -171,7 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alwaysConceal: 1
   concealingRotations: []
-  unreachable: 0
+  concealingMaterial: {fileID: 2100000, guid: 4b2e79ec0d4df3f4182cdcd79294a3d3, type: 2}
 --- !u!65 &395970906877811528
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -181,7 +181,7 @@ BoxCollider:
   m_GameObject: {fileID: 8650815324189059002}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.6000001, y: 4.1804895, z: 0.5188517}
   m_Center: {x: 0.8000001, y: 2.0902448, z: 0.000000059604645}
@@ -234,7 +234,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReturn: 0
   canAnounce: 0
-  timeToReturnOrBreak: 0
+  activeTime: 0
+  returnTime: 0
   state: 0
   selfStart: 0
   startDelay: 0

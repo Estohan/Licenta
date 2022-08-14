@@ -1,5 +1,31 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &7335796931141303634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6268650091680812220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee37d016ea341ba489b4bc1c5bb9369b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstaclesToBeTriggered:
+  - {fileID: 40939292103698059}
+  - {fileID: 40939292342328175}
+  isTwoPartTrigger: 0
+  isOneTimeTrigger: 1
+  triggerCollider: {fileID: 6268650091680812195}
+  canToleratePosture: 0
+  toleratedPosture: 0
+  changeStateOnTrigger: 1
+  changeColorOnTrigger: 0
+  colorChangingPart: {fileID: 0}
+  newColor: {r: 0, g: 0, b: 0, a: 0}
+  preTriggerState: {fileID: 6268650092733773688}
+  postTriggerState: {fileID: 6268650092780969175}
 --- !u!1 &8385075184605648354
 GameObject:
   m_ObjectHideFlags: 0
@@ -27,8 +53,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 40939291737330763}
   - {fileID: 40939292570544559}
+  - {fileID: 40939291737330763}
   - {fileID: 6268650091680812221}
   - {fileID: 1020417649258127338}
   - {fileID: 1020417650699933587}
@@ -42,6 +68,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8385075184605648355}
     m_Modifications:
+    - target: {fileID: 842509568189932876, guid: b1d09fadf7da25142b6df8d77d8b495e, type: 3}
+      propertyPath: triggerCollider
+      value: 
+      objectReference: {fileID: 6268650091680812195}
     - target: {fileID: 842509568189932876, guid: b1d09fadf7da25142b6df8d77d8b495e, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.size
       value: 2
@@ -102,11 +132,43 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 842509569424045369, guid: b1d09fadf7da25142b6df8d77d8b495e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6180864965393819087, guid: b1d09fadf7da25142b6df8d77d8b495e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ea23efe29e488c4a95ce9be415dba34, type: 2}
+    - target: {fileID: 6180864966411620540, guid: b1d09fadf7da25142b6df8d77d8b495e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ea23efe29e488c4a95ce9be415dba34, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1d09fadf7da25142b6df8d77d8b495e, type: 3}
+--- !u!1 &6268650091680812220 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 842509568189932882, guid: b1d09fadf7da25142b6df8d77d8b495e, type: 3}
+  m_PrefabInstance: {fileID: 6723744461094840814}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6268650091680812221 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 842509568189932883, guid: b1d09fadf7da25142b6df8d77d8b495e, type: 3}
+  m_PrefabInstance: {fileID: 6723744461094840814}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &6268650091680812195 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 842509568189932877, guid: b1d09fadf7da25142b6df8d77d8b495e, type: 3}
+  m_PrefabInstance: {fileID: 6723744461094840814}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6268650092733773688 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 842509569242652310, guid: b1d09fadf7da25142b6df8d77d8b495e, type: 3}
+  m_PrefabInstance: {fileID: 6723744461094840814}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6268650092780969175 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 842509569424045369, guid: b1d09fadf7da25142b6df8d77d8b495e, type: 3}
   m_PrefabInstance: {fileID: 6723744461094840814}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8385075183484228182
@@ -122,7 +184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6536781088148361407, guid: a4d646741d479204aa785614e9878793, type: 3}
       propertyPath: isOneTimeTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6536781088148361407, guid: a4d646741d479204aa785614e9878793, type: 3}
       propertyPath: canToleratePosture
@@ -130,12 +192,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6536781088148361407, guid: a4d646741d479204aa785614e9878793, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6536781088148361407, guid: a4d646741d479204aa785614e9878793, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.data[0]
       value: 
-      objectReference: {fileID: 40939292103698059}
+      objectReference: {fileID: 40939292342328175}
     - target: {fileID: 6536781088148361407, guid: a4d646741d479204aa785614e9878793, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.data[1]
       value: 
@@ -208,7 +270,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8416303451826672906, guid: 2d94db06b93636a44a6d34c1e0ad73b4, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8416303451826672906, guid: 2d94db06b93636a44a6d34c1e0ad73b4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -281,7 +343,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8416303451826672906, guid: 2d94db06b93636a44a6d34c1e0ad73b4, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8416303451826672906, guid: 2d94db06b93636a44a6d34c1e0ad73b4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -358,7 +420,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6536781088148361407, guid: a4d646741d479204aa785614e9878793, type: 3}
       propertyPath: isOneTimeTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6536781088148361407, guid: a4d646741d479204aa785614e9878793, type: 3}
       propertyPath: canToleratePosture
@@ -366,7 +428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6536781088148361407, guid: a4d646741d479204aa785614e9878793, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6536781088148361407, guid: a4d646741d479204aa785614e9878793, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.data[0]

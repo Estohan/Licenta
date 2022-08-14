@@ -28,6 +28,7 @@ public class ObjectConcealed : MonoBehaviour {
 
         if (alwaysConceal) {
             doesConceal = true;
+            this.GetComponent<MeshRenderer>().sharedMaterial = concealingMaterial;
             return;
         }
 

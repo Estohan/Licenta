@@ -27,8 +27,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 520312553535518671}
   - {fileID: 520312553725554338}
+  - {fileID: 520312553535518671}
   - {fileID: 7393261439241867625}
   - {fileID: 7393261439570185147}
   - {fileID: 7393261439091338138}
@@ -120,7 +120,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8416303451826672906, guid: 2d94db06b93636a44a6d34c1e0ad73b4, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8416303451826672906, guid: 2d94db06b93636a44a6d34c1e0ad73b4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -245,7 +245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4591621240666728130, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4591621240666728130, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.data[0]
@@ -254,7 +254,11 @@ PrefabInstance:
     - target: {fileID: 4591621240666728130, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.data[1]
       value: 
-      objectReference: {fileID: 520312553953467490}
+      objectReference: {fileID: 520312553101280527}
+    - target: {fileID: 7847964546263721249, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
 --- !u!4 &7393261439241867625 stripped
@@ -319,12 +323,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4591621240666728130, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4591621240666728130, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.data[0]
       value: 
-      objectReference: {fileID: 520312553101280527}
+      objectReference: {fileID: 520312553953467490}
     - target: {fileID: 4591621240666728130, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.data[1]
       value: 
@@ -393,12 +397,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4591621240666728130, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4591621240666728130, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.data[0]
       value: 
-      objectReference: {fileID: 520312553101280527}
+      objectReference: {fileID: 520312553953467490}
     - target: {fileID: 4591621240666728130, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.data[1]
       value: 
@@ -467,7 +471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4591621240666728130, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4591621240666728130, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.data[0]
@@ -476,7 +480,7 @@ PrefabInstance:
     - target: {fileID: 4591621240666728130, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
       propertyPath: obstaclesToBeTriggered.Array.data[1]
       value: 
-      objectReference: {fileID: 520312553953467490}
+      objectReference: {fileID: 520312553101280527}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2637fbcd7e0a7dc4e9ec9b67989c4e27, type: 3}
 --- !u!4 &7393261440597504029 stripped
@@ -493,7 +497,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8416303451826672906, guid: 2d94db06b93636a44a6d34c1e0ad73b4, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8416303451826672906, guid: 2d94db06b93636a44a6d34c1e0ad73b4, type: 3}
       propertyPath: m_LocalPosition.x

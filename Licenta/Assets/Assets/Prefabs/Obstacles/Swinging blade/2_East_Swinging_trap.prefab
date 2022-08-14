@@ -1,5 +1,31 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &3335728377589559824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737012870146316105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee37d016ea341ba489b4bc1c5bb9369b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstaclesToBeTriggered:
+  - {fileID: 6522993661083995247}
+  - {fileID: 6522993661642216285}
+  isTwoPartTrigger: 0
+  isOneTimeTrigger: 1
+  triggerCollider: {fileID: 2737012870146316118}
+  canToleratePosture: 0
+  toleratedPosture: 0
+  changeStateOnTrigger: 1
+  changeColorOnTrigger: 0
+  colorChangingPart: {fileID: 0}
+  newColor: {r: 0, g: 0, b: 0, a: 0}
+  preTriggerState: {fileID: 2737012871240690829}
+  postTriggerState: {fileID: 2737012870704875298}
 --- !u!1 &3335728376723403782
 GameObject:
   m_ObjectHideFlags: 0
@@ -37,31 +63,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3335728377589559824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2737012870146316105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee37d016ea341ba489b4bc1c5bb9369b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstaclesToBeTriggered:
-  - {fileID: 6522993661083995247}
-  - {fileID: 6522993661642216285}
-  isTwoPartTrigger: 0
-  isOneTimeTrigger: 1
-  canToleratePosture: 0
-  toleratedPosture: 0
-  changeStateOnTrigger: 1
-  changeColorOnTrigger: 0
-  colorChangingPart: {fileID: 0}
-  newColor: {r: 0, g: 0, b: 0, a: 0}
-  preTriggerState: {fileID: 2737012871240690829}
-  postTriggerState: {fileID: 2737012870704875298}
 --- !u!114 &3335728377976917183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,10 +76,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstaclesToBeTriggered:
-  - {fileID: 6522993661083995247}
   - {fileID: 6522993661642216285}
   isTwoPartTrigger: 0
   isOneTimeTrigger: 0
+  triggerCollider: {fileID: 0}
   canToleratePosture: 0
   toleratedPosture: 0
   changeStateOnTrigger: 0
@@ -101,9 +102,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstaclesToBeTriggered:
   - {fileID: 6522993661083995247}
-  - {fileID: 6522993661642216285}
   isTwoPartTrigger: 0
   isOneTimeTrigger: 0
+  triggerCollider: {fileID: 0}
   canToleratePosture: 0
   toleratedPosture: 0
   changeStateOnTrigger: 0
@@ -240,6 +241,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 842509569424045369, guid: b1d09fadf7da25142b6df8d77d8b495e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6180864965393819087, guid: b1d09fadf7da25142b6df8d77d8b495e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ea23efe29e488c4a95ce9be415dba34, type: 2}
+    - target: {fileID: 6180864966411620540, guid: b1d09fadf7da25142b6df8d77d8b495e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ea23efe29e488c4a95ce9be415dba34, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1d09fadf7da25142b6df8d77d8b495e, type: 3}
 --- !u!1 &2737012870146316105 stripped
@@ -250,6 +263,11 @@ GameObject:
 --- !u!4 &2737012870146316104 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 842509568189932883, guid: b1d09fadf7da25142b6df8d77d8b495e, type: 3}
+  m_PrefabInstance: {fileID: 3335728377589559835}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2737012870146316118 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 842509568189932877, guid: b1d09fadf7da25142b6df8d77d8b495e, type: 3}
   m_PrefabInstance: {fileID: 3335728377589559835}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2737012871240690829 stripped

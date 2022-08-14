@@ -40,7 +40,7 @@ public class PlayerStats : MyMonoBehaviour {
     }*/
 
     // Damage test
-    /*public bool test1;
+    public bool test1;
     public bool test2;
 
     private void Update() {
@@ -57,7 +57,7 @@ public class PlayerStats : MyMonoBehaviour {
             GameEventSystem.instance.PlayerHit(val);
             GameEventSystem.instance.PlayerStatsChanged();
         }
-    }*/
+    }
 
     protected override void Start() {
         base.Start();

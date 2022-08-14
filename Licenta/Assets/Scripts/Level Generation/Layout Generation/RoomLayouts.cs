@@ -141,12 +141,19 @@ public class RoomData {
     public MazeDirection rotation;
     public int size;
     public int index;
+    public int itemID;
+    public ItemRarity itemRarity;
+
+    public RoomData() {
+        // empty constructor
+    }
 
     public RoomData(MazeCoords anchor, MazeDirection rotation, int size, int index) {
         this.anchor = anchor;
         this.rotation = rotation;
         this.size = size;
         this.index = index;
+        this.itemID = -1;
     }
 
     public override string ToString() {

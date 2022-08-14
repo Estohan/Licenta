@@ -137,6 +137,9 @@ public static class MazeGenAlgorithms {
         // Choose obstacle locations
         PlaceShapes(layout, stats);
 
+        // Place items in rooms
+        PlaceItems(layout, stats, layoutRec);
+
         // DEBUG
         //_RemoveRoomWalls(layout, stats);
 
@@ -171,16 +174,78 @@ public static class MazeGenAlgorithms {
         Debug.Log(message);
 
         message = "Room data:\n";
-        for(int sector = 1; sector < layoutRec.nrOfSectors; sector ++) {
+        for(int sector = 1; sector <= layoutRec.nrOfSectors; sector ++) {
             message += "Sector " + sector + ":\n";
             foreach(RoomData room in stats.rooms[sector - 1]) {
-                message += "\t Room " + room.index + " of size " + room.size + " and rot. " + room.rotation + ", at " + room.anchor + "\n";
+                message += "\t Room " + room.index + " of size " + room.size + " and rot. " + room.rotation + ", at " + room.anchor + 
+                            " [ " + room.itemID + ", " + room.itemRarity + "]\n";
             }
         }
         Debug.Log(message);
 
 
         return (layout, stats);
+    }
+
+    private static void PlaceItems(int[,,] layout, LayoutStats stats, LevelGenerator.LayoutRequirements layoutRec) {
+        int farthestRoomDist = 0;
+        int distToStart;
+        RoomData farthestRoom = new RoomData();
+        float randFloat;
+        // 1. Place a random legendary item in the farthest room
+
+        // Find the farthest room from start
+        for (int sector = 0; sector < stats.numberOfSectors; sector++) {
+            foreach (RoomData room in stats.rooms[sector]) {
+                distToStart = stats.cellsStats[room.anchor.z, room.anchor.x].distanceToStart;
+                if (distToStart > farthestRoomDist) {
+                    farthestRoomDist = distToStart;
+                    farthestRoom = room;
+                }
+            }
+        }
+        Debug.Log("Farthest room found is " + farthestRoom + " cells away: " + farthestRoom.anchor + ", " + farthestRoom.size + ", " + farthestRoom.rotation);
+        // Chose a random legendary item and place it in there
+        randFloat = UnityEngine.Random.Range(0f, 100f);
+        foreach ((int itemID, float chanceThreshold) in ItemsIDs.legendaryItemsIDs) {
+            if (randFloat <= chanceThreshold) {
+                farthestRoom.itemID = itemID;
+                farthestRoom.itemRarity = ItemRarity.Legendary;
+                break;
+            }
+        }
+        Debug.Log("Item " + farthestRoom.itemID + " of rarity type " + farthestRoom.itemRarity + " was placed in farthest room at " + farthestRoom.anchor);
+
+        // 2. Place items in the other rooms using the received layout requirements
+        for (int sector = 0; sector < stats.numberOfSectors; sector++) {
+            foreach (RoomData room in stats.rooms[sector]) {
+                // If room was not picked at step 1.
+                if (room.itemID < 0) {
+                    // Item existence
+                    randFloat = UnityEngine.Random.Range(0f, 100f);
+                    if (randFloat <= layoutRec.noItemDropChance) {
+                        // no item will be placed in this room
+                        continue;
+                    }
+                    // Item rarity
+                    randFloat = UnityEngine.Random.Range(0f, 100f);
+                    foreach ((ItemRarity rarity, float chanceThreshold) in layoutRec.itemDropChances) {
+                        if (randFloat <= chanceThreshold) {
+                            room.itemRarity = rarity;
+                            break;
+                        }
+                    }
+                    // Item ID
+                    randFloat = UnityEngine.Random.Range(0f, 100f);
+                    foreach ((int itemID,  float chanceThreshold) in ItemsIDs.GetItemsByRarity(room.itemRarity)) {
+                        if (randFloat <= chanceThreshold) {
+                            room.itemID = itemID;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private static void PlaceShapes(int[,,] layout, LayoutStats stats) {
@@ -786,7 +851,7 @@ public static class MazeGenAlgorithms {
         while (bfsQueue.Count > 0) {
             currentCell = bfsQueue.Dequeue();
             visited[currentCell.z, currentCell.x] = true;
-            neighbours = GetAccessibleNeighbours_Unsafe(currentCell, layout);
+            neighbours = GetAccessibleNeighbours_Unsafe(currentCell, layout, true);
             foreach(MazeCoords neighbour in neighbours) {
                 if(!visited[neighbour.z, neighbour.x]) {
                     bfsQueue.Enqueue(neighbour);
@@ -813,7 +878,7 @@ public static class MazeGenAlgorithms {
         while (bfsQueue.Count > 0) {
             currentCell = bfsQueue.Dequeue();
             visited[currentCell.z, currentCell.x] = true;
-            neighbours = GetAccessibleNeighbours_Unsafe(currentCell, layout);
+            neighbours = GetAccessibleNeighbours_Unsafe(currentCell, layout, true);
             foreach (MazeCoords neighbour in neighbours) {
                 if (!visited[neighbour.z, neighbour.x]) {
                     bfsQueue.Enqueue(neighbour);
@@ -843,7 +908,7 @@ public static class MazeGenAlgorithms {
         while (bfsQueue.Count > 0) {
             currentCell = bfsQueue.Dequeue();
             visited[currentCell.z, currentCell.x] = true;
-            neighbours = GetAccessibleNeighbours_Unsafe(currentCell, layout);
+            neighbours = GetAccessibleNeighbours_Unsafe(currentCell, layout, true);
             foreach (MazeCoords neighbour in neighbours) {
                 if (!visited[neighbour.z, neighbour.x]) {
                     bfsQueue.Enqueue(neighbour);
@@ -1996,34 +2061,34 @@ public static class MazeGenAlgorithms {
         return neighbours;
     }
 
-    private static List<MazeCoords> GetAccessibleNeighbours_Unsafe(MazeCoords currentCell, int[,,] layout) {
+    private static List<MazeCoords> GetAccessibleNeighbours_Unsafe(MazeCoords currentCell, int[,,] layout, bool includeRooms = false) {
         List<MazeCoords> accessibleNeighbours = new List<MazeCoords>();
         // North
         if(layout[currentCell.z - 1, currentCell.x, 2] == 0 &&
             layout[currentCell.z, currentCell.x, 0] == 0 &&
             layout[currentCell.z - 1, currentCell.x, 4] >= (int)CellType.Start &&
-            layout[currentCell.z - 1, currentCell.x, 4] <= (int)CellType.Common) { 
+            layout[currentCell.z - 1, currentCell.x, 4] <= (includeRooms ? (int)CellType.Room : (int)CellType.Common)) { 
                 accessibleNeighbours.Add(new MazeCoords(currentCell.z - 1, currentCell.x));
         }
         // East
         if (layout[currentCell.z, currentCell.x + 1, 3] == 0 &&
             layout[currentCell.z, currentCell.x, 1] == 0 &&
             layout[currentCell.z, currentCell.x + 1, 4] >= (int)CellType.Start &&
-            layout[currentCell.z, currentCell.x + 1, 4] <= (int)CellType.Common) {
+            layout[currentCell.z, currentCell.x + 1, 4] <= (includeRooms ? (int)CellType.Room : (int)CellType.Common)) {
             accessibleNeighbours.Add(new MazeCoords(currentCell.z, currentCell.x + 1));
         }
         // South
         if (layout[currentCell.z + 1, currentCell.x, 0] == 0 &&
             layout[currentCell.z, currentCell.x, 2] == 0 &&
             layout[currentCell.z + 1, currentCell.x, 4] >= (int)CellType.Start &&
-            layout[currentCell.z + 1, currentCell.x, 4] <= (int)CellType.Common) {
+            layout[currentCell.z + 1, currentCell.x, 4] <= (includeRooms ? (int)CellType.Room : (int)CellType.Common)) {
             accessibleNeighbours.Add(new MazeCoords(currentCell.z + 1, currentCell.x));
         }
         // West
         if (layout[currentCell.z, currentCell.x - 1, 1] == 0 &&
             layout[currentCell.z, currentCell.x, 3] == 0 &&
             layout[currentCell.z, currentCell.x - 1, 4] >= (int)CellType.Start &&
-            layout[currentCell.z, currentCell.x - 1, 4] <= (int)CellType.Common) {
+            layout[currentCell.z, currentCell.x - 1, 4] <= (includeRooms ? (int)CellType.Room : (int)CellType.Common)) {
             accessibleNeighbours.Add(new MazeCoords(currentCell.z, currentCell.x - 1));
         }
         return accessibleNeighbours;
@@ -2122,6 +2187,6 @@ public enum CellType {
     Finish,
     Common,
     Room,
-    Obstacle,
-    Loot
+    Obstacle
+    //Loot
 }

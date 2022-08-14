@@ -64,11 +64,14 @@ public class MazeCellObject : MonoBehaviour {
             if(roomObjCell != null && roomObjCell.HasFloor()) {
                 _floorObj = roomObjCell._floor;
             } else { // Default blank floor
-                _floorObj = ObjectDatabase.instance.GetArchitecture(0, ObjectType.Floor, 0);
+                // _floorObj = ObjectDatabase.instance.GetArchitecture(0, ObjectType.Floor, 0);
+                _floorObj = null;
             }
         }
 
-        Instantiate(_floorObj, this.transform);
+        if (_floorObj != null) {
+            Instantiate(_floorObj, this.transform);
+        }
     }
 
     public void InstantiateWalls() {
@@ -111,18 +114,22 @@ public class MazeCellObject : MonoBehaviour {
                         if(roomObjCell != null && roomObjCell.HasWall(direction)) {
                             _wallObj = roomObjCell.GetWall(direction);
                         } else { // default blank object
-                            _wallObj = ObjectDatabase.instance.GetArchitecture(0, ObjectType.NEWall, 0);
+                            // _wallObj = ObjectDatabase.instance.GetArchitecture(0, ObjectType.NEWall, 0);
+                            _wallObj = null;
                         }
                     }
-                    GameObject newWall = Instantiate(_wallObj, this.transform);
-                    newWall.name = name + data.coordinates.z + "-" + data.coordinates.x;
-                    // Set to correct position
-                    newWall.transform.localPosition = GetCellSubsectionPos(newWall.transform,
-                                                                            Constants.cellSize,
-                                                                            subsection);
-                    // Rotate to correct position
-                    newWall.transform.rotation = GetRotationFromSubsection(newWall.transform,
-                                                                            subsection);
+
+                    if (_wallObj != null) {
+                        GameObject newWall = Instantiate(_wallObj, this.transform);
+                        newWall.name = name + data.coordinates.z + "-" + data.coordinates.x;
+                        // Set to correct position
+                        newWall.transform.localPosition = GetCellSubsectionPos(newWall.transform,
+                                                                                Constants.cellSize,
+                                                                                subsection);
+                        // Rotate to correct position
+                        newWall.transform.rotation = GetRotationFromSubsection(newWall.transform,
+                                                                                subsection);
+                    }
                 }
             }
         }
@@ -147,7 +154,8 @@ public class MazeCellObject : MonoBehaviour {
                         if(roomObjCell != null && roomObjCell.HasCorner(k)) {
                             cornerType = roomObjCell.GetCorner(k);
                         } else { // default blank object
-                            cornerType = ObjectDatabase.instance.GetArchitecture(0, ObjectType.NoFaceCorner, 0);
+                            // cornerType = ObjectDatabase.instance.GetArchitecture(0, ObjectType.NoFaceCorner, 0);
+                            cornerType = null;
                         }
                     }
                     // Set name and set cell subsection in which to be placed
@@ -218,14 +226,17 @@ public class MazeCellObject : MonoBehaviour {
                             }
                             break;
                     }
-                    // Create corner as child of its cell
-                    GameObject newCorner = Instantiate(cornerType, this.transform);
-                    newCorner.name = name + data.coordinates.z + "-" + data.coordinates.x;
-                    // Set to correct position
-                    newCorner.transform.localPosition = GetCellSubsectionPos(newCorner.transform,
-                                                                            Constants.cellSize,
-                                                                            subsection);
-                    newCorner.transform.rotation = rotation;
+
+                    if (cornerType != null) {
+                        // Create corner as child of its cell
+                        GameObject newCorner = Instantiate(cornerType, this.transform);
+                        newCorner.name = name + data.coordinates.z + "-" + data.coordinates.x;
+                        // Set to correct position
+                        newCorner.transform.localPosition = GetCellSubsectionPos(newCorner.transform,
+                                                                                Constants.cellSize,
+                                                                                subsection);
+                        newCorner.transform.rotation = rotation;
+                    }
                 }
             }
         }
@@ -253,6 +264,13 @@ public class MazeCellObject : MonoBehaviour {
                     break;
              }
             obstacle.transform.rotation = rotation;*/
+        }
+        if (data.type == CellType.Room && data.offsetToRoomAnchor.z == 0 && data.offsetToRoomAnchor.x == 0) {
+            if (ObjectDatabase.instance.GetRoomCell(stage, data.room, data.offsetToRoomAnchor).HasInterior()) {
+                GameObject interior = Instantiate(ObjectDatabase.instance.GetRoomCell(stage, data.room, data.offsetToRoomAnchor).
+                                                    GetInterior(),
+                                                    this.transform);
+            }
         }
     }
 

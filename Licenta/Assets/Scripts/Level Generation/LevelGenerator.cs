@@ -153,7 +153,7 @@ public class LevelGenerator : MonoBehaviour {
                     case CellType.Start:
                     case CellType.Finish:
                     case CellType.Obstacle:
-                    case CellType.Loot:
+                    //case CellType.Loot:
                     case CellType.Common:
                         // Walls
                         // [TODO] Choose 4 walls?
@@ -269,10 +269,15 @@ public class LevelGenerator : MonoBehaviour {
         public int outerPaddingPerc;
         public int innerPaddingPerc;
         public int nrOfSectors;
+
         public int stage;
+
         public int difficulty;
         public int chanceOfObstDowngrade;
         public int chanceOfObstUpgrade;
+
+        public float noItemDropChance;
+        public List<(ItemRarity, float)> itemDropChances;
 
         public LayoutRequirements(int sizeZ,
                                     int sizeX,
@@ -288,6 +293,13 @@ public class LevelGenerator : MonoBehaviour {
             this.difficulty = 0;
             this.chanceOfObstDowngrade = 20;
             this.chanceOfObstUpgrade = 20;
+            this.noItemDropChance = 30f;
+            itemDropChances = new List<(ItemRarity, float)> {
+                (ItemRarity.Common, 50f), // 50% chance of common drop
+                (ItemRarity.Rare, 80f), // 30% chance of rare drop
+                (ItemRarity.Epic, 99f), // 19% chance of epic drop
+                (ItemRarity.Legendary, 100f) // 1% chance of legendary drop
+        };
         }
     }
 

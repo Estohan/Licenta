@@ -42,18 +42,19 @@ public class UIPlayerStats : MyMonoBehaviour {
     private void UpdatePlayerPosition(MazeCellData newCurrentCellData) {
         //displayedPlayerPosition = newCurrentCellData.coordinates;
 
-        /*CellStats newCurrentCellStats = newCurrentCellData.cellStats;
+        CellStats newCurrentCellStats = newCurrentCellData.cellStats;
         positionText.text = "Coords.   \t:" + newCurrentCellData.coordinates.ToString();
         positionText.text += "\nInSol.  \t:" + newCurrentCellStats.isInSolution.ToString();
         positionText.text += "\nDead-end\t:" + newCurrentCellStats.isDeadEnd.ToString();
         positionText.text += "\nAdj.gate\t:" + newCurrentCellStats.isAdjacentToSectorGate.ToString();
 
-        positionText.text += "\nDist.sol\t:" + newCurrentCellStats.distanceToSolution.ToString();
+        positionText.text += "\nDist.start\t:" + newCurrentCellStats.distanceToStart.ToString();
+        /*positionText.text += "\nDist.sol\t:" + newCurrentCellStats.distanceToSolution.ToString();
         positionText.text += "\nAcc.pt. \t:" + newCurrentCellStats.accessPoints.ToString();
 
-        positionText.text += "\nRch.from\t:" + newCurrentCellStats.reachableFrom.ToString();
+        positionText.text += "\nRch.from\t:" + newCurrentCellStats.reachableFrom.ToString();*/
 
-        positionText.text += "\nObst.\t: ";
+        /*positionText.text += "\nObst.\t: ";
         foreach ((int shapeID, MazeDirection direction) in newCurrentCellStats.mappedObstacleShapes) {
             positionText.text += "(" + shapeID + ", " + direction + ") ";
         }*/

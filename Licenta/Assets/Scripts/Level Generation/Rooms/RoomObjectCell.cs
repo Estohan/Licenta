@@ -19,15 +19,18 @@ public class RoomObjectCell : ScriptableObject {
     public GameObject _NEcorner;
     public GameObject _SEcorner;
     public GameObject _SWcorner;
-    [Space]
-    [Header("Subsections")]
+    /*[Space]
+    [Header("Subsections")]*/
     // [TRY] List of GameObjects instead
-    public GameObject _subsection_1;
+    /*public GameObject _subsection_1;
     public MazeDirection _subsection_1_rot;
     public GameObject _subsection_2;
     public MazeDirection _subsection_2_rot;
     public GameObject _subsection_3;
-    public MazeDirection _subsection_3_rot;
+    public MazeDirection _subsection_3_rot;*/
+    [Space]
+    [Header("Room interior (Anchor only!)")]
+    public GameObject interiorObject;
 
     public bool HasFloor() {
         return _floor != null;
@@ -85,8 +88,16 @@ public class RoomObjectCell : ScriptableObject {
         }
     }
 
+    public GameObject GetInterior() {
+        return interiorObject;
+    }
+
+    public bool HasInterior() {
+        return interiorObject != null;
+    }
+
     // [TODO] Treat unassigned reference exceptions
-    public List<(GameObject, MazeDirection)> GetSubsectionObj() {
+    /*public List<(GameObject, MazeDirection)> GetSubsectionObj() {
         List < (GameObject, MazeDirection) > subsectionObjects = new List<(GameObject, MazeDirection)>();
 
         subsectionObjects.Add((_subsection_1, _subsection_1_rot));
@@ -94,5 +105,5 @@ public class RoomObjectCell : ScriptableObject {
         subsectionObjects.Add((_subsection_3, _subsection_3_rot));
 
         return subsectionObjects;
-    }
+    }*/
 }

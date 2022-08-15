@@ -142,6 +142,11 @@ public class ObjectDatabase : MonoBehaviour {
         }
     }
 
+    public GameObject GetPickUpItem(int stage, int itemID, ItemRarity itemRarity) {
+        GameStageObjects currentStageObjects = firstStageObjects;
+        return currentStageObjects.pickUpItems.GetPickUpItem(itemID, itemRarity);
+    }
+
     private void Awake() {
         if (instance != null && instance != this) {
             Debug.LogError("Duplicate instance of ObjectDatabase.\n");
@@ -167,6 +172,8 @@ public class GameStageObjects {
     public List<RoomsOfSizeN> PredefinedRoomsBySize;
     // Obstacles
     public List<ObstacleObjectsByShape> obstacleObjectsByShape;
+    // PickUp Items
+    public PickUpsSO pickUpItems;
 
     public int GetWallsPoolSize(MazeDirection direction) {
         if(direction == MazeDirection.North ||
@@ -229,5 +236,6 @@ public enum ObjectType {
     NEWall, SWWall,
     TwoFaceCorner, OneFaceCorner, NoFaceCorner,
     OuterPadding, InnerPadding,
-    Obstacle
+    Obstacle,
+    Item
 }

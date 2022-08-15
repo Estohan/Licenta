@@ -31,6 +31,10 @@ public class RoomObjectCell : ScriptableObject {
     [Space]
     [Header("Room interior (Anchor only!)")]
     public GameObject interiorObject;
+    [Space]
+    [Header("PickUp Items arrangements (Anchor only!)")]
+    public PickUpItemArrangement defaultArrangement;
+    public List<PickUpItemArrangement> arrangements;
 
     public bool HasFloor() {
         return _floor != null;
@@ -96,6 +100,22 @@ public class RoomObjectCell : ScriptableObject {
         return interiorObject != null;
     }
 
+    public PickUpItemArrangement GetDefaultItemArrangement() {
+        if (defaultArrangement != null) {
+            return defaultArrangement;
+        } else {
+            return new PickUpItemArrangement(new Vector3(0f, 0f, 0f));
+        }
+    }
+
+    public List<PickUpItemArrangement> GetSpecialItemArrangements() {
+        return arrangements;
+    }
+
+    public bool HasSpecialItemArrangements() {
+        return arrangements == null;
+    }
+
     // [TODO] Treat unassigned reference exceptions
     /*public List<(GameObject, MazeDirection)> GetSubsectionObj() {
         List < (GameObject, MazeDirection) > subsectionObjects = new List<(GameObject, MazeDirection)>();
@@ -106,4 +126,21 @@ public class RoomObjectCell : ScriptableObject {
 
         return subsectionObjects;
     }*/
+}
+
+[System.Serializable]
+public class PickUpItemArrangement {
+    public ItemRarity targetedItemRarity;
+    public int targetedItemID;
+
+    public Vector3 itemPosRelativeToAnchor;
+
+    public bool hasArrangement;
+    public Vector3 arrangementLocation;
+    public Vector3 arrancementRotation;
+    public GameObject arrangement;
+
+    public PickUpItemArrangement(Vector3 position) {
+        this.itemPosRelativeToAnchor = position;
+    }
 }

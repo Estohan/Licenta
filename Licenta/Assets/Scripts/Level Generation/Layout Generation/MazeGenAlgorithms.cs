@@ -141,7 +141,7 @@ public static class MazeGenAlgorithms {
         PlaceItems(layout, stats, layoutRec);
 
         // DEBUG
-        //_RemoveRoomWalls(layout, stats);
+        _RemoveRoomWalls(layout, stats);
 
 
         Debug.Log("Here are some stats:");

@@ -5,16 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "PickUp Items")]
 public class PickUpsSO : ScriptableObject {
     [SerializeField]
-    private List<(int, GameObject)> commonItems;
+    private List<PickUpItem> commonItems;
     [SerializeField]
-    private List<(int, GameObject)> rareItems;
+    private List<PickUpItem> rareItems;
     [SerializeField]
-    private List<(int, GameObject)> epicItems;
+    private List<PickUpItem> epicItems;
     [SerializeField]
-    private List<(int, GameObject)> legendaryItems;
+    private List<PickUpItem> legendaryItems;
 
     public GameObject GetPickUpItem(int itemID, ItemRarity rarity) {
-        List<(int, GameObject)> container;
+        List<PickUpItem> container;
 
         // Select items containter of required rarity
         switch (rarity) {
@@ -33,9 +33,9 @@ public class PickUpsSO : ScriptableObject {
         }
 
         // Search for object of id ItemID
-        foreach ((int id, GameObject obj) in container) {
-            if (id == itemID) {
-                return obj;
+        foreach (PickUpItem item in container) {
+            if (item.GetItemID() == itemID) {
+                return item.gameObject;
             }
         }
 

@@ -2,17 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUpItem : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+[System.Serializable]
+public class PickUpItem : MonoBehaviour {
+    [SerializeField]
+    private ItemRarity rarity;
+    [SerializeField]
+    private int itemID;
+
+    /*[Space]
+    [Header("Item specific fields:")]*/
+
+    private void OnTriggerEnter(Collider other) {
+        this.enabled = false;
+        ItemEffect();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public ItemRarity GetItemRarity() {
+        return rarity;
+    }
+
+    public int GetItemID() {
+        return itemID;
+    }
+
+    public virtual void ItemEffect() {
+
     }
 }

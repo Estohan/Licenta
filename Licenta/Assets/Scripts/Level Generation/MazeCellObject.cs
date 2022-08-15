@@ -136,8 +136,15 @@ public class MazeCellObject : MonoBehaviour {
     }
 
     public void InstantiateCorners() {
-        GameObject cornerType;
+        GameObject _corner;
         int objStage, objType, objIndex;
+        /*bool _debug = false;
+        if (this.data.type == CellType.Room && this.data.room.size == 4) {
+            _debug = true;
+            //if (_debug) Debug.Log(this.data.coordinates + " " + _corner?.name + "");
+            Debug.Log(this.data.coordinates + "- " + this.data.cornerFaces[0] + " " + this.data.cornerFaces[1] + " " + this.data.cornerFaces[2] + " " + this.data.cornerFaces[3] + " ");
+        }*/
+        
 
         if (data.type > CellType.InnerPadding) {
             for (int k = 0; k < 4; k++) {
@@ -145,17 +152,17 @@ public class MazeCellObject : MonoBehaviour {
                     // Get the corner game object
                     if (data.type != CellType.Room) { // Common cell
                         (objStage, objType, objIndex) = data.objectReferences[5 + k];
-                        cornerType = ObjectDatabase.instance.GetArchitecture(objStage, (ObjectType)objType, objIndex);
+                        _corner = ObjectDatabase.instance.GetArchitecture(objStage, (ObjectType)objType, objIndex);
                     } else { // Room cell
                         RoomObjectCell roomObjCell = ObjectDatabase.instance.GetRoomCell(
                                                                         data.roomObjStage,
                                                                         data.room,
                                                                         data.offsetToRoomAnchor);
                         if(roomObjCell != null && roomObjCell.HasCorner(k)) {
-                            cornerType = roomObjCell.GetCorner(k);
+                            _corner = roomObjCell.GetCorner(k);
                         } else { // default blank object
-                            // cornerType = ObjectDatabase.instance.GetArchitecture(0, ObjectType.NoFaceCorner, 0);
-                            cornerType = null;
+                            // _corner = ObjectDatabase.instance.GetArchitecture(0, ObjectType.NoFaceCorner, 0);
+                            _corner = null;
                         }
                     }
                     // Set name and set cell subsection in which to be placed
@@ -227,9 +234,9 @@ public class MazeCellObject : MonoBehaviour {
                             break;
                     }
 
-                    if (cornerType != null) {
+                    if (_corner != null) {
                         // Create corner as child of its cell
-                        GameObject newCorner = Instantiate(cornerType, this.transform);
+                        GameObject newCorner = Instantiate(_corner, this.transform);
                         newCorner.name = name + data.coordinates.z + "-" + data.coordinates.x;
                         // Set to correct position
                         newCorner.transform.localPosition = GetCellSubsectionPos(newCorner.transform,
@@ -266,10 +273,27 @@ public class MazeCellObject : MonoBehaviour {
             obstacle.transform.rotation = rotation;*/
         }
         if (data.type == CellType.Room && data.offsetToRoomAnchor.z == 0 && data.offsetToRoomAnchor.x == 0) {
+            // Instatiate room decorations
             if (ObjectDatabase.instance.GetRoomCell(stage, data.room, data.offsetToRoomAnchor).HasInterior()) {
                 GameObject interior = Instantiate(ObjectDatabase.instance.GetRoomCell(stage, data.room, data.offsetToRoomAnchor).
                                                     GetInterior(),
                                                     this.transform);
+            }
+
+            // Instantiate pick up item (if the room contains any)
+            if (data.room.itemID >= 0) {
+                RoomObjectCell roomObjectCell = ObjectDatabase.instance.GetRoomCell(stage, data.room, data.offsetToRoomAnchor);
+                PickUpItemArrangement itemArrangement;
+
+                if (!roomObjectCell.HasSpecialItemArrangements()) {
+                    itemArrangement = roomObjectCell.GetDefaultItemArrangement();
+                } else {
+                    // [TODO] search the special arrangements
+                    itemArrangement = roomObjectCell.GetDefaultItemArrangement();
+                }
+                GameObject pickUpItem = Instantiate(ObjectDatabase.instance.GetPickUpItem(stage, data.room.itemID, data.room.itemRarity),
+                                                    this.transform);
+                pickUpItem.transform.localPosition = itemArrangement.itemPosRelativeToAnchor;
             }
         }
     }

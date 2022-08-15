@@ -146,8 +146,20 @@ public class LevelGenerator : MonoBehaviour {
                         level.cellsData[z, x].hasObjectReference[0] = true;
                         break;
                     case CellType.Room:
-                        for(int i = 0; i < 18; i ++) {
-                            level.cellsData[z, x].hasObjectReference[i] = true;
+                        RoomObjectCell roomObjCell = ObjectDatabase.instance.GetRoomCell(
+                                                                        level.cellsData[z, x].roomObjStage,
+                                                                        level.cellsData[z, x].room,
+                                                                        level.cellsData[z, x].offsetToRoomAnchor);
+                        if (roomObjCell.HasFloor()) {
+                            level.cellsData[z, x].hasObjectReference[0] = true;
+                        }
+                        for(int i = 0; i < 5; i ++) {
+                            if (roomObjCell.HasWall((MazeDirection)i)) {
+                                level.cellsData[z, x].hasObjectReference[i+1] = true;
+                            }
+                            if (roomObjCell.HasCorner(i)) {
+                                level.cellsData[z, x].hasObjectReference[i + 5] = true;
+                            }
                         }
                         break;
                     case CellType.Start:

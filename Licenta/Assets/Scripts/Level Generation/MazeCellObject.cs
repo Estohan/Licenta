@@ -7,6 +7,7 @@ public class MazeCellObject : MonoBehaviour {
 
     [SerializeField]
     private CellConcealer cellConcealer;
+    public List<GameObject> mapIcons;
     private bool visited;
 
     public MazeCellData data;
@@ -33,6 +34,27 @@ public class MazeCellObject : MonoBehaviour {
                 cellConcealer.RevealNeighbours();
                 visited = true;
             }
+        }
+    }
+
+    public void CollectAndHideMapIcons() {
+        // Collect and store map icons references
+        Utils.ExecuteOnAllChildren(this.gameObject, CollectMapIconsReferencesDelegate, 4, true);
+        // Hide map icons
+        MapIconsVisibility(false);
+    }
+
+    // Delegate used to gather all MapObject gameobjects in this cell's hierarchy
+    public void CollectMapIconsReferencesDelegate(GameObject child) {
+        if (child.transform.name == "MapObject") {
+            mapIcons.Add(child);
+        }
+    }
+
+    // Change visibility of all map icons associated with this cell
+    public void MapIconsVisibility(bool showMapIcons) {
+        foreach (GameObject mapIcon in mapIcons) {
+            mapIcon.SetActive(showMapIcons);
         }
     }
 

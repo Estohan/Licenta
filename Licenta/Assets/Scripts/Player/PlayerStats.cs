@@ -40,21 +40,21 @@ public class PlayerStats : MyMonoBehaviour {
     }*/
 
     // Damage test
-    public bool test1;
-    public bool test2;
+    public bool test1_damage;
+    public bool test2_heal;
 
     private void Update() {
         int val = 0;
-        if (test1) {
-            test1 = false;
-            val = UnityEngine.Random.Range(5, 15);
-            GameEventSystem.instance.PlayerHit(val);
+        if (test1_damage) {
+            test1_damage = false;
+            val = -UnityEngine.Random.Range(5, 15);
+            GameEventSystem.instance.PlayerHealthAffected(val);
             GameEventSystem.instance.PlayerStatsChanged();
         }
-        if (test2) {
-            test2 = false;
-            val = -UnityEngine.Random.Range(5, 15);
-            GameEventSystem.instance.PlayerHit(val);
+        if (test2_heal) {
+            test2_heal = false;
+            val = UnityEngine.Random.Range(5, 15);
+            GameEventSystem.instance.PlayerHealthAffected(val);
             GameEventSystem.instance.PlayerStatsChanged();
         }
     }
@@ -89,7 +89,7 @@ public class PlayerStats : MyMonoBehaviour {
 
     protected override void SafeOnEnable() {
         // events
-        GameEventSystem.instance.OnPlayerHit += HitPLayerReaction;
+        GameEventSystem.instance.OnHealthAffected += PlayerHealthAffectedReaction;
         GameEventSystem.instance.OnPlayerDeath += PlayerDeathReaction;
         GameEventSystem.instance.OnPlayerMoveToAnotherCell += MoveToAnotherCellReaction;
     }
@@ -111,16 +111,28 @@ public class PlayerStats : MyMonoBehaviour {
         isInactive = true;
     }
 
-    private void HitPLayerReaction(object sender, float damage) {
+    private void PlayerHealthAffectedReaction(object sender, float amount) {
         // Debug.Log("PlayerStats: Player was hit for " + damage + " points of damage!");
-        if (!isDamageImmune) {
-            isDamageImmune = true;
-            if (currHealth - damage <= 0) {
-                GameEventSystem.instance.PlayerDeath();
-            } else {
-                currHealth -= damage;
+        if (amount < 0) { // player was hit
+            if (!isDamageImmune) {
+                // damage immunity is reset in PlayerAnimationHandler, at the end of the
+                // hit effect
+                isDamageImmune = true;
+                if (currHealth + amount <= 0) {
+                    currHealth = 0;
+                    GameEventSystem.instance.PlayerDeath();
+                } else {
+                    currHealth += amount;
+                }
+                GameEventSystem.instance.PlayerStatsChanged();
             }
-            GameEventSystem.instance.PlayerStatsChanged();
+        } else { // player was healed
+            // prevent overheal
+            if (currHealth + amount > maxHealth) {
+                currHealth = maxHealth;
+            } else {
+                currHealth += amount;
+            }
         }
     }
 
@@ -139,7 +151,7 @@ public class PlayerStats : MyMonoBehaviour {
     }
 
     private void OnDisable() {
-        GameEventSystem.instance.OnPlayerHit -= HitPLayerReaction;
+        GameEventSystem.instance.OnHealthAffected -= PlayerHealthAffectedReaction;
         GameEventSystem.instance.OnPlayerDeath -= PlayerDeathReaction;
     }
 }

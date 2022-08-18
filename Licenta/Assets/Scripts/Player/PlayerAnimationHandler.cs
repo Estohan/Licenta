@@ -14,6 +14,10 @@ public class PlayerAnimationHandler : MyMonoBehaviour
     [SerializeField]
     private Material hitFlashMaterial_2;
     [SerializeField]
+    private Material healFlashMaterial_1;
+    [SerializeField]
+    private Material healFlashMaterial_2;
+    [SerializeField]
     private SkinnedMeshRenderer playerSkMeshRenderer;
 
     [Space]
@@ -88,7 +92,7 @@ public class PlayerAnimationHandler : MyMonoBehaviour
 
     protected override void SafeOnEnable() {
         // events
-        GameEventSystem.instance.OnPlayerHit += HitPlayerReaction;
+        GameEventSystem.instance.OnHealthAffected += PlayerHealthAffectedReaction;
         GameEventSystem.instance.OnPlayerDeath += PlayerDeathReaction;
     }
 
@@ -153,10 +157,14 @@ public class PlayerAnimationHandler : MyMonoBehaviour
         animator.SetTrigger(playSpecialHash);
     }
 
-    private void HitPlayerReaction(object sender, float damage) {
+    private void PlayerHealthAffectedReaction(object sender, float amount) {
         // Debug.Log("Animation Handler: Player was hit! Showing " + damage + " points of damage.");
         if (playerStats.isAlive && !playerStats.isDamageImmune) {
-            StartCoroutine(PlayerHitFlashEffect());
+            if (amount < 0) { // player was hit
+                StartCoroutine(PlayerFlashEffect(hitFlashMaterial_1, hitFlashMaterial_2));
+            } else { // player was healed
+                StartCoroutine(PlayerFlashEffect(healFlashMaterial_1, healFlashMaterial_2));
+            }
         }
 
     }
@@ -172,11 +180,11 @@ public class PlayerAnimationHandler : MyMonoBehaviour
         animator.speed = 1f;
     }
 
-    private IEnumerator PlayerHitFlashEffect() {
+    private IEnumerator PlayerFlashEffect(Material mat1, Material mat2) {
         for (int i = 0; i < hitFlashCount; i ++) {
-            playerSkMeshRenderer.material = hitFlashMaterial_1;
+            playerSkMeshRenderer.material = mat1;
             yield return hitFlashTimer;
-            playerSkMeshRenderer.material = hitFlashMaterial_2;
+            playerSkMeshRenderer.material = mat2;
             yield return hitFlashTimer;
         }
         playerSkMeshRenderer.material = originalMaterial;
@@ -186,7 +194,7 @@ public class PlayerAnimationHandler : MyMonoBehaviour
     }
 
     private void OnDisable() {
-        GameEventSystem.instance.OnPlayerHit -= HitPlayerReaction;
+        GameEventSystem.instance.OnHealthAffected -= PlayerHealthAffectedReaction;
         GameEventSystem.instance.OnPlayerDeath -= PlayerDeathReaction;
     }
 }

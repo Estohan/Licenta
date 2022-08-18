@@ -264,6 +264,9 @@ public class LevelGenerator : MonoBehaviour {
                 // Instantiate cell contents
                 newCellObject.InstantiateContent();
 
+                // Gather and hide all map icons present in this cell's hierarchy
+                newCellObject.CollectAndHideMapIcons();
+
                 // DEBUG
                 newCellObject.DebugColor();
             }

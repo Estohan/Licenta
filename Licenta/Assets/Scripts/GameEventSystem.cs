@@ -6,11 +6,11 @@ using UnityEngine;
 public class GameEventSystem : MonoBehaviour {
     public static GameEventSystem instance = null;
 
-    public delegate void PlayerHitDelegate(object sender, float damage);
+    public delegate void PlayerHealthAffectedDelegate(object sender, float amount);
     public delegate void PlayerDeathDelegate(object sender);
     public delegate void PlayerMoveToCellDelegate(object sender, MazeCellData cellData);
 
-    public event PlayerHitDelegate OnPlayerHit;
+    public event PlayerHealthAffectedDelegate OnHealthAffected;
     public event PlayerDeathDelegate OnPlayerDeath;
     public event PlayerMoveToCellDelegate OnPlayerMoveToAnotherCell;
     public event EventHandler OnPlayerStatsChange;
@@ -25,9 +25,9 @@ public class GameEventSystem : MonoBehaviour {
         }
     }
 
-    public void PlayerHit(float damage) {
+    public void PlayerHealthAffected(float amount) {
         // OnPlayerHit?.Invoke(this, EventArgs.Empty);
-        OnPlayerHit?.Invoke(this, damage);
+        OnHealthAffected?.Invoke(this, amount);
     }
 
     public void PlayerDeath() {
@@ -38,6 +38,7 @@ public class GameEventSystem : MonoBehaviour {
         OnPlayerStatsChange?.Invoke(this, EventArgs.Empty);
     }
 
+    // [ TODO ] [Debug] Do I need this?
     public void PlayerMoveedToAnotherCell(MazeCellData cellData) {
         OnPlayerMoveToAnotherCell?.Invoke(this, cellData);
     }

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Map;
+using InGameUI;
 
 public class Input_UI : MonoBehaviour {
 
@@ -10,21 +10,23 @@ public class Input_UI : MonoBehaviour {
     private bool fullMapVisible;
     [SerializeField]
     private bool miniMapVisible;
-    InputManager inputManager;
+    //InputManager inputManager;
 
     private void Awake() {
         fullMapVisible = false;
         miniMapVisible = true;
         // Map.FullmapWindow.Show();
 
-        inputManager = new InputManager();
-        inputManager.UI.Openmap.started += _ => FullMapToggle();
-        inputManager.UI.ShowHideminimap.started += _ => MiniMapToggle();
-        inputManager.UI.Mapzoom.started += context => FullMapZoom(context.ReadValue<float>());
-        inputManager.UI.Grabmap.started += _ => PanMapCameraStarted();
-        inputManager.UI.Grabmap.canceled += _ => PanMapCameraStopped();
     }
 
+    private void Start() {
+        //inputManager = new InputManager();
+        GameManager.inputManager.UI.Openmap.started += _ => FullMapToggle();
+        GameManager.inputManager.UI.ShowHideminimap.started += _ => MiniMapToggle();
+        GameManager.inputManager.UI.Mapzoom.started += context => FullMapZoom(context.ReadValue<float>());
+        GameManager.inputManager.UI.Grabmap.started += _ => PanMapCameraStarted();
+        GameManager.inputManager.UI.Grabmap.canceled += _ => PanMapCameraStopped();
+    }
 
     private void Update() {
 
@@ -35,51 +37,51 @@ public class Input_UI : MonoBehaviour {
         }*/
     }
 
-    private void OnEnable() {
+    /*private void OnEnable() {
         inputManager.UI.Enable();
     }
 
     private void OnDisable() {
         inputManager.UI.Disable();
-    }
+    }*/
 
     private void FullMapToggle() {
         if (fullMapVisible) {
-            Map.FullmapWindow.Hide();
-            Map.MinimapWindow.Show();
+            InGameUI.FullmapWindow.Hide();
+            InGameUI.MinimapWindow.Show();
             fullMapVisible = false;
         } else {
-            Map.FullmapWindow.Show();
-            Map.MinimapWindow.Hide();
+            InGameUI.FullmapWindow.Show();
+            InGameUI.MinimapWindow.Hide();
             fullMapVisible = true;
         }
     }
 
     private void MiniMapToggle() {
         if (miniMapVisible) {
-            Map.MinimapWindow.Hide();
+            InGameUI.MinimapWindow.Hide();
             miniMapVisible = false;
         } else {
-            Map.MinimapWindow.Show();
+            InGameUI.MinimapWindow.Show();
             miniMapVisible = true;
         }
     }
 
     private void FullMapZoom(float scrollOffset) {
         if (fullMapVisible) {
-            Map.FullmapWindow.instance.Zoom(scrollOffset);
+            InGameUI.FullmapWindow.instance.Zoom(scrollOffset);
         }
     }
 
     private void PanMapCameraStarted() {
         if (fullMapVisible) {
-            Map.FullmapWindow.instance.PanMapCamera(true);
+            InGameUI.FullmapWindow.instance.PanMapCamera(true);
         }
     }
 
     private void PanMapCameraStopped() {
         if (fullMapVisible) {
-            Map.FullmapWindow.instance.PanMapCamera(false);
+            InGameUI.FullmapWindow.instance.PanMapCamera(false);
         }
     }
 }

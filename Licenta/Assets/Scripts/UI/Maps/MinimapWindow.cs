@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Map {
+namespace InGameUI {
     public class MinimapWindow : MonoBehaviour {
 
         private static MinimapWindow instance;

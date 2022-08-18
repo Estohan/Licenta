@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Map {
+namespace InGameUI {
     public class FullmapWindow : MonoBehaviour {
         public static FullmapWindow instance;
         [SerializeField]

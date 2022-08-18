@@ -15,6 +15,18 @@ public class PlayerAnimationHandler : MyMonoBehaviour
     private Material hitFlashMaterial_2;
     [SerializeField]
     private SkinnedMeshRenderer playerSkMeshRenderer;
+
+    [Space]
+    [Header("Special animations animator indexes:")]
+    [SerializeField]
+    private int cheerAnimationIndex;
+    [SerializeField]
+    private int standUpAnimationIndex;
+    // starts from 0 - special case for dying while crawling
+    [SerializeField]
+    private int deathAnimationsCount;
+
+
     private Material originalMaterial;
 
     private Animator animator;
@@ -120,18 +132,26 @@ public class PlayerAnimationHandler : MyMonoBehaviour
 
     public void Expire() {
         if (playerStats.currentPosture == PlayerControls.PlayerPostureState.Crawling) {
+            // 0 - first death animations is special for crawling posture state
             animator.SetInteger(deathAnimationHash, 0);
         } else {
-            int randAnimation = UnityEngine.Random.Range(1, 4);
+            // random death animation from 1 - deathAnimationsCount
+            int randAnimation = UnityEngine.Random.Range(1, deathAnimationsCount);
             animator.SetInteger(deathAnimationHash, randAnimation);
         }
 
         animator.SetTrigger(expireHash);
     }
 
-    /*private void HitPlayerReaction(object sender, EventArgs e) {
-        Debug.Log("Animation Handler: Player was hit!");
-    }*/
+    public void StandUp() {
+        animator.SetInteger(specialAnimationHash, standUpAnimationIndex);
+        animator.SetTrigger(playSpecialHash);
+    }
+
+    public void Cheer() {
+        animator.SetInteger(specialAnimationHash, cheerAnimationIndex);
+        animator.SetTrigger(playSpecialHash);
+    }
 
     private void HitPlayerReaction(object sender, float damage) {
         // Debug.Log("Animation Handler: Player was hit! Showing " + damage + " points of damage.");
@@ -143,6 +163,13 @@ public class PlayerAnimationHandler : MyMonoBehaviour
 
     private void PlayerDeathReaction(object sender) {
         Expire();
+    }
+    public void AnimationPause() {
+        animator.speed = 0f;
+    }
+
+    public void AnimationResume() {
+        animator.speed = 1f;
     }
 
     private IEnumerator PlayerHitFlashEffect() {

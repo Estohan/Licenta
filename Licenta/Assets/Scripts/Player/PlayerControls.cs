@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerControls : MonoBehaviour {
     [SerializeField]
     private Camera mainCamera;
-    private InputManager inputManager;
+    //private InputManager inputManager;
     private CharacterController characterController;
     private PlayerStats playerStats;
     private PlayerAnimationHandler playerAnimationHandler;
@@ -37,32 +37,14 @@ public class PlayerControls : MonoBehaviour {
     private WaitForSeconds waitDodgeCooldown;
 
     private void Awake() {
-        inputManager = new InputManager();
+        //inputManager = new InputManager();
         characterController = this.GetComponent<CharacterController>();
         playerStats = this.GetComponent<PlayerStats>();
         playerAnimationHandler = this.GetComponent<PlayerAnimationHandler>();
 
-/*        inputManager.PlayerMovement.Move.started += OnMovementInput;
-        inputManager.PlayerMovement.Move.canceled += OnMovementInput;
-        inputManager.PlayerMovement.Move.performed += OnMovementInput;*/
-
-        inputManager.PlayerMovement.Run.started += OnSprintInputStarted;
-        inputManager.PlayerMovement.Run.canceled += OnSprintInputCanceled;
-
-        //inputManager.PlayerMovement.Jump.started += OnJump;
-        inputManager.PlayerMovement.Jump.performed += OnJump;
-
-        // inputManager.PlayerMovement.Dodge.started += OnDodge;
-        inputManager.PlayerMovement.Dodge.performed += OnDodge;
-
-        inputManager.PlayerMovement.Sneak.performed += OnSneak;
-
-        inputManager.PlayerMovement.Crawl.performed += OnCrawl;
-
-        // Alternate movement
-        inputManager.PlayerMovement.Alternatemove.started += OnAltMovementInput;
-        inputManager.PlayerMovement.Alternatemove.canceled += OnAltMovementInput;
-        inputManager.PlayerMovement.Alternatemove.performed += OnAltMovementInput;
+        /*        inputManager.PlayerMovement.Move.started += OnMovementInput;
+                inputManager.PlayerMovement.Move.canceled += OnMovementInput;
+                inputManager.PlayerMovement.Move.performed += OnMovementInput;*/
 
         waitDodgeCooldown = new WaitForSeconds(dodgeCooldown);
     }
@@ -72,6 +54,24 @@ public class PlayerControls : MonoBehaviour {
         playerJumped = false;
         playerDodged = false;
         dodgeOnCooldown = false;
+
+        GameManager.inputManager.PlayerMovement.Run.started += OnSprintInputStarted;
+        GameManager.inputManager.PlayerMovement.Run.canceled += OnSprintInputCanceled;
+
+        //inputManager.PlayerMovement.Jump.started += OnJump;
+        GameManager.inputManager.PlayerMovement.Jump.performed += OnJump;
+
+        // inputManager.PlayerMovement.Dodge.started += OnDodge;
+        GameManager.inputManager.PlayerMovement.Dodge.performed += OnDodge;
+
+        GameManager.inputManager.PlayerMovement.Sneak.performed += OnSneak;
+
+        GameManager.inputManager.PlayerMovement.Crawl.performed += OnCrawl;
+
+        // Alternate movement
+        GameManager.inputManager.PlayerMovement.Alternatemove.started += OnAltMovementInput;
+        GameManager.inputManager.PlayerMovement.Alternatemove.canceled += OnAltMovementInput;
+        GameManager.inputManager.PlayerMovement.Alternatemove.performed += OnAltMovementInput;
     }
 
     private void Update() {
@@ -302,13 +302,13 @@ public class PlayerControls : MonoBehaviour {
         characterController.height = playerStats.CapsuleColliders[index].height;
     }
 
-    private void OnEnable() {
+/*    private void OnEnable() {
         inputManager.PlayerMovement.Enable();
     }
 
     private void OnDisable() {
         inputManager.PlayerMovement.Disable();
-    }
+    }*/
 
     private IEnumerator DodgeCooldownCoroutine() {
         Debug.Log("Dodge cooldown up.");

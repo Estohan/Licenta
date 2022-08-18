@@ -6,6 +6,8 @@ using TMPro;
 
 public class UIHealthBar : MonoBehaviour {
 
+    public static UIHealthBar instance;
+
     [SerializeField]
     [Tooltip("This will provide the current health and max. health values.")]
     private PlayerStats playerStats;

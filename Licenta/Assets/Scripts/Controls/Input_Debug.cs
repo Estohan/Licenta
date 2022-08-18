@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Input_Debug : MonoBehaviour {
-    InputManager inputManager;
+    /*InputManager inputManager;
 
     private void Awake() {
         inputManager = new InputManager();
@@ -16,5 +16,5 @@ public class Input_Debug : MonoBehaviour {
 
     private void OnDisable() {
         inputManager.Others.Disable();
-    }
+    }*/
 }

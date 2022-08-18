@@ -109,6 +109,14 @@ public class @InputManager : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pause Game"",
+                    ""type"": ""Button"",
+                    ""id"": ""b8f33bda-c84f-4593-959e-059b1f7c7dac"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -120,6 +128,28 @@ public class @InputManager : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Restart Game"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""de4f073b-1f71-4196-9ffe-13c110f86d80"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause Game"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b394d2d-4f42-4a64-b499-d7a188b3a9eb"",
+                    ""path"": ""<XInputController>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause Game"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -388,6 +418,7 @@ public class @InputManager : IInputActionCollection, IDisposable
         // Others
         m_Others = asset.FindActionMap("Others", throwIfNotFound: true);
         m_Others_RestartGame = m_Others.FindAction("Restart Game", throwIfNotFound: true);
+        m_Others_PauseGame = m_Others.FindAction("Pause Game", throwIfNotFound: true);
         // Player Movement
         m_PlayerMovement = asset.FindActionMap("Player Movement", throwIfNotFound: true);
         m_PlayerMovement_Move = m_PlayerMovement.FindAction("Move", throwIfNotFound: true);
@@ -504,11 +535,13 @@ public class @InputManager : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Others;
     private IOthersActions m_OthersActionsCallbackInterface;
     private readonly InputAction m_Others_RestartGame;
+    private readonly InputAction m_Others_PauseGame;
     public struct OthersActions
     {
         private @InputManager m_Wrapper;
         public OthersActions(@InputManager wrapper) { m_Wrapper = wrapper; }
         public InputAction @RestartGame => m_Wrapper.m_Others_RestartGame;
+        public InputAction @PauseGame => m_Wrapper.m_Others_PauseGame;
         public InputActionMap Get() { return m_Wrapper.m_Others; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -521,6 +554,9 @@ public class @InputManager : IInputActionCollection, IDisposable
                 @RestartGame.started -= m_Wrapper.m_OthersActionsCallbackInterface.OnRestartGame;
                 @RestartGame.performed -= m_Wrapper.m_OthersActionsCallbackInterface.OnRestartGame;
                 @RestartGame.canceled -= m_Wrapper.m_OthersActionsCallbackInterface.OnRestartGame;
+                @PauseGame.started -= m_Wrapper.m_OthersActionsCallbackInterface.OnPauseGame;
+                @PauseGame.performed -= m_Wrapper.m_OthersActionsCallbackInterface.OnPauseGame;
+                @PauseGame.canceled -= m_Wrapper.m_OthersActionsCallbackInterface.OnPauseGame;
             }
             m_Wrapper.m_OthersActionsCallbackInterface = instance;
             if (instance != null)
@@ -528,6 +564,9 @@ public class @InputManager : IInputActionCollection, IDisposable
                 @RestartGame.started += instance.OnRestartGame;
                 @RestartGame.performed += instance.OnRestartGame;
                 @RestartGame.canceled += instance.OnRestartGame;
+                @PauseGame.started += instance.OnPauseGame;
+                @PauseGame.performed += instance.OnPauseGame;
+                @PauseGame.canceled += instance.OnPauseGame;
             }
         }
     }
@@ -623,6 +662,7 @@ public class @InputManager : IInputActionCollection, IDisposable
     public interface IOthersActions
     {
         void OnRestartGame(InputAction.CallbackContext context);
+        void OnPauseGame(InputAction.CallbackContext context);
     }
     public interface IPlayerMovementActions
     {

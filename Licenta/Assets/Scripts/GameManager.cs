@@ -7,7 +7,13 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance = null;
 
     public LevelGenerator _LevelGenerator;
-    public GameObject player;
+    [SerializeField]
+    private GameObject player;
+    [SerializeField]
+    private CameraControl mainCamera;
+    [SerializeField]
+    private GameObject dropShuttle;
+    private GameObject _instantiatedDropShuttle;
 
     private LevelGenerator levelGenerator;
     private Level currentLevel;
@@ -20,11 +26,12 @@ public class GameManager : MonoBehaviour {
     // ignored if greater than 20%
     public int innerPaddingPercentage;
     public int sectorsNumber;
-    [Space]
     public int difficulty;
     public int chanceOfObstDowngrade;
     public int chanceOfObstUpgrade;
-        
+
+    public static InputManager inputManager;
+
 
     private void Awake() {
         if(instance != null && instance != this) {
@@ -35,6 +42,8 @@ public class GameManager : MonoBehaviour {
         }
 
         SaveSystem.InitSaveSystem();
+
+        inputManager = new InputManager();
     }
 
     // Start is called before the first frame update
@@ -45,10 +54,12 @@ public class GameManager : MonoBehaviour {
         levelGenerator.transform.position.Set(0f, 0f, 0f);
 
         // Generate a new level
-        StartGame();
+        CreateLevel();
+        // Ready level
+        ReadyFirstLevel();
     }
 
-    public void StartGame() {
+    public void CreateLevel() {
         // Generate level
         LevelGenerator.LayoutRequirements layoutRec = 
             new LevelGenerator.LayoutRequirements(sizeZ, sizeX, outerPaddingPercentage, innerPaddingPercentage, sectorsNumber);
@@ -60,9 +71,6 @@ public class GameManager : MonoBehaviour {
 
         // Instantiate level
         levelGenerator.InstantiateLevel();
-
-        // Ready level
-        ReadyLevel();
     }
 
     public void RestartGame() {
@@ -70,7 +78,9 @@ public class GameManager : MonoBehaviour {
             // Destroy previous level
             Destroy(levelGenerator.transform.GetChild(0).gameObject);
             // Create a new one
-            StartGame();
+            CreateLevel();
+            // Ready level
+            ReadyLevel();
             Debug.Log("Game Restarted.");
         }
     }
@@ -97,7 +107,6 @@ public class GameManager : MonoBehaviour {
         SaveSystem.SaveGame();
     }
 
-    // Final preparations before the level is playable
     public void ReadyLevel() {
         // Move player to the start position
         MazeCoords startCellPos = currentLevel.stats.startCell;
@@ -111,9 +120,63 @@ public class GameManager : MonoBehaviour {
                                                 0f + player.transform.localScale.y / 2,
                                                 playerPosZ);
         Debug.Log("Player transform: " + player.transform.position);
+
+        // Move camera to player position
+        mainCamera.SnapToPlayerPosition();
+    }
+
+    public void ReadyFirstLevel() {
+        // Starting positions offset so that the player is seen better when camera is zoomed in
+        float startPositionOffset = 0.5f;
+        // Move player to the start position
+        MazeCoords startCellPos = currentLevel.stats.startCell;
+        Transform targetCellTransform = currentLevel.cellsObjects[startCellPos.z, startCellPos.x].transform;
+        float playerPosZ = targetCellTransform.position.z;
+        float playerPosX = targetCellTransform.position.x;
+
+        _instantiatedDropShuttle = Instantiate(dropShuttle, levelGenerator.gameObject.transform);
+        _instantiatedDropShuttle.transform.position = new Vector3(playerPosX + startPositionOffset - 0.1f,
+                                                                    0f, // + player.transform.localScale.y ,
+                                                                    playerPosZ + startPositionOffset - 0.1f);
+
+        player.transform.position = new Vector3(playerPosX + startPositionOffset + 0.1f,
+                                                0f + player.transform.localScale.y, // / 2
+                                                playerPosZ + startPositionOffset + 0.1f);
+
+        // Move camera to player position
+        mainCamera.SnapToPlayerPosition();
+        mainCamera.PrepareZoomOutEffect();
+        player.transform.rotation = Quaternion.Euler(0f, 225f, 0f); // rotate the player towards the camera
+        player.GetComponent<PlayerAnimationHandler>().StandUp();
+        StartCoroutine(TestCoroutine());
+        Debug.Log("Camera position:" + mainCamera.transform.position);
+    }
+
+
+    public void Test() {
+        StartCoroutine(PrepareStartGameScene());
+    }
+
+    public void Test2() {
+        // Unpause the game
+        Time.timeScale = 1f;
+        mainCamera.ZoomOutEffect();
+        _instantiatedDropShuttle.GetComponent<Animator>().SetTrigger("OpenShuttle");
+        StartCoroutine(PrepareStartGameScene());
+    }
+
+    private IEnumerator TestCoroutine() {
+        yield return new WaitForSeconds(0.5f);
+        // Pause the game
+        Time.timeScale = 0f;
+    }
+
+    private IEnumerator PrepareStartGameScene() {
+        yield return new WaitForSeconds(2f);
+        player.GetComponent<PlayerAnimationHandler>().AnimationResume();
     }
 
     public Level getCurrentLevel() {
         return currentLevel;
-    }
+    }    
 }

@@ -5,27 +5,32 @@ using UnityEngine;
 [System.Serializable]
 public class PickUpItem : MonoBehaviour {
     [SerializeField]
-    private ItemRarity rarity;
+    private string itemName;
+    [SerializeField]
+    private ItemRarity itemRarity;
     [SerializeField]
     private int itemID;
+    [SerializeField]
+    private PickUpEffect itemProperties;
 
-    /*[Space]
-    [Header("Item specific fields:")]*/
 
     private void OnTriggerEnter(Collider other) {
-        this.enabled = false;
-        ItemEffect();
+        // this.enabled = false;
+        if (other.CompareTag("Player")) {
+            Destroy(this.gameObject);
+            itemProperties.ApplyPickUpEffect(other.gameObject);
+        }
     }
 
     public ItemRarity GetItemRarity() {
-        return rarity;
+        return itemRarity;
     }
 
     public int GetItemID() {
         return itemID;
     }
 
-    public virtual void ItemEffect() {
-
+    public string GetItemName() {
+        return itemName;
     }
 }

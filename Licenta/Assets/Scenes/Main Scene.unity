@@ -6156,6 +6156,10 @@ MonoBehaviour:
   hitFlashMaterial_2: {fileID: 2100000, guid: a3f724e827045694294662c6c5d168d2, type: 2}
   healFlashMaterial_1: {fileID: 2100000, guid: 7a5cc4fa48839f949a6496fd509a6807, type: 2}
   healFlashMaterial_2: {fileID: 2100000, guid: a3f724e827045694294662c6c5d168d2, type: 2}
+  reduceFlashMaterial_1: {fileID: 2100000, guid: 593c80325843c5f4a9b84a62766bdf29, type: 2}
+  reduceFlashMaterial_2: {fileID: 2100000, guid: a3f724e827045694294662c6c5d168d2, type: 2}
+  extendFlashMaterial_1: {fileID: 2100000, guid: 6b90a711a9c94494c88b01f45457f75e, type: 2}
+  extendFlashMaterial_2: {fileID: 2100000, guid: a3f724e827045694294662c6c5d168d2, type: 2}
   playerSkMeshRenderer: {fileID: 907777151}
   cheerAnimationIndex: 0
   standUpAnimationIndex: 1
@@ -6248,8 +6252,10 @@ MonoBehaviour:
     obst_obstacleID: 0
     obst_difficulty: 0
     obst_rotation: 0
-  test1: 0
-  test2: 0
+  test1_damage: 0
+  test2_heal: 0
+  test3_reduce: 0
+  test4_extend: 0
 --- !u!95 &1736421226
 Animator:
   serializedVersion: 3

@@ -42,19 +42,33 @@ public class PlayerStats : MyMonoBehaviour {
     // Damage test
     public bool test1_damage;
     public bool test2_heal;
+    public bool test3_reduce;
+    public bool test4_extend;
 
     private void Update() {
         int val = 0;
         if (test1_damage) {
             test1_damage = false;
-            val = -UnityEngine.Random.Range(5, 15);
-            GameEventSystem.instance.PlayerHealthAffected(val);
+            val = UnityEngine.Random.Range(5, 15);
+            GameEventSystem.instance.PlayerHealthAffected(- val, false);
             GameEventSystem.instance.PlayerStatsChanged();
         }
         if (test2_heal) {
             test2_heal = false;
             val = UnityEngine.Random.Range(5, 15);
-            GameEventSystem.instance.PlayerHealthAffected(val);
+            GameEventSystem.instance.PlayerHealthAffected(val, false);
+            GameEventSystem.instance.PlayerStatsChanged();
+        }
+        if (test3_reduce) {
+            test3_reduce = false;
+            val = UnityEngine.Random.Range(5, 15);
+            GameEventSystem.instance.PlayerHealthAffected(- val, true);
+            GameEventSystem.instance.PlayerStatsChanged();
+        }
+        if (test4_extend) {
+            test4_extend = false;
+            val = UnityEngine.Random.Range(5, 15);
+            GameEventSystem.instance.PlayerHealthAffected(val, true);
             GameEventSystem.instance.PlayerStatsChanged();
         }
     }
@@ -111,27 +125,53 @@ public class PlayerStats : MyMonoBehaviour {
         isInactive = true;
     }
 
-    private void PlayerHealthAffectedReaction(object sender, float amount) {
+    private void PlayerHealthAffectedReaction(object sender, float amount, bool onMaxHealth) {
         // Debug.Log("PlayerStats: Player was hit for " + damage + " points of damage!");
-        if (amount < 0) { // player was hit
-            if (!isDamageImmune) {
-                // damage immunity is reset in PlayerAnimationHandler, at the end of the
-                // hit effect
-                isDamageImmune = true;
-                if (currHealth + amount <= 0) {
-                    currHealth = 0;
-                    GameEventSystem.instance.PlayerDeath();
+        // Damage or healing
+        if (!onMaxHealth) {
+            // Damage
+            if (amount < 0) {
+                if (!isDamageImmune) {
+                    // Damage immunity is reset in PlayerAnimationHandler, at the end of the
+                    // hit effect coroutine
+                    isDamageImmune = true;
+                    // Check if this hit kills the player
+                    if (currHealth + amount <= 0) {
+                        currHealth = 0;
+                        GameEventSystem.instance.PlayerDeath();
+                    } else {
+                        currHealth += amount;
+                    }
+                    GameEventSystem.instance.PlayerStatsChanged();
+                }
+            // Healing
+            } else {
+                // Prevent overheal
+                if (currHealth + amount > maxHealth) {
+                    currHealth = maxHealth;
                 } else {
                     currHealth += amount;
                 }
                 GameEventSystem.instance.PlayerStatsChanged();
             }
-        } else { // player was healed
-            // prevent overheal
-            if (currHealth + amount > maxHealth) {
-                currHealth = maxHealth;
+        // Max health reduction or extension
+        } else {
+            // Reduction
+            if (amount < 0) {
+                // Check if maximum health reaches 0 and kills the player
+                if (maxHealth - amount <= 0) {
+                    maxHealth = 0;
+                    GameEventSystem.instance.PlayerDeath();
+                } else {
+                    maxHealth -= amount;
+                }
+                GameEventSystem.instance.PlayerStatsChanged();
+            // Extension
             } else {
+                maxHealth += amount;
+                // Player is also healed
                 currHealth += amount;
+                GameEventSystem.instance.PlayerStatsChanged();
             }
         }
     }

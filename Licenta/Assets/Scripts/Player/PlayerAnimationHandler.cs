@@ -18,6 +18,14 @@ public class PlayerAnimationHandler : MyMonoBehaviour
     [SerializeField]
     private Material healFlashMaterial_2;
     [SerializeField]
+    private Material reduceFlashMaterial_1;
+    [SerializeField]
+    private Material reduceFlashMaterial_2;
+    [SerializeField]
+    private Material extendFlashMaterial_1;
+    [SerializeField]
+    private Material extendFlashMaterial_2;
+    [SerializeField]
     private SkinnedMeshRenderer playerSkMeshRenderer;
 
     [Space]
@@ -157,13 +165,27 @@ public class PlayerAnimationHandler : MyMonoBehaviour
         animator.SetTrigger(playSpecialHash);
     }
 
-    private void PlayerHealthAffectedReaction(object sender, float amount) {
+    private void PlayerHealthAffectedReaction(object sender, float amount, bool onMaxHealth) {
         // Debug.Log("Animation Handler: Player was hit! Showing " + damage + " points of damage.");
         if (playerStats.isAlive && !playerStats.isDamageImmune) {
-            if (amount < 0) { // player was hit
-                StartCoroutine(PlayerFlashEffect(hitFlashMaterial_1, hitFlashMaterial_2));
-            } else { // player was healed
-                StartCoroutine(PlayerFlashEffect(healFlashMaterial_1, healFlashMaterial_2));
+            // Damage or healing
+            if (!onMaxHealth) {
+                // Damage
+                if (amount < 0) {
+                    StartCoroutine(PlayerFlashEffect(hitFlashMaterial_1, hitFlashMaterial_2));
+                // Healing
+                } else {
+                    StartCoroutine(PlayerFlashEffect(healFlashMaterial_1, healFlashMaterial_2));
+                }
+            // Max health reduction or extension
+            } else {
+                // Reduction
+                if (amount < 0) {
+                    StartCoroutine(PlayerFlashEffect(reduceFlashMaterial_1, reduceFlashMaterial_2));
+                // Extension
+                } else {
+                    StartCoroutine(PlayerFlashEffect(extendFlashMaterial_1, extendFlashMaterial_2));
+                }
             }
         }
 

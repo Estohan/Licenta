@@ -15,6 +15,11 @@ public class MazeCoords {
         this.x = x;
     }
 
+    public MazeCoords(MazeCoords coords) {
+        this.z = coords.z;
+        this.x = coords.x;
+    }
+
     public static MazeCoords operator + (MazeCoords a, MazeCoords b) {
         /*a.z += b.z;
         a.x += b.x;*/

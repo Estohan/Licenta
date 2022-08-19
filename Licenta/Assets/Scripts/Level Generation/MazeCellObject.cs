@@ -8,7 +8,8 @@ public class MazeCellObject : MonoBehaviour {
     [SerializeField]
     private CellConcealer cellConcealer;
     public List<GameObject> mapIcons;
-    private bool visited;
+    public bool visited;
+    public bool revealed;
 
     public MazeCellData data;
 
@@ -20,6 +21,7 @@ public class MazeCellObject : MonoBehaviour {
 
     private void Start() {
         visited = false;
+        revealed = false;
     }
 
     public MazeCellObject(MazeCoords coordinates) {

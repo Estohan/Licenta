@@ -12,7 +12,7 @@ public class ObstHarmfulPart : MonoBehaviour {
 
     // When damage is done without a collision being necessary
     public void ForcedActivation() {
-        GameEventSystem.instance.PlayerHealthAffected(- damage);
+        GameEventSystem.instance.PlayerHealthAffected(- damage, false);
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -21,11 +21,11 @@ public class ObstHarmfulPart : MonoBehaviour {
             if (!isIndependent) {
                 // Check ActivePart's state
                 if (obstActivePart.GetState() == ObstacleState.sprung_active) {
-                    GameEventSystem.instance.PlayerHealthAffected(- damage);
+                    GameEventSystem.instance.PlayerHealthAffected(- damage, false);
                 }
                 // If this HarmfulPart is independent, damage the player directly
             } else {
-                GameEventSystem.instance.PlayerHealthAffected(- damage);
+                GameEventSystem.instance.PlayerHealthAffected(- damage, false);
             }
         }
     }

@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager instance = null;
 
+    // Gameobjects
     public LevelGenerator _LevelGenerator;
     [SerializeField]
     private GameObject player;
@@ -15,8 +16,10 @@ public class GameManager : MonoBehaviour {
     private GameObject dropShuttle;
     private GameObject _instantiatedDropShuttle;
 
+    // Level data
     private LevelGenerator levelGenerator;
     private Level currentLevel;
+    private Queue<LevelEffectsManager.LevelEffects> levelEffectsQueue;
 
     // TEST
     public int sizeZ;
@@ -40,6 +43,8 @@ public class GameManager : MonoBehaviour {
         } else {
             instance = this;
         }
+
+        levelEffectsQueue = new Queue<LevelEffectsManager.LevelEffects>();
 
         SaveSystem.InitSaveSystem();
 
@@ -150,6 +155,14 @@ public class GameManager : MonoBehaviour {
         player.GetComponent<PlayerAnimationHandler>().StandUp();
         StartCoroutine(TestCoroutine());
         Debug.Log("Camera position:" + mainCamera.transform.position);
+    }
+
+    public void AddEffectToQueue(LevelEffectsManager.LevelEffects levelEffect) {
+        levelEffectsQueue.Enqueue(levelEffect);
+    }
+
+    public void ExecuteLevelEffect(LevelEffectsManager.LevelEffects levelEffect) {
+        LevelEffectsManager.ExecuteEffect(levelEffect);
     }
 
 

@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameEventSystem : MonoBehaviour {
     public static GameEventSystem instance = null;
 
-    public delegate void PlayerHealthAffectedDelegate(object sender, float amount);
+    public delegate void PlayerHealthAffectedDelegate(object sender, float amount, bool onMaxHealth);
     public delegate void PlayerDeathDelegate(object sender);
     public delegate void PlayerMoveToCellDelegate(object sender, MazeCellData cellData);
 
@@ -25,9 +25,9 @@ public class GameEventSystem : MonoBehaviour {
         }
     }
 
-    public void PlayerHealthAffected(float amount) {
+    public void PlayerHealthAffected(float amount, bool onMaxHealth) {
         // OnPlayerHit?.Invoke(this, EventArgs.Empty);
-        OnHealthAffected?.Invoke(this, amount);
+        OnHealthAffected?.Invoke(this, amount, onMaxHealth);
     }
 
     public void PlayerDeath() {

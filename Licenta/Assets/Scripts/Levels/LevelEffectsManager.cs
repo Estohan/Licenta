@@ -33,6 +33,13 @@ public static class LevelEffectsManager {
         int seedsCount = 3; // [ Debug ] Hardcoded value
         float percentageToReveal = 0.1f; // [ Debug ] Hardcoded value
 
+        /*// this is used to prevent the case where all seeds are chosen inside 'holes'
+        // so they cannot expand. The solution would be to start another seed elsewhere
+        // but I do not currently have the time to implement that so I'll just exit
+        // the function if that case is detected
+        // Update: the function will exit when there are no candidates left.
+        int _emptyIterations = 0;*/
+
 
         // Gather info cells visibility
         for (int z = 0; z < sizeZ; z ++) {
@@ -73,7 +80,7 @@ public static class LevelEffectsManager {
         Debug.Log("=>" + cellsCount + " " + revealedPreviouslyCount + " " + revealedNowCount + " " + toRevealCount + " " + seedsCount);
 
         // Reveal map zones
-        while (revealedNowCount < toRevealCount && revealedPreviouslyCount < cellsCount) {
+        while (revealedNowCount < toRevealCount && revealedPreviouslyCount < cellsCount && candidates.Count > 0) {
             randIndex = UnityEngine.Random.Range(0, candidates.Count);
             revealedCells = currentLevel.cellsObjects[candidates[randIndex].z, candidates[randIndex].x]
                                 .GetOccluder().RevealNeighbours();

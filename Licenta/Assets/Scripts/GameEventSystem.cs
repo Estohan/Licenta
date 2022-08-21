@@ -8,11 +8,11 @@ public class GameEventSystem : MonoBehaviour {
 
     public delegate void PlayerHealthAffectedDelegate(object sender, float amount, bool onMaxHealth);
     public delegate void PlayerDeathDelegate(object sender);
-    public delegate void PlayerMoveToCellDelegate(object sender, MazeCellData cellData);
+    // public delegate void PlayerMoveToCellDelegate(object sender, MazeCellData cellData);
 
     public event PlayerHealthAffectedDelegate OnHealthAffected;
     public event PlayerDeathDelegate OnPlayerDeath;
-    public event PlayerMoveToCellDelegate OnPlayerMoveToAnotherCell;
+    // public event PlayerMoveToCellDelegate OnPlayerMoveToAnotherCell;
     public event EventHandler OnPlayerStatsChange;
     // public event EventHandler OnPlayerHit;
 
@@ -39,7 +39,7 @@ public class GameEventSystem : MonoBehaviour {
     }
 
     // [ TODO ] [Debug] Do I need this?
-    public void PlayerMoveedToAnotherCell(MazeCellData cellData) {
+    /*public void PlayerMoveedToAnotherCell(MazeCellData cellData) {
         OnPlayerMoveToAnotherCell?.Invoke(this, cellData);
-    }
+    }*/
 }

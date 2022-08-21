@@ -5,6 +5,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+// This was used as a debug tool to see details about the cell currently
+// traversed by the player.
+// That is no longer needed but the health bar still uses this script to
+// function.
 public class UIPlayerStats : MyMonoBehaviour {
 
     [SerializeField]
@@ -25,9 +29,9 @@ public class UIPlayerStats : MyMonoBehaviour {
     protected override void Start() {
         base.Start();
 
-        if (positionText != null) {
+        /*if (positionText != null) {
             UpdatePlayerPosition(playerStats.currentCellData);
-        }
+        }*/
     }
 
 
@@ -63,7 +67,7 @@ public class UIPlayerStats : MyMonoBehaviour {
 
     private void PlayerStatsChangeReaction(object sender, EventArgs e) {
         healthBar.UpdateHealth();
-        UpdatePlayerPosition(playerStats.currentCellData);
+        // UpdatePlayerPosition(playerStats.currentCellData);
     }
 
     private void OnDisable() {

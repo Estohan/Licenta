@@ -93,8 +93,6 @@ public class PlayerStats : MyMonoBehaviour {
 
         speed = speedWalking;
         rotationFactor = walkRotationFactor;
-
-        GameEventSystem.instance.PlayerStatsChanged();
     }
 
     protected override void OnEnable() {
@@ -105,19 +103,15 @@ public class PlayerStats : MyMonoBehaviour {
         // events
         GameEventSystem.instance.OnHealthAffected += PlayerHealthAffectedReaction;
         GameEventSystem.instance.OnPlayerDeath += PlayerDeathReaction;
-        GameEventSystem.instance.OnPlayerMoveToAnotherCell += MoveToAnotherCellReaction;
+        //GameEventSystem.instance.OnPlayerMoveToAnotherCell += MoveToAnotherCellReaction;
     }
 
-    /*private void HitPLayerReaction(object sender, EventArgs e) {
-        Debug.Log("PlayerStats: Player was hit!");
-    }*/
-
-    private void MoveToAnotherCellReaction(object sender, MazeCellData cellData) {
+    /*private void MoveToAnotherCellReaction(object sender, MazeCellData cellData) {
         if(currentCellData != cellData) {
             currentCellData = cellData;
             GameEventSystem.instance.PlayerStatsChanged();
         }
-    }
+    }*/
 
     private void PlayerDeathReaction(object sender) {
         currHealth = 0;
@@ -159,11 +153,11 @@ public class PlayerStats : MyMonoBehaviour {
             // Reduction
             if (amount < 0) {
                 // Check if maximum health reaches 0 and kills the player
-                if (maxHealth - amount <= 0) {
+                if (maxHealth + amount <= 0) {
                     maxHealth = 0;
                     GameEventSystem.instance.PlayerDeath();
                 } else {
-                    maxHealth -= amount;
+                    maxHealth += amount;
                 }
                 GameEventSystem.instance.PlayerStatsChanged();
             // Extension

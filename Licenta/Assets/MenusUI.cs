@@ -15,6 +15,9 @@ public class MenusUI : MonoBehaviour {
     private GameObject confirmReturnUI;
     [SerializeField]
     private GameObject deathScreenUI;
+    [Space]
+    [SerializeField]
+    private GameObject healthBar;
 
     private bool gameIsPaused;
     private bool inMainMenu;
@@ -71,6 +74,7 @@ public class MenusUI : MonoBehaviour {
         confirmReturnUI.SetActive(false);
         mainMenuUI.SetActive(true);
         InGameUI.MinimapWindow.Hide();
+        healthBar.SetActive(false);
         inMainMenu = true;
         escapeKeyAvailable = false;
         // restart game
@@ -91,6 +95,7 @@ public class MenusUI : MonoBehaviour {
         // UI
         mainMenuUI.SetActive(false);
         InGameUI.MinimapWindow.Show();
+        healthBar.SetActive(true);
         gameIsPaused = false;
         inMainMenu = false;
         escapeKeyAvailable = true;

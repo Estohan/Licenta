@@ -6,8 +6,6 @@ using TMPro;
 
 public class UIHealthBar : MonoBehaviour {
 
-    public static UIHealthBar instance;
-
     [SerializeField]
     [Tooltip("This will provide the current health and max. health values.")]
     private PlayerStats playerStats;
@@ -59,11 +57,14 @@ public class UIHealthBar : MonoBehaviour {
         warningInProgress = false;
 
         waitWarningFlicker = new WaitForSeconds(warningFlickerFreq);
+
+        // Hide health bar at the start of the game
+        this.gameObject.SetActive(false);
     }
 
     public void UpdateHealth() {
-        currentHealthText.text = playerStats.currHealth.ToString();
-        maxHealthText.text = playerStats.maxHealth.ToString();
+        currentHealthText.text = ((int) playerStats.currHealth).ToString();
+        maxHealthText.text = ((int) playerStats.maxHealth).ToString();
         if (!healthUpdateInProgress) {
             // Debug.Log("Started coroutine");
             StartCoroutine(HealthUpdateCoroutine());

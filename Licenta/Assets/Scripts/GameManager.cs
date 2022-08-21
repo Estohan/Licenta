@@ -128,6 +128,8 @@ public class GameManager : MonoBehaviour {
 
         // Move camera to player position
         mainCamera.SnapToPlayerPosition();
+
+        //GameEventSystem.instance.PlayerStatsChanged();
     }
 
     public void ReadyFirstLevel() {
@@ -153,7 +155,8 @@ public class GameManager : MonoBehaviour {
         mainCamera.PrepareZoomOutEffect();
         player.transform.rotation = Quaternion.Euler(0f, 225f, 0f); // rotate the player towards the camera
         player.GetComponent<PlayerAnimationHandler>().StandUp();
-        StartCoroutine(TestCoroutine());
+        //GameEventSystem.instance.PlayerStatsChanged();
+        StartCoroutine(WaitForPlayerAnimationToStart());
         Debug.Log("Camera position:" + mainCamera.transform.position);
     }
 
@@ -166,25 +169,29 @@ public class GameManager : MonoBehaviour {
     }
 
 
-    public void Test() {
+   /* public void Test() {
         StartCoroutine(PrepareStartGameScene());
-    }
+    }*/
 
     public void Test2() {
         // Unpause the game
         Time.timeScale = 1f;
         mainCamera.ZoomOutEffect();
         _instantiatedDropShuttle.GetComponent<Animator>().SetTrigger("OpenShuttle");
-        StartCoroutine(PrepareStartGameScene());
+        StartCoroutine(WaitForShuttleToOpen());
     }
 
-    private IEnumerator TestCoroutine() {
+    // Let the game run half a second to make sure the player animation started
+    // and it is crouched inside the shuttle
+    private IEnumerator WaitForPlayerAnimationToStart() {
         yield return new WaitForSeconds(0.5f);
         // Pause the game
         Time.timeScale = 0f;
     }
 
-    private IEnumerator PrepareStartGameScene() {
+    // Wait for the shuttle to open enough so that the player can resume its stand up
+    // animation
+    private IEnumerator WaitForShuttleToOpen() {
         yield return new WaitForSeconds(2f);
         player.GetComponent<PlayerAnimationHandler>().AnimationResume();
     }

@@ -22,6 +22,6 @@ public class PickUp_HealthEffect : PickUpEffect {
             healingDone = amount;
         }
 
-        GameEventSystem.instance.PlayerHealthAffected(amount, false);
+        GameEventSystem.instance.PlayerHealthAffected(healingDone, false);
     }
 }

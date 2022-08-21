@@ -31,7 +31,7 @@ public class MazeCellObject : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if(other.transform.CompareTag("Player")) {
-            GameEventSystem.instance.PlayerMoveedToAnotherCell(data);
+            //GameEventSystem.instance.PlayerMoveedToAnotherCell(data);
             if (!visited) {
                 cellConcealer.RevealNeighbours();
                 visited = true;

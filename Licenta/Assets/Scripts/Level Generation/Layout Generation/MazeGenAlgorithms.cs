@@ -15,52 +15,52 @@ public static class MazeGenAlgorithms {
     //        3 - finish cell, 4 - common cell, 5 - special room cell.
 
     public static (int[,,], LayoutStats stats)
-        GenerateLayout(LevelGenerator.LayoutRequirements layoutRec) {
+        GenerateLayout(LevelConfiguration levelConfiguration) {
         /*Debug.Log("SizeZ: " + layoutRec.sizeZ);
         Debug.Log("SizeX: " + layoutRec.sizeX);
         Debug.Log("Op: " + layoutRec.outerPaddingPerc);
         Debug.Log("Ip: " + layoutRec.innerPaddingPerc);*/
 
-        int[,,] layout = new int[layoutRec.sizeZ, layoutRec.sizeX, 6];
-        LayoutStats stats = new LayoutStats(layoutRec.sizeZ, layoutRec.sizeX, layoutRec.nrOfSectors);
-        stats.difficulty = layoutRec.difficulty;
-        stats.chanceOfObstDowngrade = layoutRec.chanceOfObstDowngrade;
-        stats.chanceOfObstUpgrade = layoutRec.chanceOfObstUpgrade;
+        int[,,] layout = new int[levelConfiguration.sizeZ, levelConfiguration.sizeX, 6];
+        LayoutStats stats = new LayoutStats(levelConfiguration.sizeZ, levelConfiguration.sizeX, levelConfiguration.nrOfSectors);
+        stats.difficulty = levelConfiguration.difficulty;
+        stats.chanceOfObstDowngrade = levelConfiguration.chanceOfObstDowngrade;
+        stats.chanceOfObstUpgrade = levelConfiguration.chanceOfObstUpgrade;
 
         MazeCoords startCell;
         MazeCoords finishCell;
 
         // Check padding percentages
-        if(layoutRec.outerPaddingPerc < 0 || layoutRec.outerPaddingPerc > 20) {
+        if(levelConfiguration.outerPaddingPerc < 0 || levelConfiguration.outerPaddingPerc > 20) {
             // Set outer padding value to a default value of 5%
-            layoutRec.outerPaddingPerc = 5;
+            levelConfiguration.outerPaddingPerc = 5;
         }
-        if(layoutRec.innerPaddingPerc < 0 || layoutRec.innerPaddingPerc > 20) {
+        if(levelConfiguration.innerPaddingPerc < 0 || levelConfiguration.innerPaddingPerc > 20) {
             // Set inner padding value to a default value of 10%
-            layoutRec.innerPaddingPerc = 10;
+            levelConfiguration.innerPaddingPerc = 10;
         }
 
         // 6(OPl) + 3(IPl) + 12(M) + 3(IPr) + 6(OPr) = 12 + 6 + 12 = 30
         // Actual value = Percentage/2, since each type of padding is counted twice
         // Percentage = Value/100
-        int outerPaddingValZ = (int)Mathf.Ceil(layoutRec.sizeZ * ((float)layoutRec.outerPaddingPerc /200));
-        int outerPaddingValX = (int)Mathf.Ceil(layoutRec.sizeX * ((float)layoutRec.outerPaddingPerc /200));
-        int innerPaddingValZ = (int)Mathf.Ceil(layoutRec.sizeZ * ((float)layoutRec.innerPaddingPerc /200));
-        int innerPaddingValX = (int)Mathf.Ceil(layoutRec.sizeX * ((float)layoutRec.innerPaddingPerc /200));
+        int outerPaddingValZ = (int)Mathf.Ceil(levelConfiguration.sizeZ * ((float)levelConfiguration.outerPaddingPerc /200));
+        int outerPaddingValX = (int)Mathf.Ceil(levelConfiguration.sizeX * ((float)levelConfiguration.outerPaddingPerc /200));
+        int innerPaddingValZ = (int)Mathf.Ceil(levelConfiguration.sizeZ * ((float)levelConfiguration.innerPaddingPerc /200));
+        int innerPaddingValX = (int)Mathf.Ceil(levelConfiguration.sizeX * ((float)levelConfiguration.innerPaddingPerc /200));
         /*Debug.Log("Opz: " + outerPaddingValZ);
         Debug.Log("Opx: " + outerPaddingValX);
         Debug.Log("Ipz: " + innerPaddingValZ);
         Debug.Log("Ipx: " + innerPaddingValX);*/
-        int remainingCellsZ = layoutRec.sizeZ - outerPaddingValZ * 2 - innerPaddingValZ * 2; // DO I NEED THIS?
-        int remainingCellsX = layoutRec.sizeX - outerPaddingValX * 2 - innerPaddingValX * 2; // DO I NEED THIS?
-        int totalInnerPadding = ((layoutRec.sizeZ - outerPaddingValZ * 2) * (layoutRec.sizeX - outerPaddingValX * 2)) - 
+        int remainingCellsZ = levelConfiguration.sizeZ - outerPaddingValZ * 2 - innerPaddingValZ * 2; // DO I NEED THIS?
+        int remainingCellsX = levelConfiguration.sizeX - outerPaddingValX * 2 - innerPaddingValX * 2; // DO I NEED THIS?
+        int totalInnerPadding = ((levelConfiguration.sizeZ - outerPaddingValZ * 2) * (levelConfiguration.sizeX - outerPaddingValX * 2)) - 
                                 (remainingCellsZ * remainingCellsX); // DO I NEED THIS?
         stats.InitializePadding(outerPaddingValZ, outerPaddingValX, innerPaddingValZ, innerPaddingValX);
 
         // visisted array initialization
-        int[,] visited = new int[layoutRec.sizeZ, layoutRec.sizeX];
-        for(int z = 0; z < layoutRec.sizeZ; z ++) {
-            for(int x = 0; x < layoutRec.sizeX; x ++) {
+        int[,] visited = new int[levelConfiguration.sizeZ, levelConfiguration.sizeX];
+        for(int z = 0; z < levelConfiguration.sizeZ; z ++) {
+            for(int x = 0; x < levelConfiguration.sizeX; x ++) {
                 visited[z, x] = 0;
             }
         }
@@ -138,7 +138,7 @@ public static class MazeGenAlgorithms {
         PlaceShapes(layout, stats);
 
         // Place items in rooms
-        PlaceItems(layout, stats, layoutRec);
+        PlaceItems(layout, stats, levelConfiguration);
 
         // DEBUG
         _RemoveRoomWalls(layout, stats);
@@ -148,7 +148,7 @@ public static class MazeGenAlgorithms {
         Debug.Log("Cells total: " + stats.sizeZ * stats.sizeX + " = " + stats.totalOuterPadding + " + " + stats.totalInnerPadding + " + " + stats.totalCore + " + " +
           (stats.totalOuterPadding + stats.totalInnerPadding + stats.totalCore));
         String message = "Sectors data: \n";
-        for(int sector = 1; sector <= layoutRec.nrOfSectors; sector ++) {
+        for(int sector = 1; sector <= levelConfiguration.nrOfSectors; sector ++) {
             message += "Sector " + sector + ": ";
             message += stats.sectorCells[sector - 1].Count + " cells, of which ";
             message += stats.sectorBorder[sector - 1].Count + " are on border. \n";
@@ -174,7 +174,7 @@ public static class MazeGenAlgorithms {
         Debug.Log(message);
 
         message = "Room data:\n";
-        for(int sector = 1; sector <= layoutRec.nrOfSectors; sector ++) {
+        for(int sector = 1; sector <= levelConfiguration.nrOfSectors; sector ++) {
             message += "Sector " + sector + ":\n";
             foreach(RoomData room in stats.rooms[sector - 1]) {
                 message += "\t Room " + room.index + " of size " + room.size + " and rot. " + room.rotation + ", at " + room.anchor + 
@@ -187,7 +187,7 @@ public static class MazeGenAlgorithms {
         return (layout, stats);
     }
 
-    private static void PlaceItems(int[,,] layout, LayoutStats stats, LevelGenerator.LayoutRequirements layoutRec) {
+    private static void PlaceItems(int[,,] layout, LayoutStats stats, LevelConfiguration levelConfiguration) {
         int farthestRoomDist = 0;
         int distToStart;
         RoomData farthestRoom = new RoomData();
@@ -223,15 +223,15 @@ public static class MazeGenAlgorithms {
                 if (room.itemID < 0) {
                     // Item existence
                     randFloat = UnityEngine.Random.Range(0f, 100f);
-                    if (randFloat <= layoutRec.noItemDropChance) {
+                    if (randFloat <= levelConfiguration.noItemDropChance) {
                         // no item will be placed in this room
                         continue;
                     }
                     // Item rarity
                     randFloat = UnityEngine.Random.Range(0f, 100f);
-                    foreach ((ItemRarity rarity, float chanceThreshold) in layoutRec.itemDropChances) {
-                        if (randFloat <= chanceThreshold) {
-                            room.itemRarity = rarity;
+                    foreach (RarityDropChance rarityDropChance in levelConfiguration.itemDropChances) {
+                        if (randFloat <= rarityDropChance.dropChance) {
+                            room.itemRarity = rarityDropChance.rarity;
                             break;
                         }
                     }
@@ -392,8 +392,9 @@ public static class MazeGenAlgorithms {
         int sizeCounter = diffSizesCount;
         int randOnSolutionOrNot;
         int randSimpleShape;
+        
+        emptyIterationCounter = 0;
         while(totalPlacedShapes < maxToPlace) {
-            emptyIterationCounter = 0;
             // (1) first phase: place the first percOfComplexShapes shapes
             if(!secondPhase) {
                 // if queue is not empty
@@ -417,7 +418,21 @@ public static class MazeGenAlgorithms {
                 }
                 // reset counter
                 if(sizeCounter < 1) {
-                    sizeCounter = diffSizesCount;
+                    // check first if there are any complex shapes left
+                    bool emptyQueues = true;
+                    for(int i = complexThreshold; i < diffSizesCount; i ++) {
+                        if (mappedShapesBySize_Q[i].Count() > 0) {
+                            emptyQueues = false;
+                            break;
+                        }
+                    }
+                    // if there are no more complex shapes left, move to second phase
+                    if (emptyQueues) {
+                        secondPhase = true;
+                    } else {
+                        sizeCounter = diffSizesCount;
+                    }
+
                 }
             } else {
                 // (2) second phase: place simple shapes only
@@ -450,8 +465,12 @@ public static class MazeGenAlgorithms {
                     }
                 }
             }
-            // if the nothing was placed this iteration, then exit the loop
-            if(emptyIterationCounter > maxEmptyIterations) {
+            // if the nothing was placed for maxEmptyIterations and first phase is active, move to second phase
+            if(emptyIterationCounter > maxEmptyIterations && !secondPhase) {
+                secondPhase = true;
+            }
+            // if the nothing was placed for maxEmptyIterations and second phase is active, exit the loop
+            if (emptyIterationCounter > maxEmptyIterations && secondPhase) {
                 break;
             }
         }
@@ -1531,7 +1550,7 @@ public static class MazeGenAlgorithms {
             // If all exits are discovered for this sector
             //Debug.Log("Sector " + currentSector + " " + nextSector.Count + " " + passages.Count);
             if (sectorDone) {
-                currentSector = nextSector.Dequeue();
+                currentSector = nextSector.Dequeue(); // <----------
                 sectorDone = false;
             }
             // Look for passages in this sector

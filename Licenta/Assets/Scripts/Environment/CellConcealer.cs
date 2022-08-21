@@ -66,7 +66,7 @@ public class CellConcealer : MonoBehaviour {
     public void RevealCell() {
         // occluderObjectRenderer.enabled = false;
         fogParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        Debug.Log("Revealed cell " + mazeCellObject.name);
+        // Debug.Log("Revealed cell " + mazeCellObject.name);
         mazeCellObject.revealed = true;
         mazeCellObject.MapIconsVisibility(true);
     }

@@ -17,8 +17,11 @@ public class PickUpItem : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         // this.enabled = false;
         if (other.CompareTag("Player")) {
-            Destroy(this.gameObject);
+            // Display notification
+            InGameUI.UINotifications.instance.DisplayNotification(itemName);
+            // Apply item effect
             itemProperties.ApplyPickUpEffect(other.gameObject);
+            Destroy(this.gameObject);
         }
     }
 

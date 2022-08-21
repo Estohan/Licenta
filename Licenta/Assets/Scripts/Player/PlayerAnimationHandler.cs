@@ -166,8 +166,8 @@ public class PlayerAnimationHandler : MyMonoBehaviour
     }
 
     private void PlayerHealthAffectedReaction(object sender, float amount, bool onMaxHealth) {
-        // Debug.Log("Animation Handler: Player was hit! Showing " + damage + " points of damage.");
-        if (playerStats.isAlive && !playerStats.isDamageImmune) {
+        // Debug.Log("Animation Handler: Player was hit! Showing " + amount + " points of damage.");
+        if (playerStats.isAlive) { // && !playerStats.isDamageImmune <- there may be some problems here
             // Damage or healing
             if (!onMaxHealth) {
                 // Damage
@@ -209,6 +209,7 @@ public class PlayerAnimationHandler : MyMonoBehaviour
             playerSkMeshRenderer.material = mat2;
             yield return hitFlashTimer;
         }
+
         playerSkMeshRenderer.material = originalMaterial;
         if (playerStats.isAlive) {
             playerStats.isDamageImmune = false;

@@ -127,6 +127,7 @@ public class PlayerControls : MonoBehaviour {
             StartCoroutine(DodgeCooldownCoroutine());
         }
 
+
         playerVelocity.y += gravityValue * Time.deltaTime;
         characterController.Move(playerVelocity * Time.deltaTime);
 

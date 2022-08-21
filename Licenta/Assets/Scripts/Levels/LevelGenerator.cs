@@ -11,16 +11,16 @@ public class LevelGenerator : MonoBehaviour {
     // !! This function will need some parameters
     // Uses MazeGenAlgorithms to generate a maze layout and
     // saves that layout into a two dimensional array of MazeCellData
-    public Level GenerateLevel(LayoutRequirements layoutRec) {
-        this.sizeZ = layoutRec.sizeZ;
-        this.sizeX = layoutRec.sizeX;
+    public Level GenerateLevel(LevelConfiguration levelConfiguration) {
+        this.sizeZ = levelConfiguration.sizeZ;
+        this.sizeX = levelConfiguration.sizeX;
 
         (int[,,] layout, LayoutStats stats) = 
-            MazeGenAlgorithms.GenerateLayout(layoutRec);
+            MazeGenAlgorithms.GenerateLayout(levelConfiguration);
         level = new Level(sizeZ, sizeX, layout, stats);
 
         SelectObstacles();
-        AssignRoomsData(stats.rooms, layoutRec.nrOfSectors);
+        AssignRoomsData(stats.rooms, levelConfiguration.nrOfSectors);
         AssignWallsAndFloors();
         ObstacleArchitectureDeletions();
 
@@ -276,46 +276,6 @@ public class LevelGenerator : MonoBehaviour {
 
     public Level GetLevel() {
         return this.level;
-    }
-
-    public struct LayoutRequirements {
-        public int sizeZ;
-        public int sizeX;
-        public int outerPaddingPerc;
-        public int innerPaddingPerc;
-        public int nrOfSectors;
-
-        public int stage;
-
-        public int difficulty;
-        public int chanceOfObstDowngrade;
-        public int chanceOfObstUpgrade;
-
-        public float noItemDropChance;
-        public List<(ItemRarity, float)> itemDropChances;
-
-        public LayoutRequirements(int sizeZ,
-                                    int sizeX,
-                                    int outerPaddingPerc,
-                                    int innerPaddingPerc,
-                                    int nrOfSectors) {
-            this.sizeZ = sizeZ;
-            this.sizeX = sizeX;
-            this.outerPaddingPerc = outerPaddingPerc;
-            this.innerPaddingPerc = innerPaddingPerc;
-            this.nrOfSectors = nrOfSectors;
-            this.stage = 0;
-            this.difficulty = 0;
-            this.chanceOfObstDowngrade = 20;
-            this.chanceOfObstUpgrade = 20;
-            this.noItemDropChance = 30f;
-            itemDropChances = new List<(ItemRarity, float)> {
-                (ItemRarity.Legendary, 80f), // 50% chance of common drop
-                (ItemRarity.Rare, 95f), // 30% chance of rare drop
-                (ItemRarity.Epic, 99f), // 19% chance of epic drop
-                (ItemRarity.Common, 100f) // 1% chance of legendary drop
-        };
-        }
     }
 
     /*

@@ -31,7 +31,7 @@ public static class LevelEffectsManager {
         int toRevealCount;
         int randIndex;
         int seedsCount = 3; // [ Debug ] Hardcoded value
-        float percentageToReveal = 0.1f; // [ Debug ] Hardcoded value
+        float percentageToReveal = 0.2f; // [ Debug ] Hardcoded value
 
         /*// this is used to prevent the case where all seeds are chosen inside 'holes'
         // so they cannot expand. The solution would be to start another seed elsewhere
@@ -39,6 +39,9 @@ public static class LevelEffectsManager {
         // the function if that case is detected
         // Update: the function will exit when there are no candidates left.
         int _emptyIterations = 0;*/
+
+        // Announce effect execution
+        InGameUI.UINotifications.instance.DisplayNotification("Memory module mapped.");
 
 
         // Gather info cells visibility
@@ -93,11 +96,15 @@ public static class LevelEffectsManager {
     }
 
     public static void RevealDestination() {
+        // Announce effect execution
+        InGameUI.UINotifications.instance.DisplayNotification("Memory module mapped.");
+        // Reveal finish cell
         MazeCoords finishCell = GameManager.instance.getCurrentLevel().stats.finishCell;
         GameManager.instance.getCurrentLevel().cellsObjects[finishCell.z, finishCell.x].GetOccluder().RevealCell();
     }
 
     public enum LevelEffects {
+        FirstLevelIntro,
         MapReveal,
         DestinationReveal
     }

@@ -71,7 +71,8 @@ public class CameraControl : MonoBehaviour {
                                                (player.transform.position.z + offsetZ));
     }
 
-    public void PrepareZoomOutEffect() {
+    public void PrepareZoomOutEffect(float zoomSpeed) {
+        this.zoomSpeed = zoomSpeed;
         mainCamera.orthographicSize = zoomStartSize;
         mainCamera.transform.localPosition = new Vector3(mainCamera.transform.localPosition.x,
                                                             mainCamera.transform.localPosition.y - 2f,

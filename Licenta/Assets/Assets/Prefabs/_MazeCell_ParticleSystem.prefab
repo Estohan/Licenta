@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellConcealer: {fileID: 7795405184825683237}
+  mapIcons: []
+  visited: 0
+  revealed: 0
   data:
     coordinates:
       z: 0
@@ -112,9 +115,45 @@ PrefabInstance:
       propertyPath: m_Name
       value: ParticleSystemFog
       objectReference: {fileID: 0}
+    - target: {fileID: 561851411040844498, guid: dd4cfe40ccab47d45b39dc921693c730, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1384279908532697376, guid: dd4cfe40ccab47d45b39dc921693c730, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2451312788408170151, guid: dd4cfe40ccab47d45b39dc921693c730, type: 3}
+      propertyPath: ShapeModule.type
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2451312788408170151, guid: dd4cfe40ccab47d45b39dc921693c730, type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2451312788408170151, guid: dd4cfe40ccab47d45b39dc921693c730, type: 3}
+      propertyPath: ShapeModule.m_Scale.z
+      value: 3.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2451312788408170151, guid: dd4cfe40ccab47d45b39dc921693c730, type: 3}
+      propertyPath: ShapeModule.boxThickness.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2451312788408170151, guid: dd4cfe40ccab47d45b39dc921693c730, type: 3}
+      propertyPath: ShapeModule.boxThickness.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2451312788408170151, guid: dd4cfe40ccab47d45b39dc921693c730, type: 3}
+      propertyPath: ShapeModule.boxThickness.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2451312788408170151, guid: dd4cfe40ccab47d45b39dc921693c730, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2451312788408170151, guid: dd4cfe40ccab47d45b39dc921693c730, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7771785754054354516, guid: dd4cfe40ccab47d45b39dc921693c730, type: 3}
       propertyPath: m_RootOrder

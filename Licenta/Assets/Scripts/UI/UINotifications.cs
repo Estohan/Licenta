@@ -90,6 +90,7 @@ namespace InGameUI {
         }*/
 
         public void DisplayNotification(string notificationText, bool large = false) {
+            Debug.Log("Display \"" + notificationText + "\", " + large);
             // Small banner notifications
             if (!large) {
                 smallNotifQueue.Enqueue(notificationText);

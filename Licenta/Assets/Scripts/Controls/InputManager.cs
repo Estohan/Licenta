@@ -66,7 +66,7 @@ public class @InputManager : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""de910ae0-d544-45fd-828c-c2804cf3321b"",
-                    ""path"": ""<Keyboard>/m"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -308,7 +308,7 @@ public class @InputManager : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""11506265-b0d9-4f94-961b-11829838df96"",
-                    ""path"": ""<Keyboard>/c"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -352,7 +352,7 @@ public class @InputManager : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""32bac46d-2f0a-44ac-9d16-af660221bef4"",
-                    ""path"": ""<Keyboard>/x"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

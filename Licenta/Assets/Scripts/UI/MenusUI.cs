@@ -15,6 +15,8 @@ public class MenusUI : MonoBehaviour {
     private GameObject confirmReturnUI;
     [SerializeField]
     private GameObject deathScreenUI;
+    [SerializeField]
+    private GameObject endGameScreenUI;
     [Space]
     [SerializeField]
     private GameObject healthBar;
@@ -36,15 +38,15 @@ public class MenusUI : MonoBehaviour {
         GameManager.inputManager.Others.Disable();
 
         GameManager.inputManager.Others.PauseGame.started += _ => MenuButtonEscape();
-        GameManager.inputManager.Others.RestartGame.started += _ => Test_RestartGame();
+        // GameManager.inputManager.Others.RestartGame.started += _ => Test_RestartGame();
 
         // GameEventSystem.instance.OnPlayerDeath += PlayerDeathReaction;
     }
 
-    public void Test_RestartGame() {
+    /*public void Test_RestartGame() {
         GameManager.instance.currentLevelIndex++;
         GameManager.instance.RestartGame();
-    }
+    }*/
 
     // ------------------------------------------------------------------------
     // Pause menu functions
@@ -109,9 +111,6 @@ public class MenusUI : MonoBehaviour {
         escapeKeyAvailable = true;
         // Time.timeScale = 1f;
         GameManager.instance.StartLevel();
-        GameManager.inputManager.Others.Enable();
-        // GameManager.inputManager.PlayerMovement.Enable();
-        GameManager.inputManager.UI.Enable();
     }
 
     public void MenuButtonQuit() {
@@ -156,6 +155,30 @@ public class MenusUI : MonoBehaviour {
         GameManager.instance.RestartGame();
         // Pause the game
         // Time.timeScale = 0f;
+    }
+
+    // ------------------------------------------------------------------------
+    // End game menu functions
+    // ------------------------------------------------------------------------
+
+    public void DisplayEndGameScreen() {
+        endGameScreenUI.SetActive(true);
+        escapeKeyAvailable = false;
+        gameIsPaused = true;
+        GameManager.inputManager.PlayerMovement.Disable();
+        GameManager.inputManager.UI.Disable();
+    }
+
+    public void MenuButtonDirectMainMenu() {
+        // UI
+        mainMenuUI.SetActive(true);
+        inMainMenu = true;
+        escapeKeyAvailable = false;
+        endGameScreenUI.SetActive(false);
+        InGameUI.MinimapWindow.Hide();
+        healthBar.SetActive(false);
+        // restart game
+        GameManager.instance.RestartGame();
     }
 
     // ------------------------------------------------------------------------

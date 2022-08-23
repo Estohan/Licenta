@@ -266,20 +266,14 @@ public class GameManager : MonoBehaviour {
                 mainCamera.ZoomOutEffect();
                 // Display level
                 InGameUI.UINotifications.instance.DisplayNotification("Level " + currentLevelIndex, true);
+                // Activate controls
+                inputManager.Others.Enable();
+                inputManager.PlayerMovement.Enable();
+                inputManager.UI.Enable();
                 // Apply effects in queue
-                //ExecuteEffectsInQueue();
                 StartCoroutine(WaitAndExecuteEffects());
                 break;
         }
-
-        // Apply all effects in effects queue
-
-        /*// Unpause the game
-        Time.timeScale = 1f;
-        // Camera zoom out effect
-        mainCamera.ZoomOutEffect();
-        _instantiatedDropShuttle.GetComponent<Animator>().SetTrigger("OpenShuttle");
-        StartCoroutine(WaitForShuttleToOpen());*/
         Debug.Log("Player transform: " + player.transform.position);
     }
 
@@ -294,7 +288,9 @@ public class GameManager : MonoBehaviour {
     public void EndLevel() {
         // Display notification
         InGameUI.UINotifications.instance.DisplayNotification("Level " + currentLevelIndex + " complete.", true);
+        // Disable player controls
         inputManager.PlayerMovement.Disable();
+        // Move to next level (or end game screen)
         StartCoroutine(WaitThenPassToNextLevel(2f));
     }
 
@@ -302,20 +298,26 @@ public class GameManager : MonoBehaviour {
         yield return new WaitForSeconds(seconds);
 
         if (currentLevelIndex == 10) {
-            // Endgame notification and stuff
+            // Endgame notification
+            InGameUI.UINotifications.instance.DisplayNotification("Collected all artifacts!", true);
+            // Endgame player animation
+            player.GetComponent<PlayerAnimationHandler>().Cheer();
+            // Endgame screen
+            StartCoroutine(WaitThenShowEndGameScreen(5f));
         } else {
             // Level complete notification
             currentLevelIndex++;
-        }
-        /*// Destroy level artifact
-        Destroy(_instantiatedArtifact);
-        // Destroy shuttle
-        if (currentLevelIndex == 2) {
-            Destroy(_instantiatedDropShuttle);
-        }*/
 
-        inputManager.PlayerMovement.Enable();
-        RestartGame();
+            inputManager.PlayerMovement.Enable();
+            RestartGame();
+        }
+    }
+
+    public IEnumerator WaitThenShowEndGameScreen(float seconds) {
+        yield return new WaitForSeconds(seconds);
+        this.gameObject.GetComponent<MenusUI>().DisplayEndGameScreen();
+        // Load the first level
+        currentLevelIndex = 1;
     }
 
     // Let the game run half a second to make sure the player animation started
@@ -336,7 +338,9 @@ public class GameManager : MonoBehaviour {
         currentLevel.cellsObjects[startCellPos.z, startCellPos.x].GetOccluder().RevealNeighbours();
         // Also wait for players stand up animation before activating the controls and displaying notification
         yield return new WaitForSeconds(4f);
+        inputManager.Others.Enable();
         inputManager.PlayerMovement.Enable();
+        inputManager.UI.Enable();
         InGameUI.UINotifications.instance.DisplayNotification("Level 1", true);
         // Apply effects from queue
 

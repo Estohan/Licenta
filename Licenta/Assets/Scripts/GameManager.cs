@@ -59,8 +59,7 @@ public class GameManager : MonoBehaviour {
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         // Deactivate player so that it does not interact with the level yet
         player.SetActive(false);
 
@@ -76,6 +75,14 @@ public class GameManager : MonoBehaviour {
         // Ready level
         ReadyLevel();
     }
+
+    // TEST Start
+    // Start is called before the first frame update
+    /*void Start() {
+        inputManager.PlayerMovement.Enable();
+        inputManager.UI.Disable();
+        inputManager.Others.Disable();
+    }*/
 
     public void CreateLevel() {
         // Generate level

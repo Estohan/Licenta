@@ -45,16 +45,16 @@ public static class ObstacleShapes {
             //    `       `=
             {2, new ObstacleShape(
                    new List<(int, int, int[])> {
-                       (0, 0, new int[] {0, 1, 0, 1})
+                       (0, 0, new int[] {-1, 1, -1, 1})
                    }, // North rotation
                    new List<(int, int, int[])> {
-                       (0, 0, new int[] {1, 0, 1, 0})
+                       (0, 0, new int[] {1, -1, 1, -1})
                    }, // East rotation
                    new List<(int, int, int[])> {
-                       (0, 0, new int[] {0, 1, 0, 1})
+                       (0, 0, new int[] {-1, 1, -1, 1})
                    }, // South rotation
                    new List<(int, int, int[])> {
-                       (0, 0, new int[] {1, 0, 1, 0})
+                       (0, 0, new int[] {1, -1, 1, -1})
                    }, // West rotation
                    null, // North pruning (None)
                    null, // East pruning (None)

@@ -66,7 +66,6 @@ public class UIHealthBar : MonoBehaviour {
         currentHealthText.text = ((int) playerStats.currHealth).ToString();
         maxHealthText.text = ((int) playerStats.maxHealth).ToString();
         if (!healthUpdateInProgress) {
-            // Debug.Log("Started coroutine");
             StartCoroutine(HealthUpdateCoroutine());
         } else {
             newHealthUpdate = true;

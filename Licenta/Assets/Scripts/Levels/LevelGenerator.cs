@@ -75,10 +75,10 @@ public class LevelGenerator : MonoBehaviour {
                     }
                 }
                 if(viableObstacles.Count == 0) {
-                        Debug.LogError("No available obstacles for (" + stage + ", " +
+                        /*Debug.LogError("No available obstacles for (" + stage + ", " +
                                                                         shapeID + ", " +
                                                                         rotation + ", " +
-                                                                        rec_diff + ").");
+                                                                        rec_diff + ").");*/
                         return;
                 }
 

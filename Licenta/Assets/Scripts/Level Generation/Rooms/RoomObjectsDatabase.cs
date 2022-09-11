@@ -10,7 +10,7 @@ public class RoomObjectsDatabase : MonoBehaviour {
 
     private void Awake() {
         if (instance != null && instance != this) {
-            Debug.LogError("Duplicate instance of RoomObjectDatabase.\n");
+            // Debug.LogError("Duplicate instance of RoomObjectDatabase.\n");
             Destroy(gameObject);
         } else {
             instance = this;

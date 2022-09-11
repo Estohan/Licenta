@@ -68,19 +68,19 @@ public static class LevelEffectsManager {
             candidates.Add(hiddenCells[randIndex]);
             hiddenCells.RemoveAt(randIndex);
         }
-        Debug.Log(cellsCount + " " + revealedPreviouslyCount + " " + revealedNowCount + " " + toRevealCount + " " + seedsCount);
+        // Debug.Log(cellsCount + " " + revealedPreviouslyCount + " " + revealedNowCount + " " + toRevealCount + " " + seedsCount);
         // Reveal seed cells
         for (int i = 0; i < seedsCount; i ++) {
             revealedCells = currentLevel.cellsObjects[candidates[i].z, candidates[i].x].GetOccluder().RevealNeighbours();
-            Debug.Log("Revealed seed at " + candidates[i] + " and " + revealedCells.Count + " neighbours.");
+            // Debug.Log("Revealed seed at " + candidates[i] + " and " + revealedCells.Count + " neighbours.");
             revealedNowCount += revealedCells.Count;
             candidates.AddRange(revealedCells);
         }
 
         // Remove seed cells from candidates list
         candidates.RemoveRange(0, seedsCount);
-        Debug.Log("Candidates count: " + candidates.Count);
-        Debug.Log("=>" + cellsCount + " " + revealedPreviouslyCount + " " + revealedNowCount + " " + toRevealCount + " " + seedsCount);
+        // Debug.Log("Candidates count: " + candidates.Count);
+        // Debug.Log("=>" + cellsCount + " " + revealedPreviouslyCount + " " + revealedNowCount + " " + toRevealCount + " " + seedsCount);
 
         // Reveal map zones
         while (revealedNowCount < toRevealCount && revealedPreviouslyCount < cellsCount && candidates.Count > 0) {
@@ -91,7 +91,7 @@ public static class LevelEffectsManager {
             candidates.RemoveAt(randIndex);
             candidates.AddRange(revealedCells);
 
-            Debug.Log("->" + cellsCount + " " + revealedPreviouslyCount + " " + revealedNowCount + " " + toRevealCount + " " + seedsCount);
+            // Debug.Log("->" + cellsCount + " " + revealedPreviouslyCount + " " + revealedNowCount + " " + toRevealCount + " " + seedsCount);
         }
     }
 

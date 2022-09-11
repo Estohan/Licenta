@@ -88,6 +88,7 @@ public class MenusUI : MonoBehaviour {
         inMainMenu = true;
         escapeKeyAvailable = false;
         // restart game
+        GameManager.instance.currentLevelIndex = 1;
         GameManager.instance.RestartGame();
         // Pause the game
         //Time.timeScale = 0f;
@@ -110,7 +111,8 @@ public class MenusUI : MonoBehaviour {
         inMainMenu = false;
         escapeKeyAvailable = true;
         // Time.timeScale = 1f;
-        GameManager.instance.StartLevel();
+        // GameManager.instance.StartLevel();
+        StartCoroutine(DelayedLevelStartCoroutine());
     }
 
     public void MenuButtonQuit() {
@@ -132,17 +134,24 @@ public class MenusUI : MonoBehaviour {
     // ------------------------------------------------------------------------
 
     public void DisplayDeathScreenUI() {
-        deathScreenUI.SetActive(true);
-        escapeKeyAvailable = false;
-        gameIsPaused = true;
-        GameManager.inputManager.PlayerMovement.Disable();
-        GameManager.inputManager.UI.Disable();
+        // If player did not press escape while death animation was still playing
+        if (!gameIsPaused) {
+            deathScreenUI.SetActive(true);
+            escapeKeyAvailable = false;
+            gameIsPaused = true;
+            GameManager.inputManager.PlayerMovement.Disable();
+            GameManager.inputManager.UI.Disable();
+        }
     }
 
     public void MenuButtonRetryYes() {
         deathScreenUI.SetActive(false);
+        escapeKeyAvailable = true;
+        gameIsPaused = false;
         // restart game
+        GameManager.instance.currentLevelIndex = 1;
         GameManager.instance.RestartGame();
+        StartCoroutine(DelayedLevelStartCoroutine());
     }
 
     public void MenuButtonRetryNo() {
@@ -152,6 +161,7 @@ public class MenusUI : MonoBehaviour {
         InGameUI.MinimapWindow.Hide();
         healthBar.SetActive(false);
         // restart game
+        GameManager.instance.currentLevelIndex = 1;
         GameManager.instance.RestartGame();
         // Pause the game
         // Time.timeScale = 0f;
@@ -177,6 +187,7 @@ public class MenusUI : MonoBehaviour {
         endGameScreenUI.SetActive(false);
         InGameUI.MinimapWindow.Hide();
         healthBar.SetActive(false);
+        GameManager.instance.currentLevelIndex = 1;
         // restart game
         GameManager.instance.RestartGame();
     }
@@ -205,6 +216,21 @@ public class MenusUI : MonoBehaviour {
             // Accessed from pause menu
             pauseMenuUI.SetActive(false);
         }
+    }
+
+    // Delay StartLevel() method execution to ensure
+    // ReadyLevel() coroutines are over
+    private IEnumerator DelayedLevelStartCoroutine() {
+        yield return new WaitForSecondsRealtime(1.2f);
+        GameManager.instance.StartLevel();
+    }
+
+    public bool isGamePaused() {
+        return gameIsPaused;
+    }
+
+    public bool isMainMenuActive() {
+        return inMainMenu;
     }
 
     /*public void PlayerDeathReaction(object sender) {

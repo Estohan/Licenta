@@ -53,7 +53,7 @@ public class ObjectDatabase : MonoBehaviour {
         if (desiredContainer.Count >= index + 1) {
             return desiredContainer[index];
         } else {
-            Debug.Log("ObjectDatabase: BAD INDEX IN GETARTCHITECTURE()");
+            // Debug.Log("ObjectDatabase: BAD INDEX IN GETARTCHITECTURE()");
             return desiredContainer[0];
         }
     }
@@ -149,7 +149,7 @@ public class ObjectDatabase : MonoBehaviour {
 
     private void Awake() {
         if (instance != null && instance != this) {
-            Debug.LogError("Duplicate instance of ObjectDatabase.\n");
+            // Debug.LogError("Duplicate instance of ObjectDatabase.\n");
             Destroy(gameObject);
         } else {
             instance = this;

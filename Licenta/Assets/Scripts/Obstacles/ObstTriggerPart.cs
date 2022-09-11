@@ -96,24 +96,6 @@ public class ObstTriggerPart : MonoBehaviour {
         OPT_TriggerObstacles();
     }
 
-    /*private void OnCollisionEnter(Collision collision) {
-        Debug.Log("CollisionEnter triggered by " + collision.gameObject.transform.name);
-        if (collision.gameObject.transform.CompareTag("Player")) {
-            if (triggerType == 1) {
-                TriggerObstacles();
-            }
-        }
-    }
-
-    private void OnCollisionExit(Collision collision) {
-        Debug.Log("CollisionExit triggered by " + collision.gameObject.transform.name);
-        if (collision.gameObject.transform.CompareTag("Player")) {
-            if (triggerType == 2) {
-                TriggerObstacles();
-            }
-        }
-    }*/
-
     private void OnTriggerEnter(Collider other) {
         // Debug.Log("TriggerEnter triggered by " + other.gameObject.transform.name);
         if (other.gameObject.transform.CompareTag("Player")) {

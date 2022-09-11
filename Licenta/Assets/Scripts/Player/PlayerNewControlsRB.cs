@@ -46,11 +46,11 @@ public class PlayerNewControlsRB : MonoBehaviour {
 
     private void Update() {
         //groundedPlayer = Physics.CheckSphere(this.transform.position, 0.5f, groundLayer, QueryTriggerInteraction.Ignore);
-        if(groundedPlayer) {
+        /*if(groundedPlayer) {
             Debug.Log("Grounded");
         } else {
             Debug.Log("Not grounded");
-        }
+        }*/
 
         // Movement
         if (movementInputDetected) {

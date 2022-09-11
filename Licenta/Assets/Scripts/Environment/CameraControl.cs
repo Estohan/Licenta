@@ -31,6 +31,7 @@ public class CameraControl : MonoBehaviour {
     [SerializeField]
     private float secondsBeforeZoom;
     private WaitForSeconds waitBeforeZoom;
+    private bool zoomEffectInProgress;
 
 
     private PlayerStats playerStats;
@@ -58,6 +59,8 @@ public class CameraControl : MonoBehaviour {
         } else {
             playerVelocity = 10;
         }
+
+        zoomEffectInProgress = false;
     }
 
     void Update() {
@@ -72,6 +75,12 @@ public class CameraControl : MonoBehaviour {
     }
 
     public void PrepareZoomOutEffect(float zoomSpeed) {
+        // If a zoom effect is already in progress, stop it
+        if (zoomEffectInProgress) {
+            StopCoroutine(ZoomOutCoroutine());
+            zoomEffectInProgress = false;
+        }
+
         this.zoomSpeed = zoomSpeed;
         mainCamera.orthographicSize = zoomStartSize;
         mainCamera.transform.localPosition = new Vector3(mainCamera.transform.localPosition.x,
@@ -86,6 +95,7 @@ public class CameraControl : MonoBehaviour {
     private IEnumerator ZoomOutCoroutine() {
         float currentSize = zoomStartSize;
 
+        zoomEffectInProgress = true;
         mainCamera.orthographicSize = zoomStartSize;
         yield return waitBeforeZoom;
 
@@ -98,6 +108,7 @@ public class CameraControl : MonoBehaviour {
             }
             mainCamera.orthographicSize = currentSize;
         }
+        zoomEffectInProgress = false;
     }
 
     private void followPlayer() {

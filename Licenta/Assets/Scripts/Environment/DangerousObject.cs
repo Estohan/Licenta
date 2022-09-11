@@ -11,7 +11,7 @@ public class DangerousObject : MonoBehaviour {
     }
 
     private void OnCollisionEnter(Collision collision) {
-        Debug.Log("[ COLLISION ]");
+        // Debug.Log("[ COLLISION ]");
         if (collision.gameObject.CompareTag("Player")) {
             // GameEventSystem.instance.PlayerHit();
             // Debug.Log("Collided with: " + collision.gameObject.name);
@@ -27,7 +27,7 @@ public class DangerousObject : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        Debug.Log("[ TRIGGER ]");
+        // Debug.Log("[ TRIGGER ]");
         if (other.gameObject.CompareTag("Player")) {
             // GameEventSystem.instance.PlayerHit();
             // Debug.Log("Collided with: " + other.gameObject.name);

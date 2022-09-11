@@ -208,6 +208,7 @@ public static class ObstacleShapes {
             // 8: |   |  x  |  | |x| |  _
             //    |x| |  `  |  |   | |  x
             //           ` `    ` `   ` `
+
             //            _ _   _ _   _ _
             // 8: | |x|  |  _  |   |  x  |
             //    |   |  |  x  |x| |  `  |

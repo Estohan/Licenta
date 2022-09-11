@@ -9,7 +9,7 @@ namespace InGameUI {
 
         private void Awake() {
             if (instance != null && instance != this) {
-                Debug.LogError("Duplicate instance of MinimapWindow.\n");
+                // Debug.LogError("Duplicate instance of MinimapWindow.\n");
                 Destroy(gameObject);
             } else {
                 instance = this;

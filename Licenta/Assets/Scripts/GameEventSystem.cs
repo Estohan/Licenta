@@ -18,7 +18,7 @@ public class GameEventSystem : MonoBehaviour {
 
     private void Awake() {
         if (instance != null && instance != this) {
-            Debug.LogError("Duplicate instance of GameEventSystem.\n");
+            // Debug.LogError("Duplicate instance of GameEventSystem.\n");
             Destroy(gameObject);
         } else {
             instance = this;

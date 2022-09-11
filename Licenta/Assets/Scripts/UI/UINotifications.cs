@@ -45,7 +45,7 @@ namespace InGameUI {
 
         private void Awake() {
             if (instance != null && instance != this) {
-                Debug.LogError("Duplicate instance of Notifications.\n");
+                // Debug.LogError("Duplicate instance of Notifications.\n");
                 Destroy(gameObject);
             } else {
                 instance = this;
@@ -90,7 +90,7 @@ namespace InGameUI {
         }*/
 
         public void DisplayNotification(string notificationText, bool large = false) {
-            Debug.Log("Display \"" + notificationText + "\", " + large);
+            // Debug.Log("Display \"" + notificationText + "\", " + large);
             // Small banner notifications
             if (!large) {
                 smallNotifQueue.Enqueue(notificationText);
@@ -104,6 +104,21 @@ namespace InGameUI {
                     StartCoroutine(LargeNotifCoroutine());
                 }
             }
+        }
+
+        public void StopAndDiscardNotifications() {
+            largeNotifQueue.Clear();
+            smallNotifQueue.Clear();
+            if (largeCurrentlyOnScreen) {
+                StopCoroutine(LargeNotifCoroutine());
+                largeBanner.SetActive(false);
+            }
+            if (smallCurrentlyOnScreen) {
+                StopCoroutine(SmallNotifCoroutine());
+                smallBanner.SetActive(false);
+            }
+            largeCurrentlyOnScreen = false;
+            smallCurrentlyOnScreen = false;
         }
 
         private IEnumerator LargeNotifCoroutine() {

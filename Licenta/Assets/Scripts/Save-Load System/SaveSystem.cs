@@ -8,7 +8,7 @@ public static class SaveSystem {
     public static void InitSaveSystem() {
         if(!Directory.Exists(saveFolder)) {
             Directory.CreateDirectory(saveFolder);
-            Debug.Log("SaveSystem: Save directory created");
+            // Debug.Log("SaveSystem: Save directory created");
         }
     }
     
@@ -18,7 +18,7 @@ public static class SaveSystem {
         string jsonFileContents = JsonUtility.ToJson(data, true);
 
         File.WriteAllText(saveFolder + "save.json", jsonFileContents);
-        Debug.Log("SaveSystem: Game saved.");
+        // Debug.Log("SaveSystem: Game saved.");
     }
 
     public static SavedData LoadGame() {
@@ -26,7 +26,7 @@ public static class SaveSystem {
             string jsonFileContents = File.ReadAllText(saveFolder + "save.json");
             SavedData data = JsonUtility.FromJson<SavedData>(jsonFileContents);
 
-            Debug.Log("SaveSystem: Game loaded.");
+            // Debug.Log("SaveSystem: Game loaded.");
             return data;
         } else {
             return null;

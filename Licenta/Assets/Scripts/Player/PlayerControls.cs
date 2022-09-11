@@ -77,8 +77,6 @@ public class PlayerControls : MonoBehaviour {
     private void Update() {
         //Debug.Log("Start " + this.transform.position);
         groundedPlayer = characterController.isGrounded;
-        // groundedPlayer = Physics.CheckSphere(this.transform.position, 0.5f, groundLayer, QueryTriggerInteraction.Ignore);
-        // Debug.Log(groundedPlayer + " " + playerVelocity);
 
         if (groundedPlayer && playerVelocity.y < 0.5f) {
             playerVelocity.y = -0.5f;
@@ -136,54 +134,6 @@ public class PlayerControls : MonoBehaviour {
         playerVelocity.z /= 1 + dragValue.z * Time.deltaTime;
         //Debug.Log(this.transform.position + "end");
     }
-
-    /*private void Update() {
-        groundedPlayer = characterController.isGrounded;
-        // groundedPlayer = Physics.CheckSphere(this.transform.position, 0.5f, groundLayer, QueryTriggerInteraction.Ignore);
-        // Debug.Log(groundedPlayer + " " + playerVelocity);
-
-        if (groundedPlayer && playerVelocity.y < 0.5f) {
-            playerVelocity.y = -0.5f;
-        }
-
-        // Movement
-        if (movementInputDetected) {
-            Debug.Log("Movement vector: " + playerMovement);
-            characterController.Move(playerMovement * playerStats.speed * Time.deltaTime);
-            // character rotation?
-            currentRotation = transform.rotation;
-            targetRotation = Quaternion.LookRotation(playerMovement);
-            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, playerStats.rotationFactor);
-            // transform.forward = playerMovement;
-        }
-
-        // Gravity and jump
-        if(playerJumped && groundedPlayer) {
-            playerVelocity.y += Mathf.Sqrt(playerStats.jumpHeight * -3.0f * gravityValue);
-            playerJumped = false;
-        }
-
-        // Dodge
-        if(playerDodged && groundedPlayer) {
-            playerVelocity += Vector3.Scale(transform.forward,
-                                            playerStats.dodgeDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * dragValue.x + 1)) / -Time.deltaTime),
-                                                                                    0,
-                                                                                    (Mathf.Log(1f / (Time.deltaTime * dragValue.z + 1)) / -Time.deltaTime)));
-            playerDodged = false;
-        }
-
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        characterController.Move(playerVelocity * Time.deltaTime);
-
-        playerVelocity.x /= 1 + dragValue.x * Time.deltaTime;
-        playerVelocity.y /= 1 + dragValue.y * Time.deltaTime;
-        playerVelocity.z /= 1 + dragValue.z * Time.deltaTime;
-    }*/
-
-    /*private void OnDrawGizmos() {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(this.transform.position, 0.5f);
-    }*/
 
     private void OnMovementInput(InputAction.CallbackContext context) {
         currentMovementFromInput = context.ReadValue<Vector2>();
@@ -303,19 +253,11 @@ public class PlayerControls : MonoBehaviour {
         characterController.height = playerStats.CapsuleColliders[index].height;
     }
 
-/*    private void OnEnable() {
-        inputManager.PlayerMovement.Enable();
-    }
-
-    private void OnDisable() {
-        inputManager.PlayerMovement.Disable();
-    }*/
-
     private IEnumerator DodgeCooldownCoroutine() {
-        Debug.Log("Dodge cooldown up.");
+        // Debug.Log("Dodge cooldown up.");
         yield return waitDodgeCooldown;
         dodgeOnCooldown = false;
-        Debug.Log("Dodge cooldown down.");
+        // Debug.Log("Dodge cooldown down.");
     }
 
     public enum PlayerPostureState {
@@ -323,72 +265,4 @@ public class PlayerControls : MonoBehaviour {
         Sneaking,
         Crawling
     }
-    /*private void OnAltMovementInput(InputAction.CallbackContext context) {
-        Vector3 targetPos = Vector3.zero;
-        Plane plane = new Plane(Vector3.up, transform.position);
-        // Create a ray from the mouse click position
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        // Initialization of the enter value
-        float point = 0f;
-
-
-        if (plane.Raycast(ray, out point)) {
-            // Get the point that is clicked
-            targetPos = ray.GetPoint(point);
-        }
-
-        // Move towards the targetPos by speed*Time.deltaTime
-        // transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
-        //Debug.Log("TargetPos: " + targetPos);
-        //Debug.Log("Result?: " + (targetPos - this.transform.position).normalized);
-        //Debug.DrawLine(transform.position, targetPos, Color.red);
-
-        currentMovementFromInput = (targetPos - this.transform.position).normalized;
-        playerMovement.x = currentMovementFromInput.x;
-        playerMovement.z = currentMovementFromInput.y;
-        playerMovement = Quaternion.Euler(0f, 45f, 0f) * playerMovement;
-        movementInputDetected = playerMovement.x != 0 || playerMovement.z != 0;
-
-        if (context.canceled) { // stopped moving
-            playerStats.isIdle = true;
-        } else { // is moving
-            playerStats.isIdle = false;
-        }
-        playerAnimationHandler.Move(playerStats.isIdle);
-
-        *//*Plane plane = new Plane(Vector3.up, transform.position);
-        // Create a ray from the mouse click position
-        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        // Initialization of the enter value
-        float point = 0f;
-
-
-        if (plane.Raycast(ray, out point)) {
-            // Get the point that is clicked
-            currentMovementFromInput = ray.GetPoint(point);
-        }
-
-        Vector3 movement = new Vector3();
-        //currentMovementFromInput = mainCamera.ScreenToViewportPoint(Mouse.current.position.ReadValue());
-        *//*currentMovementFromInput = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        movement.x = currentMovementFromInput.x;
-        movement.z = currentMovementFromInput.y;
-        playerMovement = (this.transform.position - movement).normalized;
-        movementInputDetected = playerMovement.x != 0 || playerMovement.z != 0;
-
-        if (context.canceled) { // stopped moving
-            movement = Vector3.zero;
-            playerStats.isIdle = true;
-        } else { // is moving
-            playerStats.isIdle = false;
-        }
-        playerAnimationHandler.Move(playerStats.isIdle);*//*
-
-        // Destination too close to player
-        *//*if (transform.position == targetPos)
-            isWalking = false;*//*
-
-        Debug.Log("Mouse: " + currentMovementFromInput);
-        Debug.DrawLine(this.transform.position, currentMovementFromInput, Color.red);*//*
-    }*/
 }

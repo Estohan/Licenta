@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Scriptable object that is used by the ObjectDatabase and contains
+ *  references to all PickUp game objects, sorted by their rarity types.
+ */
 [CreateAssetMenu(menuName = "PickUp Items")]
 public class PickUpsSO : ScriptableObject {
     [SerializeField]
@@ -41,5 +45,4 @@ public class PickUpsSO : ScriptableObject {
 
         return null;
     }
-
 }

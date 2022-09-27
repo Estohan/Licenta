@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Scriptable object that stores the four rotations of a room.
+ */
 [CreateAssetMenu(menuName = "RoomObject")]
 public class RoomObject : ScriptableObject {
-    /*public int roomSize;
-    public int roomIndex;*/
 
     // Rotations
     public List<RoomObjectCell> northRotation = new List<RoomObjectCell>();
@@ -44,8 +45,6 @@ public class RoomObject : ScriptableObject {
         }
 
         foreach(RoomObjectCell roomCell in rotationCells) {
-            // [TODO] What's up with "==" and ".Equals"
-            // Debug.Log("Comparing " + roomCell.offset + " with " + cellOffset);
             if(roomCell.offset.z == cellOffset.z && roomCell.offset.x == cellOffset.x) {
                 return roomCell;
             }

@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Active part (moving part) component of an obstacole object. It is
+ *  usually inherited by each obstacle so that it can further implement
+ *  its own behaviour.
+ */
 public class ObstActivePart : MonoBehaviour {
 
     [SerializeField]

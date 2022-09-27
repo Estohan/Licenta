@@ -2,23 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Scriptable object that holds the data for all levels of
+ *  difficulty (and their rotations) of an obstacle type.
+ */
 [CreateAssetMenu(menuName = "Obstacle SO")]
 public class ObstacleObject : ScriptableObject {
-
-    // TODO
-    /*public Obstacle obstacle_North;
-    public Obstacle obstacle_East;
-    public Obstacle obstacle_South;
-    public Obstacle obstacle_West;*/
-    //public GameObject obstacle;
-
-    // TODO
-    // difficulty objects
-    // 0
-    // North
-    // East
-    // West
-    // South
     [Header("Lvl. 0 Difficulty - Tutorial")]
     public GameObject northRotation_0;
     public GameObject eastRotation_0;

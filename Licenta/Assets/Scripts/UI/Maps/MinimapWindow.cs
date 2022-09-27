@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Minimap data and behaviour.
+ */
 namespace InGameUI {
     public class MinimapWindow : MonoBehaviour {
 

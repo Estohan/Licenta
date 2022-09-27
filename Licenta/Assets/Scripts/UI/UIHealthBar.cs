@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/*
+ *      Health bar UI data and behaviour.
+ */
 public class UIHealthBar : MonoBehaviour {
 
     [SerializeField]

@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Game Manager that ties in together level generation, level completion
+ *  and game menus.
+ */
 public class GameManager : MonoBehaviour {
 
     public static GameManager instance = null;
@@ -353,26 +357,4 @@ public class GameManager : MonoBehaviour {
             ExecuteLevelEffect(levelEffectsQueue.Dequeue());
         }
     }
-
-    /*public void LoadGame() {
-        SavedData savedData = SaveSystem.LoadGame();
-        if(savedData != null) {
-            if (levelGenerator.transform.GetChild(0) != null) {
-                // Destroy previous level
-                Destroy(levelGenerator.transform.GetChild(0).gameObject);
-                // Create a new one based on the saved data
-                currentLevel = levelGenerator.GenerateLevelFromSave(savedData);
-                // Instantiate level
-                levelGenerator.InstantiateLevel();
-                // Ready level
-                ReadyLevel();
-            }
-        } else {
-            Debug.LogError("GameManager: No existing save data found!");
-        }
-    }
-
-    public void SaveGame() {
-        SaveSystem.SaveGame();
-    }*/
 }

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *  Item ID's and their chances of getting picked.
+ */
 public static class ItemsIDs {
 
     // Lists of tuples (itemID, chanceThreshold_of_being_picked)

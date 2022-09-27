@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      All the data associated with a single cell of the maze.
+ */
 [System.Serializable]
 public class MazeCellData {
 
@@ -20,7 +23,7 @@ public class MazeCellData {
     // 9..17 - subsections
     public (int, int, int)[] objectReferences;
     public bool[] hasObjectReference;
-    public MazeDirection[] objectsRotations; // store all rotations here when implementing save/load functionalities !!
+    public MazeDirection[] objectsRotations;
 
     // If part of a room
     public int roomObjStage;

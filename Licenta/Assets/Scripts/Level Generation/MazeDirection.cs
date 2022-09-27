@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Enum that represents directions and specific operations associated
+ *  with them.
+ */
 public enum MazeDirection {
     North,
     East,

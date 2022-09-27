@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/*
+ *      UI notifications system.
+ */
 namespace InGameUI {
     public class UINotifications : MonoBehaviour {
 
@@ -37,12 +40,6 @@ namespace InGameUI {
         private bool largeCurrentlyOnScreen;
         private bool smallCurrentlyOnScreen;
 
-        // [ Debug ]
-        /*public List<string> testListLarge;
-        public bool flushLarge;
-        public List<string> testListSmall;
-        public bool flushSmall;*/
-
         private void Awake() {
             if (instance != null && instance != this) {
                 // Debug.LogError("Duplicate instance of Notifications.\n");
@@ -66,28 +63,7 @@ namespace InGameUI {
 
             largeCurrentlyOnScreen = false;
             smallCurrentlyOnScreen = false;
-
-            // [ Debug ]
-            /*testListLarge = new List<string>();
-            testListSmall = new List<string>();*/
         }
-
-        // [ Debug ]
-        /*private void Update() {
-            if (flushLarge) {
-                foreach (string message in testListLarge) {
-                    DisplayNotification(message, true);
-                }
-                flushLarge = false;
-            }
-
-            if (flushSmall) {
-                foreach (string message in testListSmall) {
-                    DisplayNotification(message);
-                }
-                flushSmall = false;
-            }
-        }*/
 
         public void DisplayNotification(string notificationText, bool large = false) {
             // Debug.Log("Display \"" + notificationText + "\", " + large);

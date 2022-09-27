@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Used in debugging/prefab creation scenes. It creates an array of floors
+ *  visually marked to illustrate cell areas (walls, corners and traversable
+ *  zone).
+ */
 public class SceneViewBuilder : MonoBehaviour {
     public GameObject _root;
     public GameObject _floorWhite;

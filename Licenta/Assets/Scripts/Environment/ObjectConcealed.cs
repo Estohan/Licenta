@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      This script determines at runtime which game objects would affect
+ *  scene visibility by covering the player or their path (which game objects
+ *  can interpose between important game elements and the main camera) and
+ *  assigns them an appropiate material with a special shader that makes sure
+ *  their fragments are not rendered when in the above situations.
+ */
 public class ObjectConcealed : MonoBehaviour {
     [SerializeField]
     private bool alwaysConceal;
     [SerializeField]
     private List<float> concealingRotations;
-    /*[SerializeField]
-    private bool unreachable; // cannot be reached using raycast/linecast*/
-    /*[SerializeField]
-    private Material opaqueMaterial;*/
     [SerializeField]
     private Material concealingMaterial;
 
@@ -37,9 +40,9 @@ public class ObjectConcealed : MonoBehaviour {
         if (concealingRotations == null) {
             return; // not assigned in the inspector
         }
+
         foreach (float concealingRotation in concealingRotations) {
             if (Quaternion.Angle(rotation, Quaternion.Euler(0f, concealingRotation, 0f)) < Constants.rotationEpsilon) {
-                // concealedObject.layer = LayerMask.NameToLayer("ConcealableObjects");
                 doesConceal = true;
                 this.GetComponent<MeshRenderer>().sharedMaterial = concealingMaterial;
             }
@@ -57,8 +60,4 @@ public class ObjectConcealed : MonoBehaviour {
     public void SetIsConcealed(bool isConcealed) {
         this.isConcealed = isConcealed;
     }
-
-    /*public bool GetIsUnreachable() {
-        return unreachable;
-    }*/
 }

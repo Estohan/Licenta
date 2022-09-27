@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Map revealing PickUp object effect.
+ */
 [CreateAssetMenu(menuName = "PickUpProperties/MapRevealEffect")]
 public class PickUp_MapReveal : PickUpEffect {
     [Space]

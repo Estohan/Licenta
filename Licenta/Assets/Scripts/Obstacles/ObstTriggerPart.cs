@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Trigger part component of an obstacle object.
+ */
 public class ObstTriggerPart : MonoBehaviour {
     /* OPTs (OnePartTriggers) trigger all obstacles when the player touches the trigger
        TPTs (TwoPartTriggers) anounces that obstacles are about to be triggered when the
@@ -68,7 +71,6 @@ public class ObstTriggerPart : MonoBehaviour {
         }
         // Disable collider if this can trigger only once
         if (isOneTimeTrigger) {
-            // this.transform.GetComponent<BoxCollider>().enabled = false;
             triggerCollider.enabled = false;
         }
         // Change trigger state if possible

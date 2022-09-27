@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Healing Pickup object effect.
+ */
 [CreateAssetMenu(menuName = "PickUpProperties/HealthEffect")]
 public class PickUp_HealthEffect : PickUpEffect {
     [Space]

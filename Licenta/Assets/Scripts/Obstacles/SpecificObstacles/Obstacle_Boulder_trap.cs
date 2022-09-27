@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Active part component of the boulder obstacle.
+ */
 public class Obstacle_Boulder_trap : ObstActivePart {
     private Animator animatorSlot;
 

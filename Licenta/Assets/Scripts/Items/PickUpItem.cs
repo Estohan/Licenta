@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      This holds the data of a PickUp game object and ensures its correct
+ *  behavior when picked up by the player.
+ */
 [System.Serializable]
 public class PickUpItem : MonoBehaviour {
     [SerializeField]
@@ -15,7 +19,6 @@ public class PickUpItem : MonoBehaviour {
 
 
     private void OnTriggerEnter(Collider other) {
-        // this.enabled = false;
         if (other.CompareTag("Player")) {
             // Display notification
             InGameUI.UINotifications.instance.DisplayNotification(itemName);

@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      This will be the parent object of a cell and is responsible with
+ *  the instantiation of all it game object children.
+ */
 public class MazeCellObject : MonoBehaviour {
 
     [SerializeField]
@@ -13,12 +17,6 @@ public class MazeCellObject : MonoBehaviour {
 
     public MazeCellData data;
 
-    // GAME OBJECTS ?
-    /*public GameObject Prf_FloorGrey;
-    public GameObject Prf_FloorGreen;
-    public GameObject Prf_FloorRed;
-    public GameObject Prf_FloorWhite;*/
-
     private void Start() {
         visited = false;
         revealed = false;
@@ -26,12 +24,11 @@ public class MazeCellObject : MonoBehaviour {
 
     public MazeCellObject(MazeCoords coordinates) {
         this.data.coordinates = coordinates;
-        // objectPrefabs = GameManager.instance.GetComponent<ObjectReferences>();
     }
 
     private void OnTriggerEnter(Collider other) {
         if(other.transform.CompareTag("Player")) {
-            //GameEventSystem.instance.PlayerMoveedToAnotherCell(data);
+            // GameEventSystem.instance.PlayerMoveedToAnotherCell(data);
             if (!visited) {
                 cellConcealer.RevealNeighbours();
                 visited = true;
@@ -60,20 +57,16 @@ public class MazeCellObject : MonoBehaviour {
         }
     }
 
-
     /*
      ==========================================================================
      CELL INSTANTIATION
      ==========================================================================     
      */
 
-
     internal void InstantiateFloor() {
 
         // Create floor as child of the cell
-        // GameObject _floorObj = DecideFloorType(data.type); [TODO] Remove this
-        if (!data.hasObjectReference[0]) { // && data.type != CellType.Room) {
-            //Debug.LogError("Cell " + data.coordinates + " cannot instantiate floor (no object reference).");
+        if (!data.hasObjectReference[0]) {
             return;
         }
 
@@ -88,7 +81,6 @@ public class MazeCellObject : MonoBehaviour {
             if(roomObjCell != null && roomObjCell.HasFloor()) {
                 _floorObj = roomObjCell._floor;
             } else { // Default blank floor
-                // _floorObj = ObjectDatabase.instance.GetArchitecture(0, ObjectType.Floor, 0);
                 _floorObj = null;
             }
         }
@@ -138,7 +130,6 @@ public class MazeCellObject : MonoBehaviour {
                         if(roomObjCell != null && roomObjCell.HasWall(direction)) {
                             _wallObj = roomObjCell.GetWall(direction);
                         } else { // default blank object
-                            // _wallObj = ObjectDatabase.instance.GetArchitecture(0, ObjectType.NEWall, 0);
                             _wallObj = null;
                         }
                     }
@@ -162,13 +153,6 @@ public class MazeCellObject : MonoBehaviour {
     public void InstantiateCorners() {
         GameObject _corner;
         int objStage, objType, objIndex;
-        /*bool _debug = false;
-        if (this.data.type == CellType.Room && this.data.room.size == 4) {
-            _debug = true;
-            //if (_debug) Debug.Log(this.data.coordinates + " " + _corner?.name + "");
-            Debug.Log(this.data.coordinates + "- " + this.data.cornerFaces[0] + " " + this.data.cornerFaces[1] + " " + this.data.cornerFaces[2] + " " + this.data.cornerFaces[3] + " ");
-        }*/
-        
 
         if (data.type > CellType.InnerPadding) {
             for (int k = 0; k < 4; k++) {
@@ -185,7 +169,6 @@ public class MazeCellObject : MonoBehaviour {
                         if(roomObjCell != null && roomObjCell.HasCorner(k)) {
                             _corner = roomObjCell.GetCorner(k);
                         } else { // default blank object
-                            // _corner = ObjectDatabase.instance.GetArchitecture(0, ObjectType.NoFaceCorner, 0);
                             _corner = null;
                         }
                     }
@@ -276,25 +259,11 @@ public class MazeCellObject : MonoBehaviour {
     public void InstantiateContent() {
         int stage = 1;
         Quaternion rotation = Quaternion.identity;
-        // Test
+
         if(data.type == CellType.Obstacle && data.obst_anchor == true) {
             GameObject obstacle = Instantiate(ObjectDatabase.instance.GetObstacle(stage, data.obst_shapeID, data.obst_obstacleID).
                                                                        GetObstacle(data.obst_rotation, data.obst_difficulty),
                                                 this.transform);
-            /*switch (data.rotation) {
-                case MazeDirection.East:
-                    rotation = Quaternion.Euler(0f, 90f, 0f);
-                    break;
-                case MazeDirection.South:
-                    rotation = Quaternion.Euler(0f, 180f, 0f);
-                    break;
-                case MazeDirection.West:
-                    rotation = Quaternion.Euler(0f, 270f, 0f);
-                    break;
-                default: // North
-                    break;
-             }
-            obstacle.transform.rotation = rotation;*/
         }
         if (data.type == CellType.Room && data.offsetToRoomAnchor.z == 0 && data.offsetToRoomAnchor.x == 0) {
             // Instatiate room decorations
@@ -322,15 +291,10 @@ public class MazeCellObject : MonoBehaviour {
         }
     }
 
-    // Returns the position of a cell subsection given the
-    // position of the parent cell
+    // Returns the position of a cell subsection given the position of the parent cell
     private Vector3 GetCellSubsectionPos(Transform transform, float cellSize, LevelGenerator.CellSubsections subsection) {
         float z, x;
-        // offset of z or x, so that it is places inside the cell
-        // float depthOffset = (transform.GetComponent<Renderer>().bounds.size.z) / 2;
-        // float depthOffset = Constants.cellSize / Constants.cellSegments / 2; //  half the size of a subsesction
-        // offset of y so that the object is placed "on the floor" - only needed if the object's origin is set to geometry
-        float y = 0f; // (transform.GetComponent<Renderer>().bounds.size.y) / 2;
+        float y = 0f;
         switch (subsection) {
             case LevelGenerator.CellSubsections.NorthEdge:
                 z = transform.localPosition.z + cellSize / 2 - (Constants.wallWidth / 2);
@@ -437,10 +401,6 @@ public class MazeCellObject : MonoBehaviour {
     }
 
     public void DebugColor() {
-        /*float r = 0.1f;
-        float g = 0.1f;
-        float b = 0.6f;
-        Color color = new Color(r, g, b, 1.0f);*/
         List<Color> colors = new List<Color>();
         colors.Add(new Color(0.1f, 0.1f, 0.5f, 1.0f));
         colors.Add(new Color(0.1f, 0.5f, 0.1f, 1.0f));
@@ -475,7 +435,6 @@ public class MazeCellObject : MonoBehaviour {
                 }
             }
         }
-        // this.GetComponentInChildren<Renderer>().material.color = color;
     }
 
     public void DebugColor2() {
@@ -507,84 +466,3 @@ public class MazeCellObject : MonoBehaviour {
         return cellConcealer;
     }
 }
-
-
-/*public void InstantiateCorners() {
-    GameObject cornerType = ObjectReferences.instance._Corner0;
-    if (data.type > CellType.InnerPadding) {
-        for (int k = 0; k < 4; k++) {
-            // Choose corner type to be instantiated [TODO] Remove this
-            switch (data.cornerFaces[k]) {
-                case 0:
-                    cornerType = ObjectReferences.instance._Corner0;
-                    break;
-                case 1:
-                    cornerType = ObjectReferences.instance._Corner1;
-                    break;
-                case 2:
-                    cornerType = ObjectReferences.instance._Corner2;
-                    break;
-            }
-            // Set name and set cell subsection in which to be placed
-            // Also set rotation depending on corner position
-            LevelGenerator.CellSubsections subsection = LevelGenerator.CellSubsections.Inner;
-            String name = "UNNAMED";
-            Quaternion rotation = Quaternion.identity;
-            bool[] wallPlacement = data.walls;
-            switch (k) {
-                case 0:
-                    subsection = LevelGenerator.CellSubsections.NWCorner;
-                    name = "NWCorner";
-                    if (cornerType != ObjectReferences.instance._Corner2) {
-                        if (wallPlacement[0]) rotation = Quaternion.identity; // Face S
-                        if (wallPlacement[3]) rotation = Quaternion.Euler(0f, 270f, 0f); // Face E
-                    } else {
-                        rotation = Quaternion.Euler(0f, 270f, 0f); // Face SE
-                    }
-                    break;
-                case 1:
-                    subsection = LevelGenerator.CellSubsections.NECorner;
-                    name = "NECorner";
-                    if (cornerType != ObjectReferences.instance._Corner2) {
-                        if (wallPlacement[0]) rotation = Quaternion.identity; // Face S
-                        if (wallPlacement[1]) rotation = Quaternion.Euler(0f, 90f, 0f); // Face W
-                    } else {
-                        rotation = Quaternion.identity; // Face SW
-                    }
-                    break;
-                case 2:
-                    subsection = LevelGenerator.CellSubsections.SECorner;
-                    name = "SECorner";
-                    if (cornerType != ObjectReferences.instance._Corner2) {
-                        if (wallPlacement[1]) rotation = Quaternion.Euler(0f, 90f, 0f); // Face W
-                        if (wallPlacement[2]) rotation = Quaternion.Euler(0f, 180f, 0f); // Face N
-                    } else {
-                        rotation = Quaternion.Euler(0f, 90f, 0f); // Face NW
-                    }
-                    break;
-                case 3:
-                    subsection = LevelGenerator.CellSubsections.SWCorner;
-                    name = "SWCorner";
-                    if (cornerType != ObjectReferences.instance._Corner2) {
-                        if (wallPlacement[2]) rotation = Quaternion.Euler(0f, 180f, 0f); // Face N
-                        if (wallPlacement[3]) rotation = Quaternion.Euler(0f, 270f, 0f); // Face E
-                    } else {
-                        rotation = Quaternion.Euler(0f, 180f, 0f); // Face NE
-                    }
-                    break;
-            }
-            // Create wall as child of its cell
-            GameObject newCorner = Instantiate(cornerType, this.transform);
-            newCorner.name = name + data.coordinates.z + "-" + data.coordinates.x;
-            // Set to correct position
-            newCorner.transform.localPosition = GetCellSubsectionPos(newCorner.transform,
-                                                                    cellSize,
-                                                                    subsection);
-            // Additional rotation of two-faced corners
-            if (cornerType == ObjectReferences.instance._Corner2) {
-
-            }
-            newCorner.transform.rotation = rotation;
-        }
-    }
-}*/

@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Currently implements only map reveal effects. These effects are queued
+ *  in the Game Manager and applied at the beginning of a new level.
+ */
 public static class LevelEffectsManager {
-    // public delegate void LevelEffect(LevelEffects levelEffect);
 
     public static void ExecuteEffect(LevelEffects levelEffect) {
         switch(levelEffect) {

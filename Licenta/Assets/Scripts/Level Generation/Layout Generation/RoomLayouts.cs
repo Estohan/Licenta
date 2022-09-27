@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Representations of rooms that will be mapped on the maze layout.
+ */
 public static class RoomLayouts {
     // The room layouts and their corresponding rotations
     public static List<RoomLayout>[] rooms = {
@@ -84,36 +87,16 @@ public static class RoomLayouts {
 
     // Return the rotations of a random room of size n
     public static (List<(int, int)>[], int roomSize, int roomIndex) GetRandomRoomOfSizeN(int n) {
-        if (n <= rooms.Length && n > 0 && rooms[n - 1].Count > 0) { // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! [DEBUG] index out of bounds here
+        if (n <= rooms.Length && n > 0 && rooms[n - 1].Count > 0) { // !!!
             int roomIndex = UnityEngine.Random.Range(0, rooms[n - 1].Count);
             return (rooms[n - 1][roomIndex].cellsRelativeToAnchor, n, roomIndex);
         }
         throw new System.Exception("RoomLayouts: GetRandomRoomOFSizeN(" + n + ")");
     }
-
-    /*public RoomLayouts() {
-        if(instance != null && instance !=  this) {
-            Debug.Log("Duplicate instance of RoomLayouts");
-        } else {
-            instance = this;
-
-            // Initialize rooms
-            rooms = new List<Room>[4];
-            for(int i = 0; i < 4; i ++) {
-                rooms[i] = new List<Room>();
-                rooms[i].Add(new Room());
-                rooms[i].Add(new Room());
-                rooms[i].Add(new Room());
-                rooms[i].Add(new Room());
-            }
-        }
-    }*/
 }
 
 public class RoomLayout {
     public List<(int, int)>[] cellsRelativeToAnchor;
-    //public List<int> list;
-    //public int DEBUG_NUMBER;
 
     public RoomLayout(List<(int, int)> southOrientation,
                 List<(int, int)> westOrientation,
@@ -125,9 +108,6 @@ public class RoomLayout {
         cellsRelativeToAnchor[1] = westOrientation;
         cellsRelativeToAnchor[2] = northOrientation;
         cellsRelativeToAnchor[3] = eastOrientation;
-        // DEBUG_NUMBER = UnityEngine.Random.Range(0, 100);
-        //this.list = list;
-        //this.DEBUG_NUMBER = DEBUG_NUMBER;
     }
 
     public List<(int, int)> GetRotation(MazeDirection dir) {
@@ -145,7 +125,7 @@ public class RoomData {
     public ItemRarity itemRarity;
 
     public RoomData() {
-        // empty constructor
+        // Empty constructor
     }
 
     public RoomData(MazeCoords anchor, MazeDirection rotation, int size, int index) {

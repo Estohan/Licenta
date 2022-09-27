@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Event system used for the interactions between the character and
+ *  obstacles.
+ */
 public class GameEventSystem : MonoBehaviour {
     public static GameEventSystem instance = null;
 
@@ -14,7 +18,6 @@ public class GameEventSystem : MonoBehaviour {
     public event PlayerDeathDelegate OnPlayerDeath;
     // public event PlayerMoveToCellDelegate OnPlayerMoveToAnotherCell;
     public event EventHandler OnPlayerStatsChange;
-    // public event EventHandler OnPlayerHit;
 
     private void Awake() {
         if (instance != null && instance != this) {
@@ -26,7 +29,6 @@ public class GameEventSystem : MonoBehaviour {
     }
 
     public void PlayerHealthAffected(float amount, bool onMaxHealth) {
-        // OnPlayerHit?.Invoke(this, EventArgs.Empty);
         OnHealthAffected?.Invoke(this, amount, onMaxHealth);
     }
 
@@ -38,7 +40,7 @@ public class GameEventSystem : MonoBehaviour {
         OnPlayerStatsChange?.Invoke(this, EventArgs.Empty);
     }
 
-    // [ TODO ] [Debug] Do I need this?
+    // [Debug]
     /*public void PlayerMoveedToAnotherCell(MazeCellData cellData) {
         OnPlayerMoveToAnotherCell?.Invoke(this, cellData);
     }*/

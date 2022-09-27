@@ -3,6 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Main camera script. It's main function is to move the camera so that it
+ *  always follows the player. It can also create a zoom out effect while
+ *  keeping the player in the center of the screen.
+ */
 public class CameraControl : MonoBehaviour {
     [SerializeField]
     private GameObject player;

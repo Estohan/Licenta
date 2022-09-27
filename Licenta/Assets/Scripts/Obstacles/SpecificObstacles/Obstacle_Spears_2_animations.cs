@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Active part component of the spears obstacle.
+ *      Two animations variant (open and close).
+ */
 public class Obstacle_Spears_2_animations : ObstActivePart {
 
     /* Open and close animations */

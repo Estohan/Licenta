@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Harmful part component of an obstacle object.
+ */
 public class ObstHarmfulPart : MonoBehaviour {
     [SerializeField]
     private float damage;

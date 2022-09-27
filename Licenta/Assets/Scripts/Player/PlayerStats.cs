@@ -3,49 +3,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Player stats, attributes and hit points management functions.
+ */
 public class PlayerStats : MyMonoBehaviour {
     public float maxHealth;
-    public float currHealth; // persistent stats should be stored in a SO?
+    public float currHealth;
+
     [Space]
     public bool isAlive;
     public bool isInactive;
     public bool isDamageImmune;
+
     [Space]
     public float speed;
     public float speedRunning;
     public float speedWalking;
     public float speedSneaking;
     public float speedCrawling;
+
     [Space]
     public float rotationFactor;
     public float runRotationFactor;
     public float walkRotationFactor;
     public float sneakRotationFactor;
     public float crawlRotationFactor;
+
     [Space]
     public float jumpHeight;
     public float dodgeDistance;
+
     [Space]
     public bool isIdle;
     public bool isRunning;
     public bool jumped;
     public bool dodged;
-    public PlayerControls.PlayerPostureState currentPosture; // persistent?
+    public PlayerControls.PlayerPostureState currentPosture;
     public ColliderDims[] CapsuleColliders;
 
     public MazeCellData currentCellData;
 
-    /*private void Awake() {
-        animator = new Animator();
-    }*/
-
-    // Damage test
-    public bool test1_damage;
+    // [ DEBUG ] Damage test
+    /*public bool test1_damage;
     public bool test2_heal;
     public bool test3_reduce;
-    public bool test4_extend;
+    public bool test4_extend;*/
 
-    private void Update() {
+    /*private void Update() {
         int val = 0;
         if (test1_damage) {
             test1_damage = false;
@@ -71,7 +75,7 @@ public class PlayerStats : MyMonoBehaviour {
             GameEventSystem.instance.PlayerHealthAffected(val, true);
             GameEventSystem.instance.PlayerStatsChanged();
         }
-    }
+    }*/
 
     protected override void Start() {
         base.Start();

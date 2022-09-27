@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Active part component of the swinging blade obstacle.
+ */
 public class Obstacle_Swinging_Blade_trap : ObstActivePart {
 
     [Space]

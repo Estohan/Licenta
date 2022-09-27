@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Active part component of the push trap obstacle.
+ */
 public class Obstacle_Push_trap_2_animations : ObstActivePart {
     /* Open and close animations */
 

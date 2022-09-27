@@ -5,10 +5,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-// This was used as a debug tool to see details about the cell currently
-// traversed by the player.
-// That is no longer needed but the health bar still uses this script to
-// function.
+/*
+ *      This was used as a debug tool to see details about the cell currently
+ *  traversed by the player.
+ *      That is no longer needed but the health bar still uses this script to
+ *  function.
+ */
 public class UIPlayerStats : MyMonoBehaviour {
 
     [SerializeField]

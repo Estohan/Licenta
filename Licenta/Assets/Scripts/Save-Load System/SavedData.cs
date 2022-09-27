@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      [ WIP ] Does not affect the game.
+ *      Part of the data saved to disk when a game level is saved.
+ */
 [System.Serializable]
 public class SavedData {
     public int sizeZ;
     public int sizeX;
-    /*public MazeCoords startCellPos;
-    public MazeCoords finishCellPos;*/
     public LayoutStats stats;
     public List<MazeCellData> cells;
 
@@ -15,8 +17,6 @@ public class SavedData {
         if (currentLevel != null) {
             (this.sizeZ, this.sizeX) = currentLevel.getDimensions(); // Redundant, remove this
             this.stats = currentLevel.stats;
-            /*this.startCellPos = currentLevel.stats.startCell;
-            this.finishCellPos = currentLevel.stats.finishCell;*/
             this.cells = new List<MazeCellData>();
 
             for (int z = 0; z < sizeZ; z++) {

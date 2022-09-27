@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      System used to organize and manage all the game objects that can be
+ *  instantiated by the LevelGenerator.
+ *      It uses ScriptableObjects to hold object references and contains
+ *  specific methods to provide the LevelGenerator with the necessary assets.
+ */
 public class ObjectDatabase : MonoBehaviour {
     public static ObjectDatabase instance;
 
@@ -136,7 +142,7 @@ public class ObjectDatabase : MonoBehaviour {
         if (size <= currentStageObjects.PredefinedRoomsBySize.Count) {
             return currentStageObjects.PredefinedRoomsBySize[size - 1].GetRoomCell(index, rotation, offset);
         } else {
-            //throw new System.Exception("GetRoomCells: No rooms of size " + size + ".");
+            // throw new System.Exception("GetRoomCells: No rooms of size " + size + ".");
             // Debug.Log("(!) GetRoomCell: No room of index " + index + ".Returning null\n");
             return null;
         }

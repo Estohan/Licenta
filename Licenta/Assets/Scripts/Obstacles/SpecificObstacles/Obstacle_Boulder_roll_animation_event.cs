@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Animation event for the boulder obstacle's boulder roll animation.
+ */
 public class Obstacle_Boulder_roll_animation_event : MonoBehaviour {
     [SerializeField]
     private GameObject brokenBoulder;

@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      [ TEST CLASS ] Does not affect the game.
+ *      Used to check the behavior of different types of collisions.
+ */
 public class DangerousObject : MonoBehaviour {
 
     MeshRenderer meshRenderer;

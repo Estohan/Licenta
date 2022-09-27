@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Scriptable object that stores the contents of a room cell.
+ */
 [CreateAssetMenu(menuName = "RoomObjectCell")]
 public class RoomObjectCell : ScriptableObject {
     public MazeCoords offset;
@@ -13,24 +16,18 @@ public class RoomObjectCell : ScriptableObject {
     public GameObject _eastWall;
     public GameObject _southWall;
     public GameObject _westWall;
+
     [Space]
     [Header("Corners")]
     public GameObject _NWcorner;
     public GameObject _NEcorner;
     public GameObject _SEcorner;
     public GameObject _SWcorner;
-    /*[Space]
-    [Header("Subsections")]*/
-    // [TRY] List of GameObjects instead
-    /*public GameObject _subsection_1;
-    public MazeDirection _subsection_1_rot;
-    public GameObject _subsection_2;
-    public MazeDirection _subsection_2_rot;
-    public GameObject _subsection_3;
-    public MazeDirection _subsection_3_rot;*/
+
     [Space]
     [Header("Room interior (Anchor only!)")]
     public GameObject interiorObject;
+
     [Space]
     [Header("PickUp Items arrangements (Anchor only!)")]
     public PickUpItemArrangement defaultArrangement;
@@ -115,17 +112,6 @@ public class RoomObjectCell : ScriptableObject {
     public bool HasSpecialItemArrangements() {
         return arrangements == null;
     }
-
-    // [TODO] Treat unassigned reference exceptions
-    /*public List<(GameObject, MazeDirection)> GetSubsectionObj() {
-        List < (GameObject, MazeDirection) > subsectionObjects = new List<(GameObject, MazeDirection)>();
-
-        subsectionObjects.Add((_subsection_1, _subsection_1_rot));
-        subsectionObjects.Add((_subsection_2, _subsection_2_rot));
-        subsectionObjects.Add((_subsection_3, _subsection_3_rot));
-
-        return subsectionObjects;
-    }*/
 }
 
 [System.Serializable]

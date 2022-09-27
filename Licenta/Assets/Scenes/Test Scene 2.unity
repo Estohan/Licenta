@@ -1392,7 +1392,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ebe785baeb44774d90705fee54179e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occluderObject: {fileID: 106737223}
   mazeCellObject: {fileID: 0}
   fogParticles: {fileID: 0}
 --- !u!23 &106737226
@@ -4290,81 +4289,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25ac6d4969be35b4dbfd802ef31ba728, type: 3}
---- !u!1 &281952094
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 281952095}
-  - component: {fileID: 281952098}
-  - component: {fileID: 281952097}
-  - component: {fileID: 281952096}
-  m_Layer: 0
-  m_Name: FadedObjectsCollider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &281952095
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 281952094}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.835, z: 0}
-  m_LocalScale: {x: 1, y: 12.08, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1271008383}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &281952096
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 281952094}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!114 &281952097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 281952094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1946aa019b7527d4c9c0bdf60094991f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!136 &281952098
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 281952094}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 1.2
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &303098936
 GameObject:
   m_ObjectHideFlags: 0
@@ -5512,7 +5436,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ebe785baeb44774d90705fee54179e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occluderObject: {fileID: 352123569}
   mazeCellObject: {fileID: 0}
   fogParticles: {fileID: 0}
 --- !u!23 &352123572
@@ -5890,65 +5813,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 389781576}
   m_Mesh: {fileID: -850869240214101566, guid: 36621c99e076b9c4596cc2695df3802d, type: 3}
---- !u!1 &395169366
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 395169367}
-  - component: {fileID: 395169369}
-  - component: {fileID: 395169368}
-  m_Layer: 9
-  m_Name: ObjectHideArea
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &395169367
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 395169366}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1271008383}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &395169368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 395169366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f79ec129b45ddb74f933fed403baa40a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectConcealed: {fileID: 0}
---- !u!136 &395169369
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 395169366}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 4.2
-  m_Height: 20
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &395881811 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5069673063551237398, guid: 184b93fe298d006459f1ea179ed3ffb0, type: 3}
@@ -7733,7 +7597,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ebe785baeb44774d90705fee54179e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occluderObject: {fileID: 539058351}
   mazeCellObject: {fileID: 0}
   fogParticles: {fileID: 0}
 --- !u!23 &539058354
@@ -14697,7 +14560,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ebe785baeb44774d90705fee54179e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occluderObject: {fileID: 1001359638}
   mazeCellObject: {fileID: 0}
   fogParticles: {fileID: 0}
 --- !u!23 &1001359641
@@ -19258,11 +19120,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
   m_PrefabInstance: {fileID: 1271008381}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1271008383 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-  m_PrefabInstance: {fileID: 1271008381}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1271008384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19822,7 +19679,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ebe785baeb44774d90705fee54179e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occluderObject: {fileID: 1291772356}
   mazeCellObject: {fileID: 0}
   fogParticles: {fileID: 0}
 --- !u!23 &1291772359
@@ -22218,7 +22074,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ebe785baeb44774d90705fee54179e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occluderObject: {fileID: 1422776451}
   mazeCellObject: {fileID: 0}
   fogParticles: {fileID: 0}
 --- !u!23 &1422776454
@@ -22558,7 +22413,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ebe785baeb44774d90705fee54179e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occluderObject: {fileID: 1448942306}
   mazeCellObject: {fileID: 0}
   fogParticles: {fileID: 0}
 --- !u!23 &1448942309
@@ -26034,7 +25888,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ebe785baeb44774d90705fee54179e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occluderObject: {fileID: 1765027829}
   mazeCellObject: {fileID: 0}
   fogParticles: {fileID: 0}
 --- !u!23 &1765027832
@@ -28012,7 +27865,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ebe785baeb44774d90705fee54179e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occluderObject: {fileID: 1939540054}
   mazeCellObject: {fileID: 0}
   fogParticles: {fileID: 0}
 --- !u!23 &1939540057

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Representation of a pair of coordinates: z (row) and x (column).
+ */
 [System.Serializable]
 public class MazeCoords {
-
-    // Holds the coordinates of a maze cell
-    // by z (Row) and x (Column)
     public int z;
     public int x;
 
@@ -33,8 +33,4 @@ public class MazeCoords {
     public override string ToString() {
         return "(" + z + ", " + x + ")";
     }
-
-    /*public override bool Equals(object obj) {
-        return base.Equals(obj);
-    }*/
 }

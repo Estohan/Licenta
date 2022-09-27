@@ -1,6 +1,10 @@
 using UnityEngine;
 using System.IO;
 
+/*
+ *      [ WIP ] Does not affect the game.
+ *      A future save system for saving game states to disk.
+ */
 public static class SaveSystem {
 
     private static readonly string saveFolder = Application.dataPath + "/Saves/";

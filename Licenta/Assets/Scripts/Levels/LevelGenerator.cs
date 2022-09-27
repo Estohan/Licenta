@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      The Level Generator requests a level layout from MazeGenAlgoritms and
+ *  uses it to instantiate a new level.
+ */
 public class LevelGenerator : MonoBehaviour {
 
     private Level level;
     private int sizeZ, sizeX;
 
-    // !! This function will need some parameters
     // Uses MazeGenAlgorithms to generate a maze layout and
     // saves that layout into a two dimensional array of MazeCellData
     public Level GenerateLevel(LevelConfiguration levelConfiguration) {
@@ -85,8 +88,6 @@ public class LevelGenerator : MonoBehaviour {
                 // Randomly pick one of them
                 randIndex = UnityEngine.Random.Range(0, viableObstacles.Count - 1);
                    (selectedObjectID, selectedRotation, selectedDifficulty) = viableObstacles[randIndex];
-                // [TODO] See if trap has floor/walls attached (bridge case)
-                // level.cellsData[coords.z, coords.x].objectReferences[(int)CellSubsections.Inner] = (1, (int)ObjectType.Obstacle, )
                 level.cellsData[coords.z, coords.x].obst_anchor = true;
                 level.cellsData[coords.z, coords.x].obst_shapeID = shapeID;
                 level.cellsData[coords.z, coords.x].obst_obstacleID = selectedObjectID; // The actual selection
@@ -128,8 +129,6 @@ public class LevelGenerator : MonoBehaviour {
         int objIndex;
         for(int z = 0; z < sizeZ; z ++) {
             for(int x = 0; x < sizeX; x ++) {
-                // [TODO] Insert some logic to decide between multiple objects
-                // of the same type
                 switch(level.cellsData[z, x].type) {
                     case CellType.OuterPadding:
                         // Floor
@@ -218,11 +217,6 @@ public class LevelGenerator : MonoBehaviour {
         this.sizeX = savedData.sizeX;
 
         level = new Level(sizeZ, sizeX, savedData);
-        // ----------------------------------------------------------- Add stats in savedData
-        // ----------------------------------------------------------- Stats are empty here!
-        /*level.stats = new LayoutStats();
-        level.stats.startCell = savedData.startCellPos;
-        level.stats.finishCell = savedData.finishCellPos;*/
 
         return level;
     }
@@ -239,11 +233,7 @@ public class LevelGenerator : MonoBehaviour {
                 MazeCellObject newCellObject = Instantiate(ObjectDatabase.instance._mazeCellObject, rootParent);
                 newCellObject.data = level.getCellData(z, x);
                 newCellObject.name = "Cell " + z + "-" + x;
-                // newCellObject.transform.parent = this.transform;
                 // Move cell to correct position
-                // this.cellSize = this.transform.GetChild(0).GetComponent<MeshFilter>().mesh.bounds.size.x;
-
-                //newCellObject.transform.parent = transform;
                 newCellObject.transform.localPosition =
                     new Vector3(newCellObject.data.coordinates.x * Constants.cellSize - Constants.cellSize / 2,
                                 0f,
@@ -271,7 +261,6 @@ public class LevelGenerator : MonoBehaviour {
                 newCellObject.DebugColor();
             }
         }
-        /*Debug.Log("LevelGenerator: Level Instantiated.");*/
     }
 
     public Level GetLevel() {

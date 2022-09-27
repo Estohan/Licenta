@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      This manages all the game's menu windows.
+ */
 public class MenusUI : MonoBehaviour {
     [SerializeField]
     private GameObject mainMenuUI;
@@ -38,15 +41,7 @@ public class MenusUI : MonoBehaviour {
         GameManager.inputManager.Others.Disable();
 
         GameManager.inputManager.Others.PauseGame.started += _ => MenuButtonEscape();
-        // GameManager.inputManager.Others.RestartGame.started += _ => Test_RestartGame();
-
-        // GameEventSystem.instance.OnPlayerDeath += PlayerDeathReaction;
     }
-
-    /*public void Test_RestartGame() {
-        GameManager.instance.currentLevelIndex++;
-        GameManager.instance.RestartGame();
-    }*/
 
     // ------------------------------------------------------------------------
     // Pause menu functions
@@ -90,8 +85,6 @@ public class MenusUI : MonoBehaviour {
         // restart game
         GameManager.instance.currentLevelIndex = 1;
         GameManager.instance.RestartGame();
-        // Pause the game
-        //Time.timeScale = 0f;
     }
 
     public void MenuButtonMainMenuNo() {
@@ -110,8 +103,6 @@ public class MenusUI : MonoBehaviour {
         gameIsPaused = false;
         inMainMenu = false;
         escapeKeyAvailable = true;
-        // Time.timeScale = 1f;
-        // GameManager.instance.StartLevel();
         StartCoroutine(DelayedLevelStartCoroutine());
     }
 
@@ -163,8 +154,6 @@ public class MenusUI : MonoBehaviour {
         // restart game
         GameManager.instance.currentLevelIndex = 1;
         GameManager.instance.RestartGame();
-        // Pause the game
-        // Time.timeScale = 0f;
     }
 
     // ------------------------------------------------------------------------
@@ -231,16 +220,6 @@ public class MenusUI : MonoBehaviour {
 
     public bool isMainMenuActive() {
         return inMainMenu;
-    }
-
-    /*public void PlayerDeathReaction(object sender) {
-        deathScreenUI.SetActive(true);
-    }*/
-
-    private void OnEnable() {
-        /*GameManager.inputManager.PlayerMovement.Enable();
-        GameManager.inputManager.UI.Enable();
-        GameManager.inputManager.Others.Enable();*/
     }
 
     private void OnDisable() {

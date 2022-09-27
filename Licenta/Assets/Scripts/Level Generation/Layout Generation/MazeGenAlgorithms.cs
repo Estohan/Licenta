@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+/*
+ *      All the operations done in order to generate a level layout.
+ */
 public static class MazeGenAlgorithms {
 
     // the layout returned is a three dimensional array of
@@ -16,10 +19,6 @@ public static class MazeGenAlgorithms {
 
     public static (int[,,], LayoutStats stats)
         GenerateLayout(LevelConfiguration levelConfiguration) {
-        /*Debug.Log("SizeZ: " + layoutRec.sizeZ);
-        Debug.Log("SizeX: " + layoutRec.sizeX);
-        Debug.Log("Op: " + layoutRec.outerPaddingPerc);
-        Debug.Log("Ip: " + layoutRec.innerPaddingPerc);*/
 
         int[,,] layout = new int[levelConfiguration.sizeZ, levelConfiguration.sizeX, 6];
         LayoutStats stats = new LayoutStats(levelConfiguration.sizeZ, levelConfiguration.sizeX, levelConfiguration.nrOfSectors);
@@ -47,14 +46,14 @@ public static class MazeGenAlgorithms {
         int outerPaddingValX = (int)Mathf.Ceil(levelConfiguration.sizeX * ((float)levelConfiguration.outerPaddingPerc /200));
         int innerPaddingValZ = (int)Mathf.Ceil(levelConfiguration.sizeZ * ((float)levelConfiguration.innerPaddingPerc /200));
         int innerPaddingValX = (int)Mathf.Ceil(levelConfiguration.sizeX * ((float)levelConfiguration.innerPaddingPerc /200));
-        Debug.Log("Opz: " + outerPaddingValZ);
+        /*Debug.Log("Opz: " + outerPaddingValZ);
         Debug.Log("Opx: " + outerPaddingValX);
         Debug.Log("Ipz: " + innerPaddingValZ);
-        Debug.Log("Ipx: " + innerPaddingValX);
-        int remainingCellsZ = levelConfiguration.sizeZ - outerPaddingValZ * 2 - innerPaddingValZ * 2; // DO I NEED THIS?
-        int remainingCellsX = levelConfiguration.sizeX - outerPaddingValX * 2 - innerPaddingValX * 2; // DO I NEED THIS?
+        Debug.Log("Ipx: " + innerPaddingValX);*/
+        int remainingCellsZ = levelConfiguration.sizeZ - outerPaddingValZ * 2 - innerPaddingValZ * 2;
+        int remainingCellsX = levelConfiguration.sizeX - outerPaddingValX * 2 - innerPaddingValX * 2;
         int totalInnerPadding = ((levelConfiguration.sizeZ - outerPaddingValZ * 2) * (levelConfiguration.sizeX - outerPaddingValX * 2)) - 
-                                (remainingCellsZ * remainingCellsX); // DO I NEED THIS?
+                                (remainingCellsZ * remainingCellsX);
         stats.InitializePadding(outerPaddingValZ, outerPaddingValX, innerPaddingValZ, innerPaddingValX);
 
         // visisted array initialization
@@ -692,9 +691,6 @@ public static class MazeGenAlgorithms {
             }
         }
 
-        /* Set distance to solution for room cells - !count one room once!*/
-        /* Mark adjacency to sector gates */
-
         // Display calculated stats
         /*string message = "";
         Debug.Log("Maze solution:");
@@ -1283,8 +1279,8 @@ public static class MazeGenAlgorithms {
                     break;
                 }
             }
-            // DEBUG
-            //message = "";
+            // [ DEBUG ]
+            // message = "";
             // Remove the passage found from list passages
             if(toBeRemovedIndex > -1) {
                 //message += "Removing: ";
@@ -1301,7 +1297,7 @@ public static class MazeGenAlgorithms {
                     auxPassages.RemoveAt(toBeRemovedIndex - 1);
                 }
             }
-            //Debug.Log(message);
+            // Debug.Log(message);
 
             if(!passageDiscovered) {
                 sectorDone = true;
@@ -1394,20 +1390,6 @@ public static class MazeGenAlgorithms {
                 }
             }
         }
-
-        /*string message = "Maze Creation:\n";
-        for (int k = 0; k < 5; k++) {
-            message += "k = " + k + "\n";
-
-            for (int i = 0; i < sizeX; i++) {
-                for (int j = 0; j < sizeZ; j++) {
-                    message += (layout[i, j, k] + " ");
-                }
-                message += "\n";
-            }
-            message += "\n";
-        }
-        Debug.Log(message);*/
     }
 
     private static (MazeCoords, MazeCoords) ChooseStartAndFinish(int[,,] layout, LayoutStats stats) {
@@ -1583,10 +1565,10 @@ public static class MazeGenAlgorithms {
         int remainingCellsX = stats.sizeX - stats.outerPaddingValX * 2 - stats.innerPaddingValX * 2;
         int desiredInnerPadding = ((stats.sizeZ - stats.outerPaddingValZ * 2) * (stats.sizeX - stats.outerPaddingValX * 2)) -
                                 (remainingCellsZ * remainingCellsX);
-        Debug.Log(remainingCellsZ + " " + remainingCellsX);
+        /*Debug.Log(remainingCellsZ + " " + remainingCellsX);
         Debug.Log("formula " + "((" + stats.sizeZ + "-" + stats.outerPaddingValZ + "* 2) * (" + stats.sizeX + "-" + stats.outerPaddingValX + "* 2)) - (" + remainingCellsZ + "*" + remainingCellsX + "))");
         Debug.Log("desired " + desiredInnerPadding);
-        /*int DBG_TOTAL_CORE = remainingCellsZ * remainingCellsX;
+        int DBG_TOTAL_CORE = remainingCellsZ * remainingCellsX;
         int DBG_TOTAL_OUTER_PADDING = outerPaddingValZ * sizeX * 2 + outerPaddingValX * (sizeZ - 2 * outerPaddingValZ) * 2;
         Debug.Log("Total core: " + DBG_TOTAL_CORE);
         Debug.Log("Total inner padding: " + totalInnerPadding);

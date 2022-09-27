@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Controlls the light present on the shuttle visible on the first level
+ *  (and also in the main menu).
+ */
 public class ShuttleLight : MonoBehaviour {
 
     [SerializeField]
@@ -22,7 +26,6 @@ public class ShuttleLight : MonoBehaviour {
     }
 
     private IEnumerator ShuttleLightCoroutine() {
-        //float currentIntensity = shuttleLight.intensity;
         bool increaseIntensity = false;
         while(true) {
             if (increaseIntensity) {

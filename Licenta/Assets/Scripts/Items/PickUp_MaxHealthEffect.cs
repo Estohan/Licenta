@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Health extension PickUp object effect.
+ */
 [CreateAssetMenu(menuName = "PickUpProperties/MaxHealthEffect")]
 public class PickUp_MaxHealthEffect : PickUpEffect {
     [Space]

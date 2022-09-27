@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      Container for all the data and measurements done while constructing the
+ *  maze layout.
+ */
 [System.Serializable]
 public class LayoutStats {
     // General stats
@@ -14,7 +18,7 @@ public class LayoutStats {
 
     public MazeCoords startCell, finishCell;
 
-    // Sectors ----------------------------------------------------------- Nested containers are not serialized
+    // Sectors
     public List<MazeCoords>[] sectorBorder;
     public List<(MazeCoords, MazeDirection)>[] nextSectorExit;
     public List<(MazeCoords, MazeDirection)>[] passages;
@@ -57,6 +61,7 @@ public class LayoutStats {
             sectorCells[i] = new List<MazeCoords>();
             _accessibleCellsCount[i] = 0;
         }
+
         // Initialize rooms
         rooms = new List<RoomData>[numberOfSectors];
         for (int i = 0; i < numberOfSectors; i++) {
@@ -95,7 +100,6 @@ public class LayoutStats {
 
 [System.Serializable]
 public class CellStats {
-    //public bool isReachable; // ?
     public bool isInSolution;
     public bool isAdjacentToSectorGate;
     public bool isDeadEnd;

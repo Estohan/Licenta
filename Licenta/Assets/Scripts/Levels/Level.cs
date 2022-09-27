@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *      A game level. It contains all the layout data and object references
+ *  associated with a level.
+ */
 public class Level {
     public int stage;
     public int sizeZ, sizeX;
@@ -56,10 +60,6 @@ public class Level {
     public MazeCellData getCellData(int z, int x) {
         return cellsData[z, x];
     }
-
-    /*public MazeCellObject getCellObject(int x, int z) {
-        return cellsObjects[x, z];
-    }*/
 
     public (int, int) getDimensions() {
         return (sizeZ, sizeX);
